@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 Goals & Vision - LifeOS</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>2025 Goals & Vision - LifeOS</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -345,30 +345,32 @@
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to LifeOS</a>
-        
-        <div class="update-instructions">
-            <h3>📝 How to Update This Page</h3>
-            <p>To update your goals progress, edit the <code>2025-goals-data.json</code> file:</p>
-            <p>• Change goal status: "completed", "in-progress", "not-started", "planning"</p>
-            <p>• Update progress notes and achievements</p>
-            <p>• Modify timelines and targets as needed</p>
-            <p>• Refresh this page to see changes instantly</p>
+    </head>
+    <body>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to LifeOS</a>
+
+            <div class="update-instructions">
+                <h3>📝 How to Update This Page</h3>
+                <p>To update your goals progress, edit the
+                    <code>2025-goals-data.json</code> file:</p>
+                <p>• Change goal status: "completed", "in-progress",
+                    "not-started", "planning"</p>
+                <p>• Update progress notes and achievements</p>
+                <p>• Modify timelines and targets as needed</p>
+                <p>• Refresh this page to see changes instantly</p>
+            </div>
+
+            <div id="progressOverview" class="progress-overview">
+                <!-- Progress overview will be loaded here -->
+            </div>
+
+            <div id="goalsContainer" class="goals-grid">
+                <!-- Goals will be loaded here -->
+            </div>
         </div>
 
-        <div id="progressOverview" class="progress-overview">
-            <!-- Progress overview will be loaded here -->
-        </div>
-
-        <div id="goalsContainer" class="goals-grid">
-            <!-- Goals will be loaded here -->
-        </div>
-    </div>
-
-    <script>
+        <script>
         class GoalsOverviewPage {
             constructor() {
                 this.goalsData = null;
@@ -533,5 +535,5 @@
             new GoalsOverviewPage();
         });
     </script>
-</body>
+    </body>
 </html>
