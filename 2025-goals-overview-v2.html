@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Goals & Vision - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .progress-overview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-overview h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 200;
+            letter-spacing: -1px;
+        }
+        
+        .progress-overview .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .time-progress {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .time-progress-bar {
+            width: 100%;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .time-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffffff, #f0f0f0);
+            border-radius: 8px;
+            transition: width 0.8s ease;
+        }
+        
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .goal-category {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .goal-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .goal-category.personal { border-left-color: #e74c3c; }
+        .goal-category.creative { border-left-color: #9b59b6; }
+        .goal-category.professional { border-left-color: #f39c12; }
+        .goal-category.lifestyle { border-left-color: #27ae60; }
+        .goal-category.quarterly { border-left-color: #34495e; }
+        .goal-category.longterm { border-left-color: #8e44ad; }
+        
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            letter-spacing: -0.5px;
+        }
+        
+        .category-progress {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .goal-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goal-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .goal-item.completed {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-left-color: #28a745;
+        }
+        
+        .goal-item.completed::before {
+            background: #28a745;
+        }
+        
+        .goal-item.in-progress {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left-color: #ffc107;
+        }
+        
+        .goal-item.in-progress::before {
+            background: #ffc107;
+        }
+        
+        .goal-item.not-started {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-left-color: #dc3545;
+        }
+        
+        .goal-item.not-started::before {
+            background: #dc3545;
+        }
+        
+        .goal-item.planning {
+            background: linear-gradient(135deg, #e2e3e5, #d6d8db);
+            border-left-color: #6c757d;
+        }
+        
+        .goal-item.planning::before {
+            background: #6c757d;
+        }
+        
+        .goal-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+        }
+        
+        .goal-status {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-completed {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+        
+        .status-in-progress {
+            background: #ffc107;
+            color: #212529;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+        }
+        
+        .status-not-started {
+            background: #dc3545;
+            color: white;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+        
+        .status-planning {
+            background: #6c757d;
+            color: white;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+        
+        .goal-description {
+            color: #495057;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        
+        .goal-notes {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .quarterly-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+        }
+        
+        .quarterly-section .category-title {
+            color: white;
+        }
+        
+        .quarterly-section .goal-item {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .quarterly-section .goal-title {
+            color: white;
+        }
+        
+        .quarterly-section .goal-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .quarterly-section .goal-notes {
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .vision-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .vision-section .category-title {
+            color: white;
+            justify-content: center;
+        }
+        
+        .vision-goals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .vision-goal {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .vision-goal h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .vision-goal p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .update-instructions {
+            background: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .update-instructions h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .update-instructions p {
+            color: #0c5460;
+            margin-bottom: 8px;
+        }
+        
+        .update-instructions code {
+            background: #d1ecf1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-overview h1 {
+                font-size: 2.2rem;
+            }
+            
+            .vision-goals {
+                grid-template-columns: 1fr;
+            }
+            
+            .goal-category {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <div class="update-instructions">
+            <h3>📝 How to Update This Page</h3>
+            <p>To update your goals progress, edit the <code>2025-goals-data.json</code> file:</p>
+            <p>• Change goal status: "completed", "in-progress", "not-started", "planning"</p>
+            <p>• Update progress notes and achievements</p>
+            <p>• Modify timelines and targets as needed</p>
+            <p>• Refresh this page to see changes instantly</p>
+        </div>
+
+        <div id="progressOverview" class="progress-overview">
+            <!-- Progress overview will be loaded here -->
+        </div>
+
+        <div id="goalsContainer" class="goals-grid">
+            <!-- Goals will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        class GoalsOverviewPage {
+            constructor() {
+                this.goalsData = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.renderOverview();
+            }
+
+            async loadData() {
+                try {
+                    const response = await fetch('2025-goals-data.json');
+                    this.goalsData = await response.json();
+                } catch (error) {
+                    console.error('Error loading goals data:', error);
+                    this.showError('Failed to load goals data.');
+                }
+            }
+
+            renderOverview() {
+                this.renderProgressOverview();
+                this.renderGoals();
+            }
+
+            renderProgressOverview() {
+                const container = document.getElementById('progressOverview');
+                const { yearProgress } = this.goalsData;
+                
+                container.innerHTML = `
+                    <h1>2025 Goals & Vision</h1>
+                    <p class="subtitle">Progress Overview: ${yearProgress.startDate} - ${yearProgress.currentDate}</p>
+                    
+                    <div class="time-progress">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 500;">
+                            <span>${yearProgress.startDate}</span>
+                            <span>${yearProgress.daysElapsed} days elapsed</span>
+                            <span>${yearProgress.currentDate}</span>
+                        </div>
+                        <div class="time-progress-bar">
+                            <div class="time-progress-fill" style="width: ${yearProgress.percentageComplete}%"></div>
+                        </div>
+                        <div style="text-align: center; font-size: 1rem; font-weight: 500; margin-top: 10px;">
+                            ${yearProgress.percentageComplete}% of 2025 completed
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderGoals() {
+                const container = document.getElementById('goalsContainer');
+                const { categories, quarterly, longTermVision } = this.goalsData;
+                
+                let html = '';
+                
+                // Render each category
+                Object.entries(categories).forEach(([key, category]) => {
+                    html += this.renderCategory(key, category);
+                });
+                
+                // Render quarterly goals
+                html += this.renderQuarterlyGoals(quarterly);
+                
+                // Render long-term vision
+                html += this.renderLongTermVision(longTermVision);
+                
+                container.innerHTML = html;
+            }
+
+            renderCategory(key, category) {
+                const statusMap = {
+                    'completed': 'completed',
+                    'in-progress': 'in-progress',
+                    'not-started': 'not-started',
+                    'planning': 'planning'
+                };
+
+                return `
+                    <div class="goal-category ${key}">
+                        <h3 class="category-title">
+                            ${category.title}
+                            <span class="category-progress">${category.completed}/${category.total} Completed</span>
+                        </h3>
+                        
+                        ${category.goals.map(goal => `
+                            <div class="goal-item ${statusMap[goal.status] || 'not-started'}">
+                                <div class="goal-title">${goal.title}</div>
+                                <span class="goal-status status-${statusMap[goal.status] || 'not-started'}">${goal.status.replace('-', ' ')}</span>
+                                <div class="goal-description">${goal.description}</div>
+                                <div class="goal-notes">
+                                    <strong>Progress:</strong> ${goal.progressNotes || 'No progress notes available'}
+                                    ${goal.timeline ? `<br><strong>Timeline:</strong> ${goal.timeline}` : ''}
+                                    ${goal.target ? `<br><strong>Target:</strong> ${goal.target}` : ''}
+                                    ${goal.achievement ? `<br><strong>Achievement:</strong> ${goal.achievement}` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            renderQuarterlyGoals(quarterly) {
+                return `
+                    <div class="goal-category quarterly">
+                        <h3 class="category-title">
+                            ${quarterly.title}
+                            <span class="category-progress">${quarterly.completed}/${quarterly.total} Complete</span>
+                        </h3>
+                        
+                        ${quarterly.quarters.map(quarter => `
+                            <div class="goal-item ${quarter.status === 'completed' ? 'completed' : 'in-progress'}">
+                                <div class="goal-title">${quarter.quarter}</div>
+                                <span class="goal-status status-${quarter.status === 'completed' ? 'completed' : 'in-progress'}">${quarter.status}</span>
+                                <div class="goal-description">Quarterly milestones and objectives</div>
+                                <div class="goal-notes">
+                                    <strong>Goals:</strong>
+                                    <ul style="margin: 8px 0; padding-left: 20px;">
+                                        ${quarter.goals.map(goal => `<li>${goal}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            renderLongTermVision(longTermVision) {
+                return `
+                    <div class="goal-category vision-section">
+                        <h3 class="category-title">${longTermVision.title}</h3>
+                        
+                        <div class="vision-goals">
+                            ${longTermVision.goals.map(goal => `
+                                <div class="vision-goal">
+                                    <h4>${goal.title}</h4>
+                                    <p><strong>Progress:</strong> ${goal.progress}</p>
+                                    <p><strong>Vision:</strong> ${goal.vision}</p>
+                                    ${goal.nextSteps ? `<p><strong>Next Steps:</strong> ${goal.nextSteps}</p>` : ''}
+                                    ${goal.achievement ? `<p><strong>Achievement:</strong> ${goal.achievement}</p>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new GoalsOverviewPage();
+        });
+    </script>
+</body>
+</html>
