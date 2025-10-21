@@ -90,41 +90,63 @@
                 }
 
                 container.innerHTML = this.writingProjects.map(project => {
-                    // Get latest 3 drafts for this project
+                    // Get all drafts for this project
                     const projectDrafts = this.drafts.filter(draft => 
                         draft.projectId === project.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-                    ).slice(0, 3);
+                    );
                     
                     return `
-                        <div class="writing-item">
-                            <h3 class="writing-title">${this.escapeHtml(project.title)}</h3>
-                            <p class="writing-description">${this.escapeHtml(project.description)}</p>
-                            <div class="writing-meta">
-                                <span class="writing-tag writing-category">${this.escapeHtml(project.category)}</span>
-                                ${project.wordCount ? `<span class="writing-tag writing-count">${this.escapeHtml(project.wordCount)} words</span>` : ''}
-                            </div>
-                            
-                            ${projectDrafts.length > 0 ? `
-                                <div class="writing-drafts-mini">
-                                    <h4>Latest Drafts</h4>
-                                    <div class="drafts-mini-list">
-                                        ${projectDrafts.map(draft => `
-                                            <div class="draft-mini-item">
-                                                <div class="draft-mini-title">${this.escapeHtml(draft.title)}</div>
-                                                <div class="draft-mini-meta">
-                                                    <span class="draft-mini-version">${this.escapeHtml(draft.version)}</span>
-                                                    <span class="draft-mini-type ${draft.fileType}">${draft.fileType.toUpperCase()}</span>
-                                                    <span class="draft-mini-date">${this.escapeHtml(draft.lastModified)}</span>
-                                                </div>
-                                            </div>
-                                        `).join('')}
+                        <div class="writing-folder">
+                            <div class="folder-header" onclick="this.toggleFolder('${project.title.replace(/\s+/g, '-')}')">
+                                <div class="folder-icon">📁</div>
+                                <div class="folder-info">
+                                    <h3 class="folder-title">${this.escapeHtml(project.title)}</h3>
+                                    <p class="folder-description">${this.escapeHtml(project.description)}</p>
+                                    <div class="folder-meta">
+                                        <span class="writing-tag writing-category">${this.escapeHtml(project.category)}</span>
+                                        ${project.wordCount ? `<span class="writing-tag writing-count">${this.escapeHtml(project.wordCount)} words</span>` : ''}
+                                        <span class="folder-count">${projectDrafts.length} files</span>
                                     </div>
                                 </div>
-                            ` : ''}
+                                <div class="folder-toggle">▼</div>
+                            </div>
                             
-                            <div class="writing-details">
-                                <p class="writing-notes"><strong>Notes:</strong> ${this.escapeHtml(project.notes)}</p>
-                                <p class="writing-updated"><strong>Last Updated:</strong> ${this.escapeHtml(project.lastUpdated)}</p>
+                            <div class="folder-content" id="folder-${project.title.replace(/\s+/g, '-')}" style="display: none;">
+                                <div class="folder-section">
+                                    <h4>📝 Drafts</h4>
+                                    ${projectDrafts.length > 0 ? `
+                                        <div class="file-list">
+                                            ${projectDrafts.map(draft => `
+                                                <div class="file-item" onclick="this.openFile('${draft.filePath}')">
+                                                    <div class="file-icon">${draft.fileType === 'md' ? '📄' : '📋'}</div>
+                                                    <div class="file-info">
+                                                        <div class="file-name">${this.escapeHtml(draft.title)}</div>
+                                                        <div class="file-meta">
+                                                            <span class="file-version">${this.escapeHtml(draft.version)}</span>
+                                                            <span class="file-type ${draft.fileType}">${draft.fileType.toUpperCase()}</span>
+                                                            <span class="file-date">${this.escapeHtml(draft.lastModified)}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="file-actions">
+                                                        <button class="file-btn view-btn" onclick="event.stopPropagation(); this.viewFile('${draft.filePath}')">View</button>
+                                                        <button class="file-btn edit-btn" onclick="event.stopPropagation(); this.editFile('${draft.filePath}')">Edit</button>
+                                                    </div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    ` : `
+                                        <div class="no-files">No drafts available</div>
+                                    `}
+                                </div>
+                                
+                                <div class="folder-section">
+                                    <h4>📋 Project Details</h4>
+                                    <div class="project-details">
+                                        <p class="project-notes"><strong>Notes:</strong> ${this.escapeHtml(project.notes)}</p>
+                                        <p class="project-updated"><strong>Last Updated:</strong> ${this.escapeHtml(project.lastUpdated)}</p>
+                                        ${project.filePath ? `<p class="project-file"><strong>Main File:</strong> ${this.escapeHtml(project.filePath)}</p>` : ''}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     `;
@@ -177,6 +199,31 @@
                     // In a real implementation, this might open an editor
                     window.open(draft.filePath, '_blank');
                 }
+            }
+
+            toggleFolder(folderId) {
+                const folder = document.getElementById(`folder-${folderId}`);
+                const toggle = event.target.closest('.folder-header').querySelector('.folder-toggle');
+                
+                if (folder.style.display === 'none') {
+                    folder.style.display = 'block';
+                    toggle.textContent = '▲';
+                } else {
+                    folder.style.display = 'none';
+                    toggle.textContent = '▼';
+                }
+            }
+
+            openFile(filePath) {
+                window.open(filePath, '_blank');
+            }
+
+            viewFile(filePath) {
+                window.open(filePath, '_blank');
+            }
+
+            editFile(filePath) {
+                window.open(filePath, '_blank');
             }
 
             escapeHtml(text) {

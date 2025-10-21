@@ -445,6 +445,263 @@ header p {
     font-size: 0.75rem;
 }
 
+/* Writing folder view */
+.writing-folder {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.folder-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.folder-header:hover {
+    background: #e9ecef;
+}
+
+.folder-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.folder-info {
+    flex: 1;
+}
+
+.folder-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.folder-description {
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.folder-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.folder-count {
+    background: #3498db;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.folder-toggle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    transition: transform 0.3s ease;
+}
+
+.folder-content {
+    padding: 0;
+}
+
+.folder-section {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.folder-section:last-child {
+    border-bottom: none;
+}
+
+.folder-section h4 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.file-item:hover {
+    background: #e9ecef;
+    transform: translateX(3px);
+}
+
+.file-icon {
+    font-size: 1.2rem;
+    margin-right: 12px;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.file-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.file-version {
+    font-family: monospace;
+    color: #6c757d;
+    background: #e9ecef;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.file-type {
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.file-type.md {
+    background: #d4edda;
+    color: #155724;
+}
+
+.file-type.pdf {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.file-date {
+    color: #6c757d;
+    font-size: 0.75rem;
+}
+
+.file-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.file-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.file-btn:hover {
+    background: #2980b9;
+}
+
+.file-btn.edit-btn {
+    background: #f39c12;
+}
+
+.file-btn.edit-btn:hover {
+    background: #e67e22;
+}
+
+.no-files {
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.project-details {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+}
+
+.project-details p {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.project-notes {
+    font-style: italic;
+}
+
+.project-file {
+    font-family: monospace;
+    background: #e9ecef;
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .folder-header {
+        padding: 15px;
+    }
+    
+    .folder-icon {
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+    
+    .folder-title {
+        font-size: 1.2rem;
+    }
+    
+    .folder-meta {
+        gap: 5px;
+    }
+    
+    .file-item {
+        padding: 10px;
+    }
+    
+    .file-meta {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .file-actions {
+        flex-direction: column;
+        gap: 3px;
+    }
+}
+
 /* Drafts section */
 .drafts-section {
     margin-top: 40px;
