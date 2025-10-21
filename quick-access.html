@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Access - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .quick-access-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .quick-access-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .quick-access-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .quick-access-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .quick-access-description {
+            color: #7f8c8d;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .quick-access-status {
+            display: inline-block;
+            background: #e8f5e8;
+            color: #27ae60;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .projects-card { border-left: 4px solid #3498db; }
+        .github-card { border-left: 4px solid #24292e; }
+        .ahoy-card { border-left: 4px solid #667eea; }
+        .external-card { border-left: 4px solid #f39c12; }
+        
+        @media (max-width: 768px) {
+            .quick-access-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <header>
+            <h1>Quick Access</h1>
+            <p>Direct links to your most important resources and projects</p>
+        </header>
+
+        <div class="quick-access-grid">
+            <a href="active-projects.html" class="quick-access-card projects-card">
+                <span class="quick-access-icon">🚀</span>
+                <h2 class="quick-access-title">Active Projects</h2>
+                <p class="quick-access-description">View all your current projects in development with latest links and drafts.</p>
+                <span class="quick-access-status">6 Active Projects</span>
+            </a>
+
+            <a href="https://github.com/agworkywork" target="_blank" class="quick-access-card github-card">
+                <span class="quick-access-icon">💻</span>
+                <h2 class="quick-access-title">GitHub Profile</h2>
+                <p class="quick-access-description">All repositories, contributions, and code projects.</p>
+                <span class="quick-access-status">Public Repositories</span>
+            </a>
+
+            <a href="https://ahoyindiemedia.com" target="_blank" class="quick-access-card ahoy-card">
+                <span class="quick-access-icon">🎬</span>
+                <h2 class="quick-access-title">Ahoy Indie Media</h2>
+                <p class="quick-access-description">Main platform for indie media projects and content.</p>
+                <span class="quick-access-status">Live Platform</span>
+            </a>
+
+            <a href="https://creaturesinthetallgrass.com" target="_blank" class="quick-access-card external-card">
+                <span class="quick-access-icon">🎭</span>
+                <h2 class="quick-access-title">Creatures in the Tall Grass</h2>
+                <p class="quick-access-description">Feature film project website and updates.</p>
+                <span class="quick-access-status">In Development</span>
+            </a>
+
+            <a href="https://cpcnewhaven.org" target="_blank" class="quick-access-card external-card">
+                <span class="quick-access-icon">⛪</span>
+                <h2 class="quick-access-title">CPC New Haven</h2>
+                <p class="quick-access-description">Client work - church website and admin portal.</p>
+                <span class="quick-access-status">Live Site</span>
+            </a>
+
+            <a href="https://littlemarket.shop" target="_blank" class="quick-access-card external-card">
+                <span class="quick-access-icon">🛍️</span>
+                <h2 class="quick-access-title">Little Market</h2>
+                <p class="quick-access-description">E-commerce project for jam and pickle sales.</p>
+                <span class="quick-access-status">Planning</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

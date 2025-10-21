@@ -89,22 +89,46 @@
                     return;
                 }
 
-                container.innerHTML = this.writingProjects.map(project => `
-                    <div class="writing-item">
-                        <h3 class="writing-title">${this.escapeHtml(project.title)}</h3>
-                        <p class="writing-description">${this.escapeHtml(project.description)}</p>
-                        <div class="writing-meta">
-                            <span class="writing-tag writing-category">${this.escapeHtml(project.category)}</span>
-                            <span class="writing-tag writing-status">${this.escapeHtml(project.status)}</span>
-                            ${project.wordCount ? `<span class="writing-tag writing-count">${this.escapeHtml(project.wordCount)} words</span>` : ''}
+                container.innerHTML = this.writingProjects.map(project => {
+                    // Get latest 3 drafts for this project
+                    const projectDrafts = this.drafts.filter(draft => 
+                        draft.projectId === project.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+                    ).slice(0, 3);
+                    
+                    return `
+                        <div class="writing-item">
+                            <h3 class="writing-title">${this.escapeHtml(project.title)}</h3>
+                            <p class="writing-description">${this.escapeHtml(project.description)}</p>
+                            <div class="writing-meta">
+                                <span class="writing-tag writing-category">${this.escapeHtml(project.category)}</span>
+                                ${project.wordCount ? `<span class="writing-tag writing-count">${this.escapeHtml(project.wordCount)} words</span>` : ''}
+                            </div>
+                            
+                            ${projectDrafts.length > 0 ? `
+                                <div class="writing-drafts-mini">
+                                    <h4>Latest Drafts</h4>
+                                    <div class="drafts-mini-list">
+                                        ${projectDrafts.map(draft => `
+                                            <div class="draft-mini-item">
+                                                <div class="draft-mini-title">${this.escapeHtml(draft.title)}</div>
+                                                <div class="draft-mini-meta">
+                                                    <span class="draft-mini-version">${this.escapeHtml(draft.version)}</span>
+                                                    <span class="draft-mini-type ${draft.fileType}">${draft.fileType.toUpperCase()}</span>
+                                                    <span class="draft-mini-date">${this.escapeHtml(draft.lastModified)}</span>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="writing-details">
+                                <p class="writing-notes"><strong>Notes:</strong> ${this.escapeHtml(project.notes)}</p>
+                                <p class="writing-updated"><strong>Last Updated:</strong> ${this.escapeHtml(project.lastUpdated)}</p>
+                            </div>
                         </div>
-                        <div class="writing-details">
-                            <p class="writing-notes"><strong>Notes:</strong> ${this.escapeHtml(project.notes)}</p>
-                            <p class="writing-updated"><strong>Last Updated:</strong> ${this.escapeHtml(project.lastUpdated)}</p>
-                            ${project.filePath ? `<p class="writing-file"><strong>File:</strong> ${this.escapeHtml(project.filePath)}</p>` : ''}
-                        </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
 
             renderDraftsTable() {
