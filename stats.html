@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Stats - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+        
+        .stat-card.goals { border-left-color: #feca57; }
+        .stat-card.jobs { border-left-color: #48dbfb; }
+        .stat-card.writing { border-left-color: #9b59b6; }
+        .stat-card.bookmarks { border-left-color: #ff6b6b; }
+        
+        .stat-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .stat-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .stat-details {
+            margin-top: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .detail-value {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .category-breakdown {
+            margin-top: 15px;
+        }
+        
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .category-name {
+            color: #2c3e50;
+        }
+        
+        .category-count {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stat-metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .metric-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <header>
+            <h1>Project Statistics</h1>
+            <p>Overview of your projects and progress across all areas</p>
+        </header>
+
+        <div id="statsContainer" class="stats-grid">
+            <!-- Stats will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        class StatsPage {
+            constructor() {
+                this.data = {
+                    goals: [],
+                    jobs: [],
+                    writing: [],
+                    bookmarks: []
+                };
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.renderStats();
+            }
+
+            async loadData() {
+                try {
+                    const [goalsResponse, jobsResponse, writingResponse, bookmarksResponse] = await Promise.all([
+                        fetch('goals.json'),
+                        fetch('jobs.json'),
+                        fetch('writing-projects.json'),
+                        fetch('bookmarks.json')
+                    ]);
+                    
+                    this.data.goals = await goalsResponse.json();
+                    this.data.jobs = await jobsResponse.json();
+                    this.data.writing = await writingResponse.json();
+                    this.data.bookmarks = await bookmarksResponse.json();
+                } catch (error) {
+                    console.error('Error loading stats data:', error);
+                    this.showError('Failed to load statistics data.');
+                }
+            }
+
+            renderStats() {
+                const container = document.getElementById('statsContainer');
+                
+                container.innerHTML = `
+                    ${this.renderGoalsStats()}
+                    ${this.renderJobsStats()}
+                    ${this.renderWritingStats()}
+                    ${this.renderBookmarksStats()}
+                `;
+            }
+
+            renderGoalsStats() {
+                const goals = this.data.goals;
+                const totalGoals = goals.length;
+                const completedGoals = goals.filter(g => g.status === 'Completed').length;
+                const inProgressGoals = goals.filter(g => g.status === 'In Progress').length;
+                const highPriorityGoals = goals.filter(g => g.priority === 'High').length;
+                
+                const categories = this.getCategoryBreakdown(goals, 'category');
+                const priorities = this.getCategoryBreakdown(goals, 'priority');
+                
+                return `
+                    <div class="stat-card goals">
+                        <h2 class="stat-title">Goals</h2>
+                        <div class="stat-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${totalGoals}</div>
+                                <div class="metric-label">Total Goals</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${completedGoals}</div>
+                                <div class="metric-label">Completed</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${inProgressGoals}</div>
+                                <div class="metric-label">In Progress</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${highPriorityGoals}</div>
+                                <div class="metric-label">High Priority</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${totalGoals > 0 ? (completedGoals / totalGoals) * 100 : 0}%"></div>
+                        </div>
+                        <div class="stat-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Completion Rate</span>
+                                <span class="detail-value">${totalGoals > 0 ? Math.round((completedGoals / totalGoals) * 100) : 0}%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Active Goals</span>
+                                <span class="detail-value">${inProgressGoals + goals.filter(g => g.status === 'Planning').length}</span>
+                            </div>
+                        </div>
+                        <div class="category-breakdown">
+                            <h4>Top Categories</h4>
+                            ${categories.slice(0, 3).map(cat => `
+                                <div class="category-item">
+                                    <span class="category-name">${cat.name}</span>
+                                    <span class="category-count">${cat.count}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderJobsStats() {
+                const jobs = this.data.jobs;
+                const totalJobs = jobs.length;
+                const categories = this.getCategoryBreakdown(jobs, 'category');
+                const types = this.getCategoryBreakdown(jobs, 'type');
+                const locations = this.getCategoryBreakdown(jobs, 'location');
+                
+                return `
+                    <div class="stat-card jobs">
+                        <h2 class="stat-title">Job Opportunities</h2>
+                        <div class="stat-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${totalJobs}</div>
+                                <div class="metric-label">Total Jobs</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${categories.length}</div>
+                                <div class="metric-label">Categories</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${types.length}</div>
+                                <div class="metric-label">Job Types</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${locations.length}</div>
+                                <div class="metric-label">Locations</div>
+                            </div>
+                        </div>
+                        <div class="stat-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Most Common Category</span>
+                                <span class="detail-value">${categories[0]?.name || 'N/A'}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Most Common Type</span>
+                                <span class="detail-value">${types[0]?.name || 'N/A'}</span>
+                            </div>
+                        </div>
+                        <div class="category-breakdown">
+                            <h4>Top Categories</h4>
+                            ${categories.slice(0, 3).map(cat => `
+                                <div class="category-item">
+                                    <span class="category-name">${cat.name}</span>
+                                    <span class="category-count">${cat.count}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderWritingStats() {
+                const writing = this.data.writing;
+                const totalProjects = writing.length;
+                const inProgressProjects = writing.filter(w => w.status === 'In Progress').length;
+                const categories = this.getCategoryBreakdown(writing, 'category');
+                
+                return `
+                    <div class="stat-card writing">
+                        <h2 class="stat-title">Writing Projects</h2>
+                        <div class="stat-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${totalProjects}</div>
+                                <div class="metric-label">Total Projects</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${inProgressProjects}</div>
+                                <div class="metric-label">In Progress</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${categories.length}</div>
+                                <div class="metric-label">Categories</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${writing.filter(w => w.wordCount && w.wordCount !== '0').length}</div>
+                                <div class="metric-label">With Content</div>
+                            </div>
+                        </div>
+                        <div class="stat-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Active Projects</span>
+                                <span class="detail-value">${inProgressProjects + writing.filter(w => w.status === 'Planning').length}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Most Common Category</span>
+                                <span class="detail-value">${categories[0]?.name || 'N/A'}</span>
+                            </div>
+                        </div>
+                        <div class="category-breakdown">
+                            <h4>Project Categories</h4>
+                            ${categories.map(cat => `
+                                <div class="category-item">
+                                    <span class="category-name">${cat.name}</span>
+                                    <span class="category-count">${cat.count}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderBookmarksStats() {
+                const bookmarks = this.data.bookmarks;
+                const totalBookmarks = bookmarks.length;
+                const categories = this.getCategoryBreakdown(bookmarks, 'category');
+                const tags = this.getTagBreakdown(bookmarks);
+                
+                return `
+                    <div class="stat-card bookmarks">
+                        <h2 class="stat-title">Bookmarks</h2>
+                        <div class="stat-metrics">
+                            <div class="metric">
+                                <div class="metric-value">${totalBookmarks}</div>
+                                <div class="metric-label">Total Bookmarks</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${categories.length}</div>
+                                <div class="metric-label">Categories</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${tags.length}</div>
+                                <div class="metric-label">Unique Tags</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">${bookmarks.filter(b => b.favorite).length}</div>
+                                <div class="metric-label">Favorites</div>
+                            </div>
+                        </div>
+                        <div class="stat-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Most Common Category</span>
+                                <span class="detail-value">${categories[0]?.name || 'N/A'}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Most Used Tag</span>
+                                <span class="detail-value">${tags[0]?.name || 'N/A'}</span>
+                            </div>
+                        </div>
+                        <div class="category-breakdown">
+                            <h4>Top Categories</h4>
+                            ${categories.slice(0, 3).map(cat => `
+                                <div class="category-item">
+                                    <span class="category-name">${cat.name}</span>
+                                    <span class="category-count">${cat.count}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getCategoryBreakdown(items, field) {
+                const counts = {};
+                items.forEach(item => {
+                    const value = item[field];
+                    if (value) {
+                        counts[value] = (counts[value] || 0) + 1;
+                    }
+                });
+                
+                return Object.entries(counts)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => b.count - a.count);
+            }
+
+            getTagBreakdown(bookmarks) {
+                const tagCounts = {};
+                bookmarks.forEach(bookmark => {
+                    if (bookmark.tags) {
+                        bookmark.tags.forEach(tag => {
+                            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                        });
+                    }
+                });
+                
+                return Object.entries(tagCounts)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => b.count - a.count);
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new StatsPage();
+        });
+    </script>
+</body>
+</html>
