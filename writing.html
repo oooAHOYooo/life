@@ -104,7 +104,6 @@
                                     <p class="folder-description">${this.escapeHtml(project.description)}</p>
                                     <div class="folder-meta">
                                         <span class="writing-tag writing-category">${this.escapeHtml(project.category)}</span>
-                                        ${project.wordCount ? `<span class="writing-tag writing-count">${this.escapeHtml(project.wordCount)} words</span>` : ''}
                                         <span class="folder-count">${projectDrafts.length} files</span>
                                     </div>
                                 </div>
@@ -113,7 +112,7 @@
                             
                             <div class="folder-content" id="folder-${project.title.replace(/\s+/g, '-')}" style="display: none;">
                                 <div class="folder-section">
-                                    <h4>📝 Drafts</h4>
+                                    <h4>📁 All Files</h4>
                                     ${projectDrafts.length > 0 ? `
                                         <div class="file-list">
                                             ${projectDrafts.map(draft => `
@@ -135,7 +134,7 @@
                                             `).join('')}
                                         </div>
                                     ` : `
-                                        <div class="no-files">No drafts available</div>
+                                        <div class="no-files">No files available</div>
                                     `}
                                 </div>
                                 
