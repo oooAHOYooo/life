@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Goals & Vision - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .progress-overview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .progress-overview h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .progress-overview .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .time-progress {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .time-progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .time-progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+        
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .goal-category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+        }
+        
+        .goal-category.personal { border-left-color: #e74c3c; }
+        .goal-category.creative { border-left-color: #9b59b6; }
+        .goal-category.professional { border-left-color: #f39c12; }
+        .goal-category.lifestyle { border-left-color: #27ae60; }
+        .goal-category.quarterly { border-left-color: #34495e; }
+        .goal-category.longterm { border-left-color: #8e44ad; }
+        
+        .category-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .category-progress {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .goal-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 3px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .goal-item.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .goal-item.in-progress {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        
+        .goal-item.not-started {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        
+        .goal-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .goal-status {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .status-completed {
+            background: #28a745;
+            color: white;
+        }
+        
+        .status-in-progress {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .status-not-started {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .status-planning {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .goal-notes {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .quarterly-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+        }
+        
+        .quarterly-section .category-title {
+            color: white;
+        }
+        
+        .quarterly-section .goal-item {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .quarterly-section .goal-title {
+            color: white;
+        }
+        
+        .quarterly-section .goal-notes {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .vision-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .vision-section .category-title {
+            color: white;
+            justify-content: center;
+        }
+        
+        .vision-goals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .vision-goal {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .vision-goal h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .vision-goal p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-overview h2 {
+                font-size: 2rem;
+            }
+            
+            .vision-goals {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <div class="progress-overview">
+            <h2>2025 Goals & Vision</h2>
+            <p class="subtitle">Progress Overview: January 2nd - October 21st, 2025</p>
+            
+            <div class="time-progress">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Jan 2, 2025</span>
+                    <span>9 months, 19 days elapsed</span>
+                    <span>Oct 21, 2025</span>
+                </div>
+                <div class="time-progress-bar">
+                    <div class="time-progress-fill" style="width: 80.3%"></div>
+                </div>
+                <div style="text-align: center; font-size: 0.9rem; opacity: 0.9;">
+                    80.3% of 2025 completed
+                </div>
+            </div>
+        </div>
+
+        <div class="goals-grid">
+            <!-- Personal Goals -->
+            <div class="goal-category personal">
+                <h3 class="category-title">
+                    Personal Goals
+                    <span class="category-progress">2/5 Completed</span>
+                </h3>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Get Married</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Successfully planned and executed meaningful wedding ceremony</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Workout More and Stretch</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Consistent 3-4 weekly sessions, incorporating yoga and flexibility work</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Be Faithful to My Faith</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Daily prayer routine established, increased community engagement</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Move in With Ellen</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Successfully found and moved into shared living space</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Travel More</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Completed 1 meaningful trip, planning second for Q4</div>
+                </div>
+            </div>
+
+            <!-- Creative Goals -->
+            <div class="goal-category creative">
+                <h3 class="category-title">
+                    Creative Goals
+                    <span class="category-progress">3/8 Completed</span>
+                </h3>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Make a Feature Film</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Pre-production completed, filming in progress, post-production planned</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Produce Ahoy Live Shows</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Successfully produced 12+ live shows, monetization achieved</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Get Aldo Record Released</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Album finalized, released, and marketing campaign executed</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Write More</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Consistent writing practice, 3 short stories completed</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Work on Short Screenplays</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">1 short screenplay completed, winter-themed script in development</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Collaborate With Naz on Wine Business</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Regular strategy sessions, marketing materials developed</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Ahoy App Launch</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">App launched successfully, user feedback incorporated, iterations ongoing</div>
+                </div>
+                
+                <div class="goal-item not-started">
+                    <div class="goal-title">Quit Vaping</div>
+                    <span class="goal-status status-not-started">Not Started</span>
+                    <div class="goal-notes">Structured plan developed but not yet implemented</div>
+                </div>
+            </div>
+
+            <!-- Professional and Financial Goals -->
+            <div class="goal-category professional">
+                <h3 class="category-title">
+                    Professional & Financial Goals
+                    <span class="category-progress">4/7 Completed</span>
+                </h3>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Acquire Land</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">First property acquired, aligned with 6-year roadmap</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Be Financially Smart and Save</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Detailed budget created, emergency fund established, automated savings</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Start Investing in Stocks</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Diversified ETF portfolio established, regular contributions ongoing</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Consolidate Assets</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Asset review completed, consolidation process 70% complete</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Develop Side Hustles</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Freelance work established, creative services launched</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Work at Apework</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Continued contribution with balanced creative pursuits</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Read More</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">8 books completed, on track for 12+ goal</div>
+                </div>
+            </div>
+
+            <!-- Lifestyle Goals -->
+            <div class="goal-category lifestyle">
+                <h3 class="category-title">
+                    Lifestyle & Personal Development
+                    <span class="category-progress">2/3 Completed</span>
+                </h3>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Travel and Explore</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">2 meaningful trips completed, additional travel planned</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Build Stronger Connections</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Increased quality time with friends, family, and collaborators</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Read More</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">8/12 books completed, diverse mix of fiction and non-fiction</div>
+                </div>
+            </div>
+
+            <!-- Quarterly Goals -->
+            <div class="goal-category quarterly">
+                <h3 class="category-title">
+                    Quarterly Milestones
+                    <span class="category-progress">Q1-Q3 Complete</span>
+                </h3>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Q1: Feature Film Pre-Production</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Pre-production completed on schedule, first Ahoy Live Show planned</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Q2: Ahoy App Launch & Filming</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">App launched successfully, filming began, 2+ live shows hosted</div>
+                </div>
+                
+                <div class="goal-item completed">
+                    <div class="goal-title">Q3: Aldo Record Release & Land Purchase</div>
+                    <span class="goal-status status-completed">Completed</span>
+                    <div class="goal-notes">Record released, property acquired, additional live shows monetized</div>
+                </div>
+                
+                <div class="goal-item in-progress">
+                    <div class="goal-title">Q4: Winter Screenplay & Financial Review</div>
+                    <span class="goal-status status-in-progress">In Progress</span>
+                    <div class="goal-notes">Winter-themed screenplay in development, financial adjustments planned</div>
+                </div>
+            </div>
+
+            <!-- Long-term Vision -->
+            <div class="goal-category vision-section">
+                <h3 class="category-title">6-Year Vision Progress</h3>
+                
+                <div class="vision-goals">
+                    <div class="vision-goal">
+                        <h4>Land Development Roadmap</h4>
+                        <p>First property acquired (25% of 4-property goal). Creative hub development in progress.</p>
+                    </div>
+                    
+                    <div class="vision-goal">
+                        <h4>Sustainable Revenue</h4>
+                        <p>Diversified income streams established through live shows, freelance work, and investments.</p>
+                    </div>
+                    
+                    <div class="vision-goal">
+                        <h4>Creative Independence</h4>
+                        <p>Ahoy Indie Media operational with successful app launch and consistent live show production.</p>
+                    </div>
+                    
+                    <div class="vision-goal">
+                        <h4>Financial Freedom</h4>
+                        <p>Investment portfolio established, emergency fund secured, automated savings system active.</p>
+                    </div>
+                    
+                    <div class="vision-goal">
+                        <h4>Personal Fulfillment</h4>
+                        <p>Marriage completed, faith practice strengthened, creative projects flourishing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
