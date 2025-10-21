@@ -81,12 +81,6 @@
             opacity: 1;
         }
         
-        .nav-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            display: block;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-        }
         
         .nav-title {
             font-size: 1.8rem;
@@ -122,50 +116,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .quick-links h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .quick-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .quick-link-item {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .quick-link-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .quick-link-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-        
-        .quick-link-status {
-            font-size: 0.85rem;
-            color: #48dbfb;
-            font-weight: 500;
-        }
-        
         @media (max-width: 768px) {
             .nav-hub {
                 padding: 40px 15px;
@@ -190,9 +140,6 @@
                 padding: 25px 20px;
             }
             
-            .nav-icon {
-                font-size: 3rem;
-            }
             
             .nav-title {
                 font-size: 1.5rem;
@@ -201,15 +148,6 @@
             .quick-links {
                 margin-top: 40px;
                 padding-top: 30px;
-            }
-            
-            .quick-links h2 {
-                font-size: 1.5rem;
-            }
-            
-            .quick-links-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
             }
         }
         
@@ -222,9 +160,6 @@
                 padding: 20px 15px;
             }
             
-            .nav-icon {
-                font-size: 2.5rem;
-            }
         }
     </style>
     </head>
@@ -237,7 +172,6 @@
 
             <div class="nav-grid">
                 <a href="bookmarks.html" class="nav-card bookmarks-card">
-                    <span class="nav-icon">🔖</span>
                     <h2 class="nav-title">Bookmarks</h2>
                     <p class="nav-description">Your collection of useful
                         websites, resources, and references for quick
@@ -245,7 +179,6 @@
                 </a>
 
                 <a href="goals.html" class="nav-card goals-card">
-                    <span class="nav-icon">🎯</span>
                     <h2 class="nav-title">Goals</h2>
                     <p class="nav-description">Track your personal and
                         professional goals with categories and priority
@@ -253,7 +186,6 @@
                 </a>
 
                 <a href="jobs.html" class="nav-card jobs-card">
-                    <span class="nav-icon">💼</span>
                     <h2 class="nav-title">Jobs</h2>
                     <p class="nav-description">After-school job opportunities in
                         AI, STEM, and education with location-based
@@ -261,7 +193,6 @@
                 </a>
 
                 <a href="writing.html" class="nav-card writing-card">
-                    <span class="nav-icon">✍️</span>
                     <h2 class="nav-title">Writing</h2>
                     <p class="nav-description">Active writing projects including
                         fiction, screenplays, and technical documentation.</p>
@@ -269,13 +200,10 @@
             </div>
 
             <div class="quick-links">
-                <h2>Quick Access</h2>
-                <div class="quick-links-grid">
-                    <a href="quick-access.html" class="quick-link-item">
-                        <div class="quick-link-title">All Quick Links</div>
-                        <div class="quick-link-status">View All Resources</div>
-                    </a>
-                </div>
+                <a href="quick-access.html" class="nav-card">
+                    <h2 class="nav-title">Quick Access</h2>
+                    <p class="nav-description">Direct links to your most important resources and projects</p>
+                </a>
             </div>
         </div>
     </body>

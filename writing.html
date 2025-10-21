@@ -98,7 +98,6 @@
                     return `
                         <div class="writing-folder">
                             <div class="folder-header" onclick="this.toggleFolder('${project.title.replace(/\s+/g, '-')}')">
-                                <div class="folder-icon">📁</div>
                                 <div class="folder-info">
                                     <h3 class="folder-title">${this.escapeHtml(project.title)}</h3>
                                     <p class="folder-description">${this.escapeHtml(project.description)}</p>
@@ -112,12 +111,12 @@
                             
                             <div class="folder-content" id="folder-${project.title.replace(/\s+/g, '-')}" style="display: none;">
                                 <div class="folder-section">
-                                    <h4>📁 All Files</h4>
+                                    <h4>All Files</h4>
                                     ${projectDrafts.length > 0 ? `
                                         <div class="file-list">
                                             ${projectDrafts.map(draft => `
                                                 <div class="file-item" onclick="this.openFile('${draft.filePath}')">
-                                                    <div class="file-icon">${draft.fileType === 'md' ? '📄' : '📋'}</div>
+                                                    <div class="file-icon">${draft.fileType === 'md' ? 'MD' : 'PDF'}</div>
                                                     <div class="file-info">
                                                         <div class="file-name">${this.escapeHtml(draft.title)}</div>
                                                         <div class="file-meta">
@@ -139,7 +138,7 @@
                                 </div>
                                 
                                 <div class="folder-section">
-                                    <h4>📋 Project Details</h4>
+                                    <h4>Project Details</h4>
                                     <div class="project-details">
                                         <p class="project-notes"><strong>Notes:</strong> ${this.escapeHtml(project.notes)}</p>
                                         <p class="project-updated"><strong>Last Updated:</strong> ${this.escapeHtml(project.lastUpdated)}</p>

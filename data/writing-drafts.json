@@ -1,11 +1,11 @@
 [
   {
-    "id": "poets-story",
-    "title": "The Poet's Story",
-    "projectId": "poets-story",
+    "id": "untitled-creature-story",
+    "title": "Untitled Creature Story",
+    "projectId": "untitled-creature-story",
     "version": "draft-1",
     "fileType": "md",
-    "filePath": "data/writing-drafts/poets-story-draft-1.md",
+    "filePath": "data/writing-drafts/untitled-creature-story-draft-1.md",
     "wordCount": 0,
     "lastModified": "2024-01-15",
     "status": "In Progress",

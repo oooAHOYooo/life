@@ -469,10 +469,6 @@ header p {
     background: #e9ecef;
 }
 
-.folder-icon {
-    font-size: 2rem;
-    margin-right: 15px;
-}
 
 .folder-info {
     flex: 1;
@@ -556,8 +552,15 @@ header p {
 }
 
 .file-icon {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+    background: #e9ecef;
+    padding: 4px 8px;
+    border-radius: 4px;
     margin-right: 12px;
+    min-width: 30px;
+    text-align: center;
 }
 
 .file-info {
@@ -674,10 +677,6 @@ header p {
         padding: 15px;
     }
     
-    .folder-icon {
-        font-size: 1.5rem;
-        margin-right: 10px;
-    }
     
     .folder-title {
         font-size: 1.2rem;
