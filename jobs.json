@@ -1,0 +1,380 @@
+[
+  {
+    "title": "Coordinator, Environmental Leadership & Out of School Opportunities",
+    "organization": "Common Ground High School",
+    "description": "Manages after-school enrichment and environmental leadership programs at this environmental charter school's nonprofit branch with urban farm and environmental education center.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Coordinator",
+    "url": "https://commongroundct.org/"
+  },
+  {
+    "title": "Coding Instructor/Program Coordinator",
+    "organization": "Coding with Kids",
+    "description": "Teach computer science and programming to students in grades K-12 through after-school enrichment classes and camps.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Instructor",
+    "url": "https://codingwithkids.com/"
+  },
+  {
+    "title": "Mad Science and ART After School Teacher",
+    "organization": "Various Organizations",
+    "description": "After-school teacher specializing in STEM-based and creative projects, combining science education with artistic expression.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Teacher",
+    "url": ""
+  },
+  {
+    "title": "EVOLUTIONS Program Staff",
+    "organization": "Yale Peabody Museum",
+    "description": "Work with teen program focusing on science, education, and museum fields. Alumni have gone on to work in STEM education roles.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Program Staff",
+    "url": "https://peabody.yale.edu/"
+  },
+  {
+    "title": "IT Youth Program Coordinator",
+    "organization": "New Haven Public School",
+    "description": "Technology-related programs through partnership between Youth and Recreation Department and school system.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Coordinator",
+    "url": "https://www.nhps.net/"
+  },
+  {
+    "title": "Part-Time Assistant Director",
+    "organization": "The Foote School",
+    "description": "Independent school after-school role for grades K-9, supporting program management and student activities.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Administrative",
+    "url": "https://www.footeschool.org/"
+  },
+  {
+    "title": "After School Program Teacher",
+    "organization": "The Foote School",
+    "description": "Teaching position for after-school programs serving students in grades K-9 at this independent school.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Teacher",
+    "url": "https://www.footeschool.org/"
+  },
+  {
+    "title": "After School Program Staff",
+    "organization": "New Haven Public Schools",
+    "description": "Staff positions for after-school and community partnership programs within the public school system.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Staff",
+    "url": "https://www.nhps.net/"
+  },
+  {
+    "title": "Youth Development Professional",
+    "organization": "Boys & Girls Club of Greater New Haven",
+    "description": "Supervise and oversee after-school activities, providing mentorship and support to youth participants.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Youth Development",
+    "url": "https://bgcgnh.org/"
+  },
+  {
+    "title": "Assistant Teacher - After School Program",
+    "organization": "Leila Day Nurseries",
+    "description": "Focus on outdoor and art education in after-school program setting, working with young children.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Teacher",
+    "url": "https://leiladay.org/"
+  },
+  {
+    "title": "After School Program Staff",
+    "organization": "Common Ground Camp",
+    "description": "Part of the New Haven Ecology Project, this camp and education center offers after-school programs with environmental focus.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Staff",
+    "url": "https://commongroundct.org/"
+  },
+  {
+    "title": "Program Aide",
+    "organization": "City of New Haven Department of Youth and Recreation",
+    "description": "Various roles for year-round and summer youth programs, supporting recreational and educational activities.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Program Aide",
+    "url": "https://www.cityofnewhaven.com/"
+  },
+  {
+    "title": "Seasonal Assistant - Kidslink Program",
+    "organization": "YWCA of Hartford Region",
+    "description": "Before and after-school program assistant in West Hartford, focusing on providing enriching activities for students.",
+    "category": "General after-school",
+    "location": "West Hartford, CT",
+    "type": "Assistant",
+    "url": "https://ywcahartford.org/"
+  },
+  {
+    "title": "Head Teacher/Teacher's Aide",
+    "organization": "YMCA of Greater Hartford",
+    "description": "Supervise activities and implement curriculum for school-aged children in before and after-school programs.",
+    "category": "General after-school",
+    "location": "Hartford, CT",
+    "type": "Teacher",
+    "url": "https://ghymca.org/"
+  },
+  {
+    "title": "STEAM Instructor",
+    "organization": "VineyardAppCamp (VAC) Enrichment",
+    "description": "Teach interactive STEAM-related subjects in after-school classes at various central Connecticut locations including West Hartford.",
+    "category": "AI and STEM-related",
+    "location": "West Hartford, CT",
+    "type": "Instructor",
+    "url": ""
+  },
+  {
+    "title": "STEM After-School Teacher",
+    "organization": "Mad Science of Western New England",
+    "description": "Facilitate STEM-based enrichment programs at schools in Hartford and nearby towns like West Hartford.",
+    "category": "AI and STEM-related",
+    "location": "Hartford, CT",
+    "type": "Teacher",
+    "url": "https://www.madscience.org/"
+  },
+  {
+    "title": "Behavior Analyst/Therapist",
+    "organization": "The Talcott Center for Child Development",
+    "description": "Full-time positions for behavior analysts and therapists with required availability during after-school hours in Farmington.",
+    "category": "General after-school",
+    "location": "Farmington, CT",
+    "type": "Therapist",
+    "url": "https://www.talcottcenter.org/"
+  },
+  {
+    "title": "Youth Development Staff",
+    "organization": "Wakeman Boys & Girls Club",
+    "description": "Oversee after-school programs including enrichment activities at this Bridgeport location.",
+    "category": "General after-school",
+    "location": "Bridgeport, CT",
+    "type": "Youth Development",
+    "url": "https://www.wakemanboysandgirlsclub.org/"
+  },
+  {
+    "title": "Part-Time STEM Teacher",
+    "organization": "Concorde Education",
+    "description": "Plan and lead collaborative learning sessions in computer science and coding in Fairfield.",
+    "category": "AI and STEM-related",
+    "location": "Fairfield, CT",
+    "type": "Teacher",
+    "url": "https://concordeeducation.com/"
+  },
+  {
+    "title": "After-School STEM Instructor",
+    "organization": "Play-Well TEKnologies",
+    "description": "Teach subjects like robotics and coding in after-school programs in Norwalk.",
+    "category": "AI and STEM-related",
+    "location": "Norwalk, CT",
+    "type": "Instructor",
+    "url": "https://www.play-well.org/"
+  },
+  {
+    "title": "Part-Time STEAM Instructor",
+    "organization": "iCAMP",
+    "description": "Teach topics such as Lego robotics, coding, and circuitry in after-school programs in Stamford.",
+    "category": "AI and STEM-related",
+    "location": "Stamford, CT",
+    "type": "Instructor",
+    "url": "https://icampct.com/"
+  },
+  {
+    "title": "STEM Instructor",
+    "organization": "Togetherhood",
+    "description": "Design and lead age-appropriate STEM classes for kids, based in Greenwich and operating in Stamford.",
+    "category": "AI and STEM-related",
+    "location": "Stamford, CT",
+    "type": "Instructor",
+    "url": "https://togetherhood.org/"
+  },
+  {
+    "title": "Lead STEM Tutor/Teacher",
+    "organization": "Code Ninjas Trumbull",
+    "description": "Focus on computer science and coding for children in after-school programs.",
+    "category": "AI and STEM-related",
+    "location": "Trumbull, CT",
+    "type": "Teacher",
+    "url": "https://www.codeninjas.com/"
+  },
+  {
+    "title": "Associate Instructor",
+    "organization": "LEARN Regional Educational Service Center",
+    "description": "Before and after-school program role at Regional Multicultural Magnet School in New London, including recreational and enrichment activities.",
+    "category": "General after-school",
+    "location": "New London, CT",
+    "type": "Instructor",
+    "url": "https://www.learn.k12.ct.us/"
+  },
+  {
+    "title": "Program Assistant",
+    "organization": "New London Public Schools",
+    "description": "After-school program assistant roles, particularly at the Winthrop STEM Elementary Magnet School.",
+    "category": "AI and STEM-related",
+    "location": "New London, CT",
+    "type": "Assistant",
+    "url": "https://www.newlondon.org/"
+  },
+  {
+    "title": "Youth Program Staff",
+    "organization": "Thames Valley Council for Community Action",
+    "description": "Manage Head Start and other youth programs in New London.",
+    "category": "General after-school",
+    "location": "New London, CT",
+    "type": "Staff",
+    "url": "https://www.tvcca.org/"
+  },
+  {
+    "title": "Lab Intern - Sci. CORPS Program",
+    "organization": "Yale Peabody Museum",
+    "description": "Paid lab internships through the EVOLUTIONS program for high school students, focusing on scientific inquiry and STEM career awareness.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Intern",
+    "url": "https://peabody.yale.edu/"
+  },
+  {
+    "title": "Museum Interpreter - Sci. CORPS",
+    "organization": "Yale Peabody Museum",
+    "description": "Youth employment program role focusing on scientific inquiry and STEM career awareness for high school students.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Interpreter",
+    "url": "https://peabody.yale.edu/"
+  },
+  {
+    "title": "STEM Tutor",
+    "organization": "Dwight Hall at Yale",
+    "description": "Tutor students at Co-op Arts and Humanities High School in STEM subjects and SAT prep through after-school support program.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Tutor",
+    "url": "https://dwighthall.org/"
+  },
+  {
+    "title": "Early Educator/Teacher",
+    "organization": "Bright Horizons at Yale West Campus",
+    "description": "Daycare and preschool positions for early educators and teachers at Yale West Campus location.",
+    "category": "General after-school",
+    "location": "Orange, CT",
+    "type": "Teacher",
+    "url": "https://www.brighthorizons.com/"
+  },
+  {
+    "title": "iD Tech Camp Staff",
+    "organization": "Fairfield University",
+    "description": "Summer camp staff to teach coding, robotics, and AI to students during iD Tech Camps hosted at the university.",
+    "category": "AI and STEM-related",
+    "location": "Fairfield, CT",
+    "type": "Instructor",
+    "url": "https://www.idtech.com/"
+  },
+  {
+    "title": "After-School Staff",
+    "organization": "Hamden/North Haven YMCA",
+    "description": "Work with children in supervised environment for after-school childcare, youth sports, and day camps.",
+    "category": "General after-school",
+    "location": "Hamden, CT",
+    "type": "Staff",
+    "url": "https://www.ghymca.org/"
+  },
+  {
+    "title": "Program Staff - New Haven Intermediate",
+    "organization": "LEARN Resource Center",
+    "description": "Before and after-school programming at New Haven Intermediate, offering enrichment activities for students.",
+    "category": "General after-school",
+    "location": "New Haven, CT",
+    "type": "Staff",
+    "url": "https://www.learn.k12.ct.us/"
+  },
+  {
+    "title": "After-School Program Staff",
+    "organization": "Monitor My Health",
+    "description": "After-school program at Hamden Middle School with funding for programming in 2025–2026.",
+    "category": "General after-school",
+    "location": "Hamden, CT",
+    "type": "Staff",
+    "url": ""
+  },
+  {
+    "title": "After-School Program Staff",
+    "organization": "West Haven Community House",
+    "description": "Staff positions for after-school programs in partnership with West Haven schools.",
+    "category": "General after-school",
+    "location": "West Haven, CT",
+    "type": "Staff",
+    "url": "https://www.westhavencommunityhouse.org/"
+  },
+  {
+    "title": "LEGO STEM Instructor",
+    "organization": "Branford Parks and Recreation Department",
+    "description": "Lead LEGO STEM classes through Play-Well TEKnologies and computer classes with SPARK Business Academy.",
+    "category": "AI and STEM-related",
+    "location": "Branford, CT",
+    "type": "Instructor",
+    "url": "https://www.branford-ct.gov/"
+  },
+  {
+    "title": "Youth Program Volunteer",
+    "organization": "Milford Youth Center",
+    "description": "Assist with various activities in free after-school program for youth aged 8–18.",
+    "category": "General after-school",
+    "location": "Milford, CT",
+    "type": "Volunteer",
+    "url": "https://www.milfordct.gov/"
+  },
+  {
+    "title": "STEM Instructor - LEGO Robotics",
+    "organization": "Snapology",
+    "description": "Lead STEM programs including LEGO robotics in the greater New Haven area.",
+    "category": "AI and STEM-related",
+    "location": "Hartford & New Haven region, CT",
+    "type": "Instructor",
+    "url": "https://www.snapology.com/"
+  },
+  {
+    "title": "Code Coach",
+    "organization": "The Coder School",
+    "description": "Teach coding languages, AI, and robotics to students in the New Haven area.",
+    "category": "AI and STEM-related",
+    "location": "Branford, CT",
+    "type": "Coach",
+    "url": "https://www.thecoderschool.com/"
+  },
+  {
+    "title": "Coding Instructor Volunteer",
+    "organization": "CS4ALL",
+    "description": "Volunteer opportunities for teaching free in-person and online coding programs for kids and teens.",
+    "category": "AI and STEM-related",
+    "location": "New Haven, CT",
+    "type": "Volunteer",
+    "url": "https://cs4all.org/"
+  },
+  {
+    "title": "LEGO STEM Instructor",
+    "organization": "Play-Well TEKnologies",
+    "description": "Conduct after-school LEGO STEM classes through the Branford Parks and Recreation Department.",
+    "category": "AI and STEM-related",
+    "location": "Branford, CT",
+    "type": "Instructor",
+    "url": "https://www.play-well.org/"
+  },
+  {
+    "title": "Early Childhood Educator",
+    "organization": "KinderCare",
+    "description": "Implement curriculum and after-school activities at daycare and preschool facility.",
+    "category": "General after-school",
+    "location": "Hamden, CT",
+    "type": "Teacher",
+    "url": "https://www.kindercare.com/"
+  }
+]

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <header>
+            <h1>Bookmarks</h1>
+            <p>Your collection of useful websites and resources</p>
+        </header>
+
+        <div id="bookmarksList" class="bookmarks-list">
+            <!-- Bookmarks will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        class BookmarksPage {
+            constructor() {
+                this.bookmarks = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.renderBookmarks();
+            }
+
+            async loadData() {
+                try {
+                    const response = await fetch('bookmarks.json');
+                    this.bookmarks = await response.json();
+                } catch (error) {
+                    console.error('Error loading bookmarks:', error);
+                    this.showError('Failed to load bookmarks data.');
+                }
+            }
+
+            renderBookmarks() {
+                const container = document.getElementById('bookmarksList');
+                
+                if (this.bookmarks.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><h3>No bookmarks yet</h3><p>Add some bookmarks to your bookmarks.json file</p></div>';
+                    return;
+                }
+
+                container.innerHTML = this.bookmarks.map(bookmark => `
+                    <div class="bookmark-item">
+                        <h3 class="bookmark-title">${this.escapeHtml(bookmark.title)}</h3>
+                        <a href="${bookmark.url}" target="_blank" class="bookmark-url">${this.escapeHtml(bookmark.url)}</a>
+                        ${bookmark.description ? `<p class="bookmark-description">${this.escapeHtml(bookmark.description)}</p>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BookmarksPage();
+        });
+    </script>
+</body>
+</html>

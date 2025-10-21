@@ -5,57 +5,162 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LifeOS</title>
         <link rel="stylesheet" href="styles.css">
+        <style>
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        .nav-hub {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .nav-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-card:hover::before {
+            opacity: 1;
+        }
+        
+        .nav-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+        
+        .nav-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+        
+        .bookmarks-card { 
+            border-left: 4px solid #ff6b6b;
+        }
+        .goals-card { 
+            border-left: 4px solid #feca57;
+        }
+        .jobs-card { 
+            border-left: 4px solid #48dbfb;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 3rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
     </head>
     <body>
-        <div class="container">
+        <div class="nav-hub">
             <header>
                 <h1>LifeOS</h1>
                 <p>Your personal life management system</p>
             </header>
 
-            <nav class="tabs">
-                <button class="tab-button active"
-                    data-tab="programs">Programs</button>
-                <button class="tab-button"
-                    data-tab="bookmarks">Bookmarks</button>
-                <button class="tab-button" data-tab="goals">Goals</button>
-            </nav>
+            <div class="nav-grid">
+                <a href="bookmarks.html" class="nav-card bookmarks-card">
+                    <span class="nav-icon">🔖</span>
+                    <h2 class="nav-title">Bookmarks</h2>
+                    <p class="nav-description">Your collection of useful
+                        websites, resources, and references for quick
+                        access.</p>
+                </a>
 
-            <main>
-                <!-- Programs Tab -->
-                <div id="programs" class="tab-content active">
-                    <div class="filters">
-                        <input type="text" id="searchInput"
-                            placeholder="Search programs..."
-                            class="search-input">
-                        <select id="cityFilter" class="filter-select">
-                            <option value>All Cities</option>
-                        </select>
-                        <select id="typeFilter" class="filter-select">
-                            <option value>All Types</option>
-                        </select>
-                    </div>
-                    <div id="programsList" class="programs-grid">
-                        <!-- Programs will be loaded here -->
-                    </div>
-                </div>
+                <a href="goals.html" class="nav-card goals-card">
+                    <span class="nav-icon">🎯</span>
+                    <h2 class="nav-title">Goals</h2>
+                    <p class="nav-description">Track your personal and
+                        professional goals with categories and priority
+                        levels.</p>
+                </a>
 
-                <!-- Bookmarks Tab -->
-                <div id="bookmarks" class="tab-content">
-                    <div id="bookmarksList" class="bookmarks-list">
-                        <!-- Bookmarks will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Goals Tab -->
-                <div id="goals" class="tab-content">
-                    <div id="goalsList" class="goals-list">
-                        <!-- Goals will be loaded here -->
-                    </div>
-                </div>
-            </main>
+                <a href="jobs.html" class="nav-card jobs-card">
+                    <span class="nav-icon">💼</span>
+                    <h2 class="nav-title">Jobs</h2>
+                    <p class="nav-description">After-school job opportunities in
+                        AI, STEM, and education with location-based
+                        filtering.</p>
+                </a>
+            </div>
         </div>
-
-        <script src="app.js"></script>
     </body>
 </html>

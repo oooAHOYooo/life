@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jobs - LifeOS</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to LifeOS</a>
+
+            <header>
+                <h1>Jobs</h1>
+                <p>After-school job opportunities in AI, STEM, and education</p>
+            </header>
+
+            <div class="filters">
+                <input type="text" id="jobSearchInput"
+                    placeholder="Search jobs..." class="search-input">
+                <select id="jobCategoryFilter" class="filter-select">
+                    <option value>All Categories</option>
+                </select>
+                <select id="jobTypeFilter" class="filter-select">
+                    <option value>All Types</option>
+                </select>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="potential-jobs.html" class="program-link"
+                    style="text-decoration: none; display: inline-block;">
+                    View Additional Job Resources →
+                </a>
+            </div>
+
+            <div id="jobsList" class="jobs-list">
+                <!-- Jobs will be loaded here -->
+            </div>
+        </div>
+
+        <script>
+        class JobsPage {
+            constructor() {
+                this.jobs = [];
+                this.filteredJobs = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.setupEventListeners();
+                this.renderAll();
+            }
+
+            async loadData() {
+                try {
+                    const response = await fetch('jobs.json');
+                    this.jobs = await response.json();
+                    this.filteredJobs = [...this.jobs];
+                } catch (error) {
+                    console.error('Error loading jobs:', error);
+                    this.showError('Failed to load jobs data.');
+                }
+            }
+
+            setupEventListeners() {
+                const searchInput = document.getElementById('jobSearchInput');
+                const categoryFilter = document.getElementById('jobCategoryFilter');
+                const typeFilter = document.getElementById('jobTypeFilter');
+
+                searchInput.addEventListener('input', () => this.filterJobs());
+                categoryFilter.addEventListener('change', () => this.filterJobs());
+                typeFilter.addEventListener('change', () => this.filterJobs());
+            }
+
+            filterJobs() {
+                const searchTerm = document.getElementById('jobSearchInput').value.toLowerCase();
+                const categoryFilter = document.getElementById('jobCategoryFilter').value;
+                const typeFilter = document.getElementById('jobTypeFilter').value;
+
+                this.filteredJobs = this.jobs.filter(job => {
+                    const matchesSearch = !searchTerm || 
+                        job.title.toLowerCase().includes(searchTerm) ||
+                        job.organization.toLowerCase().includes(searchTerm) ||
+                        job.description.toLowerCase().includes(searchTerm);
+                    
+                    const matchesCategory = !categoryFilter || job.category === categoryFilter;
+                    const matchesType = !typeFilter || job.type === typeFilter;
+
+                    return matchesSearch && matchesCategory && matchesType;
+                });
+
+                this.renderJobs();
+            }
+
+            renderAll() {
+                this.renderJobs();
+                this.populateFilters();
+            }
+
+            renderJobs() {
+                const container = document.getElementById('jobsList');
+                
+                if (this.filteredJobs.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><h3>No jobs found</h3><p>Try adjusting your filters</p></div>';
+                    return;
+                }
+
+                // Group jobs by organization and location
+                const groupedJobs = this.groupJobsByOrganization(this.filteredJobs);
+                
+                container.innerHTML = Object.keys(groupedJobs).map(orgKey => {
+                    const orgData = groupedJobs[orgKey];
+                    const jobs = orgData.jobs;
+                    
+                    return `
+                        <div class="organization-group">
+                            <div class="organization-header">
+                                <h2 class="organization-name">${this.escapeHtml(orgData.organization)}</h2>
+                                <div class="organization-location">${this.escapeHtml(orgData.location)}</div>
+                            </div>
+                            <div class="organization-jobs">
+                                ${jobs.map(job => `
+                                    <div class="job-list-item">
+                                        <div class="job-list-header">
+                                            <h3 class="job-list-title">${this.escapeHtml(job.title)}</h3>
+                                            <div class="job-list-type">${this.escapeHtml(job.type)}</div>
+                                        </div>
+                                        <p class="job-list-description">${this.escapeHtml(job.description)}</p>
+                                        <div class="job-list-footer">
+                                            <div></div>
+                                            ${job.url ? `<a href="${job.url}" target="_blank" class="job-list-link">View Job →</a>` : ''}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            groupJobsByOrganization(jobs) {
+                const grouped = {};
+                
+                jobs.forEach(job => {
+                    const key = `${job.organization} - ${job.location}`;
+                    if (!grouped[key]) {
+                        grouped[key] = {
+                            organization: job.organization,
+                            location: job.location,
+                            jobs: []
+                        };
+                    }
+                    grouped[key].jobs.push(job);
+                });
+                
+                // Sort organizations alphabetically
+                const sortedKeys = Object.keys(grouped).sort((a, b) => {
+                    const orgA = grouped[a].organization.toLowerCase();
+                    const orgB = grouped[b].organization.toLowerCase();
+                    if (orgA !== orgB) return orgA.localeCompare(orgB);
+                    return grouped[a].location.localeCompare(grouped[b].location);
+                });
+                
+                const sortedGrouped = {};
+                sortedKeys.forEach(key => {
+                    sortedGrouped[key] = grouped[key];
+                });
+                
+                return sortedGrouped;
+            }
+
+            populateFilters() {
+                // Populate job category filter
+                const jobCategories = [...new Set(this.jobs.map(j => j.category))].sort();
+                const jobCategoryFilter = document.getElementById('jobCategoryFilter');
+                jobCategoryFilter.innerHTML = '<option value="">All Categories</option>' + 
+                    jobCategories.map(category => `<option value="${category}">${this.escapeHtml(category)}</option>`).join('');
+
+                // Populate job type filter
+                const jobTypes = [...new Set(this.jobs.map(j => j.type))].sort();
+                const jobTypeFilter = document.getElementById('jobTypeFilter');
+                jobTypeFilter.innerHTML = '<option value="">All Types</option>' + 
+                    jobTypes.map(type => `<option value="${type}">${this.escapeHtml(type)}</option>`).join('');
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new JobsPage();
+        });
+    </script>
+    </body>
+</html>

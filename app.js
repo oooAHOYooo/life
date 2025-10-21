@@ -6,7 +6,9 @@ class LifeOS {
         this.programs = [];
         this.bookmarks = [];
         this.goals = [];
+        this.jobs = [];
         this.filteredPrograms = [];
+        this.filteredJobs = [];
         
         this.init();
     }
@@ -20,17 +22,20 @@ class LifeOS {
     async loadData() {
         try {
             // Load all JSON files
-            const [programsResponse, bookmarksResponse, goalsResponse] = await Promise.all([
+            const [programsResponse, bookmarksResponse, goalsResponse, jobsResponse] = await Promise.all([
                 fetch('programs.json'),
                 fetch('bookmarks.json'),
-                fetch('goals.json')
+                fetch('goals.json'),
+                fetch('jobs.json')
             ]);
 
             this.programs = await programsResponse.json();
             this.bookmarks = await bookmarksResponse.json();
             this.goals = await goalsResponse.json();
+            this.jobs = await jobsResponse.json();
 
             this.filteredPrograms = [...this.programs];
+            this.filteredJobs = [...this.jobs];
         } catch (error) {
             console.error('Error loading data:', error);
             this.showError('Failed to load data. Please check that all JSON files exist.');
@@ -53,6 +58,15 @@ class LifeOS {
         searchInput.addEventListener('input', () => this.filterPrograms());
         cityFilter.addEventListener('change', () => this.filterPrograms());
         typeFilter.addEventListener('change', () => this.filterPrograms());
+
+        // Job filtering
+        const jobSearchInput = document.getElementById('jobSearchInput');
+        const jobCategoryFilter = document.getElementById('jobCategoryFilter');
+        const jobTypeFilter = document.getElementById('jobTypeFilter');
+
+        jobSearchInput.addEventListener('input', () => this.filterJobs());
+        jobCategoryFilter.addEventListener('change', () => this.filterJobs());
+        jobTypeFilter.addEventListener('change', () => this.filterJobs());
     }
 
     switchTab(tabName) {
@@ -88,10 +102,31 @@ class LifeOS {
         this.renderPrograms();
     }
 
+    filterJobs() {
+        const searchTerm = document.getElementById('jobSearchInput').value.toLowerCase();
+        const categoryFilter = document.getElementById('jobCategoryFilter').value;
+        const typeFilter = document.getElementById('jobTypeFilter').value;
+
+        this.filteredJobs = this.jobs.filter(job => {
+            const matchesSearch = !searchTerm || 
+                job.title.toLowerCase().includes(searchTerm) ||
+                job.organization.toLowerCase().includes(searchTerm) ||
+                job.description.toLowerCase().includes(searchTerm);
+            
+            const matchesCategory = !categoryFilter || job.category === categoryFilter;
+            const matchesType = !typeFilter || job.type === typeFilter;
+
+            return matchesSearch && matchesCategory && matchesType;
+        });
+
+        this.renderJobs();
+    }
+
     renderAll() {
         this.renderPrograms();
         this.renderBookmarks();
         this.renderGoals();
+        this.renderJobs();
         this.populateFilters();
     }
 
@@ -155,6 +190,29 @@ class LifeOS {
         `).join('');
     }
 
+    renderJobs() {
+        const container = document.getElementById('jobsList');
+        
+        if (this.filteredJobs.length === 0) {
+            container.innerHTML = '<div class="empty-state"><h3>No jobs found</h3><p>Try adjusting your filters</p></div>';
+            return;
+        }
+
+        container.innerHTML = this.filteredJobs.map(job => `
+            <div class="job-card">
+                <h3 class="job-title">${this.escapeHtml(job.title)}</h3>
+                <div class="job-organization">${this.escapeHtml(job.organization)}</div>
+                <p class="job-description">${this.escapeHtml(job.description)}</p>
+                <div class="job-meta">
+                    <span class="job-tag job-category">${this.escapeHtml(job.category)}</span>
+                    <span class="job-tag job-type">${this.escapeHtml(job.type)}</span>
+                    <span class="job-tag job-location">${this.escapeHtml(job.location)}</span>
+                </div>
+                ${job.url ? `<a href="${job.url}" target="_blank" class="job-link">View Job</a>` : ''}
+            </div>
+        `).join('');
+    }
+
     populateFilters() {
         // Populate city filter
         const cities = [...new Set(this.programs.map(p => p.city))].sort();
@@ -167,6 +225,18 @@ class LifeOS {
         const typeFilter = document.getElementById('typeFilter');
         typeFilter.innerHTML = '<option value="">All Types</option>' + 
             types.map(type => `<option value="${type}">${this.escapeHtml(type)}</option>`).join('');
+
+        // Populate job category filter
+        const jobCategories = [...new Set(this.jobs.map(j => j.category))].sort();
+        const jobCategoryFilter = document.getElementById('jobCategoryFilter');
+        jobCategoryFilter.innerHTML = '<option value="">All Categories</option>' + 
+            jobCategories.map(category => `<option value="${category}">${this.escapeHtml(category)}</option>`).join('');
+
+        // Populate job type filter
+        const jobTypes = [...new Set(this.jobs.map(j => j.type))].sort();
+        const jobTypeFilter = document.getElementById('jobTypeFilter');
+        jobTypeFilter.innerHTML = '<option value="">All Types</option>' + 
+            jobTypes.map(type => `<option value="${type}">${this.escapeHtml(type)}</option>`).join('');
     }
 
     escapeHtml(text) {

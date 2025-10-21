@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <header>
+            <h1>Goals</h1>
+            <p>Track your personal and professional goals</p>
+        </header>
+
+        <div id="goalsList" class="goals-list">
+            <!-- Goals will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        class GoalsPage {
+            constructor() {
+                this.goals = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.renderGoals();
+            }
+
+            async loadData() {
+                try {
+                    const response = await fetch('goals.json');
+                    this.goals = await response.json();
+                } catch (error) {
+                    console.error('Error loading goals:', error);
+                    this.showError('Failed to load goals data.');
+                }
+            }
+
+            renderGoals() {
+                const container = document.getElementById('goalsList');
+                
+                if (this.goals.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><h3>No goals yet</h3><p>Add some goals to your goals.json file</p></div>';
+                    return;
+                }
+
+                container.innerHTML = this.goals.map(goal => `
+                    <div class="goal-item">
+                        <h3 class="goal-title">${this.escapeHtml(goal.title)}</h3>
+                        <p class="goal-description">${this.escapeHtml(goal.description)}</p>
+                        <div class="goal-meta">
+                            ${goal.category ? `<span class="goal-tag goal-category">${this.escapeHtml(goal.category)}</span>` : ''}
+                            ${goal.priority ? `<span class="goal-tag goal-priority">${this.escapeHtml(goal.priority)}</span>` : ''}
+                            ${goal.status ? `<span class="goal-tag">${this.escapeHtml(goal.status)}</span>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new GoalsPage();
+        });
+    </script>
+</body>
+</html>

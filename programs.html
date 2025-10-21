@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <header>
+            <h1>Programs</h1>
+            <p>Educational programs, courses, and learning opportunities</p>
+        </header>
+
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="Search programs..." class="search-input">
+            <select id="cityFilter" class="filter-select">
+                <option value="">All Cities</option>
+            </select>
+            <select id="typeFilter" class="filter-select">
+                <option value="">All Types</option>
+            </select>
+        </div>
+        
+        <div id="programsList" class="programs-grid">
+            <!-- Programs will be loaded here -->
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        class ProgramsPage {
+            constructor() {
+                this.programs = [];
+                this.filteredPrograms = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.setupEventListeners();
+                this.renderAll();
+            }
+
+            async loadData() {
+                try {
+                    const response = await fetch('programs.json');
+                    this.programs = await response.json();
+                    this.filteredPrograms = [...this.programs];
+                } catch (error) {
+                    console.error('Error loading programs:', error);
+                    this.showError('Failed to load programs data.');
+                }
+            }
+
+            setupEventListeners() {
+                const searchInput = document.getElementById('searchInput');
+                const cityFilter = document.getElementById('cityFilter');
+                const typeFilter = document.getElementById('typeFilter');
+
+                searchInput.addEventListener('input', () => this.filterPrograms());
+                cityFilter.addEventListener('change', () => this.filterPrograms());
+                typeFilter.addEventListener('change', () => this.filterPrograms());
+            }
+
+            filterPrograms() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const cityFilter = document.getElementById('cityFilter').value;
+                const typeFilter = document.getElementById('typeFilter').value;
+
+                this.filteredPrograms = this.programs.filter(program => {
+                    const matchesSearch = !searchTerm || 
+                        program.title.toLowerCase().includes(searchTerm) ||
+                        program.description.toLowerCase().includes(searchTerm);
+                    
+                    const matchesCity = !cityFilter || program.city === cityFilter;
+                    const matchesType = !typeFilter || program.type === typeFilter;
+
+                    return matchesSearch && matchesCity && matchesType;
+                });
+
+                this.renderPrograms();
+            }
+
+            renderAll() {
+                this.renderPrograms();
+                this.populateFilters();
+            }
+
+            renderPrograms() {
+                const container = document.getElementById('programsList');
+                
+                if (this.filteredPrograms.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><h3>No programs found</h3><p>Try adjusting your filters</p></div>';
+                    return;
+                }
+
+                container.innerHTML = this.filteredPrograms.map(program => `
+                    <div class="program-card">
+                        <h3 class="program-title">${this.escapeHtml(program.title)}</h3>
+                        <p class="program-description">${this.escapeHtml(program.description)}</p>
+                        <div class="program-meta">
+                            <span class="meta-tag">${this.escapeHtml(program.city)}</span>
+                            <span class="meta-tag">${this.escapeHtml(program.type)}</span>
+                            ${program.duration ? `<span class="meta-tag">${this.escapeHtml(program.duration)}</span>` : ''}
+                        </div>
+                        ${program.url ? `<a href="${program.url}" target="_blank" class="program-link">Visit Program</a>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            populateFilters() {
+                // Populate city filter
+                const cities = [...new Set(this.programs.map(p => p.city))].sort();
+                const cityFilter = document.getElementById('cityFilter');
+                cityFilter.innerHTML = '<option value="">All Cities</option>' + 
+                    cities.map(city => `<option value="${city}">${this.escapeHtml(city)}</option>`).join('');
+
+                // Populate type filter
+                const types = [...new Set(this.programs.map(p => p.type))].sort();
+                const typeFilter = document.getElementById('typeFilter');
+                typeFilter.innerHTML = '<option value="">All Types</option>' + 
+                    types.map(type => `<option value="${type}">${this.escapeHtml(type)}</option>`).join('');
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProgramsPage();
+        });
+    </script>
+</body>
+</html>
