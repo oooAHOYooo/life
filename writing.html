@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Writing Projects - LifeOS</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to LifeOS</a>
+
+            <header>
+                <h1>Writing Projects</h1>
+                <p>Active writing projects and creative works in progress</p>
+            </header>
+
+            <div id="writingList" class="writing-list">
+                <!-- Writing projects will be loaded here -->
+            </div>
+
+            <div class="drafts-section">
+                <h2>Writing Drafts</h2>
+                <div class="drafts-table-container">
+                    <table id="draftsTable" class="drafts-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Version</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Last Modified</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="draftsTableBody">
+                            <!-- Drafts will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        class WritingPage {
+            constructor() {
+                this.writingProjects = [];
+                this.drafts = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.renderWritingProjects();
+                this.renderDraftsTable();
+            }
+
+            async loadData() {
+                try {
+                    const [projectsResponse, draftsResponse] = await Promise.all([
+                        fetch('writing-projects.json'),
+                        fetch('data/writing-drafts.json')
+                    ]);
+                    this.writingProjects = await projectsResponse.json();
+                    this.drafts = await draftsResponse.json();
+                } catch (error) {
+                    console.error('Error loading writing data:', error);
+                    this.showError('Failed to load writing data.');
+                }
+            }
+
+            renderWritingProjects() {
+                const container = document.getElementById('writingList');
+                
+                if (this.writingProjects.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><h3>No writing projects yet</h3><p>Add some writing projects to your writing-projects.json file</p></div>';
+                    return;
+                }
+
+                container.innerHTML = this.writingProjects.map(project => `
+                    <div class="writing-item">
+                        <h3 class="writing-title">${this.escapeHtml(project.title)}</h3>
+                        <p class="writing-description">${this.escapeHtml(project.description)}</p>
+                        <div class="writing-meta">
+                            <span class="writing-tag writing-category">${this.escapeHtml(project.category)}</span>
+                            <span class="writing-tag writing-status">${this.escapeHtml(project.status)}</span>
+                            ${project.wordCount ? `<span class="writing-tag writing-count">${this.escapeHtml(project.wordCount)} words</span>` : ''}
+                        </div>
+                        <div class="writing-details">
+                            <p class="writing-notes"><strong>Notes:</strong> ${this.escapeHtml(project.notes)}</p>
+                            <p class="writing-updated"><strong>Last Updated:</strong> ${this.escapeHtml(project.lastUpdated)}</p>
+                            ${project.filePath ? `<p class="writing-file"><strong>File:</strong> ${this.escapeHtml(project.filePath)}</p>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            renderDraftsTable() {
+                const tbody = document.getElementById('draftsTableBody');
+                
+                if (this.drafts.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="empty-drafts">No drafts found</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = this.drafts.map(draft => `
+                    <tr class="draft-row">
+                        <td class="draft-title">${this.escapeHtml(draft.title)}</td>
+                        <td class="draft-version">${this.escapeHtml(draft.version)}</td>
+                        <td class="draft-type">
+                            <span class="file-type-badge ${draft.fileType}">${draft.fileType.toUpperCase()}</span>
+                        </td>
+                        <td class="draft-status">
+                            <span class="status-badge status-${draft.status.toLowerCase().replace(' ', '-')}">${this.escapeHtml(draft.status)}</span>
+                        </td>
+                        <td class="draft-modified">${this.escapeHtml(draft.lastModified)}</td>
+                        <td class="draft-actions">
+                            <button class="action-btn view-btn" onclick="this.viewDraft('${draft.id}')">View</button>
+                            <button class="action-btn edit-btn" onclick="this.editDraft('${draft.id}')">Edit</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            viewDraft(draftId) {
+                const draft = this.drafts.find(d => d.id === draftId);
+                if (draft) {
+                    if (draft.fileType === 'pdf') {
+                        window.open(draft.filePath, '_blank');
+                    } else {
+                        // For markdown files, we could open in a new tab or modal
+                        window.open(draft.filePath, '_blank');
+                    }
+                }
+            }
+
+            editDraft(draftId) {
+                const draft = this.drafts.find(d => d.id === draftId);
+                if (draft) {
+                    // For now, just open the file
+                    // In a real implementation, this might open an editor
+                    window.open(draft.filePath, '_blank');
+                }
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new WritingPage();
+        });
+    </script>
+    </body>
+</html>

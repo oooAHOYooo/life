@@ -1,0 +1,80 @@
+[
+  {
+    "id": "poets-story",
+    "title": "The Poet's Story",
+    "projectId": "poets-story",
+    "version": "draft-1",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/poets-story-draft-1.md",
+    "wordCount": 0,
+    "lastModified": "2024-01-15",
+    "status": "In Progress",
+    "notes": "Initial draft - needs completion and editing",
+    "tags": ["fiction", "mystery", "connecticut", "kenny-lewis"]
+  },
+  {
+    "id": "creatures-act1",
+    "title": "Creatures in the Tall Grass - Act I",
+    "projectId": "creatures-tall-grass",
+    "version": "draft-3",
+    "fileType": "pdf",
+    "filePath": "data/writing-drafts/creatures-act1-draft-3.pdf",
+    "wordCount": 0,
+    "lastModified": "2024-01-10",
+    "status": "Review",
+    "notes": "Act I outline locked. Ready for test shoots.",
+    "tags": ["screenplay", "horror", "connecticut", "feature-film"]
+  },
+  {
+    "id": "creatures-act2",
+    "title": "Creatures in the Tall Grass - Act II",
+    "projectId": "creatures-tall-grass",
+    "version": "draft-1",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/creatures-act2-draft-1.md",
+    "wordCount": 0,
+    "lastModified": "2024-01-05",
+    "status": "Drafting",
+    "notes": "Early outline and key scenes",
+    "tags": ["screenplay", "horror", "connecticut", "feature-film"]
+  },
+  {
+    "id": "ahoy-blog-intro",
+    "title": "Ahoy Indie Media - Introduction Post",
+    "projectId": "ahoy-blog",
+    "version": "draft-1",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/ahoy-blog-intro-draft-1.md",
+    "wordCount": 0,
+    "lastModified": "2024-01-12",
+    "status": "Drafting",
+    "notes": "Introduction to the Ahoy Indie Media platform",
+    "tags": ["blog", "technical", "indie-media", "introduction"]
+  },
+  {
+    "id": "curriculum-ai-art",
+    "title": "AI Art & Creative Coding - Curriculum",
+    "projectId": "teaching-curricula",
+    "version": "draft-2",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/curriculum-ai-art-draft-2.md",
+    "wordCount": 0,
+    "lastModified": "2024-01-08",
+    "status": "Review",
+    "notes": "5-session lesson plan with supply list",
+    "tags": ["curriculum", "education", "ai", "creative-coding"]
+  },
+  {
+    "id": "curriculum-unreal",
+    "title": "Unreal World Building - Curriculum",
+    "projectId": "teaching-curricula",
+    "version": "draft-1",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/curriculum-unreal-draft-1.md",
+    "wordCount": 0,
+    "lastModified": "2024-01-03",
+    "status": "Drafting",
+    "notes": "No VR focus - accessible world building",
+    "tags": ["curriculum", "education", "unreal", "world-building"]
+  }
+]

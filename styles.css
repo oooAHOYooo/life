@@ -218,6 +218,13 @@ header p {
     gap: 20px;
 }
 
+/* Writing projects list */
+.writing-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
 /* Jobs grid */
 .jobs-grid {
     display: grid;
@@ -281,6 +288,250 @@ header p {
 .goal-category {
     background: #d1ecf1;
     color: #0c5460;
+}
+
+/* Writing project items */
+.writing-item {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.writing-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.writing-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.writing-description {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.writing-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.writing-tag {
+    background: #ecf0f1;
+    color: #2c3e50;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.writing-category {
+    background: #e8f5e8;
+    color: #27ae60;
+}
+
+.writing-status {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.writing-count {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.writing-details {
+    border-top: 1px solid #ecf0f1;
+    padding-top: 15px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.writing-details p {
+    margin-bottom: 8px;
+}
+
+.writing-notes {
+    font-style: italic;
+}
+
+.writing-file {
+    font-family: monospace;
+    background: #f8f9fa;
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* Drafts section */
+.drafts-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #ecf0f1;
+}
+
+.drafts-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.drafts-table-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.drafts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.drafts-table th {
+    background: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 15px 12px;
+    text-align: left;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.drafts-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.draft-row:hover {
+    background: #f8f9fa;
+}
+
+.draft-title {
+    font-weight: 500;
+    color: #2c3e50;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.draft-version {
+    font-family: monospace;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.file-type-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.file-type-badge.md {
+    background: #e8f5e8;
+    color: #27ae60;
+}
+
+.file-type-badge.pdf {
+    background: #ffebee;
+    color: #e74c3c;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-in-progress {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-review {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-drafting {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.draft-modified {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.draft-actions {
+    white-space: nowrap;
+}
+
+.action-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #2980b9;
+}
+
+.edit-btn {
+    background: #f39c12;
+}
+
+.edit-btn:hover {
+    background: #e67e22;
+}
+
+.empty-drafts {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .drafts-table-container {
+        font-size: 0.8rem;
+    }
+
+    .drafts-table th,
+    .drafts-table td {
+        padding: 8px 6px;
+    }
+
+    .draft-title {
+        max-width: 150px;
+    }
+
+    .action-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
 }
 
 /* Job cards */
@@ -660,7 +911,8 @@ header p {
     .bookmarks-list,
     .goals-list,
     .jobs-grid,
-    .jobs-list {
+    .jobs-list,
+    .writing-list {
         grid-template-columns: 1fr;
     }
 }

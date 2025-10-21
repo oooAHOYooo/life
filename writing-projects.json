@@ -1,0 +1,42 @@
+[
+  {
+    "title": "The Poet's Story",
+    "description": "A mysterious tale about Kenny Lewis, gold discovery, and strange encounters beneath the New Haven Canal. A story of obsession, ancient secrets, and something watching from the depths.",
+    "category": "Fiction",
+    "status": "In Progress",
+    "wordCount": "~2,500",
+    "lastUpdated": "2024-01-15",
+    "notes": "Needs completion and editing. Contains elements of cosmic horror and local Connecticut history.",
+    "filePath": "the-poets-story.md"
+  },
+  {
+    "title": "Creatures in the Tall Grass",
+    "description": "A feature film script about supernatural encounters in rural Connecticut. Act I focuses on establishing characters and the mysterious events that begin to unfold.",
+    "category": "Screenplay",
+    "status": "In Progress",
+    "wordCount": "~15,000",
+    "lastUpdated": "2024-01-10",
+    "notes": "Act I outline locked. Test shoots planned with RED Komodo + Sirui anamorphic. Resolve pipeline confirmed.",
+    "filePath": "creatures-tall-grass-script.pdf"
+  },
+  {
+    "title": "Ahoy Indie Media Blog",
+    "description": "Technical blog posts about web development, indie media, and creative coding projects.",
+    "category": "Technical Writing",
+    "status": "Planning",
+    "wordCount": "0",
+    "lastUpdated": "2024-01-01",
+    "notes": "Part of the Ahoy Indie Media MVP. Will cover React, Next.js, and indie media development.",
+    "filePath": "ahoy-blog/"
+  },
+  {
+    "title": "Teaching Curriculum Documentation",
+    "description": "Documentation for the 4 ready-to-run curricula: AI Art & Creative Coding, Unreal World Building, Podcasting + Storytelling, and Front-End Design & Full-Stack.",
+    "category": "Educational",
+    "status": "Planning",
+    "wordCount": "0",
+    "lastUpdated": "2024-01-01",
+    "notes": "Each curriculum needs syllabus, supply list, and 5-session lesson plans.",
+    "filePath": "curricula/"
+  }
+]

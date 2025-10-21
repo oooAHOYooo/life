@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Projects - LifeOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+        
+        .project-header {
+            margin-bottom: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .project-status {
+            display: inline-block;
+            background: #e8f5e8;
+            color: #27ae60;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .project-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .project-links {
+            margin-bottom: 20px;
+        }
+        
+        .project-links h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .link-item:last-child {
+            border-bottom: none;
+        }
+        
+        .link-label {
+            font-weight: 500;
+            color: #2c3e50;
+            min-width: 100px;
+            margin-right: 15px;
+        }
+        
+        .link-url {
+            color: #3498db;
+            text-decoration: none;
+            flex: 1;
+        }
+        
+        .link-url:hover {
+            text-decoration: underline;
+        }
+        
+        .project-drafts {
+            margin-top: 20px;
+        }
+        
+        .project-drafts h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .drafts-mini-table {
+            background: #f8f9fa;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .drafts-mini-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        
+        .drafts-mini-table th {
+            background: #e9ecef;
+            color: #495057;
+            font-weight: 600;
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 0.8rem;
+        }
+        
+        .drafts-mini-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .drafts-mini-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .draft-title-mini {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .draft-version-mini {
+            font-family: monospace;
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+        
+        .draft-type-mini {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .draft-type-mini.md {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .draft-type-mini.pdf {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .no-drafts {
+            color: #6c757d;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to LifeOS</a>
+        
+        <header>
+            <h1>Active Projects</h1>
+            <p>Current projects in development with latest links and drafts</p>
+        </header>
+
+        <div id="projectsList">
+            <!-- Projects will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        class ActiveProjectsPage {
+            constructor() {
+                this.projects = [];
+                this.drafts = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.renderProjects();
+            }
+
+            async loadData() {
+                try {
+                    const [projectsResponse, draftsResponse] = await Promise.all([
+                        fetch('writing-projects.json'),
+                        fetch('data/writing-drafts.json')
+                    ]);
+                    this.projects = await projectsResponse.json();
+                    this.drafts = await draftsResponse.json();
+                } catch (error) {
+                    console.error('Error loading projects data:', error);
+                    this.showError('Failed to load projects data.');
+                }
+            }
+
+            renderProjects() {
+                const container = document.getElementById('projectsList');
+                
+                // Filter only active projects (In Progress status)
+                const activeProjects = this.projects.filter(project => 
+                    project.status === 'In Progress'
+                );
+                
+                if (activeProjects.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><h3>No active projects</h3><p>All projects are in planning phase</p></div>';
+                    return;
+                }
+
+                container.innerHTML = activeProjects.map(project => {
+                    const projectDrafts = this.drafts.filter(draft => 
+                        draft.projectId === project.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+                    );
+                    
+                    return `
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h2 class="project-title">${this.escapeHtml(project.title)}</h2>
+                                <span class="project-status">${this.escapeHtml(project.status)}</span>
+                            </div>
+                            
+                            <p class="project-description">${this.escapeHtml(project.description)}</p>
+                            
+                            <div class="project-links">
+                                <h3>Latest Links</h3>
+                                <div class="link-item">
+                                    <span class="link-label">Repository:</span>
+                                    <a href="${this.getProjectLink(project.title)}" target="_blank" class="link-url">${this.getProjectLink(project.title)}</a>
+                                </div>
+                                <div class="link-item">
+                                    <span class="link-label">Live Site:</span>
+                                    <a href="${this.getProjectLiveLink(project.title)}" target="_blank" class="link-url">${this.getProjectLiveLink(project.title)}</a>
+                                </div>
+                                <div class="link-item">
+                                    <span class="link-label">Documentation:</span>
+                                    <a href="${this.getProjectDocsLink(project.title)}" target="_blank" class="link-url">${this.getProjectDocsLink(project.title)}</a>
+                                </div>
+                            </div>
+                            
+                            ${projectDrafts.length > 0 ? `
+                                <div class="project-drafts">
+                                    <h3>Latest Drafts</h3>
+                                    <div class="drafts-mini-table">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Version</th>
+                                                    <th>Type</th>
+                                                    <th>Modified</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${projectDrafts.slice(0, 3).map(draft => `
+                                                    <tr>
+                                                        <td class="draft-title-mini">${this.escapeHtml(draft.title)}</td>
+                                                        <td class="draft-version-mini">${this.escapeHtml(draft.version)}</td>
+                                                        <td><span class="draft-type-mini ${draft.fileType}">${draft.fileType}</span></td>
+                                                        <td>${this.escapeHtml(draft.lastModified)}</td>
+                                                    </tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="project-drafts">
+                                    <h3>Latest Drafts</h3>
+                                    <div class="no-drafts">No writing drafts for this project</div>
+                                </div>
+                            `}
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            getProjectLink(title) {
+                const links = {
+                    'Ship Ahoy Indie Media MVP (Web)': 'https://github.com/agworkywork/ahoy-indie-media',
+                    'Unity/Xbox Front-End: Grid Library + Watchlist': 'https://github.com/agworkywork/ahoy-unity-frontend',
+                    'LifeOS Static Site': 'https://github.com/agworkywork/life',
+                    'Scoutalina (RouteScout) Android Alpha': 'https://github.com/agworkywork/scoutalina',
+                    'CPC Admin Portal: JSON Export & Content CRUD': 'https://github.com/agworkywork/cpc-admin',
+                    'Creatures in the Tall Grass — Act I + Test Shoots': 'https://github.com/agworkywork/creatures-tall-grass'
+                };
+                return links[title] || 'https://github.com/agworkywork';
+            }
+
+            getProjectLiveLink(title) {
+                const links = {
+                    'Ship Ahoy Indie Media MVP (Web)': 'https://ahoyindiemedia.com',
+                    'LifeOS Static Site': 'https://agworkywork.github.io/life',
+                    'CPC Admin Portal: JSON Export & Content CRUD': 'https://cpcnewhaven.org',
+                    'Creatures in the Tall Grass — Act I + Test Shoots': 'https://creaturesinthetallgrass.com'
+                };
+                return links[title] || '#';
+            }
+
+            getProjectDocsLink(title) {
+                const links = {
+                    'Ship Ahoy Indie Media MVP (Web)': 'https://ahoyindiemedia.com/docs',
+                    'Unity/Xbox Front-End: Grid Library + Watchlist': 'https://github.com/agworkywork/ahoy-unity-frontend/wiki',
+                    'LifeOS Static Site': 'https://github.com/agworkywork/life#readme',
+                    'Scoutalina (RouteScout) Android Alpha': 'https://github.com/agworkywork/scoutalina#readme',
+                    'CPC Admin Portal: JSON Export & Content CRUD': 'https://cpcnewhaven.org/admin/docs'
+                };
+                return links[title] || '#';
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            showError(message) {
+                const container = document.querySelector('.container');
+                container.innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <button onclick="location.reload()">Reload Page</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ActiveProjectsPage();
+        });
+    </script>
+</body>
+</html>
