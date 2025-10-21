@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LifeOS</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>LifeOS</h1>
+                <p>Your personal life management system</p>
+            </header>
+
+            <nav class="tabs">
+                <button class="tab-button active"
+                    data-tab="programs">Programs</button>
+                <button class="tab-button"
+                    data-tab="bookmarks">Bookmarks</button>
+                <button class="tab-button" data-tab="goals">Goals</button>
+            </nav>
+
+            <main>
+                <!-- Programs Tab -->
+                <div id="programs" class="tab-content active">
+                    <div class="filters">
+                        <input type="text" id="searchInput"
+                            placeholder="Search programs..."
+                            class="search-input">
+                        <select id="cityFilter" class="filter-select">
+                            <option value>All Cities</option>
+                        </select>
+                        <select id="typeFilter" class="filter-select">
+                            <option value>All Types</option>
+                        </select>
+                    </div>
+                    <div id="programsList" class="programs-grid">
+                        <!-- Programs will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Bookmarks Tab -->
+                <div id="bookmarks" class="tab-content">
+                    <div id="bookmarksList" class="bookmarks-list">
+                        <!-- Bookmarks will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Goals Tab -->
+                <div id="goals" class="tab-content">
+                    <div id="goalsList" class="goals-list">
+                        <!-- Goals will be loaded here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

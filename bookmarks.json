@@ -1,0 +1,52 @@
+[
+  {
+    "title": "MDN Web Docs",
+    "url": "https://developer.mozilla.org/",
+    "description": "Comprehensive resource for web developers with documentation, tutorials, and guides."
+  },
+  {
+    "title": "Stack Overflow",
+    "url": "https://stackoverflow.com/",
+    "description": "Q&A community for programmers to ask questions and share knowledge."
+  },
+  {
+    "title": "GitHub",
+    "url": "https://github.com/",
+    "description": "Code hosting platform for version control and collaboration."
+  },
+  {
+    "title": "CSS-Tricks",
+    "url": "https://css-tricks.com/",
+    "description": "Daily articles about CSS, HTML, JavaScript, and all things related to web design and development."
+  },
+  {
+    "title": "Smashing Magazine",
+    "url": "https://www.smashingmagazine.com/",
+    "description": "Professional web design and development magazine with articles, books, and conferences."
+  },
+  {
+    "title": "A List Apart",
+    "url": "https://alistapart.com/",
+    "description": "Explores the design, development, and meaning of web content, with a special focus on web standards and best practices."
+  },
+  {
+    "title": "JavaScript.info",
+    "url": "https://javascript.info/",
+    "description": "Modern JavaScript tutorial covering the language specification up to the latest features."
+  },
+  {
+    "title": "React Documentation",
+    "url": "https://react.dev/",
+    "description": "Official React documentation with guides, tutorials, and API reference."
+  },
+  {
+    "title": "Vue.js Guide",
+    "url": "https://vuejs.org/guide/",
+    "description": "Official Vue.js documentation and learning resources."
+  },
+  {
+    "title": "Node.js Documentation",
+    "url": "https://nodejs.org/docs/",
+    "description": "Official Node.js documentation and API reference."
+  }
+]

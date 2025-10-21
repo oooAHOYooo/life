@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Master React and Next.js",
+    "description": "Become proficient in React ecosystem including hooks, context, and Next.js for full-stack development.",
+    "category": "Learning",
+    "priority": "High",
+    "status": "In Progress"
+  },
+  {
+    "title": "Build a Personal Portfolio Website",
+    "description": "Create a modern, responsive portfolio website showcasing my projects and skills.",
+    "category": "Project",
+    "priority": "Medium",
+    "status": "Planning"
+  },
+  {
+    "title": "Learn TypeScript",
+    "description": "Master TypeScript for better JavaScript development with type safety and improved tooling.",
+    "category": "Learning",
+    "priority": "High",
+    "status": "In Progress"
+  },
+  {
+    "title": "Contribute to Open Source",
+    "description": "Make meaningful contributions to open source projects and build a presence in the developer community.",
+    "category": "Community",
+    "priority": "Medium",
+    "status": "Planning"
+  },
+  {
+    "title": "Learn Machine Learning Fundamentals",
+    "description": "Understand the basics of ML including algorithms, data preprocessing, and model evaluation.",
+    "category": "Learning",
+    "priority": "Low",
+    "status": "Future"
+  },
+  {
+    "title": "Improve System Design Skills",
+    "description": "Learn to design scalable systems and understand distributed computing concepts.",
+    "category": "Learning",
+    "priority": "Medium",
+    "status": "Planning"
+  },
+  {
+    "title": "Complete a Side Project",
+    "description": "Build and deploy a complete web application from concept to production.",
+    "category": "Project",
+    "priority": "High",
+    "status": "In Progress"
+  },
+  {
+    "title": "Write Technical Blog Posts",
+    "description": "Share knowledge and experiences through regular blog posts about web development.",
+    "category": "Writing",
+    "priority": "Low",
+    "status": "Future"
+  },
+  {
+    "title": "Learn Docker and DevOps",
+    "description": "Understand containerization and deployment strategies for modern web applications.",
+    "category": "Learning",
+    "priority": "Medium",
+    "status": "Planning"
+  },
+  {
+    "title": "Network with Other Developers",
+    "description": "Attend meetups, conferences, and online events to connect with the developer community.",
+    "category": "Networking",
+    "priority": "Low",
+    "status": "Future"
+  }
+]

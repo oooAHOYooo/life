@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Y Combinator Startup School",
+    "description": "Free online course for entrepreneurs covering the fundamentals of starting a company.",
+    "city": "Online",
+    "type": "Course",
+    "duration": "8 weeks",
+    "url": "https://www.startupschool.org/"
+  },
+  {
+    "title": "MIT OpenCourseWare - Computer Science",
+    "description": "Free access to MIT's computer science curriculum including lectures, assignments, and exams.",
+    "city": "Online",
+    "type": "Course",
+    "duration": "Self-paced",
+    "url": "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/"
+  },
+  {
+    "title": "Stanford CS229 Machine Learning",
+    "description": "Comprehensive machine learning course covering supervised learning, unsupervised learning, and deep learning.",
+    "city": "Online",
+    "type": "Course",
+    "duration": "10 weeks",
+    "url": "https://cs229.stanford.edu/"
+  },
+  {
+    "title": "Coursera Data Science Specialization",
+    "description": "Complete data science program covering R programming, statistical inference, and machine learning.",
+    "city": "Online",
+    "type": "Specialization",
+    "duration": "6 months",
+    "url": "https://www.coursera.org/specializations/jhu-data-science"
+  },
+  {
+    "title": "General Assembly Web Development Bootcamp",
+    "description": "Intensive 12-week program covering full-stack web development with modern technologies.",
+    "city": "San Francisco",
+    "type": "Bootcamp",
+    "duration": "12 weeks",
+    "url": "https://generalassemb.ly/education/web-development-immersive"
+  },
+  {
+    "title": "Le Wagon Coding Bootcamp",
+    "description": "9-week intensive coding bootcamp teaching Ruby on Rails, JavaScript, and modern web development.",
+    "city": "Paris",
+    "type": "Bootcamp",
+    "duration": "9 weeks",
+    "url": "https://www.lewagon.com/"
+  },
+  {
+    "title": "Harvard CS50 Introduction to Computer Science",
+    "description": "Harvard's introduction to computer science and programming, covering algorithms, data structures, and more.",
+    "city": "Online",
+    "type": "Course",
+    "duration": "11 weeks",
+    "url": "https://cs50.harvard.edu/"
+  },
+  {
+    "title": "Udacity Nanodegree Programs",
+    "description": "Industry-focused programs in AI, data science, programming, and autonomous systems.",
+    "city": "Online",
+    "type": "Nanodegree",
+    "duration": "3-6 months",
+    "url": "https://www.udacity.com/nanodegree"
+  }
+]
