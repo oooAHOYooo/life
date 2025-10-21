@@ -113,9 +113,69 @@
             border-left: 4px solid #48dbfb;
         }
         
+        .quick-links {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .quick-links h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .quick-link-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .quick-link-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .quick-link-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .quick-link-status {
+            font-size: 0.85rem;
+            color: #48dbfb;
+            font-weight: 500;
+        }
+        
         @media (max-width: 768px) {
+            .nav-hub {
+                padding: 40px 15px;
+            }
+            
             header h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                letter-spacing: -1px;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+                margin-bottom: 40px;
             }
             
             .nav-grid {
@@ -124,7 +184,43 @@
             }
             
             .nav-card {
-                padding: 30px 20px;
+                padding: 25px 20px;
+            }
+            
+            .nav-icon {
+                font-size: 3rem;
+            }
+            
+            .nav-title {
+                font-size: 1.5rem;
+            }
+            
+            .quick-links {
+                margin-top: 40px;
+                padding-top: 30px;
+            }
+            
+            .quick-links h2 {
+                font-size: 1.5rem;
+            }
+            
+            .quick-links-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-card {
+                padding: 20px 15px;
+            }
+            
+            .nav-icon {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -160,6 +256,44 @@
                         AI, STEM, and education with location-based
                         filtering.</p>
                 </a>
+            </div>
+
+            <div class="quick-links">
+                <h2>Active Projects</h2>
+                <div class="quick-links-grid">
+                    <a href="https://ahoyindiemedia.com" target="_blank"
+                        class="quick-link-item">
+                        <div class="quick-link-title">Ahoy Indie Media MVP</div>
+                        <div class="quick-link-status">In Progress</div>
+                    </a>
+                    <a href="https://github.com/agworkywork" target="_blank"
+                        class="quick-link-item">
+                        <div class="quick-link-title">Scoutalina Android
+                            Alpha</div>
+                        <div class="quick-link-status">In Progress</div>
+                    </a>
+                    <a href="https://cpcnewhaven.org" target="_blank"
+                        class="quick-link-item">
+                        <div class="quick-link-title">CPC Admin Portal</div>
+                        <div class="quick-link-status">In Progress</div>
+                    </a>
+                    <a href="https://github.com/agworkywork/life"
+                        target="_blank" class="quick-link-item">
+                        <div class="quick-link-title">LifeOS Static Site</div>
+                        <div class="quick-link-status">In Progress</div>
+                    </a>
+                    <a href="https://creaturesinthetallgrass.com"
+                        target="_blank" class="quick-link-item">
+                        <div class="quick-link-title">Creatures in the Tall
+                            Grass</div>
+                        <div class="quick-link-status">In Progress</div>
+                    </a>
+                    <a href="https://littlemarket.shop" target="_blank"
+                        class="quick-link-item">
+                        <div class="quick-link-title">Little Market</div>
+                        <div class="quick-link-status">Planning</div>
+                    </a>
+                </div>
             </div>
         </div>
     </body>

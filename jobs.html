@@ -118,37 +118,18 @@
                     return;
                 }
 
-                // Group jobs by organization and location
-                const groupedJobs = this.groupJobsByOrganization(this.filteredJobs);
-                
-                container.innerHTML = Object.keys(groupedJobs).map(orgKey => {
-                    const orgData = groupedJobs[orgKey];
-                    const jobs = orgData.jobs;
-                    
-                    return `
-                        <div class="organization-group">
-                            <div class="organization-header">
-                                <h2 class="organization-name">${this.escapeHtml(orgData.organization)}</h2>
-                                <div class="organization-location">${this.escapeHtml(orgData.location)}</div>
-                            </div>
-                            <div class="organization-jobs">
-                                ${jobs.map(job => `
-                                    <div class="job-list-item">
-                                        <div class="job-list-header">
-                                            <h3 class="job-list-title">${this.escapeHtml(job.title)}</h3>
-                                            <div class="job-list-type">${this.escapeHtml(job.type)}</div>
-                                        </div>
-                                        <p class="job-list-description">${this.escapeHtml(job.description)}</p>
-                                        <div class="job-list-footer">
-                                            <div></div>
-                                            ${job.url ? `<a href="${job.url}" target="_blank" class="job-list-link">View Job →</a>` : ''}
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
+                container.innerHTML = this.filteredJobs.map(job => `
+                    <div class="job-item">
+                        <h3 class="job-title">${this.escapeHtml(job.title)}</h3>
+                        <p class="job-organization">${this.escapeHtml(job.organization)} • ${this.escapeHtml(job.location)}</p>
+                        <p class="job-description">${this.escapeHtml(job.description)}</p>
+                        <div class="job-meta">
+                            <span class="job-tag job-category">${this.escapeHtml(job.category)}</span>
+                            <span class="job-tag job-type">${this.escapeHtml(job.type)}</span>
                         </div>
-                    `;
-                }).join('');
+                        ${job.url ? `<a href="${job.url}" target="_blank" class="job-link">View Job</a>` : ''}
+                    </div>
+                `).join('');
             }
 
             groupJobsByOrganization(jobs) {
