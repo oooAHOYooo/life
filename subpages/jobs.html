@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Jobs - LifeOS</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../styles.css">
         <style>
         .back-link {
             display: inline-block;
@@ -20,7 +20,7 @@
     </head>
     <body>
         <div class="container">
-            <a href="index.html" class="back-link">← Back to LifeOS</a>
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
 
             <header>
                 <h1>Jobs</h1>
@@ -66,7 +66,7 @@
 
             async loadData() {
                 try {
-                    const response = await fetch('jobs.json');
+                    const response = await fetch('../data/jobs.json');
                     this.jobs = await response.json();
                     this.filteredJobs = [...this.jobs];
                 } catch (error) {

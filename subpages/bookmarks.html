@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmarks - LifeOS</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bookmarks - LifeOS</title>
+        <link rel="stylesheet" href="../styles.css">
+        <style>
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -17,22 +17,22 @@
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to LifeOS</a>
-        
-        <header>
-            <h1>Bookmarks</h1>
-            <p>Your collection of useful websites and resources</p>
-        </header>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
 
-        <div id="bookmarksList" class="bookmarks-list">
-            <!-- Bookmarks will be loaded here -->
+            <header>
+                <h1>Bookmarks</h1>
+                <p>Your collection of useful websites and resources</p>
+            </header>
+
+            <div id="bookmarksList" class="bookmarks-list">
+                <!-- Bookmarks will be loaded here -->
+            </div>
         </div>
-    </div>
 
-    <script>
+        <script>
         class BookmarksPage {
             constructor() {
                 this.bookmarks = [];
@@ -46,7 +46,7 @@
 
             async loadData() {
                 try {
-                    const response = await fetch('bookmarks.json');
+                    const response = await fetch('../data/bookmarks.json');
                     this.bookmarks = await response.json();
                 } catch (error) {
                     console.error('Error loading bookmarks:', error);
@@ -94,5 +94,5 @@
             new BookmarksPage();
         });
     </script>
-</body>
+    </body>
 </html>

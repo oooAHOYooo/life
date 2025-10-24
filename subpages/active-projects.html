@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Active Projects - LifeOS</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Active Projects - LifeOS</title>
+        <link rel="stylesheet" href="../styles.css">
+        <style>
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -168,22 +168,23 @@
             padding: 20px;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to LifeOS</a>
-        
-        <header>
-            <h1>Active Projects</h1>
-            <p>Current projects in development with latest links and drafts</p>
-        </header>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
 
-        <div id="projectsList">
-            <!-- Projects will be loaded here -->
+            <header>
+                <h1>Active Projects</h1>
+                <p>Current projects in development with latest links and
+                    drafts</p>
+            </header>
+
+            <div id="projectsList">
+                <!-- Projects will be loaded here -->
+            </div>
         </div>
-    </div>
 
-    <script>
+        <script>
         class ActiveProjectsPage {
             constructor() {
                 this.projects = [];
@@ -199,8 +200,8 @@
             async loadData() {
                 try {
                     const [projectsResponse, draftsResponse] = await Promise.all([
-                        fetch('writing-projects.json'),
-                        fetch('data/writing-drafts.json')
+                        fetch('../data/writing-projects.json'),
+                        fetch('../data/writing-drafts.json')
                     ]);
                     this.projects = await projectsResponse.json();
                     this.drafts = await draftsResponse.json();
@@ -346,5 +347,5 @@
             new ActiveProjectsPage();
         });
     </script>
-</body>
+    </body>
 </html>

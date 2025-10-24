@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goals - LifeOS</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Goals - LifeOS</title>
+        <link rel="stylesheet" href="../styles.css">
+        <style>
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -17,22 +17,22 @@
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to LifeOS</a>
-        
-        <header>
-            <h1>Goals</h1>
-            <p>Track your personal and professional goals</p>
-        </header>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
 
-        <div id="goalsList" class="goals-list">
-            <!-- Goals will be loaded here -->
+            <header>
+                <h1>Goals</h1>
+                <p>Track your personal and professional goals</p>
+            </header>
+
+            <div id="goalsList" class="goals-list">
+                <!-- Goals will be loaded here -->
+            </div>
         </div>
-    </div>
 
-    <script>
+        <script>
         class GoalsPage {
             constructor() {
                 this.goals = [];
@@ -46,7 +46,7 @@
 
             async loadData() {
                 try {
-                    const response = await fetch('goals.json');
+                    const response = await fetch('../data/goals.json');
                     this.goals = await response.json();
                 } catch (error) {
                     console.error('Error loading goals:', error);
@@ -98,5 +98,5 @@
             new GoalsPage();
         });
     </script>
-</body>
+    </body>
 </html>

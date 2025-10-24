@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Stats - LifeOS</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Project Stats - LifeOS</title>
+        <link rel="stylesheet" href="../styles.css">
+        <style>
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -154,22 +154,22 @@
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to LifeOS</a>
-        
-        <header>
-            <h1>Project Statistics</h1>
-            <p>Overview of your projects and progress across all areas</p>
-        </header>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
 
-        <div id="statsContainer" class="stats-grid">
-            <!-- Stats will be loaded here -->
+            <header>
+                <h1>Project Statistics</h1>
+                <p>Overview of your projects and progress across all areas</p>
+            </header>
+
+            <div id="statsContainer" class="stats-grid">
+                <!-- Stats will be loaded here -->
+            </div>
         </div>
-    </div>
 
-    <script>
+        <script>
         class StatsPage {
             constructor() {
                 this.data = {
@@ -189,10 +189,10 @@
             async loadData() {
                 try {
                     const [goalsResponse, jobsResponse, writingResponse, bookmarksResponse] = await Promise.all([
-                        fetch('goals.json'),
-                        fetch('jobs.json'),
-                        fetch('writing-projects.json'),
-                        fetch('bookmarks.json')
+                        fetch('../data/goals.json'),
+                        fetch('../data/jobs.json'),
+                        fetch('../data/writing-projects.json'),
+                        fetch('../data/bookmarks.json')
                     ]);
                     
                     this.data.goals = await goalsResponse.json();
@@ -470,5 +470,5 @@
             new StatsPage();
         });
     </script>
-</body>
+    </body>
 </html>

@@ -1,0 +1,145 @@
+[
+  {
+    "id": "screenwriting-services",
+    "title": "Screenwriting Services",
+    "description": "Professional screenplay development, script doctoring, and story consulting for independent filmmakers and production companies.",
+    "category": "Writing Services",
+    "type": "Service",
+    "status": "Available",
+    "pricing": "Project-based",
+    "deliverables": [
+      "Original screenplay development",
+      "Script rewrites and polishes",
+      "Story structure analysis",
+      "Character development consultation",
+      "Dialogue enhancement"
+    ],
+    "experience": "5+ years",
+    "specialties": ["Horror", "Thriller", "Drama", "Independent Film"],
+    "portfolio": [
+      "Creatures in the Tall Grass (Feature)",
+      "Untitled Creature Story (Short)",
+      "Various commercial scripts"
+    ],
+    "contact": "Available for consultation",
+    "lastUpdated": "2024-01-15"
+  },
+  {
+    "id": "film-production-consulting",
+    "title": "Film Production Consulting",
+    "description": "End-to-end production consulting for independent films, from pre-production planning to post-production workflow optimization.",
+    "category": "Production Services",
+    "type": "Service",
+    "status": "Available",
+    "pricing": "Hourly/Project-based",
+    "deliverables": [
+      "Production planning and scheduling",
+      "Budget breakdown and management",
+      "Equipment recommendations",
+      "Location scouting assistance",
+      "Post-production workflow setup"
+    ],
+    "experience": "3+ years",
+    "specialties": ["Independent Film", "Documentary", "Short Films", "Low-budget Production"],
+    "equipment": [
+      "RED Komodo + Sirui Anamorphic",
+      "DaVinci Resolve Pipeline",
+      "Various lighting and audio equipment"
+    ],
+    "contact": "Available for consultation",
+    "lastUpdated": "2024-01-15"
+  },
+  {
+    "id": "post-production-services",
+    "title": "Post-Production Services",
+    "description": "Professional video editing, color grading, and post-production services using industry-standard tools and workflows.",
+    "category": "Post-Production",
+    "type": "Service",
+    "status": "Available",
+    "pricing": "Hourly/Project-based",
+    "deliverables": [
+      "Video editing and assembly",
+      "Color grading and correction",
+      "Audio mixing and mastering",
+      "Motion graphics and titles",
+      "Final delivery in multiple formats"
+    ],
+    "experience": "4+ years",
+    "specialties": ["Narrative Film", "Documentary", "Commercial", "Music Video"],
+    "software": [
+      "DaVinci Resolve",
+      "Adobe Premiere Pro",
+      "After Effects",
+      "Pro Tools"
+    ],
+    "contact": "Available for consultation",
+    "lastUpdated": "2024-01-15"
+  },
+  {
+    "id": "film-education-workshops",
+    "title": "Film Education Workshops",
+    "description": "Hands-on workshops and courses covering various aspects of filmmaking, from script to screen.",
+    "category": "Education",
+    "type": "Course/Workshop",
+    "status": "Available",
+    "pricing": "Per session/Group rates",
+    "deliverables": [
+      "Screenwriting fundamentals",
+      "Production planning and management",
+      "Camera operation and cinematography",
+      "Post-production workflow",
+      "Independent film distribution"
+    ],
+    "experience": "Teaching 2+ years",
+    "specialties": ["Beginner to Intermediate", "Hands-on Learning", "Small Groups"],
+    "curriculum": [
+      "5-session comprehensive courses",
+      "Single-day intensive workshops",
+      "Custom curriculum development"
+    ],
+    "contact": "Available for booking",
+    "lastUpdated": "2024-01-15"
+  },
+  {
+    "id": "indie-film-package",
+    "title": "Complete Indie Film Package",
+    "description": "All-in-one package for independent filmmakers including script development, production consulting, and post-production services.",
+    "category": "Package Deal",
+    "type": "Service Package",
+    "status": "Available",
+    "pricing": "Package pricing available",
+    "deliverables": [
+      "Script development and rewrites",
+      "Production planning and consulting",
+      "On-set support and direction",
+      "Complete post-production workflow",
+      "Distribution strategy consultation"
+    ],
+    "experience": "Full-service 3+ years",
+    "specialties": ["Micro-budget Films", "First-time Filmmakers", "Passion Projects"],
+    "value": "Significant cost savings vs. individual services",
+    "contact": "Custom quote available",
+    "lastUpdated": "2024-01-15"
+  },
+  {
+    "id": "film-equipment-rental",
+    "title": "Film Equipment Rental",
+    "description": "Professional film equipment available for rent, including cameras, lighting, and audio gear.",
+    "category": "Equipment",
+    "type": "Rental",
+    "status": "Limited Availability",
+    "pricing": "Daily/Weekly rates",
+    "deliverables": [
+      "RED Komodo camera package",
+      "Sirui anamorphic lenses",
+      "Professional lighting kit",
+      "Audio recording equipment",
+      "Support and accessories"
+    ],
+    "experience": "Equipment maintenance 2+ years",
+    "specialties": ["Independent Film", "Documentary", "Commercial"],
+    "availability": "Based on project schedule",
+    "contact": "Check availability",
+    "lastUpdated": "2024-01-15"
+  }
+]

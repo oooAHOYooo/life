@@ -49,13 +49,14 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px 30px;
+            border-radius: 15px;
+            padding: 25px 20px;
             transition: all 0.4s ease;
             text-decoration: none;
             color: inherit;
             position: relative;
             overflow: hidden;
+            display: block;
         }
         
         .nav-card::before {
@@ -83,17 +84,17 @@
         
         
         .nav-title {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
         
         .nav-description {
             color: #b0b0b0;
-            line-height: 1.6;
-            font-size: 1rem;
+            line-height: 1.4;
+            font-size: 0.9rem;
             font-weight: 300;
         }
         
@@ -111,17 +112,67 @@
         }
         
         .quick-links {
-            margin-top: 60px;
-            padding-top: 40px;
+            margin-top: 50px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .quick-links .nav-card {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .quick-links .nav-card:last-child {
             margin-bottom: 0;
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-button:hover::before {
+            opacity: 1;
+        }
+        
+        .sitemap-card {
+            border-left: 4px solid #00d4aa;
         }
         
         @media (max-width: 768px) {
@@ -157,6 +208,16 @@
                 margin-top: 40px;
                 padding-top: 30px;
             }
+            
+            .button-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+            
+            .nav-button {
+                padding: 12px 15px;
+                font-size: 0.85rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -179,28 +240,29 @@
             </header>
 
             <div class="nav-grid">
-                <a href="bookmarks.html" class="nav-card bookmarks-card">
+                <a href="subpages/bookmarks.html"
+                    class="nav-card bookmarks-card">
                     <h2 class="nav-title">Bookmarks</h2>
                     <p class="nav-description">Your collection of useful
                         websites, resources, and references for quick
                         access.</p>
                 </a>
 
-                <a href="goals.html" class="nav-card goals-card">
+                <a href="subpages/goals.html" class="nav-card goals-card">
                     <h2 class="nav-title">Goals</h2>
                     <p class="nav-description">Track your personal and
                         professional goals with categories and priority
                         levels.</p>
                 </a>
 
-                <a href="jobs.html" class="nav-card jobs-card">
+                <a href="subpages/jobs.html" class="nav-card jobs-card">
                     <h2 class="nav-title">Jobs</h2>
                     <p class="nav-description">After-school job opportunities in
                         AI, STEM, and education with location-based
                         filtering.</p>
                 </a>
 
-                <a href="writing.html" class="nav-card writing-card">
+                <a href="subpages/writing.html" class="nav-card writing-card">
                     <h2 class="nav-title">Writing</h2>
                     <p class="nav-description">Active writing projects including
                         fiction, screenplays, and technical documentation.</p>
@@ -208,21 +270,26 @@
             </div>
 
             <div class="quick-links">
-                <a href="2025-goals-overview-v2.html" class="nav-card">
-                    <h2 class="nav-title">2025 Goals Overview</h2>
-                    <p class="nav-description">Master progress tracking for your
-                        2025 goals and vision</p>
+                <a href="subpages/project-sitemap.html"
+                    class="nav-card sitemap-card">
+                    <h2 class="nav-title">Project Sitemap</h2>
+                    <p class="nav-description">Visual hierarchy of all projects,
+                        ideas, and their relationships across different life
+                        areas</p>
                 </a>
-                <a href="stats.html" class="nav-card">
-                    <h2 class="nav-title">Statistics</h2>
-                    <p class="nav-description">Overview of your projects and
-                        progress across all areas</p>
-                </a>
-                <a href="quick-access.html" class="nav-card">
-                    <h2 class="nav-title">Quick Access</h2>
-                    <p class="nav-description">Direct links to your most
-                        important resources and projects</p>
-                </a>
+
+                <div class="button-grid">
+                    <a href="subpages/2025-goals-overview-v2.html"
+                        class="nav-button">2025 Goals Overview</a>
+                    <a href="subpages/film-products.html"
+                        class="nav-button">Film
+                        Products</a>
+                    <a href="subpages/stats.html"
+                        class="nav-button">Statistics</a>
+                    <a href="subpages/quick-access.html"
+                        class="nav-button">Quick
+                        Access</a>
+                </div>
             </div>
         </div>
     </body>

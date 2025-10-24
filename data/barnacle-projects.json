@@ -1,0 +1,78 @@
+[
+  {
+    "project": "Left Hand Right",
+    "studio": "Barnacle Studios",
+    "monetization_strategy": {
+      "goal": "Sustain free PC build with light ads, sell clean premium builds on console/Steam.",
+      "model": "Softwall monetization with optional 'Remove Ads' upgrade.",
+      "versioning": {
+        "shared_codebase": true,
+        "platform_toggle": "bEnableSponsorBreaks",
+        "conditional_logic": "Switch on Platform or config flags in GameInstance"
+      },
+      "platforms": {
+        "PC": {
+          "distribution": ["Direct Download", "Itch.io"],
+          "price": "Free",
+          "ads_enabled": true,
+          "ad_frequency_minutes": 30,
+          "ad_type": "Curated sponsor reels hosted on Barnacle CDN",
+          "remove_ads_upgrade": {
+            "price_usd": 3.99,
+            "entitlement_type": "local flag or account-based",
+            "ui_location": "Pause Menu / End of Session"
+          },
+          "revenue_goal": "Funnel casual players into supporter base"
+        },
+        "Steam": {
+          "distribution": ["Steam Store"],
+          "price": 4.99,
+          "ads_enabled": false,
+          "notes": "Premium only; includes cosmetic extras as incentive",
+          "revenue_goal": "Core paid distribution"
+        },
+        "Consoles": {
+          "platforms": ["Xbox", "PlayStation", "Nintendo Switch"],
+          "price": 4.99,
+          "ads_enabled": false,
+          "monetization": "Premium purchase and optional DLC/cosmetics through platform store",
+          "notes": "No external ad networks allowed. Maintain clean version with same content.",
+          "revenue_goal": "Paid premium experience with trusted distribution"
+        },
+        "Barnacle_Launcher": {
+          "distribution": ["Barnacle App (future)"],
+          "price": "Free",
+          "ads_enabled": true,
+          "ad_type": "Barnacle curated",
+          "remove_ads_upgrade": {
+            "price_usd": 3.99
+          },
+          "cross_promotion": true,
+          "notes": "Acts as a hub for Barnacle games and sponsor content."
+        }
+      },
+      "technical_notes": {
+        "ad_delivery": "Own CDN (Cloudflare/AWS/Supabase) with JSON rotation endpoint",
+        "ad_client": "BP_SponsorBreakManager",
+        "integration_point": "BP_SessionDirector / GameInstance startup",
+        "reward_system": "Optional mana boost for watching full ad",
+        "platform_detection": "GetPlatformName / Switch on Platform"
+      },
+      "player_experience": {
+        "ad_interruption_points": ["End of session", "Every 30 minutes idle"],
+        "skippable_after_seconds": 5,
+        "tone": "In-universe 'broadcast intermission' to keep immersion",
+        "premium_incentive": "Remove interruptions + cosmetic extras",
+        "offline_mode": "Skip ads gracefully when no connection"
+      },
+      "future_expansion": {
+        "sponsorship_model": "Sell ad slots to local creatives/brands",
+        "cross_promo": "Feature other Barnacle titles in ad rotation",
+        "metrics": "Track impressions and engagement through backend logs",
+        "additional_revenue": ["Supporter Packs", "Soundtrack", "Skins"]
+      }
+    },
+    "version": "1.0.0",
+    "last_updated": "2025-10-24"
+  }
+]
