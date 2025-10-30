@@ -7,114 +7,307 @@
         <link rel="stylesheet" href="styles.css">
         <style>
         body {
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #001f3f 0%, #003d70 50%, #0066b3 100%);
+            background-size: 200% 200%;
+            animation: liquidFlow 15s ease infinite;
+            color: #e0f2fe;
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes liquidFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 119, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(64, 181, 255, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(0, 149, 255, 0.2) 0%, transparent 50%);
+            animation: liquidPulse 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes liquidPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
         
         .nav-hub {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 30px 100px;
             text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .desktop-apps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 30px 40px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+        }
+        
+        .app-icon {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .app-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .app-icon img,
+        .app-icon .icon-placeholder {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 2px solid rgba(64, 181, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .app-icon:hover .icon-placeholder {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(64, 181, 255, 0.5);
+            box-shadow: 0 8px 25px rgba(64, 181, 255, 0.3);
+        }
+        
+        .app-label {
+            color: #e0f2fe;
+            font-size: 0.75rem;
+            text-shadow: 0 1px 5px rgba(0, 100, 200, 0.3);
+            max-width: 80px;
+            text-align: center;
+            word-wrap: break-word;
+        }
+        
+        header {
+            margin-bottom: 40px;
         }
         
         header h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 300;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #87ceeb 0%, #4fc3f7 50%, #0288d1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: -2px;
+            text-shadow: 0 0 30px rgba(135, 206, 235, 0.3);
+            filter: drop-shadow(0 2px 20px rgba(64, 181, 255, 0.4));
         }
         
         header p {
-            font-size: 1.3rem;
-            color: #a0a0a0;
-            margin-bottom: 60px;
+            font-size: 1.1rem;
+            color: #b3d9f2;
+            margin-bottom: 0;
             font-weight: 300;
+            text-shadow: 0 1px 10px rgba(0, 100, 200, 0.2);
+        }
+        
+        .os-dock {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(0, 60, 120, 0.7);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(64, 181, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 30px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dock-apps {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .dock-item {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 2px solid rgba(64, 181, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            color: #e0f2fe;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .dock-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(64, 181, 255, 0.5);
+            transform: scale(1.2) translateY(-10px);
+            box-shadow: 0 10px 30px rgba(64, 181, 255, 0.4);
+        }
+        
+        .dock-item::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            width: 5px;
+            height: 5px;
+            background: rgba(64, 181, 255, 0.8);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .dock-item:hover::before {
+            opacity: 1;
         }
         
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
         }
         
         .nav-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px 20px;
+            background: rgba(0, 60, 120, 0.4);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(64, 181, 255, 0.4);
+            border-radius: 12px;
+            padding: 0;
             transition: all 0.4s ease;
             text-decoration: none;
             color: inherit;
             position: relative;
             overflow: hidden;
             display: block;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            min-height: 280px;
         }
         
-        .nav-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .window-header {
+            background: rgba(0, 60, 120, 0.5);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(64, 181, 255, 0.2);
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .window-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .window-dot.close {
+            background: linear-gradient(135deg, #ff5f56, #ff4757);
+        }
+        
+        .window-dot.minimize {
+            background: linear-gradient(135deg, #ffbd2e, #ffa502);
+        }
+        
+        .window-dot.maximize {
+            background: linear-gradient(135deg, #27c93f, #2ed573);
+        }
+        
+        .window-title-bar {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #e0f2fe;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .window-content {
+            padding: 25px 20px;
         }
         
         .nav-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(0, 60, 120, 0.5);
+            border-color: rgba(64, 181, 255, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 102, 179, 0.5);
         }
         
-        .nav-card:hover::before {
-            opacity: 1;
+        .nav-card:hover .window-header {
+            background: rgba(0, 60, 120, 0.6);
         }
         
         
         .nav-title {
             font-size: 1.4rem;
             font-weight: 600;
-            color: #ffffff;
+            color: #e0f2fe;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(64, 181, 255, 0.3);
         }
         
         .nav-description {
-            color: #b0b0b0;
+            color: #b3d9f2;
             line-height: 1.4;
             font-size: 0.9rem;
             font-weight: 300;
         }
         
         .bookmarks-card { 
-            border-left: 4px solid #ff6b6b;
+            border-left: 4px solid #5dade2;
         }
         .goals-card { 
-            border-left: 4px solid #feca57;
+            border-left: 4px solid #3498db;
         }
         .jobs-card { 
-            border-left: 4px solid #48dbfb;
+            border-left: 4px solid #2980b9;
         }
         .writing-card { 
-            border-left: 4px solid #9b59b6;
+            border-left: 4px solid #1e88e5;
         }
         
         .quick-links {
             margin-top: 50px;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(64, 181, 255, 0.2);
         }
         
         .quick-links .nav-card {
@@ -133,26 +326,27 @@
         }
         
         .nav-button {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(0, 60, 120, 0.4);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 15px 20px;
+            border: 1px solid rgba(64, 181, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 18px;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: inherit;
+            color: #e0f2fe;
             text-align: center;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         .nav-button:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(0, 60, 120, 0.5);
+            border-color: rgba(64, 181, 255, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 102, 179, 0.4);
         }
         
         .nav-button::before {
@@ -162,7 +356,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            background: linear-gradient(90deg, #87ceeb, #4fc3f7, #0288d1);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -172,12 +366,12 @@
         }
         
         .sitemap-card {
-            border-left: 4px solid #00d4aa;
+            border-left: 4px solid #5dade2;
         }
         
         @media (max-width: 768px) {
             .nav-hub {
-                padding: 40px 15px;
+                padding: 40px 15px 90px;
             }
             
             header h1 {
@@ -186,22 +380,34 @@
             }
             
             header p {
-                font-size: 1.1rem;
-                margin-bottom: 40px;
+                font-size: 1rem;
+                margin-bottom: 0;
             }
             
             .nav-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                margin-top: 30px;
             }
             
             .nav-card {
-                padding: 25px 20px;
+                min-height: auto;
             }
             
+            .window-header {
+                padding: 10px 15px;
+            }
+            
+            .window-content {
+                padding: 20px 15px;
+            }
             
             .nav-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+            }
+            
+            .nav-description {
+                font-size: 0.85rem;
             }
             
             .quick-links {
@@ -210,7 +416,7 @@
             }
             
             .button-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: 1fr;
                 gap: 10px;
             }
             
@@ -218,17 +424,26 @@
                 padding: 12px 15px;
                 font-size: 0.85rem;
             }
+            
+            .os-dock {
+                height: 70px;
+            }
         }
         
         @media (max-width: 480px) {
+            .nav-hub {
+                padding: 30px 10px 80px;
+            }
+            
             header h1 {
                 font-size: 2rem;
             }
             
-            .nav-card {
-                padding: 20px 15px;
+            .dock-item {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
             }
-            
         }
     </style>
     </head>
@@ -242,40 +457,94 @@
             <div class="nav-grid">
                 <a href="subpages/bookmarks.html"
                     class="nav-card bookmarks-card">
-                    <h2 class="nav-title">Bookmarks</h2>
-                    <p class="nav-description">Your collection of useful
-                        websites, resources, and references for quick
-                        access.</p>
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <div class="window-dot close"></div>
+                            <div class="window-dot minimize"></div>
+                            <div class="window-dot maximize"></div>
+                        </div>
+                        <div class="window-title-bar">Bookmarks</div>
+                    </div>
+                    <div class="window-content">
+                        <h2 class="nav-title">Bookmarks</h2>
+                        <p class="nav-description">Your collection of useful
+                            websites, resources, and references for quick
+                            access.</p>
+                    </div>
                 </a>
 
                 <a href="subpages/goals.html" class="nav-card goals-card">
-                    <h2 class="nav-title">Goals</h2>
-                    <p class="nav-description">Track your personal and
-                        professional goals with categories and priority
-                        levels.</p>
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <div class="window-dot close"></div>
+                            <div class="window-dot minimize"></div>
+                            <div class="window-dot maximize"></div>
+                        </div>
+                        <div class="window-title-bar">Goals</div>
+                    </div>
+                    <div class="window-content">
+                        <h2 class="nav-title">Goals</h2>
+                        <p class="nav-description">Track your personal and
+                            professional goals with categories and priority
+                            levels.</p>
+                    </div>
                 </a>
 
                 <a href="subpages/jobs.html" class="nav-card jobs-card">
-                    <h2 class="nav-title">Jobs</h2>
-                    <p class="nav-description">After-school job opportunities in
-                        AI, STEM, and education with location-based
-                        filtering.</p>
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <div class="window-dot close"></div>
+                            <div class="window-dot minimize"></div>
+                            <div class="window-dot maximize"></div>
+                        </div>
+                        <div class="window-title-bar">Jobs</div>
+                    </div>
+                    <div class="window-content">
+                        <h2 class="nav-title">Jobs</h2>
+                        <p class="nav-description">After-school job
+                            opportunities in
+                            AI, STEM, and education with location-based
+                            filtering.</p>
+                    </div>
                 </a>
 
                 <a href="subpages/writing.html" class="nav-card writing-card">
-                    <h2 class="nav-title">Writing</h2>
-                    <p class="nav-description">Active writing projects including
-                        fiction, screenplays, and technical documentation.</p>
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <div class="window-dot close"></div>
+                            <div class="window-dot minimize"></div>
+                            <div class="window-dot maximize"></div>
+                        </div>
+                        <div class="window-title-bar">Writing</div>
+                    </div>
+                    <div class="window-content">
+                        <h2 class="nav-title">Writing</h2>
+                        <p class="nav-description">Active writing projects
+                            including
+                            fiction, screenplays, and technical
+                            documentation.</p>
+                    </div>
                 </a>
             </div>
 
             <div class="quick-links">
                 <a href="subpages/project-sitemap.html"
                     class="nav-card sitemap-card">
-                    <h2 class="nav-title">Project Sitemap</h2>
-                    <p class="nav-description">Visual hierarchy of all projects,
-                        ideas, and their relationships across different life
-                        areas</p>
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <div class="window-dot close"></div>
+                            <div class="window-dot minimize"></div>
+                            <div class="window-dot maximize"></div>
+                        </div>
+                        <div class="window-title-bar">Project Sitemap</div>
+                    </div>
+                    <div class="window-content">
+                        <h2 class="nav-title">Project Sitemap</h2>
+                        <p class="nav-description">Visual hierarchy of all
+                            projects,
+                            ideas, and their relationships across different life
+                            areas</p>
+                    </div>
                 </a>
 
                 <div class="button-grid">
@@ -290,6 +559,86 @@
                         class="nav-button">Quick
                         Access</a>
                 </div>
+
+                <div class="nav-card">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <div class="window-dot close"></div>
+                            <div class="window-dot minimize"></div>
+                            <div class="window-dot maximize"></div>
+                        </div>
+                        <div class="window-title-bar">Quick Access</div>
+                    </div>
+                    <div class="window-content">
+                        <h2 class="nav-title">Quick Access</h2>
+                        <div class="quick-access-lists">
+                            <h3 class="category-title">Active Netlify
+                                Projects</h3>
+                            <ul class="quick-list">
+                                <li><a href="https://ag-film.netlify.app/"
+                                        target="_blank"
+                                        rel="noopener">Film</a></li>
+                                <li><a href="https://agpo.netlify.app"
+                                        target="_blank"
+                                        rel="noopener">Pecans</a></li>
+                                <li><a href="https://agscout.netlify.app"
+                                        target="_blank" rel="noopener">Land
+                                        Scout</a></li>
+                            </ul>
+
+                            <h3 class="category-title">Render Apps</h3>
+                            <ul class="quick-list">
+                                <li><a href="https://app.ahoy.ooo"
+                                        target="_blank" rel="noopener">Ahoy
+                                        Platform</a></li>
+                                <li><a href="https://newhaven.ahoy.ooo"
+                                        target="_blank" rel="noopener">Ahoy New
+                                        Haven</a></li>
+                            </ul>
+
+                            <h3 class="category-title">Teaching</h3>
+                            <ul class="quick-list">
+                                <li><a href="https://mrg-stem.netlify.app"
+                                        target="_blank" rel="noopener">MRG
+                                        STEM</a></li>
+                            </ul>
+
+                            <h3 class="category-title">Public Portfolio</h3>
+                            <ul class="quick-list">
+                                <li><a href="https://alexgonzalez.ooo"
+                                        target="_blank"
+                                        rel="noopener">alexgonzalez.ooo</a></li>
+                            </ul>
+
+                            <h3 class="category-title">Side Websites</h3>
+                            <ul class="quick-list">
+                                <li><a href="https://cpcnewhaven.org"
+                                        target="_blank"
+                                        rel="noopener">CPC</a></li>
+                                <li><a href="https://apeworx.io" target="_blank"
+                                        rel="noopener">APE</a></li>
+                                <li>Phoenix — coming soon</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="os-dock">
+            <div class="dock-apps">
+                <a href="subpages/bookmarks.html" class="dock-item"
+                    title="Bookmarks">🔖</a>
+                <a href="subpages/goals.html" class="dock-item"
+                    title="Goals">🎯</a>
+                <a href="subpages/jobs.html" class="dock-item"
+                    title="Jobs">💼</a>
+                <a href="subpages/writing.html" class="dock-item"
+                    title="Writing">✍️</a>
+                <a href="subpages/project-sitemap.html" class="dock-item"
+                    title="Sitemap">🗺️</a>
+                <a href="subpages/stats.html" class="dock-item"
+                    title="Stats">📊</a>
             </div>
         </div>
     </body>
