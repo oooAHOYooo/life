@@ -76,5 +76,18 @@
     "status": "Drafting",
     "notes": "No VR focus - accessible world building",
     "tags": ["curriculum", "education", "unreal", "world-building"]
+  },
+  {
+    "id": "gonz-goes-for-mayor",
+    "title": "Gonz Goes for Mayor",
+    "projectId": "the-havens",
+    "version": "draft-1",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/gonz goes for mayor",
+    "wordCount": 500,
+    "lastModified": "2025-11-04",
+    "status": "Drafting",
+    "notes": "A story about the mayoral race and Gonzalez's campaign",
+    "tags": ["fiction", "the-havens", "politics"]
   }
 ]

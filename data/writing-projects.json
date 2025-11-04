@@ -38,5 +38,15 @@
     "lastUpdated": "2024-01-01",
     "notes": "Each curriculum needs syllabus, supply list, and 5-session lesson plans.",
     "filePath": "curricula/"
+  },
+  {
+    "title": "The Havens",
+    "description": "Stories from the Havens, including the mayoral race story.",
+    "category": "Fiction",
+    "status": "In Progress",
+    "wordCount": "~500",
+    "lastUpdated": "2025-11-04",
+    "notes": "Collection of stories set in the Havens.",
+    "filePath": "the-havens/"
   }
 ]
