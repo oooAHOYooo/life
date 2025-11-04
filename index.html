@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LifeOS</title>
+        <title>Personal Hub</title>
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,8 +113,8 @@
         /* Telecom Grid */
         .telecom-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
             margin-bottom: 60px;
             animation: fadeInUp 1s ease-out 0.2s both;
         }
@@ -136,13 +136,16 @@
             backdrop-filter: blur(20px);
             border: 2px solid rgba(99, 102, 241, 0.2);
             border-radius: 20px;
-            padding: 32px 28px;
+            padding: 24px 20px;
             text-decoration: none;
             color: inherit;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
             cursor: pointer;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -234,19 +237,14 @@
         .button-content {
             position: relative;
             z-index: 2;
-        }
-
-        .button-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-            display: block;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.3));
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .button-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
             color: #e8eaed;
             margin-bottom: 8px;
@@ -254,10 +252,21 @@
         }
 
         .button-description {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #9ca3af;
-            line-height: 1.6;
+            line-height: 1.5;
             font-weight: 300;
+            flex: 1;
+            margin-bottom: 12px;
+        }
+
+        .button-icon {
+            font-size: 1.75rem;
+            margin-top: auto;
+            display: block;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.3));
         }
 
         /* Quick links section */
@@ -383,10 +392,26 @@
             transform: translateX(4px);
         }
 
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .footer-date {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            color: #818cf8;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 40px 20px;
+                padding: 40px 15px;
             }
 
             header {
@@ -394,21 +419,59 @@
             }
 
             .telecom-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
             }
 
             .telecom-button {
-                padding: 28px 24px;
+                padding: 20px 16px;
+                min-height: 160px;
+            }
+
+            .button-title {
+                font-size: 1.1rem;
+            }
+
+            .button-description {
+                font-size: 0.8rem;
+            }
+
+            .button-icon {
+                font-size: 1.5rem;
             }
 
             .quick-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 12px;
             }
 
             .external-links-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .telecom-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .telecom-button {
+                padding: 16px 12px;
+                min-height: 140px;
+            }
+
+            .button-title {
+                font-size: 1rem;
+            }
+
+            .button-description {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+
+            .button-icon {
+                font-size: 1.25rem;
             }
         }
 
@@ -424,7 +487,7 @@
     <body>
         <div class="container">
             <header>
-                <h1>LifeOS</h1>
+                <h1>Personal Hub</h1>
                 <p>Your personal life management system</p>
             </header>
 
@@ -432,54 +495,54 @@
                 <a href="subpages/bookmarks.html" class="telecom-button" data-button="bookmarks">
                     <div class="button-indicator"></div>
                     <div class="button-content">
-                        <span class="button-icon">🔖</span>
                         <h2 class="button-title">Bookmarks</h2>
                         <p class="button-description">Your collection of useful websites, resources, and references</p>
+                        <span class="button-icon">🔖</span>
                     </div>
                 </a>
 
                 <a href="subpages/goals.html" class="telecom-button" data-button="goals">
                     <div class="button-indicator"></div>
                     <div class="button-content">
-                        <span class="button-icon">🎯</span>
                         <h2 class="button-title">Goals</h2>
                         <p class="button-description">Track your personal and professional goals with categories</p>
+                        <span class="button-icon">🎯</span>
                     </div>
                 </a>
 
                 <a href="subpages/jobs.html" class="telecom-button" data-button="jobs">
                     <div class="button-indicator"></div>
                     <div class="button-content">
-                        <span class="button-icon">💼</span>
                         <h2 class="button-title">Jobs</h2>
                         <p class="button-description">After-school job opportunities in AI, STEM, and education</p>
+                        <span class="button-icon">💼</span>
                     </div>
                 </a>
 
                 <a href="subpages/writing.html" class="telecom-button" data-button="writing">
                     <div class="button-indicator"></div>
                     <div class="button-content">
-                        <span class="button-icon">✍️</span>
                         <h2 class="button-title">Writing</h2>
                         <p class="button-description">Active writing projects including fiction and screenplays</p>
+                        <span class="button-icon">✍️</span>
                     </div>
                 </a>
 
                 <a href="subpages/project-sitemap.html" class="telecom-button" data-button="sitemap">
                     <div class="button-indicator"></div>
                     <div class="button-content">
-                        <span class="button-icon">🗺️</span>
                         <h2 class="button-title">Project Sitemap</h2>
                         <p class="button-description">Visual hierarchy of all projects and ideas</p>
+                        <span class="button-icon">🗺️</span>
                     </div>
                 </a>
 
                 <a href="subpages/stats.html" class="telecom-button" data-button="stats">
                     <div class="button-indicator"></div>
                     <div class="button-content">
-                        <span class="button-icon">📊</span>
                         <h2 class="button-title">Statistics</h2>
                         <p class="button-description">View insights and analytics about your life data</p>
+                        <span class="button-icon">📊</span>
                     </div>
                 </a>
             </div>
@@ -538,7 +601,21 @@
             </div>
         </div>
 
+        <footer>
+            <div class="footer-date" id="currentDate"></div>
+        </footer>
+
         <script>
+        // Display current date
+        const dateElement = document.getElementById('currentDate');
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        dateElement.textContent = now.toLocaleDateString('en-US', options);
         // Telecom button activation effect
         document.querySelectorAll('.telecom-button, .quick-button').forEach(button => {
             button.addEventListener('click', function(e) {
