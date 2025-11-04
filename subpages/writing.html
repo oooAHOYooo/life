@@ -16,6 +16,99 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        
+        /* File Modal Styles */
+        .file-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .file-modal {
+            background: white;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .file-modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-modal-header h3 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.3rem;
+        }
+        
+        .file-modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #7f8c8d;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        
+        .file-modal-close:hover {
+            color: #2c3e50;
+        }
+        
+        .file-modal-content {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+            background: #f8f9fa;
+        }
+        
+        .file-modal-content pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
+        .file-modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .file-btn.download-btn {
+            background: #3498db;
+            color: white;
+        }
+        
+        .file-btn.download-btn:hover {
+            background: #2980b9;
+        }
     </style>
     </head>
     <body>
@@ -89,15 +182,16 @@
                     return;
                 }
 
-                container.innerHTML = this.writingProjects.map(project => {
+                container.innerHTML = this.writingProjects.map((project, projectIndex) => {
                     // Get all drafts for this project
                     const projectDrafts = this.drafts.filter(draft => 
                         draft.projectId === project.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
                     );
+                    const projectId = project.title.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
                     
                     return `
                         <div class="writing-folder">
-                            <div class="folder-header" onclick="this.toggleFolder('${project.title.replace(/\s+/g, '-')}')">
+                            <div class="folder-header" data-project-id="${projectId}">
                                 <div class="folder-info">
                                     <h3 class="folder-title">${this.escapeHtml(project.title)}</h3>
                                     <p class="folder-description">${this.escapeHtml(project.description)}</p>
@@ -109,13 +203,13 @@
                                 <div class="folder-toggle">▼</div>
                             </div>
                             
-                            <div class="folder-content" id="folder-${project.title.replace(/\s+/g, '-')}" style="display: none;">
+                            <div class="folder-content" id="folder-${projectId}" style="display: none;">
                                 <div class="folder-section">
                                     <h4>All Files</h4>
                                     ${projectDrafts.length > 0 ? `
                                         <div class="file-list">
-                                            ${projectDrafts.map(draft => `
-                                                <div class="file-item" onclick="this.openFile('${draft.filePath}')">
+                                            ${projectDrafts.map((draft, draftIndex) => `
+                                                <div class="file-item">
                                                     <div class="file-icon">${draft.fileType === 'md' ? 'MD' : 'PDF'}</div>
                                                     <div class="file-info">
                                                         <div class="file-name">${this.escapeHtml(draft.title)}</div>
@@ -126,8 +220,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="file-actions">
-                                                        <button class="file-btn view-btn" onclick="event.stopPropagation(); this.viewFile('${draft.filePath}')">View</button>
-                                                        <button class="file-btn edit-btn" onclick="event.stopPropagation(); this.editFile('${draft.filePath}')">Edit</button>
+                                                        <button class="file-btn view-btn" data-file-path="${this.escapeHtml(draft.filePath)}" data-file-type="${draft.fileType}">View</button>
+                                                        <button class="file-btn download-btn" data-file-path="${this.escapeHtml(draft.filePath)}" data-file-name="${this.escapeHtml(draft.title)}">Download</button>
                                                     </div>
                                                 </div>
                                             `).join('')}
@@ -149,6 +243,39 @@
                         </div>
                     `;
                 }).join('');
+
+                // Attach event listeners after rendering
+                this.attachEventListeners();
+            }
+
+            attachEventListeners() {
+                // Folder toggle handlers
+                document.querySelectorAll('.folder-header').forEach(header => {
+                    header.addEventListener('click', (e) => {
+                        const projectId = header.getAttribute('data-project-id');
+                        this.toggleFolder(projectId, e);
+                    });
+                });
+
+                // View button handlers
+                document.querySelectorAll('.file-btn.view-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const filePath = btn.getAttribute('data-file-path');
+                        const fileType = btn.getAttribute('data-file-type');
+                        this.viewFile(filePath, fileType);
+                    });
+                });
+
+                // Download button handlers
+                document.querySelectorAll('.file-btn.download-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const filePath = btn.getAttribute('data-file-path');
+                        const fileName = btn.getAttribute('data-file-name');
+                        this.downloadFile(filePath, fileName);
+                    });
+                });
             }
 
             renderDraftsTable() {
@@ -199,11 +326,12 @@
                 }
             }
 
-            toggleFolder(folderId) {
+            toggleFolder(folderId, event) {
                 const folder = document.getElementById(`folder-${folderId}`);
-                const toggle = event.target.closest('.folder-header').querySelector('.folder-toggle');
+                const header = event.target.closest('.folder-header');
+                const toggle = header.querySelector('.folder-toggle');
                 
-                if (folder.style.display === 'none') {
+                if (folder.style.display === 'none' || !folder.style.display) {
                     folder.style.display = 'block';
                     toggle.textContent = '▲';
                 } else {
@@ -212,16 +340,99 @@
                 }
             }
 
-            openFile(filePath) {
-                window.open(filePath, '_blank');
+            async viewFile(filePath, fileType) {
+                if (fileType === 'pdf') {
+                    // For PDFs, open in new tab
+                    window.open(`../${filePath}`, '_blank');
+                } else {
+                    // For markdown/text files, fetch and display in modal
+                    try {
+                        const response = await fetch(`../${filePath}`);
+                        if (!response.ok) throw new Error('Failed to load file');
+                        const content = await response.text();
+                        this.showFileModal(content, filePath);
+                    } catch (error) {
+                        console.error('Error loading file:', error);
+                        alert('Failed to load file. Opening in new tab instead.');
+                        window.open(`../${filePath}`, '_blank');
+                    }
+                }
             }
 
-            viewFile(filePath) {
-                window.open(filePath, '_blank');
+            async downloadFile(filePath, fileName) {
+                try {
+                    // Fetch the file content
+                    const response = await fetch(`../${filePath}`);
+                    if (!response.ok) throw new Error('Failed to fetch file');
+                    
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    
+                    // Create a temporary link and trigger download
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = fileName || filePath.split('/').pop();
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Clean up the object URL
+                    window.URL.revokeObjectURL(url);
+                } catch (error) {
+                    console.error('Error downloading file:', error);
+                    // Fallback: try direct link
+                    const link = document.createElement('a');
+                    link.href = `../${filePath}`;
+                    link.download = fileName || filePath.split('/').pop();
+                    link.target = '_blank';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
             }
 
-            editFile(filePath) {
-                window.open(filePath, '_blank');
+            showFileModal(content, filePath) {
+                // Create modal overlay
+                const modal = document.createElement('div');
+                modal.className = 'file-modal-overlay';
+                const fileName = filePath.split('/').pop();
+                modal.innerHTML = `
+                    <div class="file-modal">
+                        <div class="file-modal-header">
+                            <h3>${this.escapeHtml(fileName)}</h3>
+                            <button class="file-modal-close">&times;</button>
+                        </div>
+                        <div class="file-modal-content">
+                            <pre>${this.escapeHtml(content)}</pre>
+                        </div>
+                        <div class="file-modal-footer">
+                            <button class="file-btn download-btn" data-modal-file-path="${this.escapeHtml(filePath)}" data-modal-file-name="${this.escapeHtml(fileName)}">Download</button>
+                            <button class="file-btn close-modal-btn">Close</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Close handlers
+                const closeBtn = modal.querySelector('.file-modal-close');
+                const closeModalBtn = modal.querySelector('.close-modal-btn');
+                const closeModal = () => {
+                    document.body.removeChild(modal);
+                };
+                closeBtn.addEventListener('click', closeModal);
+                closeModalBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+
+                // Download handler
+                const downloadBtn = modal.querySelector('.download-btn');
+                downloadBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const modalFilePath = downloadBtn.getAttribute('data-modal-file-path');
+                    const modalFileName = downloadBtn.getAttribute('data-modal-file-name');
+                    this.downloadFile(modalFilePath, modalFileName);
+                });
             }
 
             escapeHtml(text) {
