@@ -3,17 +3,80 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Project Sitemap - LifeOS</title>
+        <title>Project Sitemap - LifeOS | Visual Hierarchy of All Projects</title>
+        <meta name="description" content="Complete visual hierarchy and sitemap of all projects, ideas, and their relationships across different aspects of life management.">
+        <meta name="keywords" content="project sitemap, life management, project hierarchy, visual organization, project tracking, LifeOS">
+        <meta name="author" content="LifeOS">
+        <meta name="robots" content="index, follow">
+        <meta name="theme-color" content="#0a0e27">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://lifeos.app/subpages/project-sitemap.html">
+        <meta property="og:title" content="Project Sitemap - LifeOS">
+        <meta property="og:description" content="Complete visual hierarchy and sitemap of all projects, ideas, and their relationships.">
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://lifeos.app/subpages/project-sitemap.html">
+        <meta property="twitter:title" content="Project Sitemap - LifeOS">
+        <meta property="twitter:description" content="Complete visual hierarchy and sitemap of all projects, ideas, and their relationships.">
+        
         <link rel="stylesheet" href="../styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
         <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #e8eaed;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: #3498db;
+            color: #818cf8;
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
         .back-link:hover {
+            color: #a78bfa;
             text-decoration: underline;
         }
         
@@ -21,23 +84,48 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #e8eaed;
+        }
+        
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
         }
         
         .sitemap-section {
             margin-bottom: 50px;
-            background: white;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(99, 102, 241, 0.2);
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         
         .sitemap-section h2 {
             font-size: 1.8rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: #e8eaed;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #3498db;
+            border-bottom: 3px solid #818cf8;
         }
         
         .hierarchy-tree {
@@ -46,8 +134,8 @@
         }
         
         .hierarchy-node {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
+            background: rgba(30, 41, 59, 0.7);
+            border: 2px solid rgba(99, 102, 241, 0.3);
             border-radius: 8px;
             padding: 15px 20px;
             margin: 10px 0;
@@ -57,44 +145,45 @@
         }
         
         .hierarchy-node:hover {
-            background: #e9ecef;
+            background: rgba(30, 41, 59, 0.9);
             transform: translateX(5px);
-            border-color: #3498db;
+            border-color: #818cf8;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
         }
         
         .hierarchy-node.main {
-            background: #e3f2fd;
-            border-color: #2196f3;
+            background: rgba(99, 102, 241, 0.15);
+            border-color: #818cf8;
             font-weight: 600;
         }
         
         .hierarchy-node.sub {
             margin-left: 30px;
-            background: #f1f8e9;
-            border-color: #8bc34a;
+            background: rgba(139, 92, 246, 0.15);
+            border-color: #a78bfa;
         }
         
         .hierarchy-node.sub-sub {
             margin-left: 60px;
-            background: #fff3e0;
-            border-color: #ff9800;
+            background: rgba(251, 191, 36, 0.15);
+            border-color: #fbbf24;
         }
         
         .hierarchy-node.sub-sub-sub {
             margin-left: 90px;
-            background: #fce4ec;
-            border-color: #e91e63;
+            background: rgba(236, 72, 153, 0.15);
+            border-color: #ec4899;
         }
         
         .node-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: #e8eaed;
             margin-bottom: 5px;
         }
         
         .node-description {
-            color: #7f8c8d;
+            color: #9ca3af;
             font-size: 0.9rem;
             margin-bottom: 8px;
         }
@@ -106,8 +195,8 @@
         }
         
         .node-tag {
-            background: #ecf0f1;
-            color: #2c3e50;
+            background: rgba(99, 102, 241, 0.2);
+            color: #c7d2fe;
             padding: 3px 8px;
             border-radius: 12px;
             font-size: 0.75rem;
@@ -115,43 +204,45 @@
         }
         
         .node-tag.status-active {
-            background: #d4edda;
-            color: #155724;
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
         }
         
         .node-tag.status-planning {
-            background: #fff3cd;
-            color: #856404;
+            background: rgba(251, 191, 36, 0.2);
+            color: #fde047;
         }
         
         .node-tag.status-completed {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
         }
         
         .node-tag.priority-high {
-            background: #f8d7da;
-            color: #721c24;
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
         }
         
         .node-tag.priority-medium {
-            background: #fff3cd;
-            color: #856404;
+            background: rgba(251, 191, 36, 0.2);
+            color: #fde047;
         }
         
         .node-tag.priority-low {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
         }
         
         .node-link {
-            color: #3498db;
+            color: #818cf8;
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
+            transition: color 0.3s ease;
         }
         
         .node-link:hover {
+            color: #a78bfa;
             text-decoration: underline;
         }
         
@@ -182,36 +273,37 @@
         }
         
         .stat-card {
-            background: #f8f9fa;
+            background: rgba(30, 41, 59, 0.7);
             border-radius: 8px;
             padding: 20px;
             text-align: center;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #818cf8;
         }
         
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #2c3e50;
+            color: #e8eaed;
             display: block;
         }
         
         .stat-label {
-            color: #7f8c8d;
+            color: #9ca3af;
             font-size: 0.9rem;
             margin-top: 5px;
         }
         
         .legend {
-            background: #f8f9fa;
+            background: rgba(30, 41, 59, 0.7);
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 30px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
         
         .legend h3 {
             font-size: 1.2rem;
-            color: #2c3e50;
+            color: #e8eaed;
             margin-bottom: 15px;
         }
         
@@ -234,14 +326,14 @@
             border: 2px solid;
         }
         
-        .legend-color.main { background: #e3f2fd; border-color: #2196f3; }
-        .legend-color.sub { background: #f1f8e9; border-color: #8bc34a; }
-        .legend-color.sub-sub { background: #fff3e0; border-color: #ff9800; }
-        .legend-color.sub-sub-sub { background: #fce4ec; border-color: #e91e63; }
+        .legend-color.main { background: rgba(99, 102, 241, 0.15); border-color: #818cf8; }
+        .legend-color.sub { background: rgba(139, 92, 246, 0.15); border-color: #a78bfa; }
+        .legend-color.sub-sub { background: rgba(251, 191, 36, 0.15); border-color: #fbbf24; }
+        .legend-color.sub-sub-sub { background: rgba(236, 72, 153, 0.15); border-color: #ec4899; }
         
         .legend-text {
             font-size: 0.9rem;
-            color: #2c3e50;
+            color: #e8eaed;
         }
         
         .category-section {
@@ -279,22 +371,23 @@
         }
         
         .project-sitemap-card {
-            background: white;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #3498db;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #818cf8;
         }
         
         .project-sitemap-card h3 {
             font-size: 1.4rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: #e8eaed;
             margin-bottom: 8px;
         }
         
         .project-sitemap-card p {
-            color: #7f8c8d;
+            color: #9ca3af;
             margin-bottom: 15px;
             font-size: 0.9rem;
         }
@@ -302,10 +395,10 @@
         .sitemap-preview {
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #e9ecef;
+            border: 1px solid rgba(99, 102, 241, 0.3);
             border-radius: 6px;
             padding: 15px;
-            background: #f8f9fa;
+            background: rgba(15, 23, 42, 0.5);
         }
         
         .sitemap-preview .hierarchy-node {
@@ -315,26 +408,26 @@
         }
         
         .sitemap-preview .hierarchy-node.main {
-            background: #e3f2fd;
-            border-color: #2196f3;
+            background: rgba(99, 102, 241, 0.15);
+            border-color: #818cf8;
         }
         
         .sitemap-preview .hierarchy-node.sub {
             margin-left: 15px;
-            background: #f1f8e9;
-            border-color: #8bc34a;
+            background: rgba(139, 92, 246, 0.15);
+            border-color: #a78bfa;
         }
         
         .sitemap-preview .hierarchy-node.sub-sub {
             margin-left: 30px;
-            background: #fff3e0;
-            border-color: #ff9800;
+            background: rgba(251, 191, 36, 0.15);
+            border-color: #fbbf24;
         }
         
         .sitemap-preview .hierarchy-node.sub-sub-sub {
             margin-left: 45px;
-            background: #fce4ec;
-            border-color: #e91e63;
+            background: rgba(236, 72, 153, 0.15);
+            border-color: #ec4899;
         }
         
         .code-sitemap {
@@ -344,23 +437,23 @@
         .code-sitemap h2 {
             font-size: 1.8rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: #e8eaed;
             margin-bottom: 20px;
             text-align: center;
         }
         
         .sitemap-code {
-            background: #1e1e1e;
+            background: rgba(15, 23, 42, 0.9);
             color: #d4d4d4;
             font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
             font-size: 14px;
             line-height: 1.6;
             padding: 25px;
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid rgba(99, 102, 241, 0.3);
             overflow-x: auto;
             white-space: pre;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
         
         .code-line {
@@ -443,9 +536,9 @@
 
             async loadAllData() {
                 try {
-                    console.log('Loading barnacle projects...');
-                    const barnacleProjects = await fetch('../data/barnacle-projects.json').then(r => r.json());
-                    console.log('Loaded barnacle projects:', barnacleProjects);
+                    const response = await fetch('../data/barnacle-projects.json');
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const barnacleProjects = await response.json();
                     this.allData = { barnacleProjects };
                 } catch (error) {
                     console.error('Error loading data:', error);
@@ -579,9 +672,7 @@
             }
 
             renderBarnacleCodeSitemap() {
-                console.log('Rendering barnacle code sitemap, allData:', this.allData);
                 if (!this.allData.barnacleProjects || this.allData.barnacleProjects.length === 0) {
-                    console.log('No barnacle projects data available');
                     return '<div class="code-line">// No Barnacle projects data available</div>';
                 }
                 
@@ -697,9 +788,13 @@
         }
 
         // Initialize the page when it loads
-        document.addEventListener('DOMContentLoaded', () => {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                new SitemapPage();
+            });
+        } else {
             new SitemapPage();
-        });
+        }
     </script>
     </body>
 </html>
