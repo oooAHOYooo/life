@@ -197,10 +197,21 @@
                 <p class="muted" style="margin-bottom:12px;">Edit <span class="mono">data/reminders.json</span> and add a new object with this shape:</p>
                 <div class="schema" id="schemaBlock"></div>
             </div>
+
+            <div class="card">
+                <header style="text-align:left;margin-bottom:12px;">
+                    <h2 style="font-size:1.4rem;font-weight:700;color:#e8eaed;margin:0 0 4px 0;">Current Bills</h2>
+                    <p class="muted" style="margin:0;">Organized by section with estimated next charge date</p>
+                </header>
+                <div id="billsSummary" class="muted" style="margin-bottom:12px;"></div>
+                <div id="billsContainer"></div>
+                <div class="footer-note">Edit <span class="mono">data/bills.json</span> to add or update bills.</div>
+            </div>
         </div>
 
         <script>
         const DATA_URL = '../data/reminders.json';
+        const BILLS_URL = '../data/bills.json';
 
         const schemaExample = {
             id: "unique-id",
@@ -225,22 +236,26 @@
             constructor() {
                 this.all = [];
                 this.filtered = [];
+                this.bills = null;
                 this.dom = {
                     body: document.getElementById('remindersBody'),
                     count: document.getElementById('countNote'),
                     search: document.getElementById('searchInput'),
                     filter: document.getElementById('statusFilter'),
                     sort: document.getElementById('sortSelect'),
-                    schema: document.getElementById('schemaBlock')
+                    schema: document.getElementById('schemaBlock'),
+                    billsContainer: document.getElementById('billsContainer'),
+                    billsSummary: document.getElementById('billsSummary')
                 };
                 this.init();
             }
 
             async init() {
                 this.dom.schema.textContent = JSON.stringify(schemaExample, null, 2);
-                await this.loadData();
+                await Promise.all([this.loadData(), this.loadBills()]);
                 this.bindEvents();
                 this.applyFiltersAndRender();
+                this.renderBills();
             }
 
             async loadData() {
@@ -251,6 +266,17 @@
                 } catch (e) {
                     console.error('Failed to load reminders:', e);
                     this.dom.body.innerHTML = '<tr><td colspan="5" class="muted">Failed to load reminders.</td></tr>';
+                }
+            }
+
+            async loadBills() {
+                try {
+                    const res = await fetch(BILLS_URL);
+                    if (!res.ok) throw new Error(res.statusText);
+                    this.bills = await res.json();
+                } catch (e) {
+                    console.error('Failed to load bills:', e);
+                    this.dom.billsContainer.innerHTML = '<div class="muted">Failed to load bills.</div>';
                 }
             }
 
@@ -350,6 +376,157 @@
                 const div = document.createElement('div');
                 div.textContent = String(text ?? '');
                 return div.innerHTML;
+            }
+
+            // ------- Bills UI --------
+            renderBills() {
+                if (!this.bills || !Array.isArray(this.bills.categories)) {
+                    this.dom.billsContainer.innerHTML = '<div class="muted">No bills data.</div>';
+                    return;
+                }
+                const now = new Date();
+
+                const categoryBlocks = this.bills.categories.map(cat => {
+                    const enriched = cat.items.map(item => this.computeBillDates(item, now));
+                    const yearly = enriched.reduce((sum, it) => sum + this.estimateYearly(it.amount, it.frequency), 0);
+                    const header = `
+                        <div style="margin:14px 0 6px 0;font-weight:700;color:#e8eaed;">
+                            ${this.escape(cat.title)} <span class="muted" style="font-weight:500;">• est ${this.formatCurrency(yearly)}/yr</span>
+                        </div>
+                    `;
+                    const rows = enriched.map(it => this.renderBillRow(it)).join('');
+                    const table = `
+                        <div style="overflow:auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name/Frequency</th>
+                                        <th>Account</th>
+                                        <th>User</th>
+                                        <th>Due</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${rows}</tbody>
+                            </table>
+                        </div>
+                    `;
+                    return header + table;
+                }).join('');
+
+                // Overall summary
+                const totals = this.bills.categories.reduce((acc, cat) => {
+                    const yearly = cat.items.reduce((sum, it) => sum + this.estimateYearly(it.amount, it.frequency), 0);
+                    acc.yearly += yearly;
+                    acc.count += cat.items.length;
+                    return acc;
+                }, { yearly: 0, count: 0 });
+                this.dom.billsSummary.textContent = `${totals.count} items • est ${this.formatCurrency(totals.yearly)}/yr`;
+
+                this.dom.billsContainer.innerHTML = categoryBlocks;
+            }
+
+            computeBillDates(item, now) {
+                const periodDays = this.periodDays(item.frequency);
+                const generatedAt = this.bills?.generatedAt ? new Date(this.bills.generatedAt + 'T00:00:00') : null;
+
+                // 1) Absolute next due date takes precedence
+                if (item.nextDueOn) {
+                    let next = new Date(item.nextDueOn + 'T00:00:00');
+                    if (isFinite(next)) {
+                        if (periodDays > 0) {
+                            while (next < now) {
+                                next = new Date(next.getTime() + periodDays * 24 * 60 * 60 * 1000);
+                            }
+                        }
+                        return { ...item, nextEstimatedDate: next, dueRelative: this.relativeFromNow(next) };
+                    }
+                }
+
+                // 2) Billing day of month for recurring monthly-like bills
+                if (item.billingDayOfMonth && /monthly|quarterly|yearly|annually/i.test(String(item.frequency || ''))) {
+                    const day = Math.max(1, Math.min(28, Number(item.billingDayOfMonth))); // safe bound 1..28
+                    let candidate = new Date(now.getFullYear(), now.getMonth(), day);
+                    if (candidate < new Date(now.getFullYear(), now.getMonth(), now.getDate())) {
+                        // move to next cycle
+                        if (/quarterly/i.test(item.frequency)) {
+                            candidate = new Date(now.getFullYear(), now.getMonth() + 3, day);
+                        } else if (/yearly|annually/i.test(item.frequency)) {
+                            candidate = new Date(now.getFullYear() + 1, now.getMonth(), day);
+                        } else {
+                            candidate = new Date(now.getFullYear(), now.getMonth() + 1, day);
+                        }
+                    }
+                    return { ...item, nextEstimatedDate: candidate, dueRelative: this.relativeFromNow(candidate) };
+                }
+
+                // 3) Relative anchor from file's generatedAt and dueInDays
+                if (generatedAt && typeof item.dueInDays === 'number') {
+                    let next = new Date(generatedAt.getTime() + item.dueInDays * 24 * 60 * 60 * 1000);
+                    if (periodDays > 0) {
+                        while (next < now) {
+                            next = new Date(next.getTime() + periodDays * 24 * 60 * 60 * 1000);
+                        }
+                    }
+                    return { ...item, nextEstimatedDate: next, dueRelative: this.relativeFromNow(next) };
+                }
+
+                // 4) Fallback: nothing known
+                return { ...item, nextEstimatedDate: null, dueRelative: '—' };
+            }
+
+            periodDays(frequency) {
+                const f = String(frequency || '').toLowerCase();
+                if (f === 'weekly') return 7;
+                if (f === 'monthly') return 30;
+                if (f === 'quarterly') return 90;
+                if (f === 'yearly' || f === 'annually') return 365;
+                return 30;
+            }
+
+            estimateYearly(amount, frequency) {
+                const f = String(frequency || '').toLowerCase();
+                if (f === 'weekly') return amount * 52;
+                if (f === 'monthly') return amount * 12;
+                if (f === 'quarterly') return amount * 4;
+                if (f === 'yearly' || f === 'annually') return amount;
+                return amount * 12;
+            }
+
+            renderBillRow(it) {
+                const dateStr = it.nextEstimatedDate ? this.formatDate(it.nextEstimatedDate) : '—';
+                const rel = it.dueRelative || (it.nextEstimatedDate ? this.relativeFromNow(it.nextEstimatedDate) : '—');
+                return `
+                    <tr>
+                        <td>
+                            <div style="font-weight:600;color:#e8eaed;">${this.escape(it.name)}</div>
+                            <div class="muted">${this.escape(it.frequency || '')}</div>
+                        </td>
+                        <td>${this.escape(it.account || '')}</td>
+                        <td>${this.escape(it.assumedUsername || '—')}</td>
+                        <td>
+                            <div>${dateStr}</div>
+                            <div class="muted">${this.escape(rel)}</div>
+                        </td>
+                        <td>${this.formatCurrency(it.amount)}</td>
+                    </tr>
+                `;
+            }
+
+            formatDate(d) {
+                return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+
+            relativeFromNow(target) {
+                const now = new Date();
+                const diffDays = Math.round((target - now) / (1000 * 60 * 60 * 24));
+                if (diffDays === 0) return 'today';
+                if (diffDays > 0) return `in ${diffDays} days`;
+                return `${Math.abs(diffDays)} days ago`;
+            }
+
+            formatCurrency(n) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n || 0);
             }
         }
 

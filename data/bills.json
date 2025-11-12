@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2025-11-12",
+  "categories": [
+    {
+      "id": "subscriptions",
+      "title": "Subscriptions",
+      "items": [
+        { "name": "Adobe Creative Cloud", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 2 days", "dueInDays": 2, "amount": 24.45 },
+        { "name": "Amazon Digital Services", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 24 days", "dueInDays": 24, "amount": 3.18 },
+        { "name": "ExpressVPN", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 11 days", "dueInDays": 11, "amount": 12.95 },
+        { "name": "Github", "frequency": "Monthly", "account": "Chase ••5316", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 3 days", "dueInDays": 3, "amount": 4.25 },
+        { "name": "Google One", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "4 days ago", "dueInDays": -4, "amount": 4.32, "notes": "2 subscriptions" },
+        { "name": "Google Workspace", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 20 days", "dueInDays": 20, "amount": 8.93 },
+        { "name": "HBO Max", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 10 days", "dueInDays": 10, "amount": 10.62 },
+        { "name": "Medium", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 24 days", "dueInDays": 24, "amount": 5.00 },
+        { "name": "OpenAI", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 14 days", "dueInDays": 14, "amount": 21.27 },
+        { "name": "Paddle.net", "frequency": "Quarterly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 2 months", "dueInDays": 60, "amount": 54.95 },
+        { "name": "Spotify", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 29 days", "dueInDays": 29, "amount": 11.99 },
+        { "name": "Squarespace", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 16 days", "dueInDays": 16, "amount": 18.21 }
+      ]
+    },
+    {
+      "id": "bills_utilities",
+      "title": "Bills & Utilities",
+      "items": [
+        { "name": "Assurant", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 4 days", "dueInDays": 4, "amount": 14.59 },
+        { "name": "GEICO", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 5 days", "dueInDays": 5, "amount": 157.59 },
+        { "name": "Gas", "frequency": "Monthly", "account": "—", "assumedUsername": "ahoy.mr.ag@gmail.com", "billingDayOfMonth": 15, "amount": 0, "notes": "Placeholder amount and date. Update when known." },
+        { "name": "UI Bill", "frequency": "Monthly", "account": "—", "assumedUsername": "ahoy.mr.ag@gmail.com", "billingDayOfMonth": 20, "amount": 0, "notes": "Placeholder amount and date. Update when known." },
+        { "name": "Rent", "frequency": "Monthly", "account": "Sofi", "assumedUsername": "ahoy.mr.ag@gmail.com", "billingDayOfMonth": 1, "amount": 1900, "notes": "Fixed rent auto-drafted from Sofi" }
+      ]
+    },
+    {
+      "id": "credit_cards",
+      "title": "Credit Card Payments",
+      "items": [
+        { "name": "Chase Credit Card", "frequency": "Monthly", "account": "Multiple", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 25 days", "dueInDays": 25, "amount": 1047.12, "notes": "Aggregated across 4 subscriptions" }
+      ]
+    },
+    {
+      "id": "transfers",
+      "title": "Transfers",
+      "items": [
+        { "name": "CASH APP*ALEXANDER GONZ Oakland CA", "frequency": "Monthly", "account": "Chase ••5316", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 10 days", "dueInDays": 10, "amount": 19.31, "notes": "2 subscriptions" }
+      ]
+    },
+    {
+      "id": "other",
+      "title": "Other",
+      "items": [
+        { "name": "AHOY.OOO AHOY.OOO CT", "frequency": "Weekly", "account": "Chase ••5316", "assumedUsername": "alex@ahoy.ooo", "dueIn": "today", "dueInDays": 0, "amount": 3.00 },
+        { "name": "New York Times", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 28 days", "dueInDays": 28, "amount": 4.24 },
+        { "name": "Vanguard Investments", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 21 days", "dueInDays": 21, "amount": 50.00 }
+      ]
+    }
+  ]
+}
+
+
