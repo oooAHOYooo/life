@@ -1,0 +1,21 @@
+[
+  {
+    "id": "cleanmymac-x",
+    "category": "subscription",
+    "name": "CleanMyMac X",
+    "vendor": "MacPaw",
+    "planName": "Plan For 2 Macs",
+    "devicesAllowed": 2,
+    "devicesInUse": 2,
+    "purchaseDate": "2025-10-23",
+    "renewsOn": "2026-10-29",
+    "billingPeriod": "1 Year",
+    "url": "",
+    "notes": "Upgrade after the new year. Check new essential Mac care tools.",
+    "desiredAction": "Upgrade",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2026-01-01",
+    "notifyDaysBefore": 45
+  }
+]
+
