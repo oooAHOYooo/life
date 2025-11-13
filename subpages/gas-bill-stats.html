@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SCG Gas Bill History & Stats</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+        <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #e8eaed;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.8;transform:scale(1.05)} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        .back-link { display:inline-block; margin-bottom:20px; color:#818cf8; text-decoration:none; font-weight:500; }
+        .back-link:hover { color:#a78bfa; text-decoration:underline; }
+        header { text-align:center; margin-bottom: 20px; }
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 8px;
+        }
+        header p { color:#9ca3af; }
+        .card { background: rgba(15,23,42,0.6); backdrop-filter: blur(20px); border: 2px solid rgba(99,102,241,0.2); border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+        .metric { background: rgba(15,23,42,0.6); border:1px solid rgba(99,102,241,0.25); border-radius:10px; padding:12px; }
+        .metric .label { color:#9ca3af; font-size:0.85rem; }
+        .metric .value { font-weight:700; color:#e8eaed; }
+        .muted { color:#9ca3af; }
+        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+        .table { width:100%; border-collapse: collapse; }
+        .table th, .table td { text-align:left; padding:12px; border-bottom:1px solid rgba(99,102,241,0.15); vertical-align: top; }
+        .table th { color:#c7d2fe; font-weight:600; border-bottom:2px solid rgba(99,102,241,0.3); position: sticky; top: 0; background: rgba(15,23,42,0.9); }
+        .footer-note { color:#9ca3af; font-size:0.9rem; margin-top:10px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
+            <header>
+                <h1>SCG Gas Bill • History & Stats</h1>
+                <p>Account 05000117275128 • 206 SAINT JOHN ST FL 3RGT, NEW HAVEN, CT 06511</p>
+            </header>
+
+            <div class="card" id="summaryCard">
+                <div class="grid">
+                    <div class="metric">
+                        <div class="label">Next Due</div>
+                        <div class="value" id="nextDueDate">Dec 4, 2025</div>
+                        <div class="muted" id="nextDueAmount">$67.55</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Average (all records)</div>
+                        <div class="value" id="avgAll">$0.00</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Last 3 months avg</div>
+                        <div class="value" id="avg3">$0.00</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Last 6 months avg</div>
+                        <div class="value" id="avg6">$0.00</div>
+                    </div>
+                </div>
+                <div class="footer-note">Source: SCG Bills & Payments portal</div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size:1.2rem;font-weight:700;color:#e8eaed;margin:0 0 10px 0;">Billing History</h2>
+                <div style="overflow:auto;">
+                    <table class="table" id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Billed Days</th>
+                                <th>Bill Amount</th>
+                                <th>Amount Due</th>
+                                <th>Due On</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        const history = [
+            { from: '2025-10-03', to: '2025-11-04', days: 33, billAmount: 67.55, amountDue: 67.55, dueOn: '2025-12-04' },
+            { from: '2025-09-04', to: '2025-10-02', days: 29, billAmount: 47.59, amountDue: 47.59, dueOn: '2025-11-03' },
+            { from: '2025-08-05', to: '2025-09-03', days: 30, billAmount: 47.44, amountDue: 47.44, dueOn: '2025-10-03' },
+            { from: '2025-07-03', to: '2025-08-04', days: 33, billAmount: 46.17, amountDue: 46.17, dueOn: '2025-09-03' },
+            { from: '2025-06-04', to: '2025-07-02', days: 29, billAmount: 45.30, amountDue: 99.69, dueOn: '2025-08-04' },
+            { from: '2025-05-03', to: '2025-06-03', days: 32, billAmount: 54.39, amountDue: 54.39, dueOn: '2025-07-03' },
+            { from: '2025-04-03', to: '2025-05-02', days: 30, billAmount: 89.57, amountDue: 89.57, dueOn: '2025-06-03' },
+            { from: '2025-02-28', to: '2025-04-02', days: 34, billAmount: 154.15, amountDue: 154.15, dueOn: '2025-05-02' }
+        ];
+
+        function formatUsd(n) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n || 0);
+        }
+        function formatDate(iso) {
+            const d = new Date(iso + 'T00:00:00');
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+        function average(arr) {
+            if (!arr.length) return 0;
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+
+        function render() {
+            // Render table
+            const tbody = document.getElementById('historyBody');
+            tbody.innerHTML = history.map(r => `
+                <tr>
+                    <td>${formatDate(r.from)}</td>
+                    <td>${formatDate(r.to)}</td>
+                    <td>${r.days}</td>
+                    <td>${formatUsd(r.billAmount)}</td>
+                    <td>${formatUsd(r.amountDue)}</td>
+                    <td>${formatDate(r.dueOn)}</td>
+                </tr>
+            `).join('');
+
+            // Compute and render metrics
+            const amounts = history.map(r => r.billAmount);
+            const avgAll = average(amounts);
+            const last3 = average(amounts.slice(0, 3)); // entries are newest-first
+            const last6 = average(amounts.slice(0, 6));
+
+            document.getElementById('avgAll').textContent = formatUsd(avgAll);
+            document.getElementById('avg3').textContent = formatUsd(last3);
+            document.getElementById('avg6').textContent = formatUsd(last6);
+
+            // Next due (from most recent entry)
+            const next = history[0];
+            document.getElementById('nextDueDate').textContent = formatDate(next.dueOn);
+            document.getElementById('nextDueAmount').textContent = formatUsd(next.amountDue);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', render);
+        } else {
+            render();
+        }
+        </script>
+    </body>
+    </html>
+
+

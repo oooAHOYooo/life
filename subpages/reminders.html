@@ -158,6 +158,10 @@
                 <p>Track software subscriptions, renewals, and planned upgrades</p>
             </header>
 
+            <!-- Gas Bill summary moved under Bills & Utilities section below -->
+
+            <!-- Electric Bill summary moved under Bills & Utilities section below -->
+
             <div class="card">
                 <div class="controls">
                     <input id="searchInput" type="search" placeholder="Search name or vendor...">
@@ -394,6 +398,63 @@
                             ${this.escape(cat.title)} <span class="muted" style="font-weight:500;">• est ${this.formatCurrency(yearly)}/yr</span>
                         </div>
                     `;
+                    // Inline Gas (SCG) and Electric (UI) summaries under Bills & Utilities
+                    const utilitiesInline = (cat.title === 'Bills & Utilities') ? `
+                        <div style="margin:6px 0 12px 0; display:grid; grid-template-columns: 1fr; gap:14px;">
+                            <div>
+                                <div class="muted" style="margin-bottom:6px;">SCG Gas Bill • Account 05000117275128</div>
+                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Next bill due</div>
+                                        <div style="font-weight:700;color:#e8eaed;">Dec 4, 2025</div>
+                                        <div class="muted">$67.55</div>
+                                    </div>
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Average (8 months)</div>
+                                        <div style="font-weight:700;color:#e8eaed;">$69.02</div>
+                                    </div>
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Last 3 months avg</div>
+                                        <div style="font-weight:700;color:#e8eaed;">$54.19</div>
+                                    </div>
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Last 6 months avg</div>
+                                        <div style="font-weight:700;color:#e8eaed;">$51.41</div>
+                                    </div>
+                                </div>
+                                <div class="muted" style="margin-top:6px;">Source: SCG Bills & Payments portal.</div>
+                                <div style="margin-top:8px;">
+                                    <a href="./gas-bill-stats.html" style="color:#819cf8;text-decoration:none;font-weight:600;">View full gas bill history →</a>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="muted" style="margin:10px 0 6px 0;">UI Electric Bill • Account 01000020024211</div>
+                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Next bill status</div>
+                                        <div style="font-weight:700;color:#e8eaed;">Nov 7, 2025</div>
+                                        <div class="muted">- $15.40 (credit)</div>
+                                    </div>
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Average (9 months)</div>
+                                        <div style="font-weight:700;color:#e8eaed;">$72.42</div>
+                                    </div>
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Last 3 months avg</div>
+                                        <div style="font-weight:700;color:#e8eaed;">$78.04</div>
+                                    </div>
+                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
+                                        <div class="muted" style="font-size:0.85rem;">Last 6 months avg</div>
+                                        <div style="font-weight:700;color:#e8eaed;">$87.21</div>
+                                    </div>
+                                </div>
+                                <div class="muted" style="margin-top:6px;">Source: UI Bills & Payments portal.</div>
+                                <div style="margin-top:8px;">
+                                    <a href="./electric-bill-stats.html" style="color:#819cf8;text-decoration:none;font-weight:600;">View full electric bill history →</a>
+                                </div>
+                            </div>
+                        </div>
+                    ` : '';
                     const rows = enriched.map(it => this.renderBillRow(it)).join('');
                     const table = `
                         <div style="overflow:auto;">
@@ -411,7 +472,7 @@
                             </table>
                         </div>
                     `;
-                    return header + table;
+                    return header + utilitiesInline + table;
                 }).join('');
 
                 // Overall summary
