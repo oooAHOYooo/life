@@ -169,5 +169,480 @@
     "title": "Netlify Deploys - Golden Sfogliatella",
     "url": "https://app.netlify.com/projects/golden-sfogliatella-f11934/deploys",
     "description": "Netlify deploy dashboard."
+  },
+  {
+    "title": "Southern Connecticut Gas",
+    "url": "https://www.soconngas.com/",
+    "description": "SCG public website."
+  },
+  {
+    "title": "SCG Portal Dashboard",
+    "url": "https://portal.soconngas.com/dashboard",
+    "description": "Southern Connecticut Gas customer portal."
+  },
+  {
+    "title": "Joy Wedding - Edit Guests",
+    "url": "https://withjoy.com/alexander-and-ellen-jun-25/edit/guests",
+    "description": "Manage guest list."
+  },
+  {
+    "title": "Joy Wedding - Welcome",
+    "url": "https://withjoy.com/alexander-and-ellen-jun-25/welcome",
+    "description": "Wedding site welcome page."
+  },
+  {
+    "title": "Google Doc (11TtycN...)",
+    "url": "https://docs.google.com/document/d/11TtycNpuQQ7nl9QWpoihq35_fVOH5dydVxClRcNxq10/edit?tab=t.0",
+    "description": "Google Docs document."
+  },
+  {
+    "title": "Gmail: Inbox Message",
+    "url": "https://mail.google.com/mail/u/0/#inbox/FMfcgzQbfLcZfVSvNMTjSLNhHLQgLvCR?projector=1&messagePartId=0.1",
+    "description": "Gmail message link."
+  },
+  {
+    "title": "Google Doc (1GqlG77...)",
+    "url": "https://docs.google.com/document/d/1GqlG77s8U2F79f6Jm5R82fY9C3OF4ou_JR1j_2y6bus/edit?tab=t.0",
+    "description": "Google Docs document."
+  },
+  {
+    "title": "Google Doc (1COzfLw...)",
+    "url": "https://docs.google.com/document/d/1COzfLwVDaBvPZXvrfHhgyphXRcZHx9DnAz7b3V1wG9U/edit?tab=t.0",
+    "description": "Google Docs document."
+  },
+  {
+    "title": "Canva Design (DAGovlqu3ys)",
+    "url": "https://www.canva.com/design/DAGovlqu3ys/uzN4_oa_xNX-A1WBUfCVbw/edit?ui=eyJBIjp7fX0",
+    "description": "Canva design editor link."
+  },
+  {
+    "title": "SuitShop - Men's Olive Green Tweed Suit",
+    "url": "https://suitshop.com/products/mens-olive-green-tweed-suit/?jacketfit=slim&jacketsize=40",
+    "description": "Product page."
+  },
+  {
+    "title": "Birdy Grey - Spencer Tuxedo Black",
+    "url": "https://suits.birdygrey.com/products/spencer-tuxedo-black",
+    "description": "Product page."
+  },
+  {
+    "title": "Google Doc (19KQceh...)",
+    "url": "https://docs.google.com/document/d/19KQceh6FYtWFIc169FB-3BUEjoyinaQ4GtH17zGdYCU/edit?tab=t.0",
+    "description": "Google Docs document."
+  },
+  {
+    "title": "Google Sheet (1gXAe2A... gid=0)",
+    "url": "https://docs.google.com/spreadsheets/d/1gXAe2AchJ0GTMcujt7hfGoqriWvfQ3rLgDhXdtgblRY/edit?gid=0#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1Igic1u... gid=0)",
+    "url": "https://docs.google.com/spreadsheets/d/1Igic1uv7WVzGjejHSS-WAk1zNiPkKv0B_y6_8oeW2xQ/edit?gid=0#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1gXAe2A... gid=0)",
+    "url": "https://docs.google.com/spreadsheets/d/1gXAe2AchJ0GTMcujt7hfGoqriWvfQ3rLgDhXdtgblRY/edit?gid=0#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1ymPwcW... gid=839106022)",
+    "url": "https://docs.google.com/spreadsheets/d/1ymPwcW2ly8XhwYfgdrk3vCTexQMd1HS4mGMJXyPMLJ0/edit?gid=839106022#gid=839106022",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1Igic1u... gid=1534717817)",
+    "url": "https://docs.google.com/spreadsheets/d/1Igic1uv7WVzGjejHSS-WAk1zNiPkKv0B_y6_8oeW2xQ/edit?gid=1534717817#gid=1534717817",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Ultimate Guitar - Exitlude (Chords)",
+    "url": "https://tabs.ultimate-guitar.com/tab/the-killers/exitlude-chords-418416",
+    "description": "Chord chart."
+  },
+  {
+    "title": "Google Drive Folder (1aHkcH...)",
+    "url": "https://drive.google.com/drive/folders/1aHkcHT8JXQ4Y-c8Zpr1iQ3t-50gHI0HA",
+    "description": "Drive folder."
+  },
+  {
+    "title": "Google Sheet (1Ujcv0m... gid=1908962333)",
+    "url": "https://docs.google.com/spreadsheets/d/1Ujcv0m0yR4CAl-Cd89iUJIK0JmrrAHgTcR7wBdpofek/edit?gid=1908962333#gid=1908962333",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1h91Kj3... gid=1386909782)",
+    "url": "https://docs.google.com/spreadsheets/d/1h91Kj312HbLtHFEIhZlQatbkfn3Uc8LQyqRKAy73oiw/edit?gid=1386909782#gid=1386909782",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Doc (1gTk5DI...)",
+    "url": "https://docs.google.com/document/d/1gTk5DIJyM_mHzV0_AJtsJ3tk_jRA81F_dIlBus8ei4Q/edit?tab=t.0#heading=h.gzv8jpwf5kg6",
+    "description": "Google Docs document."
+  },
+  {
+    "title": "CT DSS SNAP - Apply",
+    "url": "https://portal.ct.gov/dss/snap/supplemental-nutrition-assistance-program---snap/apply?language=en_US",
+    "description": "CT SNAP application page."
+  },
+  {
+    "title": "CT DRS eServices",
+    "url": "https://drs.ct.gov/eservices/_/",
+    "description": "CT Department of Revenue Services eServices."
+  },
+  {
+    "title": "CT DRS eServices - Account",
+    "url": "https://drs.ct.gov/eservices/_/#38",
+    "description": "CT DRS eServices (account view)."
+  },
+  {
+    "title": "Access Health CT",
+    "url": "https://www.accesshealthct.com/",
+    "description": "Connecticut health insurance marketplace."
+  },
+  {
+    "title": "Elm Shakespeare - Midsummer",
+    "url": "https://elmshakespeare.org/in-the-park/midsummer",
+    "description": "Elm Shakespeare in the Park: A Midsummer Night’s Dream."
+  },
+  {
+    "title": "Downtown New Haven - Movies",
+    "url": "https://www.downtownnewhaven.com/movies",
+    "description": "Downtown NHV movie events and schedules."
+  },
+  {
+    "title": "Space Ballroom - Spanish Love Songs",
+    "url": "https://spaceballroom.com/info-page-sg/e/spanish-love-songs-1538382656939/",
+    "description": "Event info at Space Ballroom."
+  },
+  {
+    "title": "Gryphon's Pub",
+    "url": "https://gryphonspub.com/",
+    "description": "Yale graduate student pub."
+  },
+  {
+    "title": "Wintergreen Lake Boat Launch",
+    "url": "https://portal.ct.gov/deep/boating/boat-launches/wintergreen-lake-boat-launch",
+    "description": "CT DEEP: Wintergreen Lake boat launch info."
+  },
+  {
+    "title": "College Street Music Hall",
+    "url": "https://collegestreetmusichall.com/",
+    "description": "Venue and events in New Haven."
+  },
+  {
+    "title": "Eventbrite - Peach Pit",
+    "url": "https://www.eventbrite.com/e/peach-pit-tickets-1355223793849",
+    "description": "Event listing for Peach Pit."
+  },
+  {
+    "title": "Firehouse 12",
+    "url": "https://firehouse12.com/",
+    "description": "Music venue and recording studio."
+  },
+  {
+    "title": "Archive.org - Greatest Speeches of the 20th Century",
+    "url": "https://archive.org/details/Greatest_Speeches_of_the_20th_Century",
+    "description": "Audio collection on Internet Archive."
+  },
+  {
+    "title": "Dark Wave Water Ocean GIF",
+    "url": "https://bestanimations.com/media/water/185829572dark-wave-water-ocean-gif.gif",
+    "description": "Animated ocean waves."
+  },
+  {
+    "title": "Rollernews - Obsolete (2024/07/21)",
+    "url": "https://www.rollernews.com/2024/07/21/obsolete/",
+    "description": "Inline skating article."
+  },
+  {
+    "title": "YouTube Channel - TallBoyz",
+    "url": "https://www.youtube.com/@tallboyz9336",
+    "description": "YouTube channel."
+  },
+  {
+    "title": "YouTube - Video",
+    "url": "https://www.youtube.com/watch?v=9ECatTPntK4",
+    "description": "YouTube video link."
+  },
+  {
+    "title": "BELLA+CANVAS 3001",
+    "url": "https://www.bellacanvas.com/product/3001/Unisex-Jersey-Short-Sleeve-Tee.html",
+    "description": "Unisex Jersey Short Sleeve Tee."
+  },
+  {
+    "title": "BELLA+CANVAS 3501CVC",
+    "url": "https://www.bellacanvas.com/product/3501CVC/Unisex-Heather-CVC-Long-Sleeve-Tee.html#/",
+    "description": "Unisex Heather CVC Long Sleeve Tee."
+  },
+  {
+    "title": "Vintage Telex Copyette 121 (Standpipe Antiques)",
+    "url": "https://standpipeantiques.com/products/vintage-telex-copyette-121-mono-cassette-electronic-duplicator-716ce?variant=44410673856676&currency=USD&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&srsltid=AfmBOoqkKSzVMD0u9k9DN8eZ3nI-8H2QDqs51abT0LSTM9eATHTilF63oZA&com_cvv=8fb3d522dc163aeadb66e08cd7450cbbdddc64c6cf2e8891f6d48747c6d56d2c",
+    "description": "Vintage cassette duplicator listing."
+  },
+  {
+    "title": "Coinbase Commerce - Balances",
+    "url": "https://beta.commerce.coinbase.com/balances",
+    "description": "Crypto payments balances."
+  },
+  {
+    "title": "BlueVine Dashboard",
+    "url": "https://app.bluevine.com/dashboard/home",
+    "description": "BlueVine account dashboard."
+  },
+  {
+    "title": "Google Sheet (1I2NdFu2...)",
+    "url": "https://docs.google.com/spreadsheets/d/1I2NdFu2DP3_C3o4KP_UxYbK37aBMD89KtOA7alQXE4E/edit#gid=1386834576",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (13v7hlPn...)",
+    "url": "https://docs.google.com/spreadsheets/d/13v7hlPnIEBDEbu8IUgIliLWAUe2U39xplUsE_LmtgaU/edit#gid=1386834576",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1xR7G4_w...)",
+    "url": "https://docs.google.com/spreadsheets/d/1xR7G4_wUzeAQ6wo7CY8gwt1eGL_XHnYrZbjRwcGkkps/edit#gid=1386834576",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1H_itTBG... gid=1933838823)",
+    "url": "https://docs.google.com/spreadsheets/d/1H_itTBGV5QOuXRs4JJ5oAvo3pCXV2iztjydRJc9hwSk/edit#gid=1933838823",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Drive - Priority",
+    "url": "https://drive.google.com/drive/priority",
+    "description": "Drive priority view."
+  },
+  {
+    "title": "Google Sheet (1H_itTBG... drive_web)",
+    "url": "https://docs.google.com/spreadsheets/d/1H_itTBGV5QOuXRs4JJ5oAvo3pCXV2iztjydRJc9hwSk/edit?usp=drive_web&ouid=110390905679009359380",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Kiddle for Kids",
+    "url": "https://kids.kiddle.co/",
+    "description": "Kids encyclopedia."
+  },
+  {
+    "title": "Google Cloud Console - Dashboard",
+    "url": "https://console.cloud.google.com/projectselector2/home/dashboard?_ga=2.95562716.1307466491.1661273624-880634847.1661273624&pli=1",
+    "description": "GCP console home."
+  },
+  {
+    "title": "Google Cloud Console - Create Project",
+    "url": "https://console.cloud.google.com/projectselector2/home/dashboard?_ga=2.95562716.1307466491.1661273624-880634847.1661273624&pli=1&creatingProject=true&organizationId=0",
+    "description": "GCP new project selector."
+  },
+  {
+    "title": "Google Sheet (13TynnIr...)",
+    "url": "https://docs.google.com/spreadsheets/d/13TynnIryWffEleQO2CgB4U6-TYh6t6d9K_qGavRM07M/edit#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1CUXCFRs...)",
+    "url": "https://docs.google.com/spreadsheets/d/1CUXCFRsGo4Kudz51bsoQN-ymU6DkjtI6RHMORBvogz0/edit#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1yS2lfY_...)",
+    "url": "https://docs.google.com/spreadsheets/d/1yS2lfY_0cnoQROWCnH7v8qxwUJkPwAWpnAH77_cg5EE/edit#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (17Am9JoV...)",
+    "url": "https://docs.google.com/spreadsheets/d/17Am9JoV7Z1Ky9zOQsKpibt8eSCglXbULAHyPR3PJ8IA/edit?pli=1#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1bobQ9GE...)",
+    "url": "https://docs.google.com/spreadsheets/d/1bobQ9GER2OBcoDU-KXLm5geP61XaI8PCoCHbW5_9UTA/edit?pli=1#gid=219425270",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1ewO3uSv...)",
+    "url": "https://docs.google.com/spreadsheets/d/1ewO3uSv1YNkipqb-C72zpD8OSjNAgxMMnE_qmAHatmM/edit#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Google Sheet (1h91Kj3... gid=962582506)",
+    "url": "https://docs.google.com/spreadsheets/d/1h91Kj312HbLtHFEIhZlQatbkfn3Uc8LQyqRKAy73oiw/edit#gid=962582506",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Ahoy Radio",
+    "url": "http://radio.ahoy.ooo/",
+    "description": "Ahoy radio stream."
+  },
+  {
+    "title": "Ahoy Home",
+    "url": "https://ahoy.ooo/",
+    "description": "Ahoy site."
+  },
+  {
+    "title": "Radio Ahoy GitHub",
+    "url": "https://radioahoy.github.io/",
+    "description": "Radio Ahoy site."
+  },
+  {
+    "title": "Ahoy ETH",
+    "url": "https://eth.ahoy.ooo/",
+    "description": "Ahoy Ethereum."
+  },
+  {
+    "title": "Ahoy App GitHub Pages",
+    "url": "https://ahoyapp.github.io/",
+    "description": "Ahoy app pages."
+  },
+  {
+    "title": "Notion - Ahoy",
+    "url": "https://www.notion.so/Ahoy-4dc95624124b4255981a93be630395e9",
+    "description": "Notion workspace."
+  },
+  {
+    "title": "AWS S3 - ahoycollection",
+    "url": "https://s3.console.aws.amazon.com/s3/buckets/ahoycollection?region=us-east-2&tab=objects",
+    "description": "S3 bucket objects."
+  },
+  {
+    "title": "Plausible Sites",
+    "url": "https://plausible.io/sites",
+    "description": "Plausible analytics sites."
+  },
+  {
+    "title": "Supabase - Projects",
+    "url": "https://supabase.com/dashboard/projects",
+    "description": "Supabase dashboard projects."
+  },
+  {
+    "title": "Expo Account - alexfromahoy",
+    "url": "https://expo.dev/accounts/alexfromahoy",
+    "description": "Expo account page."
+  },
+  {
+    "title": "AWS S3 - ahoypodcast",
+    "url": "https://s3.console.aws.amazon.com/s3/buckets/ahoypodcast?region=us-east-2&bucketType=general&tab=objects",
+    "description": "S3 bucket objects."
+  },
+  {
+    "title": "Supabase Project (ornjxyco...)",
+    "url": "https://supabase.com/dashboard/project/ornjxycoizoybvdhhowp",
+    "description": "Supabase project dashboard."
+  },
+  {
+    "title": "Google Play Console - Release",
+    "url": "https://play.google.com/console/u/0/developers/8505496272746894967/app/4972239325012047495/tracks/4697371954282067944/releases/1/prepare",
+    "description": "Play Console app release."
+  },
+  {
+    "title": "Google Play Console - Apps",
+    "url": "https://play.google.com/console/u/0/developers/8505496272746894967/app-list",
+    "description": "Play Console apps list."
+  },
+  {
+    "title": "PageSpeed Insights - Ahoy",
+    "url": "https://pagespeed.web.dev/analysis/https-ahoy-ooo-ahoyApp-www-index-html/u1lfxfi33j?form_factor=mobile",
+    "description": "Performance analysis."
+  },
+  {
+    "title": "Pingdom Tools",
+    "url": "https://tools.pingdom.com/#6326550563000000",
+    "description": "Website speed test."
+  },
+  {
+    "title": "LegalZoom Account",
+    "url": "https://www.legalzoom.com/my/account/fc1e1e53-76f8-4c90-8609-253d0c1f2e22/legal",
+    "description": "LegalZoom account page."
+  },
+  {
+    "title": "CFGNH - Basic Needs Fund",
+    "url": "https://www.cfgnh.org/leading-on-issues/basic-needs-fund",
+    "description": "Community fund information."
+  },
+  {
+    "title": "MassGIS Map Viewer",
+    "url": "https://massgis.maps.arcgis.com/apps/OnePane/basicviewer/index.html?appid=47689963e7bb4007961676ad9fc56ae9",
+    "description": "ArcGIS map viewer."
+  },
+  {
+    "title": "CodePen - OJRNbZp",
+    "url": "https://codepen.io/aybukeceylan/pen/OJRNbZp",
+    "description": "CodePen demo."
+  },
+  {
+    "title": "Super Cinemafi",
+    "url": "https://super-cinemafi.github.io/",
+    "description": "Cinemafi site."
+  },
+  {
+    "title": "Linear - Cinemafi team",
+    "url": "https://linear.app/cinemafi/team/CFI/all",
+    "description": "Linear workspace."
+  },
+  {
+    "title": "Linear - Ahoy project",
+    "url": "https://linear.app/ahoy-indie-media/project/v24-1839e99d20bd",
+    "description": "Linear project view."
+  },
+  {
+    "title": "Firebase Console - Ahoy Indie Media",
+    "url": "https://console.firebase.google.com/project/ahoy-indie-media-da86d/overview",
+    "description": "Firebase project overview."
+  },
+  {
+    "title": "GCS - ahoy-song-collection",
+    "url": "https://console.cloud.google.com/storage/browser/ahoy-song-collection;tab=objects?project=ahoyapp-indie&supportedpurview=project&prefix=&forceOnObjectsSortingFiltering=false",
+    "description": "Cloud Storage bucket."
+  },
+  {
+    "title": "GCS - ahoy-podcast-collection",
+    "url": "https://console.cloud.google.com/storage/browser/ahoy-podcast-collection;tab=objects?forceOnBucketsSortingFiltering=true&project=ahoyapp-indie&supportedpurview=project&prefix=&forceOnObjectsSortingFiltering=false",
+    "description": "Cloud Storage bucket."
+  },
+  {
+    "title": "JSONBin Dashboard",
+    "url": "https://jsonbin.io/app/bins",
+    "description": "JSONBin bins."
+  },
+  {
+    "title": "Ahoy App - Web",
+    "url": "https://ahoy.ooo/ahoyApp/www/index.html",
+    "description": "Ahoy app web entry."
+  },
+  {
+    "title": "Google Sheet (1mPMltjc...)",
+    "url": "https://docs.google.com/spreadsheets/d/1mPMltjcJTcg2qZ9JITtJoAKneR8t9kKdzGbyEr68HQ4/edit#gid=0",
+    "description": "Google Sheets spreadsheet."
+  },
+  {
+    "title": "Gamma - Ahoy Indie Media Coffee House",
+    "url": "https://gamma.app/docs/Ahoy-Indie-Media-Coffee-House-Where-Coffee-Community-and-Creativi-2n7frhuwk9f2ove?mode=present#card-d3oob8gtk1aulbv",
+    "description": "Gamma presentation."
+  },
+  {
+    "title": "eBay Listing",
+    "url": "https://www.ebay.com/itm/134925334145?itmmeta=01J29Q70P12DN970GJZMPE06V1&hash=item1f6a2d3681:g:f9YAAOSw4CdjLUts&itmprp=enc%3AAQAJAAAAwPEjsONyge2rWC2o6MQHczPjiKIibPjVovDV1d3yEGXIwimyQRcalBPhtE3APqboU4fO1gxyC%2BDbchvkcsTRcFNvK%2Fs0reabDvuNjrwmf%2BvHYuDN97oHsUWEDb4uJEnH8WADEGMNSVKL0T3qaXtsel7nzKSQx%2BZKQrk8NFcJkpS3b6Mg3T8L9Hw%2FEXDRxm84u%2Bv3lizk%2FmulJI2HZzPKdg4hVElfe0S8ZMXcd%2B9yT6ZAM0OZQ9UkJ8arkjn258Pgog%3D%3D%7Ctkp%3ABk9SR5CLnLeSZA",
+    "description": "eBay product link."
+  },
+  {
+    "title": "Google Doc (1WVqCMh...)",
+    "url": "https://docs.google.com/document/d/1WVqCMh91rdxF6gSAosJDOQQwEOI3UFJruPeHeKzGaEw/edit",
+    "description": "Google Docs document."
+  },
+  {
+    "title": "Local Ahoy App (Dev)",
+    "url": "http://127.0.0.1:3000/oooAHOYooo.github.io/ahoyApp/www/index.html",
+    "description": "Local development page."
+  },
+  {
+    "title": "Ahoy Workshop - Radio Widget",
+    "url": "https://ahoy.ooo/workshop/radioWidget.html",
+    "description": "Radio widget workshop."
+  },
+  {
+    "title": "AG Babby Cakes - Master Suite",
+    "url": "https://agbabbbycakes.github.io/website/suite/master-suite.html",
+    "description": "Project page."
   }
 ]
