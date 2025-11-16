@@ -7,555 +7,76 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: #e8eaed;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated background particles */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        header h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-            position: relative;
-            display: inline-block;
-        }
-
-        header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #818cf8, transparent);
-            animation: shimmer 2s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        header p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: #9ca3af;
-            font-weight: 300;
-            letter-spacing: 0.02em;
-        }
-
-        /* Telecom Grid */
-        .telecom-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .telecom-button {
-            position: relative;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(99, 102, 241, 0.2);
-            border-radius: 20px;
-            padding: 28px 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .telecom-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .telecom-button:hover::before {
-            left: 100%;
-        }
-
-        .telecom-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .telecom-button:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(99, 102, 241, 0.5);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
-        }
-
-        .telecom-button:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Active/On state */
-        .telecom-button.active {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
-            border-color: rgba(99, 102, 241, 0.6);
-            box-shadow: 
-                0 0 30px rgba(99, 102, 241, 0.4),
-                inset 0 0 20px rgba(99, 102, 241, 0.1);
-        }
-
-        .telecom-button.active .button-indicator {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-
-        /* Button indicator light */
-        .button-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #6366f1;
-            box-shadow: 
-                0 0 10px rgba(99, 102, 241, 0.8),
-                0 0 20px rgba(99, 102, 241, 0.4);
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            animation: pulseLight 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseLight {
-            0%, 100% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.8), 0 0 20px rgba(99, 102, 241, 0.4); }
-            50% { box-shadow: 0 0 15px rgba(99, 102, 241, 1), 0 0 30px rgba(99, 102, 241, 0.6); }
-        }
-
-        .telecom-button.active .button-indicator {
-            animation: pulseLight 1.5s ease-in-out infinite;
-        }
-
-        .button-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .button-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #e8eaed;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .button-description {
-            font-size: 0.85rem;
-            color: #9ca3af;
-            line-height: 1.6;
-            font-weight: 300;
-            margin: 0;
-        }
-
-        .button-icon {
-            display: none;
-        }
-
-        /* Quick links section */
-        .quick-links-section {
-            margin-top: 80px;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #e8eaed;
-            margin-bottom: 32px;
-            text-align: center;
-            letter-spacing: -0.01em;
-        }
-
-        .quick-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .quick-button {
-            position: relative;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            padding: 20px;
-            text-decoration: none;
-            color: #e8eaed;
-            text-align: center;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .quick-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .quick-button:hover::before {
-            left: 100%;
-        }
-
-        .quick-button:hover {
-            transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
-            background: rgba(15, 23, 42, 0.7);
-        }
-
-        .quick-button.active {
-            background: rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.5);
-        }
-
-        /* External links card */
-        .external-links-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(99, 102, 241, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            margin-top: 40px;
-        }
-
-        .external-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-        }
-
-        .link-category {
-            margin-bottom: 32px;
-        }
-
-        .link-category:last-child {
-            margin-bottom: 0;
-        }
-
-        .category-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #818cf8;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.85rem;
-        }
-
-        .link-list {
-            list-style: none;
-        }
-
-        .link-list li {
-            margin-bottom: 8px;
-        }
-
-        .link-list a {
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            display: inline-block;
-        }
-
-        .link-list a:hover {
-            color: #818cf8;
-            transform: translateX(4px);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 80px;
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            color: #9ca3af;
-            font-size: 0.9rem;
-        }
-
-        .footer-date {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
-            color: #818cf8;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-
-            header {
-                margin-bottom: 50px;
-            }
-
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            header p {
-                font-size: 1rem;
-            }
-
-            .telecom-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .telecom-button {
-                padding: 24px 20px;
-                min-height: auto;
-            }
-
-            .button-title {
-                font-size: 1.2rem;
-                margin-bottom: 10px;
-            }
-
-            .button-description {
-                font-size: 0.9rem;
-                line-height: 1.6;
-            }
-
-            .quick-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .quick-button {
-                padding: 18px;
-                font-size: 1rem;
-            }
-
-            .external-links-card {
-                padding: 30px 20px;
-            }
-
-            .external-links-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .category-title {
-                font-size: 0.8rem;
-                margin-bottom: 16px;
-            }
-
-            .link-list a {
-                font-size: 0.95rem;
-                padding: 4px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 24px 16px;
-            }
-
-            header {
-                margin-bottom: 40px;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .telecom-button {
-                padding: 20px 16px;
-            }
-
-            .button-title {
-                font-size: 1.1rem;
-            }
-
-            .button-description {
-                font-size: 0.85rem;
-            }
-
-            .external-links-card {
-                padding: 24px 16px;
-            }
-        }
-
-        /* Stagger animation for grid items */
-        .telecom-button:nth-child(1) { animation-delay: 0.1s; }
-        .telecom-button:nth-child(2) { animation-delay: 0.2s; }
-        .telecom-button:nth-child(3) { animation-delay: 0.3s; }
-        .telecom-button:nth-child(4) { animation-delay: 0.4s; }
-        .telecom-button:nth-child(5) { animation-delay: 0.5s; }
-        .telecom-button:nth-child(6) { animation-delay: 0.6s; }
-        </style>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="design-system.css">
     </head>
     <body>
-        <div class="container">
+        <div class="container home">
             <header>
                 <h1>Personal Hub</h1>
                 <p>Your personal life management system</p>
             </header>
 
             <div class="telecom-grid">
-                <a href="subpages/bookmarks.html" class="telecom-button" data-button="bookmarks">
+                <a href="subpages/bookmarks.html" class="telecom-button"
+                    data-button="bookmarks">
                     <div class="button-indicator"></div>
                     <div class="button-content">
                         <h2 class="button-title">Bookmarks</h2>
-                        <p class="button-description">Your collection of useful websites, resources, and references</p>
+                        <p class="button-description">Your collection of useful
+                            websites, resources, and references</p>
                     </div>
                 </a>
 
-                <a href="subpages/goals.html" class="telecom-button" data-button="goals">
+                <a href="subpages/goals.html" class="telecom-button"
+                    data-button="goals">
                     <div class="button-indicator"></div>
                     <div class="button-content">
                         <h2 class="button-title">Goals</h2>
-                        <p class="button-description">Track your personal and professional goals with categories</p>
+                        <p class="button-description">Track your personal and
+                            professional goals with categories</p>
                     </div>
                 </a>
 
-                <a href="subpages/jobs.html" class="telecom-button" data-button="jobs">
+                <a href="subpages/jobs.html" class="telecom-button"
+                    data-button="jobs">
                     <div class="button-indicator"></div>
                     <div class="button-content">
                         <h2 class="button-title">Jobs</h2>
-                        <p class="button-description">After-school job opportunities in AI, STEM, and education</p>
+                        <p class="button-description">After-school job
+                            opportunities in AI, STEM, and education</p>
                     </div>
                 </a>
 
-                <a href="subpages/writing.html" class="telecom-button" data-button="writing">
+                <a href="subpages/writing.html" class="telecom-button"
+                    data-button="writing">
                     <div class="button-indicator"></div>
                     <div class="button-content">
                         <h2 class="button-title">Writing</h2>
-                        <p class="button-description">Active writing projects including fiction and screenplays</p>
+                        <p class="button-description">Active writing projects
+                            including fiction and screenplays</p>
                     </div>
                 </a>
 
-                <a href="subpages/project-sitemap.html" class="telecom-button" data-button="sitemap">
+                <a href="subpages/project-sitemap.html" class="telecom-button"
+                    data-button="sitemap">
                     <div class="button-indicator"></div>
                     <div class="button-content">
                         <h2 class="button-title">Project Sitemap</h2>
-                        <p class="button-description">Visual hierarchy of all projects and ideas</p>
+                        <p class="button-description">Visual hierarchy of all
+                            projects and ideas</p>
                     </div>
                 </a>
 
-                <a href="subpages/stats.html" class="telecom-button" data-button="stats">
+                <a href="subpages/stats.html" class="telecom-button"
+                    data-button="stats">
                     <div class="button-indicator"></div>
                     <div class="button-content">
                         <h2 class="button-title">Statistics</h2>
-                        <p class="button-description">View insights and analytics about your life data</p>
+                        <p class="button-description">View insights and
+                            analytics about your life data</p>
                     </div>
                 </a>
             </div>
@@ -563,59 +84,93 @@
             <div class="quick-links-section">
                 <h2 class="section-title">Quick Access</h2>
                 <div class="quick-grid">
-                    <a href="subpages/2025-goals-overview-v2.html" class="quick-button" data-quick="goals-2025">2025 Goals</a>
-                    <a href="subpages/film-products.html" class="quick-button" data-quick="film">Film Products</a>
-                    <a href="subpages/quick-access.html" class="quick-button" data-quick="quick">Quick Access</a>
-                    <a href="subpages/reminders.html" class="quick-button" data-quick="reminders">Reminders & Upkeep</a>
+                    <a href="subpages/2025-goals-overview-v2.html"
+                        class="quick-button" data-quick="goals-2025">2025
+                        Goals</a>
+                    <a href="subpages/quick-access.html" class="quick-button"
+                        data-quick="quick">Quick Access</a>
+                    <a href="subpages/reminders.html" class="quick-button"
+                        data-quick="reminders">Reminders & Upkeep</a>
                 </div>
 
                 <div class="external-links-card">
                     <div class="external-links-grid">
                         <div class="link-category">
-                            <h3 class="category-title">Active Netlify Projects</h3>
+                            <h3 class="category-title">Active Netlify
+                                Projects</h3>
                             <ul class="link-list">
-                                <li><a href="https://ag-film.netlify.app/" target="_blank" rel="noopener">Film</a></li>
-                                <li><a href="https://agpo.netlify.app" target="_blank" rel="noopener">Pecans</a></li>
-                                <li><a href="https://agscout.netlify.app" target="_blank" rel="noopener">Land Scout</a></li>
-                                <li><a href="https://barnbarn.netlify.app" target="_blank" rel="noopener">Barnacle</a></li>
+                                <li><a href="https://ag-film.netlify.app/"
+                                        target="_blank"
+                                        rel="noopener">Film</a></li>
+                                <li><a href="https://agpo.netlify.app"
+                                        target="_blank"
+                                        rel="noopener">Pecans</a></li>
+                                <li><a href="https://agscout.netlify.app"
+                                        target="_blank" rel="noopener">Land
+                                        Scout</a></li>
+                                <li><a href="https://barnbarn.netlify.app"
+                                        target="_blank"
+                                        rel="noopener">Barnacle</a></li>
                             </ul>
                         </div>
 
                         <div class="link-category">
                             <h3 class="category-title">Render Apps</h3>
                             <ul class="link-list">
-                                <li><a href="https://app.ahoy.ooo" target="_blank" rel="noopener">Ahoy Platform</a></li>
-                                <li><a href="https://newhaven.ahoy.ooo" target="_blank" rel="noopener">Ahoy New Haven</a></li>
+                                <li><a href="https://app.ahoy.ooo"
+                                        target="_blank" rel="noopener">Ahoy
+                                        Platform</a></li>
+                                <li><a href="https://newhaven.ahoy.ooo"
+                                        target="_blank" rel="noopener">Ahoy New
+                                        Haven</a></li>
+                                <li><a href="https://cpc-web-app.onrender.com/"
+                                        target="_blank" rel="noopener">CPC Web
+                                        App</a></li>
                             </ul>
                         </div>
 
                         <div class="link-category">
                             <h3 class="category-title">Teaching</h3>
                             <ul class="link-list">
-                                <li><a href="https://mrg-stem.netlify.app" target="_blank" rel="noopener">MRG STEM</a></li>
+                                <li><a href="https://mrg-stem.netlify.app"
+                                        target="_blank" rel="noopener">MRG
+                                        STEM</a></li>
                             </ul>
                         </div>
 
                         <div class="link-category">
                             <h3 class="category-title">Public Portfolio</h3>
                             <ul class="link-list">
-                                <li><a href="https://alexgonzalez.ooo" target="_blank" rel="noopener">alexgonzalez.ooo</a></li>
+                                <li><a href="https://alexgonzalez.ooo"
+                                        target="_blank"
+                                        rel="noopener">alexgonzalez.ooo</a></li>
                             </ul>
                         </div>
 
                         <div class="link-category">
                             <h3 class="category-title">Websites I Maintain</h3>
                             <ul class="link-list">
-                                <li><a href="https://cpcnewhaven.org" target="_blank" rel="noopener">CPC</a></li>
-                                <li><a href="https://ape-market.netlify.app" target="_blank" rel="noopener">Firebird (Ape Redesign)</a></li>
+                                <li><a href="https://cpcnewhaven.org"
+                                        target="_blank"
+                                        rel="noopener">CPC</a></li>
+                                <li><a href="https://ape-market.netlify.app"
+                                        target="_blank" rel="noopener">Firebird
+                                        (Ape Redesign)</a></li>
                             </ul>
                         </div>
 
                         <div class="link-category">
-                            <h3 class="category-title">Professional Projects</h3>
+                            <h3 class="category-title">Professional
+                                Projects</h3>
                             <ul class="link-list">
-                                <li><a href="https://github.com/oooAHOYooo/aracastone" target="_blank" rel="noopener">ArcaStone</a></li>
-                                <li><a href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html" target="_blank" rel="noopener">Zuki</a></li>
+                                <li><a
+                                        href="https://github.com/oooAHOYooo/aracastone"
+                                        target="_blank"
+                                        rel="noopener">ArcaStone</a></li>
+                                <li><a
+                                        href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html"
+                                        target="_blank"
+                                        rel="noopener">Zuki</a></li>
                             </ul>
                         </div>
                     </div>
