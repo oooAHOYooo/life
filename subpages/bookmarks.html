@@ -36,11 +36,30 @@
             async loadData() {
                 try {
                     const response = await fetch('../data/bookmarks.json');
-                    this.bookmarks = await response.json();
+                    const data = await response.json();
+                    this.bookmarks = this.dedupeAndSort(data);
                 } catch (error) {
                     console.error('Error loading bookmarks:', error);
                     this.showError('Failed to load bookmarks data.');
                 }
+            }
+
+            dedupeAndSort(items) {
+                const byUrl = new Map();
+                items.forEach(item => {
+                    const key = String(item.url || '').trim().toLowerCase();
+                    if (!key) return;
+                    if (!byUrl.has(key)) {
+                        byUrl.set(key, item);
+                    }
+                });
+                const unique = Array.from(byUrl.values());
+                unique.sort((a, b) => {
+                    const at = (a.title || a.url || '').toLowerCase();
+                    const bt = (b.title || b.url || '').toLowerCase();
+                    return at.localeCompare(bt);
+                });
+                return unique;
             }
 
             renderBookmarks() {
