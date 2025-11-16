@@ -29,6 +29,6 @@ The main LifeOS system now consists of:
 - `stats.html` - Statistics overview
 - `quick-access.html` - Quick access links
 - `active-projects.html` - Active projects overview
-- `2025-goals-overview-v2.html` + `2025-goals-data.json` - Goals tracking system
+<!-- Removed: 2025 goals overview and data files were deleted from active site -->
 - `styles.css` - Main stylesheet
 - `data/` - Writing drafts and data files

@@ -49,4 +49,125 @@
     "url": "https://nodejs.org/docs/",
     "description": "Official Node.js documentation and API reference."
   }
+  ,
+  {
+    "title": "Zuki Portfolio - Hello Zuki",
+    "url": "https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html",
+    "description": "Portfolio: Zuki overview page."
+  },
+  {
+    "title": "CRM Demo (alexgonzalez.ooo)",
+    "url": "https://alexgonzalez.ooo/crm/src/index.html",
+    "description": "CRM prototype UI."
+  },
+  {
+    "title": "CPC I-9 Page",
+    "url": "https://cpcnewhaven.org/cpc-up/i-9-2.html",
+    "description": "CPC New Haven I-9 info."
+  },
+  {
+    "title": "Alex Gonzalez Share",
+    "url": "https://alexgonzalez.ooo/share/",
+    "description": "Shared files hub."
+  },
+  {
+    "title": "New Haven Digital Creator (Gamma)",
+    "url": "https://new-haven-digital-creato-f0yx15k.gamma.site/",
+    "description": "Gamma site for New Haven Digital Creator."
+  },
+  {
+    "title": "Update CPC (Render)",
+    "url": "https://update-cpc.onrender.com/",
+    "description": "CPC content update app."
+  },
+  {
+    "title": "Update Ahoy (Render)",
+    "url": "https://update-ahoy.onrender.com/",
+    "description": "Ahoy content update app."
+  },
+  {
+    "title": "Newoy (Render)",
+    "url": "https://newoy.onrender.com/",
+    "description": "Newoy app (Render)."
+  },
+  {
+    "title": "New Haven Mini Market (Render)",
+    "url": "https://new-haven-mini-market.onrender.com/",
+    "description": "Mini market demo app."
+  },
+  {
+    "title": "Product Builder (Hackees)",
+    "url": "https://alexgonzalez.ooo/host/hackees/product-builder_2.html",
+    "description": "Hosted product builder prototype."
+  },
+  {
+    "title": "Ahoy Super Autumn (Render)",
+    "url": "https://ahoy-super-autumn.onrender.com/",
+    "description": "Ahoy seasonal deployment."
+  },
+  {
+    "title": "Ahoy Super Autumn (GitHub)",
+    "url": "https://github.com/oooAHOYooo/ahoy-super-autumn",
+    "description": "Repository for Ahoy Super Autumn."
+  },
+  {
+    "title": "Montauk Full Splash - Wine",
+    "url": "https://alexgonzalez.ooo/host/montauk/full-splash-wine.html",
+    "description": "Montauk splash page."
+  },
+  {
+    "title": "Ahoy Unity (GitHub)",
+    "url": "https://github.com/oooAHOYooo/AhoyUnity",
+    "description": "Unity client for Ahoy."
+  },
+  {
+    "title": "Barnacle Ballast (Render)",
+    "url": "https://barnacle-ballast.onrender.com/",
+    "description": "Barnacle Ballast app."
+  },
+  {
+    "title": "MRG STEM (Render)",
+    "url": "https://mrgonzalezstem.onrender.com/",
+    "description": "STEM site deployment."
+  },
+  {
+    "title": "Squirrel Rush (Render)",
+    "url": "https://squirrel-rush.onrender.com/",
+    "description": "Squirrel Rush game/app."
+  },
+  {
+    "title": "Crew Dashboard (Local)",
+    "url": "http://127.0.0.1:5002/crew/dashboard",
+    "description": "Local development dashboard."
+  },
+  {
+    "title": "Ahoy Little Platform (Render)",
+    "url": "https://ahoy-little-platform.onrender.com/",
+    "description": "Ahoy lightweight platform."
+  },
+  {
+    "title": "Scoultalina (Render)",
+    "url": "https://scoultalina.onrender.com/",
+    "description": "Scoultalina deployment."
+  },
+  {
+    "title": "AG Scout (Netlify)",
+    "url": "https://agscout.netlify.app/",
+    "description": "Land scouting app."
+  },
+  {
+    "title": "AG Life (Netlify)",
+    "url": "https://ag-life.netlify.app/",
+    "description": "LifeOS Netlify deployment."
+  },
+  {
+    "title": "Golden Sfogliatella (Netlify)",
+    "url": "https://golden-sfogliatella-f11934.netlify.app/",
+    "description": "Netlify site for Golden Sfogliatella."
+  },
+  {
+    "title": "Netlify Deploys - Golden Sfogliatella",
+    "url": "https://app.netlify.com/projects/golden-sfogliatella-f11934/deploys",
+    "description": "Netlify deploy dashboard."
+  }
 ]
