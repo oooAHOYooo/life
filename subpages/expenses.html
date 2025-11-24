@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expenses - Last 3 Months</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+        <link rel="stylesheet" href="../design-system.css">
+        <style>
+        .chart {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            align-items: end;
+            height: 220px;
+            margin-top: 10px;
+        }
+        .bar {
+            background: linear-gradient(180deg, rgba(99,102,241,0.6), rgba(99,102,241,0.2));
+            border: 1px solid rgba(99,102,241,0.35);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+        }
+        .bar-label {
+            text-align: center;
+            margin-top: 6px;
+            color: #c7d2fe;
+            font-size: 0.9rem;
+        }
+        .bar-value {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(99,102,241,0.35);
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            color: #e8eaed;
+            white-space: nowrap;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .muted-sm { color:#9ca3af; font-size:0.9rem; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to LifeOS</a>
+            <header>
+                <h1>Credit Card Expenses (Last 3 Months)</h1>
+                <p class="muted">Overview, month-over-month comparison, and key insights</p>
+            </header>
+
+            <div class="card">
+                <div id="stats" class="grid-3" style="margin-bottom:12px;"></div>
+                <div id="chartBlock">
+                    <div id="chart" class="chart"></div>
+                    <div id="labels" class="grid-3" style="margin-top:6px;"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin:0 0 8px 0;">Detailed Comparison</h3>
+                <div id="comparison" class="grid-3"></div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin:0 0 8px 0;">Latest Statement — Nov 2025</h3>
+                <div class="grid-3">
+                    <div class="metric">
+                        <div class="label">Statement Period</div>
+                        <div class="value">2025-10-24 → 2025-11-23</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Purchases</div>
+                        <div class="value">$2,124.61</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">New Balance</div>
+                        <div class="value">$306.21</div>
+                    </div>
+                </div>
+                <div class="grid-3" style="margin-top:8px;">
+                    <div class="metric">
+                        <div class="label">Minimum Due</div>
+                        <div class="value">$35.00</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Due Date</div>
+                        <div class="value">2025-12-20</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Source</div>
+                        <div class="value">Amazon Chase (acct •1755)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin:0 0 8px 0;">Statement — Aug 2025</h3>
+                <div class="grid-3">
+                    <div class="metric">
+                        <div class="label">Statement Period</div>
+                        <div class="value">2025-07-24 → 2025-08-23</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Purchases</div>
+                        <div class="value">$2,155.62</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">New Balance</div>
+                        <div class="value">$169.49</div>
+                    </div>
+                </div>
+                <div class="grid-3" style="margin-top:8px;">
+                    <div class="metric">
+                        <div class="label">Minimum Due</div>
+                        <div class="value">$35.00</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Due Date</div>
+                        <div class="value">2025-09-20</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Source</div>
+                        <div class="value">Amazon Chase (acct •1755)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin:0 0 8px 0;">How to update</h3>
+                <p class="muted-sm" style="margin:0 0 6px 0;">Edit <span class="mono">data/expenses.json</span> to set your totals for the last 3 months. Example:</p>
+                <div class="sitemap-code" style="white-space:pre; font-size: 12px; margin-top:8px;">
+{ "months": [
+  { "month": "2025-09", "total": 0 },
+  { "month": "2025-10", "total": 0 },
+  { "month": "2025-11", "total": 0 }
+] }
+                </div>
+            </div>
+        </div>
+
+        <script>
+        const EXPENSES_URL = '../data/expenses.json';
+
+        class ExpensesPage {
+            constructor() {
+                this.months = [];
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.render();
+            }
+
+            async loadData() {
+                try {
+                    const res = await fetch(EXPENSES_URL);
+                    if (!res.ok) throw new Error(res.statusText);
+                    const data = await res.json();
+                    // Expect last 3 months in chronological or any order; sort by month asc
+                    this.months = (data.months || []).slice(0, 3).sort((a, b) => (a.month || '').localeCompare(b.month || ''));
+                } catch (e) {
+                    console.error('Failed to load expenses data:', e);
+                    this.months = this.fallbackMonths();
+                }
+                // If less than 3 provided, pad with zeros for previous months
+                while (this.months.length < 3) {
+                    this.months.unshift({ month: this.prevMonth(this.months[0]?.month), total: 0 });
+                }
+            }
+
+            fallbackMonths() {
+                // Generate last 3 months based on today with zeros
+                const months = [];
+                const today = new Date();
+                for (let i = 2; i >= 0; i--) {
+                    const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                    const m = String(d.getMonth() + 1).padStart(2, '0');
+                    months.push({ month: `${d.getFullYear()}-${m}`, total: 0 });
+                }
+                return months;
+            }
+
+            prevMonth(ym) {
+                if (!ym || !/^\d{4}-\d{2}$/.test(ym)) {
+                    const d = new Date();
+                    const pm = new Date(d.getFullYear(), d.getMonth() - 1, 1);
+                    return `${pm.getFullYear()}-${String(pm.getMonth()+1).padStart(2,'0')}`;
+                }
+                const [y, m] = ym.split('-').map(n => Number(n));
+                const date = new Date(y, m - 2, 1); // previous month
+                return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
+            }
+
+            render() {
+                this.renderStats();
+                this.renderChart();
+                this.renderComparison();
+            }
+
+            renderStats() {
+                const stats = document.getElementById('stats');
+                const totals = this.months.map(m => Number(m.total || 0));
+                const sum = totals.reduce((a, b) => a + b, 0);
+                const avg = sum / (totals.length || 1);
+                const maxVal = Math.max(...totals);
+                const maxIdx = totals.indexOf(maxVal);
+                const maxMonth = this.months[maxIdx]?.month || '—';
+
+                stats.innerHTML = `
+                    <div class="metric">
+                        <div class="label">3-Month Total</div>
+                        <div class="value">${this.formatCurrency(sum)}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Monthly Average</div>
+                        <div class="value">${this.formatCurrency(avg)}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">Highest Month</div>
+                        <div class="value">${this.escape(maxMonth)} • ${this.formatCurrency(maxVal)}</div>
+                    </div>
+                `;
+            }
+
+            renderChart() {
+                const chart = document.getElementById('chart');
+                const max = Math.max(...this.months.map(m => Number(m.total || 0)), 1);
+                chart.innerHTML = this.months.map(m => {
+                    const t = Number(m.total || 0);
+                    const h = Math.round((t / max) * 100);
+                    return `
+                        <div class="bar" style="height:${h}%;"><div class="bar-value">${this.formatCurrency(t)}</div></div>
+                    `;
+                }).join('');
+                // Labels
+                const labels = document.getElementById('labels');
+                labels.innerHTML = this.months.map(m => `<div class="bar-label">${this.escape(m.month)}</div>`).join('');
+            }
+
+            renderComparison() {
+                const comp = document.getElementById('comparison');
+                const [m1, m2, m3] = this.months;
+                const rows = [];
+                // MoM deltas (m2 vs m1, m3 vs m2)
+                rows.push(this.renderMoM(m1, m2));
+                rows.push(this.renderMoM(m2, m3));
+                // Overall change (m3 vs m1)
+                rows.push(this.renderOverall(m1, m3));
+                comp.innerHTML = rows.join('');
+            }
+
+            renderMoM(prev, curr) {
+                const prevVal = Number(prev?.total || 0);
+                const currVal = Number(curr?.total || 0);
+                const diff = currVal - prevVal;
+                const pct = prevVal === 0 ? (currVal > 0 ? 100 : 0) : (diff / prevVal) * 100;
+                const direction = diff > 0 ? '↑' : (diff < 0 ? '↓' : '→');
+                return `
+                    <div class="metric">
+                        <div class="label">${this.escape(prev?.month || '—')} → ${this.escape(curr?.month || '—')}</div>
+                        <div class="value">${direction} ${this.formatCurrency(Math.abs(diff))} (${pct.toFixed(1)}%)</div>
+                    </div>
+                `;
+            }
+
+            renderOverall(first, last) {
+                const a = Number(first?.total || 0);
+                const b = Number(last?.total || 0);
+                const diff = b - a;
+                const pct = a === 0 ? (b > 0 ? 100 : 0) : (diff / a) * 100;
+                const direction = diff > 0 ? '↑' : (diff < 0 ? '↓' : '→');
+                return `
+                    <div class="metric">
+                        <div class="label">Overall: ${this.escape(first?.month || '—')} → ${this.escape(last?.month || '—')}</div>
+                        <div class="value">${direction} ${this.formatCurrency(Math.abs(diff))} (${pct.toFixed(1)}%)</div>
+                    </div>
+                `;
+            }
+
+            formatCurrency(n) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n || 0);
+            }
+
+            escape(text) {
+                const div = document.createElement('div');
+                div.textContent = String(text ?? '');
+                return div.innerHTML;
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => new ExpensesPage());
+        } else {
+            new ExpensesPage();
+        }
+        </script>
+    </body>
+    </html>
+
+

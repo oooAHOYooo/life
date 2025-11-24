@@ -16,7 +16,8 @@
         { "name": "OpenAI", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 14 days", "dueInDays": 14, "amount": 21.27 },
         { "name": "Paddle.net", "frequency": "Quarterly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 2 months", "dueInDays": 60, "amount": 54.95 },
         { "name": "Spotify", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "nextDueOn": "2025-12-11", "amount": 0, "notes": "Cancelled on 2025-11-24. Plan will change to Spotify Free on 2025-12-11." },
-        { "name": "Squarespace", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 16 days", "dueInDays": 16, "amount": 18.21 }
+        { "name": "Squarespace", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 16 days", "dueInDays": 16, "amount": 18.21 },
+        { "name": "Render.com (Ahoy web services)", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "amount": 14.00, "notes": "Workspace: Ahoy Indie Media. Services for app.ahoy.ooo and newhaven.ahoy.ooo. Month to date $11.16; projected $14.00; paid via Visa ••1755." }
       ]
     },
     {
