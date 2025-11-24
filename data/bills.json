@@ -7,15 +7,15 @@
       "items": [
         { "name": "Adobe Creative Cloud", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 2 days", "dueInDays": 2, "amount": 24.45 },
         { "name": "Amazon Digital Services", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 24 days", "dueInDays": 24, "amount": 3.18 },
-        { "name": "ExpressVPN", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 11 days", "dueInDays": 11, "amount": 12.95 },
+        { "name": "ExpressVPN", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "nextDueOn": "2025-12-22", "amount": 0, "notes": "Cancelled on 2025-11-24. Service remains active until 2025-12-22; no renewal after that." },
         { "name": "Github", "frequency": "Monthly", "account": "Chase ••5316", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 3 days", "dueInDays": 3, "amount": 4.25 },
         { "name": "Google One", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "4 days ago", "dueInDays": -4, "amount": 4.32, "notes": "2 subscriptions" },
         { "name": "Google Workspace", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 20 days", "dueInDays": 20, "amount": 8.93 },
-        { "name": "HBO Max", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 10 days", "dueInDays": 10, "amount": 10.62 },
-        { "name": "Medium", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 24 days", "dueInDays": 24, "amount": 5.00 },
+        { "name": "Max (Basic With Ads)", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "nextDueOn": "2025-12-21", "amount": 5.49, "notes": "Offer $5.49/month for 6 months starts 2025-12-21. You can cancel this plan change before your next billing date." },
+        { "name": "Medium", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "nextDueOn": "2025-12-05", "amount": 0, "notes": "Cancelled on 2025-11-24. Benefits continue through 2025-12-05. No renewal after that." },
         { "name": "OpenAI", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 14 days", "dueInDays": 14, "amount": 21.27 },
         { "name": "Paddle.net", "frequency": "Quarterly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 2 months", "dueInDays": 60, "amount": 54.95 },
-        { "name": "Spotify", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 29 days", "dueInDays": 29, "amount": 11.99, "notes": "Cancelled on 2025-11-24. Plan will change to Spotify Free on 2025-12-11." },
+        { "name": "Spotify", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "nextDueOn": "2025-12-11", "amount": 0, "notes": "Cancelled on 2025-11-24. Plan will change to Spotify Free on 2025-12-11." },
         { "name": "Squarespace", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 16 days", "dueInDays": 16, "amount": 18.21 }
       ]
     },

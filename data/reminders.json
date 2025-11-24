@@ -44,6 +44,48 @@
     "actionPolicy": "at_or_after_date",
     "actionOnOrAfter": "2025-12-11",
     "notifyDaysBefore": 2
+  },
+  {
+    "id": "medium-membership",
+    "category": "subscription",
+    "name": "Medium Membership",
+    "vendor": "Medium",
+    "planName": "Membership",
+    "billingPeriod": "Monthly",
+    "url": "https://medium.com/me/settings",
+    "notes": "Cancelled on 2025-11-24. Membership benefits continue through 2025-12-05.",
+    "desiredAction": "Confirm cancellation complete / no renewal",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2025-12-05",
+    "notifyDaysBefore": 2
+  },
+  {
+    "id": "max-offer-change",
+    "category": "subscription",
+    "name": "Max (Basic With Ads)",
+    "vendor": "Max",
+    "planName": "Basic With Ads (Monthly)",
+    "billingPeriod": "Monthly",
+    "url": "https://www.max.com/account",
+    "notes": "Offer $5.49/month for 6 months. Starts on next billing date: 2025-12-21. You can cancel this plan change before the next billing date.",
+    "desiredAction": "Confirm plan change or cancel before billing date",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2025-12-19",
+    "notifyDaysBefore": 2
+  },
+  {
+    "id": "expressvpn",
+    "category": "subscription",
+    "name": "ExpressVPN",
+    "vendor": "ExpressVPN",
+    "planName": "Monthly",
+    "billingPeriod": "Monthly",
+    "url": "https://www.expressvpn.com/sign-in",
+    "notes": "Cancelled on 2025-11-24. Service remains active until 2025-12-22; Keys password manager continues with apps installed.",
+    "desiredAction": "Confirm cancellation complete / remove auto-renew",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2025-12-22",
+    "notifyDaysBefore": 2
   }
 ]
 
