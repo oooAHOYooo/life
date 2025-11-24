@@ -15,7 +15,7 @@
         { "name": "Medium", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 24 days", "dueInDays": 24, "amount": 5.00 },
         { "name": "OpenAI", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 14 days", "dueInDays": 14, "amount": 21.27 },
         { "name": "Paddle.net", "frequency": "Quarterly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 2 months", "dueInDays": 60, "amount": 54.95 },
-        { "name": "Spotify", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 29 days", "dueInDays": 29, "amount": 11.99 },
+        { "name": "Spotify", "frequency": "Monthly", "account": "Chase ••1755", "assumedUsername": "ahoy.mr.ag@gmail.com", "dueIn": "in 29 days", "dueInDays": 29, "amount": 11.99, "notes": "Cancelled on 2025-11-24. Plan will change to Spotify Free on 2025-12-11." },
         { "name": "Squarespace", "frequency": "Monthly", "account": "Chase ••6053", "assumedUsername": "alex@ahoy.ooo", "dueIn": "in 16 days", "dueInDays": 16, "amount": 18.21 }
       ]
     },

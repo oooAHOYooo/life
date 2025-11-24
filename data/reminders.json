@@ -16,6 +16,34 @@
     "actionPolicy": "at_or_after_date",
     "actionOnOrAfter": "2026-01-01",
     "notifyDaysBefore": 45
+  },
+  {
+    "id": "adobe-premiere-pro",
+    "category": "subscription",
+    "name": "Adobe Premiere Pro",
+    "vendor": "Adobe",
+    "planName": "Premiere Pro plan (90-day promo)",
+    "billingPeriod": "Monthly",
+    "url": "",
+    "notes": "90-day free promo active. Automatic billing resumes after the promo. Review/cancel before the free period ends.",
+    "desiredAction": "Cancel before promo ends",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2026-02-22",
+    "notifyDaysBefore": 7
+  },
+  {
+    "id": "spotify-premium",
+    "category": "subscription",
+    "name": "Spotify Premium",
+    "vendor": "Spotify",
+    "planName": "Individual",
+    "billingPeriod": "Monthly",
+    "url": "https://www.spotify.com/account/subscription/",
+    "notes": "Cancelled on 2025-11-24. Plan will change to Spotify Free on 2025-12-11.",
+    "desiredAction": "Confirm free plan active",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2025-12-11",
+    "notifyDaysBefore": 2
   }
 ]
 

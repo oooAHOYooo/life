@@ -6,8 +6,12 @@
         <title>Reminders & Upkeep</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-        <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet" media="print" onload="this.media='all'">
+        <noscript><link
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+                rel="stylesheet"></noscript>
         <link rel="stylesheet" href="../design-system.css">
         <style>
         * {
@@ -156,7 +160,8 @@
             <a href="../index.html" class="back-link">← Back to LifeOS</a>
             <header>
                 <h1>Reminders & Upkeep</h1>
-                <p>Track software subscriptions, renewals, and planned upgrades</p>
+                <p>Track software subscriptions, renewals, and planned
+                    upgrades</p>
             </header>
 
             <!-- Gas Bill summary moved under Bills & Utilities section below -->
@@ -165,7 +170,8 @@
 
             <div class="card">
                 <div class="controls">
-                    <input id="searchInput" type="search" placeholder="Search name or vendor...">
+                    <input id="searchInput" type="search"
+                        placeholder="Search name or vendor...">
                     <select id="statusFilter">
                         <option value="all">All statuses</option>
                         <option value="soon">Due soon</option>
@@ -173,8 +179,10 @@
                         <option value="ok">OK</option>
                     </select>
                     <select id="sortSelect">
-                        <option value="nextDateAsc">Next date (soonest first)</option>
-                        <option value="nextDateDesc">Next date (latest first)</option>
+                        <option value="nextDateAsc">Next date (soonest
+                            first)</option>
+                        <option value="nextDateDesc">Next date (latest
+                            first)</option>
                         <option value="nameAsc">Name (A→Z)</option>
                     </select>
                 </div>
@@ -190,7 +198,8 @@
                             </tr>
                         </thead>
                         <tbody id="remindersBody">
-                            <tr><td colspan="5" class="muted">Loading...</td></tr>
+                            <tr><td colspan="5"
+                                    class="muted">Loading...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -199,18 +208,26 @@
 
             <div class="card">
                 <h3 style="margin-bottom:8px;">How to add more items</h3>
-                <p class="muted" style="margin-bottom:12px;">Edit <span class="mono">data/reminders.json</span> and add a new object with this shape:</p>
+                <p class="muted" style="margin-bottom:12px;">Edit <span
+                        class="mono">data/reminders.json</span> and add a new
+                    object with this shape:</p>
                 <div class="schema" id="schemaBlock"></div>
             </div>
 
             <div class="card">
                 <header style="text-align:left;margin-bottom:12px;">
-                    <h2 style="font-size:1.4rem;font-weight:700;color:#e8eaed;margin:0 0 4px 0;">Current Bills</h2>
-                    <p class="muted" style="margin:0;">Organized by section with estimated next charge date</p>
+                    <h2
+                        style="font-size:1.4rem;font-weight:700;color:#e8eaed;margin:0 0 4px 0;">Current
+                        Bills</h2>
+                    <p class="muted" style="margin:0;">Organized by section with
+                        estimated next charge date</p>
                 </header>
-                <div id="billsSummary" class="muted" style="margin-bottom:12px;"></div>
+                <div id="billsSummary" class="muted"
+                    style="margin-bottom:12px;"></div>
                 <div id="billsContainer"></div>
-                <div class="footer-note">Edit <span class="mono">data/bills.json</span> to add or update bills.</div>
+                <div class="footer-note">Edit <span
+                        class="mono">data/bills.json</span> to add or update
+                    bills.</div>
             </div>
         </div>
 
@@ -563,6 +580,7 @@
                         <td>
                             <div style="font-weight:600;color:#e8eaed;">${this.escape(it.name)}</div>
                             <div class="muted">${this.escape(it.frequency || '')}</div>
+                            ${it.notes ? `<div class="note" style="margin-top:4px;">${this.escape(it.notes)}</div>` : ''}
                         </td>
                         <td>${this.escape(it.account || '')}</td>
                         <td>${this.escape(it.assumedUsername || '—')}</td>
@@ -600,5 +618,3 @@
         </script>
     </body>
 </html>
-
-
