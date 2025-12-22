@@ -229,6 +229,27 @@
             gap: var(--spacing-md);
         }
 
+        .topbar-weather {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: 0 var(--spacing-sm);
+        }
+
+        .weather-time {
+            font-size: var(--font-size-sm);
+            color: var(--color-text);
+            font-variant-numeric: tabular-nums;
+            min-width: 80px;
+        }
+
+        .weather-temp {
+            font-size: var(--font-size-sm);
+            color: var(--color-text);
+            font-weight: 500;
+            min-width: 50px;
+        }
+
         .topbar-date {
             font-size: var(--font-size-sm);
             color: var(--color-text-muted);
@@ -434,6 +455,22 @@
                 display: block;
             }
 
+            .topbar-actions {
+                gap: var(--spacing-sm);
+                flex-wrap: wrap;
+            }
+
+            .topbar-weather {
+                order: -1;
+                width: 100%;
+                justify-content: center;
+                padding: var(--spacing-xs) 0;
+            }
+
+            .topbar-date {
+                font-size: var(--font-size-xs);
+            }
+
             aside.sidebar {
                 position: fixed;
                 left: 0;
@@ -501,6 +538,10 @@
             </div>
             <div class="topbar-actions">
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+                <div class="topbar-weather">
+                    <div class="weather-time" id="currentTime"></div>
+                    <div class="weather-temp" id="currentTemp">--°F</div>
+                </div>
                 <div class="topbar-date" id="currentDate"></div>
                 <span class="status-pill" id="statusPill">Unlocked</span>
                 <a href="subpages/2026.html" class="topbar-button">2026</a>
@@ -841,6 +882,68 @@
 
         // App initialization
         function initApp() {
+            // Time display (updates every second)
+            function updateTime() {
+                const timeElement = document.getElementById('currentTime');
+                if (timeElement) {
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true
+                    });
+                    timeElement.textContent = timeString;
+                }
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            // Temperature display for New Haven, CT
+            async function fetchTemperature() {
+                const tempElement = document.getElementById('currentTemp');
+                if (!tempElement) return;
+
+                try {
+                    // Using wttr.in as a free weather service (no API key needed)
+                    // Format: %t for temperature, &u for US units (Fahrenheit)
+                    const response = await fetch(`https://wttr.in/New+Haven,CT?format=%t&u`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'text/plain'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const temp = await response.text();
+                        // Clean up the response (remove any extra whitespace)
+                        const cleanTemp = temp.trim();
+                        tempElement.textContent = cleanTemp || '--°F';
+                    } else {
+                        // Fallback: try with CORS proxy if direct fetch fails
+                        try {
+                            const proxyResponse = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://wttr.in/New+Haven,CT?format=%t&u')}`);
+                            if (proxyResponse.ok) {
+                                const proxyData = await proxyResponse.json();
+                                const temp = JSON.parse(proxyData.contents).trim();
+                                tempElement.textContent = temp || '--°F';
+                            } else {
+                                tempElement.textContent = '--°F';
+                            }
+                        } catch (proxyError) {
+                            tempElement.textContent = '--°F';
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching temperature:', error);
+                    tempElement.textContent = '--°F';
+                }
+            }
+            
+            // Fetch temperature on load and every 10 minutes
+            fetchTemperature();
+            setInterval(fetchTemperature, 600000); // 10 minutes
+
             // Date display
             const dateElement = document.getElementById('currentDate');
             const now = new Date();
