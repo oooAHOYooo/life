@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bills - LifeOS</title>
+        <link rel="stylesheet" href="../design-system.css">
+        <style>
+        body {
+            background: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .back-link {
+            color: #00ff00;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .back-link:hover {
+            color: #00cc00;
+        }
+        
+        header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            padding-bottom: 15px;
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+            color: #00ff00;
+            margin-bottom: 5px;
+        }
+        
+        .category-section {
+            margin-bottom: 25px;
+        }
+        
+        .category-title {
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+            padding-bottom: 5px;
+        }
+        
+        .bill-item {
+            margin-bottom: 6px;
+            padding: 4px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: baseline;
+        }
+        
+        .bill-name {
+            color: #00ff00;
+            font-weight: bold;
+            min-width: 180px;
+        }
+        
+        .bill-amount {
+            color: #00cc00;
+            min-width: 70px;
+        }
+        
+        .bill-due {
+            color: #009900;
+            font-size: 0.8rem;
+            min-width: 100px;
+        }
+        
+        .bill-account {
+            color: #006600;
+            font-size: 0.75rem;
+        }
+        
+        .bill-notes {
+            color: #004400;
+            font-size: 0.75rem;
+            font-style: italic;
+            width: 100%;
+            margin-left: 188px;
+            margin-top: 2px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #009900;
+            padding: 40px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .bill-item {
+                flex-direction: column;
+                gap: 2px;
+            }
+            
+            .bill-name,
+            .bill-amount,
+            .bill-due,
+            .bill-account {
+                min-width: auto;
+            }
+            
+            .bill-notes {
+                margin-left: 0;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← BACK</a>
+            
+            <header>
+                <h1>BILLS</h1>
+            </header>
+            
+            <div id="billsContainer"></div>
+        </div>
+        
+        <script>
+        class BillsPage {
+            constructor() {
+                this.bills = null;
+                this.init();
+            }
+            
+            async init() {
+                await this.loadData();
+                this.render();
+            }
+            
+            async loadData() {
+                try {
+                    const response = await fetch('../data/bills.json');
+                    this.bills = await response.json();
+                } catch (error) {
+                    console.error('Error loading bills:', error);
+                    this.showError('FAILED TO LOAD BILLS DATA.');
+                }
+            }
+            
+            render() {
+                const container = document.getElementById('billsContainer');
+                
+                if (!this.bills || !this.bills.categories) {
+                    container.innerHTML = '<div class="empty-state">NO BILLS FOUND</div>';
+                    return;
+                }
+                
+                let html = '';
+                
+                this.bills.categories.forEach(category => {
+                    html += '<div class="category-section">';
+                    html += `<div class="category-title">${this.escapeHtml(category.title)}</div>`;
+                    
+                    category.items.forEach(item => {
+                        html += '<div class="bill-item">';
+                        html += `<span class="bill-name">${this.escapeHtml(item.name)}</span>`;
+                        
+                        if (item.amount > 0) {
+                            html += `<span class="bill-amount">$${item.amount.toFixed(2)}</span>`;
+                        } else {
+                            html += '<span class="bill-amount">—</span>';
+                        }
+                        
+                        if (item.dueIn || item.nextDueOn) {
+                            const dueText = item.dueIn || item.nextDueOn;
+                            html += `<span class="bill-due">${this.escapeHtml(dueText)}</span>`;
+                        }
+                        
+                        if (item.account && item.account !== '—') {
+                            html += `<span class="bill-account">${this.escapeHtml(item.account)}</span>`;
+                        }
+                        
+                        html += '</div>';
+                        
+                        if (item.notes) {
+                            html += `<div class="bill-notes">${this.escapeHtml(item.notes)}</div>`;
+                        }
+                    });
+                    
+                    html += '</div>';
+                });
+                
+                container.innerHTML = html;
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            showError(message) {
+                const container = document.getElementById('billsContainer');
+                container.innerHTML = `<div class="empty-state">${message}</div>`;
+            }
+        }
+        
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BillsPage();
+        });
+        </script>
+    </body>
+</html>
+
