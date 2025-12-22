@@ -19,6 +19,269 @@
     --radius-3: 20px;
 }
 
+/* Password Protected Loading Screen with Three.js */
+.password-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    overflow: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.password-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#threeCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.password-screen-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px;
+    max-width: 800px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.password-logo {
+    margin-bottom: 80px;
+    position: relative;
+    width: 100%;
+}
+
+.password-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-shadow: 0 0 60px rgba(99, 102, 241, 0.6);
+    animation: titleFloat 5s ease-in-out infinite;
+    line-height: 1.1;
+    filter: drop-shadow(0 0 30px rgba(129, 140, 248, 0.5));
+}
+
+@keyframes titleFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-15px) scale(1.02);
+    }
+}
+
+.password-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--color-text-muted);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 20px;
+    opacity: 0.9;
+    animation: subtitlePulse 3s ease-in-out infinite;
+}
+
+@keyframes subtitlePulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.password-form-container {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.password-input-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.password-input {
+    width: 100%;
+    padding: 28px 40px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-family: 'Space Grotesk', monospace;
+    background: rgba(15, 23, 42, 0.85);
+    border: 3px solid var(--color-border-1);
+    border-radius: 20px;
+    color: var(--color-text);
+    text-align: center;
+    letter-spacing: 0.4em;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 
+                0 0 0 0 rgba(99, 102, 241, 0.4);
+}
+
+.password-input:focus {
+    outline: none;
+    border-color: var(--color-accent-1);
+    box-shadow: 0 0 50px rgba(99, 102, 241, 0.6), 
+                0 8px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(99, 102, 241, 0.1);
+    transform: scale(1.03);
+    background: rgba(15, 23, 42, 0.95);
+}
+
+.password-input::placeholder {
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    font-size: 0.7em;
+}
+
+.password-input.shake {
+    animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0) scale(1); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-15px) scale(1.02); }
+    20%, 40%, 60%, 80% { transform: translateX(15px) scale(1.02); }
+}
+
+.password-indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2), var(--color-accent-3));
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+}
+
+.password-input:focus + .password-indicator {
+    width: 85%;
+}
+
+.password-submit {
+    width: 100%;
+    padding: 24px 50px;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--color-accent-1) 0%, var(--color-accent-2) 100%);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 40px rgba(99, 102, 241, 0.4),
+                0 0 0 0 rgba(99, 102, 241, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.password-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.password-submit:hover::before {
+    left: 100%;
+}
+
+.password-submit:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 50px rgba(99, 102, 241, 0.6),
+                0 0 0 8px rgba(99, 102, 241, 0.1);
+}
+
+.password-submit:active {
+    transform: translateY(-2px) scale(1);
+    box-shadow: 0 8px 40px rgba(99, 102, 241, 0.4);
+}
+
+.password-error {
+    color: #ef4444;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    margin-top: 25px;
+    min-height: 30px;
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
+.password-error.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .password-screen-content {
+        padding: 40px 30px;
+    }
+    
+    .password-title {
+        font-size: clamp(2.5rem, 15vw, 5rem);
+        margin-bottom: 20px;
+    }
+    
+    .password-subtitle {
+        font-size: clamp(1rem, 4vw, 1.4rem);
+    }
+    
+    .password-input {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+        padding: 22px 30px;
+        letter-spacing: 0.3em;
+    }
+    
+    .password-submit {
+        padding: 20px 40px;
+        font-size: clamp(1rem, 4vw, 1.3rem);
+    }
+    
+    .password-form-container {
+        margin-top: 40px;
+    }
+}
+
 /* Base */
 * {
     margin: 0;

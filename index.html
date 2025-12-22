@@ -11,8 +11,35 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="design-system.css">
+        <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     </head>
     <body>
+        <!-- Password Protected Loading Screen -->
+        <div id="passwordScreen" class="password-screen">
+            <canvas id="threeCanvas"></canvas>
+            <div class="password-screen-content">
+                <div class="password-logo">
+                    <h1 class="password-title">PERSONAL HUB</h1>
+                    <div class="password-subtitle">Access Required</div>
+                </div>
+                <div class="password-form-container">
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="passwordInput" 
+                            class="password-input" 
+                            placeholder="Enter Access Code"
+                            autocomplete="off"
+                            autofocus
+                        />
+                        <div class="password-indicator"></div>
+                    </div>
+                    <div id="passwordError" class="password-error"></div>
+                    <button id="passwordSubmit" class="password-submit">ENTER</button>
+                </div>
+            </div>
+        </div>
+
         <div class="container home">
             <header>
                 <h1>Personal Hub</h1>
@@ -275,6 +302,227 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        // Password Screen Logic with Three.js Fluid Animation
+        (function() {
+            const PASSWORD = '1153';
+            const STORAGE_KEY = 'personalHub_authenticated';
+            
+            const passwordScreen = document.getElementById('passwordScreen');
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordSubmit = document.getElementById('passwordSubmit');
+            const passwordError = document.getElementById('passwordError');
+            const container = document.querySelector('.container.home');
+            const canvas = document.getElementById('threeCanvas');
+            
+            // Check if already authenticated
+            if (localStorage.getItem(STORAGE_KEY) === 'true') {
+                passwordScreen.style.display = 'none';
+                container.style.display = 'block';
+                return;
+            }
+            
+            // Hide main content initially
+            container.style.display = 'none';
+            
+            // Three.js Fluid Animation Setup
+            let scene, camera, renderer;
+            let blobs = [];
+            let time = 0;
+            
+            function initThreeJS() {
+                // Scene setup
+                scene = new THREE.Scene();
+                
+                // Camera setup
+                camera = new THREE.PerspectiveCamera(
+                    75,
+                    window.innerWidth / window.innerHeight,
+                    0.1,
+                    1000
+                );
+                camera.position.z = 5;
+                
+                // Renderer setup
+                renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    alpha: true,
+                    antialias: true
+                });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                
+                // Create fluid blobs
+                const blobCount = 6;
+                const colors = [
+                    new THREE.Color(0x818cf8), // accent-1
+                    new THREE.Color(0xa78bfa), // accent-2
+                    new THREE.Color(0x60a5fa), // accent-3
+                    new THREE.Color(0x6366f1), // indigo
+                    new THREE.Color(0x8b5cf6), // purple
+                    new THREE.Color(0x3b82f6)  // blue
+                ];
+                
+                for (let i = 0; i < blobCount; i++) {
+                    const geometry = new THREE.IcosahedronGeometry(0.8, 3);
+                    const material = new THREE.MeshStandardMaterial({
+                        color: colors[i % colors.length],
+                        metalness: 0.3,
+                        roughness: 0.2,
+                        transparent: true,
+                        opacity: 0.6,
+                        emissive: colors[i % colors.length],
+                        emissiveIntensity: 0.3
+                    });
+                    
+                    const blob = new THREE.Mesh(geometry, material);
+                    
+                    // Position blobs in a sphere
+                    const angle = (i / blobCount) * Math.PI * 2;
+                    const radius = 2.5;
+                    blob.position.x = Math.cos(angle) * radius;
+                    blob.position.y = Math.sin(angle * 2) * radius * 0.5;
+                    blob.position.z = Math.sin(angle) * radius * 0.3;
+                    
+                    blob.userData = {
+                        basePosition: blob.position.clone(),
+                        speed: 0.3 + Math.random() * 0.2,
+                        phase: Math.random() * Math.PI * 2
+                    };
+                    
+                    blobs.push(blob);
+                    scene.add(blob);
+                }
+                
+                // Add ambient and point lights
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+                
+                const pointLight1 = new THREE.PointLight(0x818cf8, 1, 100);
+                pointLight1.position.set(5, 5, 5);
+                scene.add(pointLight1);
+                
+                const pointLight2 = new THREE.PointLight(0xa78bfa, 1, 100);
+                pointLight2.position.set(-5, -5, 5);
+                scene.add(pointLight2);
+                
+                // Handle window resize
+                window.addEventListener('resize', onWindowResize);
+            }
+            
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                time += 0.01;
+                
+                // Animate blobs with smooth, fluid motion
+                blobs.forEach((blob, i) => {
+                    const data = blob.userData;
+                    
+                    // Smooth floating motion
+                    blob.position.x = data.basePosition.x + Math.sin(time * data.speed + data.phase) * 0.5;
+                    blob.position.y = data.basePosition.y + Math.cos(time * data.speed * 0.7 + data.phase) * 0.5;
+                    blob.position.z = data.basePosition.z + Math.sin(time * data.speed * 0.5 + data.phase) * 0.3;
+                    
+                    // Smooth rotation
+                    blob.rotation.x += 0.002 * data.speed;
+                    blob.rotation.y += 0.003 * data.speed;
+                    blob.rotation.z += 0.001 * data.speed;
+                    
+                    // Morphing scale for liquid butter effect
+                    const scale = 1 + Math.sin(time * 2 + data.phase) * 0.15;
+                    blob.scale.set(scale, scale, scale);
+                    
+                    // Pulsing opacity
+                    blob.material.opacity = 0.5 + Math.sin(time * 1.5 + data.phase) * 0.2;
+                });
+                
+                // Rotate camera slightly for dynamic view
+                camera.position.x = Math.sin(time * 0.1) * 0.5;
+                camera.position.y = Math.cos(time * 0.15) * 0.3;
+                camera.lookAt(scene.position);
+                
+                renderer.render(scene, camera);
+            }
+            
+            // Initialize Three.js
+            initThreeJS();
+            animate();
+            
+            // Handle password submission
+            function checkPassword() {
+                const input = passwordInput.value.trim();
+                
+                if (input === PASSWORD) {
+                    // Correct password
+                    localStorage.setItem(STORAGE_KEY, 'true');
+                    passwordError.textContent = '';
+                    passwordError.classList.remove('show');
+                    
+                    // Animate out with smooth transition
+                    passwordScreen.classList.add('fade-out');
+                    
+                    // Stop animation loop
+                    setTimeout(() => {
+                        if (renderer) {
+                            renderer.dispose();
+                        }
+                        passwordScreen.style.display = 'none';
+                        container.style.display = 'block';
+                        // Trigger fade-in animations
+                        document.querySelectorAll('.telecom-button, .quick-button').forEach(el => {
+                            el.style.opacity = '0';
+                            el.style.transform = 'translateY(20px)';
+                            observer.observe(el);
+                        });
+                    }, 1000);
+                } else {
+                    // Wrong password
+                    passwordError.textContent = 'Access Denied';
+                    passwordError.classList.add('show');
+                    passwordInput.value = '';
+                    passwordInput.classList.add('shake');
+                    
+                    // Add shake effect to blobs
+                    blobs.forEach(blob => {
+                        const originalPos = blob.position.clone();
+                        let shakeCount = 0;
+                        const shakeInterval = setInterval(() => {
+                            blob.position.x = originalPos.x + (Math.random() - 0.5) * 0.2;
+                            blob.position.y = originalPos.y + (Math.random() - 0.5) * 0.2;
+                            shakeCount++;
+                            if (shakeCount > 10) {
+                                clearInterval(shakeInterval);
+                                blob.position.copy(originalPos);
+                            }
+                        }, 50);
+                    });
+                    
+                    setTimeout(() => {
+                        passwordInput.classList.remove('shake');
+                    }, 500);
+                }
+            }
+            
+            // Event listeners
+            passwordSubmit.addEventListener('click', checkPassword);
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
+            // Focus input on load
+            setTimeout(() => {
+                passwordInput.focus();
+            }, 100);
+        })();
         </script>
     </body>
 </html>
