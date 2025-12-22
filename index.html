@@ -1,309 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Personal Hub</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet">
-        <link rel="stylesheet" href="design-system.css">
-        <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    </head>
-    <body>
-        <!-- Password Protected Loading Screen -->
-        <div id="passwordScreen" class="password-screen">
-            <canvas id="threeCanvas"></canvas>
-            <div class="password-screen-content">
-                <div class="password-logo">
-                    <h1 class="password-title">PERSONAL HUB</h1>
-                    <div class="password-subtitle">Access Required</div>
-                </div>
-                <div class="password-form-container">
-                    <div class="password-input-wrapper">
-                        <input 
-                            type="password" 
-                            id="passwordInput" 
-                            class="password-input" 
-                            placeholder="Enter Access Code"
-                            autocomplete="off"
-                            autofocus
-                        />
-                        <div class="password-indicator"></div>
-                    </div>
-                    <div id="passwordError" class="password-error"></div>
-                    <button id="passwordSubmit" class="password-submit">ENTER</button>
-                </div>
-            </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Hub - LifeOS</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <style>
+        :root {
+            --color-text: #2c2416;
+            --color-text-muted: #6b5d47;
+            --color-text-light: #8b7d6b;
+            --color-bg: #f5f1e8;
+            --color-bg-alt: #ebe7dd;
+            --color-sidebar: #f0ece2;
+            --color-border: #3d3424;
+            --color-border-light: #6b5d47;
+            --color-border-strong: #2c2416;
+            --color-accent: #5a4a3a;
+            --color-accent-hover: #3d3424;
+            --color-error: #8b4513;
+            --color-card-bg: #faf8f3;
+            --color-card-bg-soft: #f5f1e8;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --sidebar-width: 260px;
+            --topbar-height: 56px;
+            --font-size-xs: 11px;
+            --font-size-sm: 13px;
+            --font-size-base: 14px;
+            --font-size-md: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-2xl: 24px;
+        }
 
-        <div class="container home">
-            <header>
-                <h1>Personal Hub</h1>
-                <p>Your personal life management system</p>
-            </header>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <div class="telecom-grid">
-                <a href="subpages/bookmarks.html" class="telecom-button"
-                    data-button="bookmarks">
-                    <div class="button-indicator"></div>
-                    <div class="button-content">
-                        <h2 class="button-title">Bookmarks</h2>
-                        <p class="button-description">Your collection of useful
-                            websites, resources, and references</p>
-                    </div>
-                </a>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+            color: var(--color-text);
+            background: var(--color-bg);
+            height: 100vh;
+            overflow: hidden;
+        }
 
-                <a href="subpages/goals.html" class="telecom-button"
-                    data-button="goals">
-                    <div class="button-indicator"></div>
-                    <div class="button-content">
-                        <h2 class="button-title">Goals</h2>
-                        <p class="button-description">Track your personal and
-                            professional goals with categories</p>
-                    </div>
-                </a>
+        /* Password Screen */
+        .password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            overflow: hidden;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
 
-                <a href="subpages/jobs.html" class="telecom-button"
-                    data-button="jobs">
-                    <div class="button-indicator"></div>
-                    <div class="button-content">
-                        <h2 class="button-title">Jobs</h2>
-                        <p class="button-description">After-school job
-                            opportunities in AI, STEM, and education</p>
-                    </div>
-                </a>
+        .password-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-                <a href="subpages/writing.html" class="telecom-button"
-                    data-button="writing">
-                    <div class="button-indicator"></div>
-                    <div class="button-content">
-                        <h2 class="button-title">Writing</h2>
-                        <p class="button-description">Active writing projects
-                            including fiction and screenplays</p>
-                    </div>
-                </a>
+        #threeCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.7;
+        }
 
-                <a href="subpages/project-sitemap.html" class="telecom-button"
-                    data-button="sitemap">
-                    <div class="button-indicator"></div>
-                    <div class="button-content">
-                        <h2 class="button-title">Project Sitemap</h2>
-                        <p class="button-description">Visual hierarchy of all
-                            projects and ideas</p>
-                    </div>
-                </a>
+        .password-screen-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 60px;
+            max-width: 800px;
+            width: 90%;
+        }
 
-                <a href="subpages/stats.html" class="telecom-button"
-                    data-button="stats">
-                    <div class="button-indicator"></div>
-                    <div class="button-content">
-                        <h2 class="button-title">Statistics</h2>
-                        <p class="button-description">View insights and
-                            analytics about your life data</p>
-                    </div>
-                </a>
-            </div>
+        .password-title {
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
 
-            <div class="quick-links-section">
-                <h2 class="section-title">Quick Access</h2>
-                <div class="quick-grid">
-                    <a href="subpages/quick-access.html" class="quick-button"
-                        data-quick="quick">Quick Access</a>
-                    <a href="subpages/reminders.html" class="quick-button"
-                        data-quick="reminders">Reminders & Upkeep</a>
-                    <a href="subpages/expenses.html" class="quick-button"
-                        data-quick="expenses">Expenses</a>
-                    <a href="subpages/2026.html" class="quick-button"
-                        data-quick="2026">2026</a>
-                    <a href="subpages/bills.html" class="quick-button"
-                        data-quick="bills">Bills</a>
-                </div>
+        .password-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #9ca3af;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+        }
 
-                <div class="external-links-card">
-                    <div class="external-links-grid">
-                        <div class="link-category">
-                            <h3 class="category-title">Active Netlify
-                                Projects</h3>
-                            <ul class="link-list">
-                                <li><a href="https://ag-film.netlify.app/"
-                                        target="_blank"
-                                        rel="noopener">Film</a></li>
-                                <li><a href="https://agpo.netlify.app"
-                                        target="_blank"
-                                        rel="noopener">Pecans</a></li>
-                                <li><a href="https://agscout.netlify.app"
-                                        target="_blank" rel="noopener">Land
-                                        Scout</a></li>
-                                <li><a href="https://barnbarn.netlify.app"
-                                        target="_blank"
-                                        rel="noopener">Barnacle</a></li>
-                            </ul>
-                        </div>
+        .password-input {
+            width: 100%;
+            padding: 28px 40px;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-family: monospace;
+            background: rgba(15, 23, 42, 0.85);
+            border: 3px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            color: #e8eaed;
+            text-align: center;
+            letter-spacing: 0.4em;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
 
-                        <div class="link-category">
-                            <h3 class="category-title">Render Apps</h3>
-                            <ul class="link-list">
-                                <li><a href="https://app.ahoy.ooo"
-                                        target="_blank" rel="noopener">Ahoy
-                                        Platform</a></li>
-                                <li><a href="https://newhaven.ahoy.ooo"
-                                        target="_blank" rel="noopener">Ahoy New
-                                        Haven</a></li>
-                                <li><a href="https://cpc-web-app.onrender.com/"
-                                        target="_blank" rel="noopener">CPC Web
-                                        App</a></li>
-                                <li><a href="https://phoenix-pne7.onrender.com/"
-                                        target="_blank" rel="noopener">Phoenix (Bot Editor)</a></li>
-                                <li><a href="https://elm-7t8e.onrender.com"
-                                        target="_blank" rel="noopener">Elm City Daily</a></li>
-                            </ul>
-                        </div>
+        .password-input:focus {
+            outline: none;
+            border-color: #818cf8;
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.6);
+        }
 
-                        <div class="link-category">
-                            <h3 class="category-title">Teaching</h3>
-                            <ul class="link-list">
-                                <li><a href="https://mrg-stem.netlify.app"
-                                        target="_blank" rel="noopener">MRG
-                                        STEM</a></li>
-                            </ul>
-                        </div>
+        .password-submit {
+            width: 100%;
+            padding: 24px 50px;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
 
-                        <div class="link-category">
-                            <h3 class="category-title">Public Portfolio</h3>
-                            <ul class="link-list">
-                                <li><a href="https://alexgonzalez.ooo"
-                                        target="_blank"
-                                        rel="noopener">alexgonzalez.ooo</a></li>
-                            </ul>
-                        </div>
+        .password-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
 
-                        <div class="link-category">
-                            <h3 class="category-title">Websites I Maintain</h3>
-                            <ul class="link-list">
-                                <li><a href="https://cpcnewhaven.org"
-                                        target="_blank"
-                                        rel="noopener">CPC</a></li>
-                                <li><a href="https://ape-market.netlify.app"
-                                        target="_blank" rel="noopener">Firebird
-                                        (Ape Redesign)</a></li>
-                            </ul>
-                        </div>
+        .password-error {
+            color: #ef4444;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-top: 20px;
+            min-height: 30px;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
 
-                        <div class="link-category">
-                            <h3 class="category-title">Professional
-                                Projects</h3>
-                            <ul class="link-list">
-                                <li><a
-                                        href="https://github.com/oooAHOYooo/aracastone"
-                                        target="_blank"
-                                        rel="noopener">ArcaStone</a></li>
-                                <li><a
-                                        href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html"
-                                        target="_blank"
-                                        rel="noopener">Zuki</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        .password-error.show {
+            opacity: 1;
+        }
 
-        <footer>
-            <div class="footer-date" id="currentDate"></div>
-        </footer>
+        .password-input.shake {
+            animation: shake 0.6s ease;
+        }
 
-        <script>
-        // Display current date
-        const dateElement = document.getElementById('currentDate');
-        const now = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-        dateElement.textContent = now.toLocaleDateString('en-US', options);
-        // Telecom button activation effect
-        document.querySelectorAll('.telecom-button, .quick-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Add active class
-                this.classList.add('active');
-                
-                // Remove active class after navigation (or after a delay)
-                setTimeout(() => {
-                    this.classList.remove('active');
-                }, 600);
-                
-                // Create ripple effect
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    border-radius: 50%;
-                    background: rgba(99, 102, 241, 0.3);
-                    left: ${x}px;
-                    top: ${y}px;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                    z-index: 1;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-15px); }
+            75% { transform: translateX(15px); }
+        }
 
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
+        /* App Shell */
+        .app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Bar */
+        header.topbar {
+            height: var(--topbar-height);
+            background: var(--color-card-bg);
+            border-bottom: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-brand {
+            display: flex;
+            align-items: baseline;
+            gap: var(--spacing-sm);
+        }
+
+        .topbar-brand h1 {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .topbar-brand .subtitle {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .topbar-date {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+        }
+
+        .status-pill {
+            font-size: var(--font-size-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-alt);
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--color-border-light);
+        }
+
+        .topbar-button {
+            background: none;
+            border: 1px solid var(--color-border);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .topbar-button:hover {
+            background: var(--color-bg-alt);
+            border-color: var(--color-border-strong);
+            color: var(--color-accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: var(--font-size-lg);
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            color: var(--color-text);
+            transition: color 0.2s ease;
+        }
+
+        .menu-toggle:hover {
+            color: var(--color-accent-hover);
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        aside.sidebar {
+            width: var(--sidebar-width);
+            background: var(--color-sidebar);
+            border-right: 2px solid var(--color-border);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        nav.sidebar-nav {
+            padding: var(--spacing-md);
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .nav-section-title {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .nav-link {
+            display: block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--color-text);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--color-bg-alt);
+            color: var(--color-accent);
+        }
+
+        .nav-link:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .nav-link.active {
+            background: var(--color-bg-alt);
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        main.main-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: transparent;
+        }
+
+        .main-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+        }
+
+        /* Panels */
+        .panel {
+            background: var(--color-card-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .panel-header {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .panel-title {
+            font-size: var(--font-size-md);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .panel-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .link-card {
+            display: block;
+            padding: var(--spacing-md);
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--color-text);
+            font-size: var(--font-size-sm);
+            transition: all 0.2s ease;
+        }
+
+        .link-card:hover {
+            border-color: var(--color-border);
+            background: var(--color-card-bg);
+            transform: translateY(-1px);
+        }
+
+        .link-card:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .link-card-title {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .link-card-url {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+            word-break: break-all;
+        }
+
+        .link-card:hover .link-card-url {
+            color: var(--color-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
             }
-        `;
-        document.head.appendChild(style);
 
-        // Add smooth scroll behavior
-        document.documentElement.style.scrollBehavior = 'smooth';
+            aside.sidebar {
+                position: fixed;
+                left: 0;
+                top: var(--topbar-height);
+                height: calc(100vh - var(--topbar-height));
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 200;
+            }
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            aside.sidebar.open {
+                transform: translateX(0);
+            }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+            .main-content {
+                width: 100%;
+            }
 
-        // Observe all buttons for scroll animations
-        document.querySelectorAll('.telecom-button, .quick-button').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+            .link-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-        // Password Screen Logic with Three.js Fluid Animation
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Protected Loading Screen -->
+    <div id="passwordScreen" class="password-screen">
+        <canvas id="threeCanvas"></canvas>
+        <div class="password-screen-content">
+            <div class="password-logo">
+                <h1 class="password-title">PERSONAL HUB</h1>
+                <div class="password-subtitle">Access Required</div>
+            </div>
+            <div class="password-form-container">
+                <div class="password-input-wrapper">
+                    <input 
+                        type="password" 
+                        id="passwordInput" 
+                        class="password-input" 
+                        placeholder="Enter Access Code"
+                        autocomplete="off"
+                        autofocus
+                    />
+                </div>
+                <div id="passwordError" class="password-error"></div>
+                <button id="passwordSubmit" class="password-submit">ENTER</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Shell -->
+    <div class="app" id="appShell" style="display: none;">
+        <header class="topbar">
+            <div class="topbar-brand">
+                <h1>Personal Hub</h1>
+                <span class="subtitle">LifeOS</span>
+            </div>
+            <div class="topbar-actions">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+                <div class="topbar-date" id="currentDate"></div>
+                <span class="status-pill" id="statusPill">Unlocked</span>
+                <a href="subpages/2026.html" class="topbar-button">2026</a>
+            </div>
+        </header>
+
+        <div class="layout">
+            <aside class="sidebar" id="sidebar">
+                <nav class="sidebar-nav" aria-label="Main navigation">
+                    <div class="nav-section">
+                        <div class="nav-section-title">Primary</div>
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="subpages/bookmarks.html" class="nav-link">Bookmarks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/goals.html" class="nav-link">Goals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/jobs.html" class="nav-link">Jobs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/writing.html" class="nav-link">Writing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/project-sitemap.html" class="nav-link">Project Sitemap</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/stats.html" class="nav-link">Statistics</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-section-title">Quick</div>
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="subpages/quick-access.html" class="nav-link">Quick Access</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/reminders.html" class="nav-link">Reminders & Upkeep</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/expenses.html" class="nav-link">Expenses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/2026.html" class="nav-link">2026</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/bills.html" class="nav-link">Bills</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="main-inner">
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Active Netlify Projects</h2>
+                            <p class="panel-description">Deployed projects on Netlify</p>
+                        </div>
+                        <div class="link-grid">
+                            <a href="https://ag-film.netlify.app/" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Film</div>
+                                <div class="link-card-url">ag-film.netlify.app</div>
+                            </a>
+                            <a href="https://agpo.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Pecans</div>
+                                <div class="link-card-url">agpo.netlify.app</div>
+                            </a>
+                            <a href="https://agscout.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Land Scout</div>
+                                <div class="link-card-url">agscout.netlify.app</div>
+                            </a>
+                            <a href="https://barnbarn.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Barnacle</div>
+                                <div class="link-card-url">barnbarn.netlify.app</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Render Apps</h2>
+                            <p class="panel-description">Applications hosted on Render</p>
+                        </div>
+                        <div class="link-grid">
+                            <a href="https://app.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Ahoy Platform</div>
+                                <div class="link-card-url">app.ahoy.ooo</div>
+                            </a>
+                            <a href="https://newhaven.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Ahoy New Haven</div>
+                                <div class="link-card-url">newhaven.ahoy.ooo</div>
+                            </a>
+                            <a href="https://cpc-web-app.onrender.com/" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">CPC Web App</div>
+                                <div class="link-card-url">cpc-web-app.onrender.com</div>
+                            </a>
+                            <a href="https://phoenix-pne7.onrender.com/" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Phoenix (Bot Editor)</div>
+                                <div class="link-card-url">phoenix-pne7.onrender.com</div>
+                            </a>
+                            <a href="https://elm-7t8e.onrender.com" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Elm City Daily</div>
+                                <div class="link-card-url">elm-7t8e.onrender.com</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Teaching</h2>
+                            <p class="panel-description">Educational resources and materials</p>
+                        </div>
+                        <div class="link-grid">
+                            <a href="https://mrg-stem.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">MRG STEM</div>
+                                <div class="link-card-url">mrg-stem.netlify.app</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Public Portfolio</h2>
+                            <p class="panel-description">Public-facing portfolio and work</p>
+                        </div>
+                        <div class="link-grid">
+                            <a href="https://alexgonzalez.ooo" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">alexgonzalez.ooo</div>
+                                <div class="link-card-url">alexgonzalez.ooo</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Websites I Maintain</h2>
+                            <p class="panel-description">Sites under active maintenance</p>
+                        </div>
+                        <div class="link-grid">
+                            <a href="https://cpcnewhaven.org" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">CPC</div>
+                                <div class="link-card-url">cpcnewhaven.org</div>
+                            </a>
+                            <a href="https://ape-market.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Firebird (Ape Redesign)</div>
+                                <div class="link-card-url">ape-market.netlify.app</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-header">
+                            <h2 class="panel-title">Professional Projects</h2>
+                            <p class="panel-description">Professional development projects</p>
+                        </div>
+                        <div class="link-grid">
+                            <a href="https://github.com/oooAHOYooo/aracastone" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">ArcaStone</div>
+                                <div class="link-card-url">github.com/oooAHOYooo/aracastone</div>
+                            </a>
+                            <a href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html" target="_blank" rel="noopener" class="link-card">
+                                <div class="link-card-title">Zuki</div>
+                                <div class="link-card-url">alexgonzalez.ooo/portfolio/zuki</div>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Password Screen Logic with Three.js
         (function() {
             const PASSWORD = '1153';
             const STORAGE_KEY = 'personalHub_authenticated';
@@ -312,18 +686,16 @@
             const passwordInput = document.getElementById('passwordInput');
             const passwordSubmit = document.getElementById('passwordSubmit');
             const passwordError = document.getElementById('passwordError');
-            const container = document.querySelector('.container.home');
+            const appShell = document.getElementById('appShell');
             const canvas = document.getElementById('threeCanvas');
             
             // Check if already authenticated
             if (localStorage.getItem(STORAGE_KEY) === 'true') {
                 passwordScreen.style.display = 'none';
-                container.style.display = 'block';
+                appShell.style.display = 'flex';
+                initApp();
                 return;
             }
-            
-            // Hide main content initially
-            container.style.display = 'none';
             
             // Three.js Fluid Animation Setup
             let scene, camera, renderer;
@@ -331,19 +703,10 @@
             let time = 0;
             
             function initThreeJS() {
-                // Scene setup
                 scene = new THREE.Scene();
-                
-                // Camera setup
-                camera = new THREE.PerspectiveCamera(
-                    75,
-                    window.innerWidth / window.innerHeight,
-                    0.1,
-                    1000
-                );
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
                 camera.position.z = 5;
                 
-                // Renderer setup
                 renderer = new THREE.WebGLRenderer({
                     canvas: canvas,
                     alpha: true,
@@ -352,15 +715,14 @@
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 renderer.setPixelRatio(window.devicePixelRatio);
                 
-                // Create fluid blobs
                 const blobCount = 6;
                 const colors = [
-                    new THREE.Color(0x818cf8), // accent-1
-                    new THREE.Color(0xa78bfa), // accent-2
-                    new THREE.Color(0x60a5fa), // accent-3
-                    new THREE.Color(0x6366f1), // indigo
-                    new THREE.Color(0x8b5cf6), // purple
-                    new THREE.Color(0x3b82f6)  // blue
+                    new THREE.Color(0x818cf8),
+                    new THREE.Color(0xa78bfa),
+                    new THREE.Color(0x60a5fa),
+                    new THREE.Color(0x6366f1),
+                    new THREE.Color(0x8b5cf6),
+                    new THREE.Color(0x3b82f6)
                 ];
                 
                 for (let i = 0; i < blobCount; i++) {
@@ -376,8 +738,6 @@
                     });
                     
                     const blob = new THREE.Mesh(geometry, material);
-                    
-                    // Position blobs in a sphere
                     const angle = (i / blobCount) * Math.PI * 2;
                     const radius = 2.5;
                     blob.position.x = Math.cos(angle) * radius;
@@ -394,7 +754,6 @@
                     scene.add(blob);
                 }
                 
-                // Add ambient and point lights
                 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
                 scene.add(ambientLight);
                 
@@ -406,44 +765,30 @@
                 pointLight2.position.set(-5, -5, 5);
                 scene.add(pointLight2);
                 
-                // Handle window resize
-                window.addEventListener('resize', onWindowResize);
-            }
-            
-            function onWindowResize() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
             }
             
             function animate() {
                 requestAnimationFrame(animate);
-                
                 time += 0.01;
                 
-                // Animate blobs with smooth, fluid motion
-                blobs.forEach((blob, i) => {
+                blobs.forEach((blob) => {
                     const data = blob.userData;
-                    
-                    // Smooth floating motion
                     blob.position.x = data.basePosition.x + Math.sin(time * data.speed + data.phase) * 0.5;
                     blob.position.y = data.basePosition.y + Math.cos(time * data.speed * 0.7 + data.phase) * 0.5;
                     blob.position.z = data.basePosition.z + Math.sin(time * data.speed * 0.5 + data.phase) * 0.3;
-                    
-                    // Smooth rotation
                     blob.rotation.x += 0.002 * data.speed;
                     blob.rotation.y += 0.003 * data.speed;
                     blob.rotation.z += 0.001 * data.speed;
-                    
-                    // Morphing scale for liquid butter effect
                     const scale = 1 + Math.sin(time * 2 + data.phase) * 0.15;
                     blob.scale.set(scale, scale, scale);
-                    
-                    // Pulsing opacity
                     blob.material.opacity = 0.5 + Math.sin(time * 1.5 + data.phase) * 0.2;
                 });
                 
-                // Rotate camera slightly for dynamic view
                 camera.position.x = Math.sin(time * 0.1) * 0.5;
                 camera.position.y = Math.cos(time * 0.15) * 0.3;
                 camera.lookAt(scene.position);
@@ -451,66 +796,37 @@
                 renderer.render(scene, camera);
             }
             
-            // Initialize Three.js
             initThreeJS();
             animate();
             
-            // Handle password submission
             function checkPassword() {
                 const input = passwordInput.value.trim();
                 
                 if (input === PASSWORD) {
-                    // Correct password
                     localStorage.setItem(STORAGE_KEY, 'true');
                     passwordError.textContent = '';
                     passwordError.classList.remove('show');
-                    
-                    // Animate out with smooth transition
                     passwordScreen.classList.add('fade-out');
                     
-                    // Stop animation loop
                     setTimeout(() => {
                         if (renderer) {
                             renderer.dispose();
                         }
                         passwordScreen.style.display = 'none';
-                        container.style.display = 'block';
-                        // Trigger fade-in animations
-                        document.querySelectorAll('.telecom-button, .quick-button').forEach(el => {
-                            el.style.opacity = '0';
-                            el.style.transform = 'translateY(20px)';
-                            observer.observe(el);
-                        });
+                        appShell.style.display = 'flex';
+                        initApp();
                     }, 1000);
                 } else {
-                    // Wrong password
                     passwordError.textContent = 'Access Denied';
                     passwordError.classList.add('show');
                     passwordInput.value = '';
                     passwordInput.classList.add('shake');
-                    
-                    // Add shake effect to blobs
-                    blobs.forEach(blob => {
-                        const originalPos = blob.position.clone();
-                        let shakeCount = 0;
-                        const shakeInterval = setInterval(() => {
-                            blob.position.x = originalPos.x + (Math.random() - 0.5) * 0.2;
-                            blob.position.y = originalPos.y + (Math.random() - 0.5) * 0.2;
-                            shakeCount++;
-                            if (shakeCount > 10) {
-                                clearInterval(shakeInterval);
-                                blob.position.copy(originalPos);
-                            }
-                        }, 50);
-                    });
-                    
                     setTimeout(() => {
                         passwordInput.classList.remove('shake');
                     }, 500);
                 }
             }
             
-            // Event listeners
             passwordSubmit.addEventListener('click', checkPassword);
             passwordInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
@@ -518,11 +834,52 @@
                 }
             });
             
-            // Focus input on load
             setTimeout(() => {
                 passwordInput.focus();
             }, 100);
         })();
-        </script>
-    </body>
+
+        // App initialization
+        function initApp() {
+            // Date display
+            const dateElement = document.getElementById('currentDate');
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            dateElement.textContent = now.toLocaleDateString('en-US', options);
+
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                });
+
+                // Close menu when clicking outside on mobile
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                            sidebar.classList.remove('open');
+                        }
+                    }
+                });
+            }
+
+            // Set active nav link based on current page
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPath.split('/').pop() || 
+                    (currentPath === '/' && link.getAttribute('href') === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
 </html>
