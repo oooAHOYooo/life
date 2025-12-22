@@ -1,0 +1,51 @@
+[
+  {
+    "type": "decision",
+    "title": "Focus on Indie Media Platform",
+    "description": "Prioritize Ahoy Indie Media as primary revenue stream. Ship MVP, stabilize infrastructure, build audience.",
+    "category": "Business"
+  },
+  {
+    "type": "decision",
+    "title": "Teaching as Stable Income",
+    "description": "Package and sell 4 ready-to-run curricula. Target 2 contracts per season in Greater New Haven area.",
+    "category": "Income"
+  },
+  {
+    "type": "decision",
+    "title": "Maintain $5k Monthly Floor",
+    "description": "Mix retainers, teaching, and freelance. Cover $3.5k expenses, save the rest for land and emergency fund.",
+    "category": "Finance"
+  },
+  {
+    "type": "vision",
+    "title": "Land Acquisition",
+    "description": "Build wealth bucket toward land purchase. Scout properties, understand financing, prepare for opportunity.",
+    "category": "Long-term"
+  },
+  {
+    "type": "vision",
+    "title": "Film Production Pipeline",
+    "description": "Complete Act I of Creatures in the Tall Grass. Establish production workflow, test equipment, build team.",
+    "category": "Creative"
+  },
+  {
+    "type": "vision",
+    "title": "Personal Systems Simplification",
+    "description": "Keep LifeOS static. No backend complexity. JSON-driven, manual editing in Cursor. Focus on content over infrastructure.",
+    "category": "Systems"
+  },
+  {
+    "type": "decision",
+    "title": "Client Work Boundaries",
+    "description": "CPC work: finish admin portal, deliver media gallery. Then evaluate ongoing relationship vs. time allocation.",
+    "category": "Work"
+  },
+  {
+    "type": "vision",
+    "title": "R&D Projects",
+    "description": "Zuki robot: minimal MVP in Snorlax shell. RouteScout: stabilize Android build, log land leads. Keep experimental.",
+    "category": "R&D"
+  }
+]
+
