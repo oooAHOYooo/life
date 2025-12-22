@@ -20,3 +20,5 @@
 
 *Full plan: docs/goals/2026.md*
 
+
+
