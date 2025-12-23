@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>2026 Goals - LifeOS</title>
+        <title>Christmas Break Transition - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,6 +75,14 @@
                 inset 0 0 60px rgba(255, 250, 240, 0.5);
         }
         
+        .nav-links {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
         .back-link, .nav-link {
             color: #8b7355;
             text-decoration: none;
@@ -87,14 +95,6 @@
         .back-link:hover, .nav-link:hover {
             color: #6b5a42;
             text-decoration: underline;
-        }
-        
-        .nav-links {
-            margin-bottom: 30px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
         }
         
         .print-controls {
@@ -451,9 +451,7 @@
             <div class="nav-links">
                 <a href="../index.html" class="back-link">← HOME</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
-                <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="2026.html" class="nav-link">2026</a>
             </div>
             
             <div class="print-controls">
@@ -461,15 +459,15 @@
             </div>
             
             <header>
-                <h1>2026</h1>
-                <p>GOALS & PLAN</p>
+                <h1>Christmas Break</h1>
+                <p>TRANSITION PLAN</p>
             </header>
             
             <div id="contentContainer" class="content"></div>
         </div>
         
         <script>
-        class Goals2026Page {
+        class XmasBreakPage {
             constructor() {
                 this.markdown = '';
                 this.init();
@@ -482,7 +480,7 @@
             
             async loadData() {
                 try {
-                    const response = await fetch('../data/2026.md');
+                    const response = await fetch('../data/25-xmas-break.md');
                     if (!response.ok) throw new Error('Failed to load markdown');
                     this.markdown = await response.text();
                 } catch (error) {
@@ -546,7 +544,7 @@
         
         // Initialize the page when it loads
         document.addEventListener('DOMContentLoaded', () => {
-            new Goals2026Page();
+            new XmasBreakPage();
         });
         </script>
     </body>
