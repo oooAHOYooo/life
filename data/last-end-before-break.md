@@ -91,3 +91,7 @@ _Revisit this document quarterly._
 
 _Add any other urgent items, reminders, or tasks here before break begins._
 
+### Additional Thoughts for Later
+
+1. Should make Life and other things private
+2. Check status of Electric + Gas Bills + Pay via SoFi
