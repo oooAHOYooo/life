@@ -1,5 +1,6 @@
 import JSZip from "jszip";
 import Konva from "konva";
+import type { Stage } from "konva/lib/Stage";
 import type { Scene } from "@/types/scene";
 import { downloadBlob, downloadDataUrl } from "@/utils/download";
 
@@ -16,11 +17,11 @@ function safeName(name: string) {
   return name.replace(/[^a-z0-9\-_]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "").toLowerCase() || "project";
 }
 
-function getLayerByName(stage: Konva.Stage, name: string) {
+function getLayerByName(stage: Stage, name: string) {
   return stage.findOne(`.${name}`) as Konva.Layer | null;
 }
 
-export function renderCleanPngDataUrl(stage: Konva.Stage) {
+export function renderCleanPngDataUrl(stage: Stage) {
   const ui = getLayerByName(stage, "ui");
   const annot = getLayerByName(stage, "annot");
   const prevUiVis = ui?.visible();
@@ -35,7 +36,7 @@ export function renderCleanPngDataUrl(stage: Konva.Stage) {
   return url;
 }
 
-export function renderAnnotatedPngDataUrl(stage: Konva.Stage) {
+export function renderAnnotatedPngDataUrl(stage: Stage) {
   const ui = getLayerByName(stage, "ui");
   const prevUiVis = ui?.visible();
   if (ui) ui.visible(false);
@@ -46,7 +47,7 @@ export function renderAnnotatedPngDataUrl(stage: Konva.Stage) {
   return url;
 }
 
-export function buildAnnotationLayer(stage: Konva.Stage, labels: Array<{ id: string; name: string; type: string; x: number; y: number; width: number; height: number }>) {
+export function buildAnnotationLayer(stage: Stage, labels: Array<{ id: string; name: string; type: string; x: number; y: number; width: number; height: number }>) {
   const existing = getLayerByName(stage, "annot");
   existing?.destroy();
 
@@ -135,7 +136,7 @@ export function makePromptMd(opts: {
 }
 
 export async function exportAiBundleZip(opts: {
-  stage: Konva.Stage;
+  stage: Stage;
   filenameBase: string;
   projectName: string;
   scene: Scene;
@@ -159,12 +160,12 @@ export async function exportAiBundleZip(opts: {
   downloadBlob(`${base}_ai-bundle.zip`, blob);
 }
 
-export function downloadCleanPng(stage: Konva.Stage, filenameBase: string) {
+export function downloadCleanPng(stage: Stage, filenameBase: string) {
   const url = renderCleanPngDataUrl(stage);
   downloadDataUrl(`${filenameBase}.png`, url);
 }
 
-export function downloadAnnotatedPng(stage: Konva.Stage, filenameBase: string) {
+export function downloadAnnotatedPng(stage: Stage, filenameBase: string) {
   const url = renderAnnotatedPngDataUrl(stage);
   downloadDataUrl(`${filenameBase}_annotated.png`, url);
 }

@@ -1,14 +1,16 @@
 import { defineStore } from "pinia";
-import type Konva from "konva";
+import { markRaw, shallowRef } from "vue";
+import type { Stage } from "konva/lib/Stage";
 
-export const useRuntimeStore = defineStore("runtime", {
-  state: () => ({
-    stage: null as Konva.Stage | null,
-  }),
-  actions: {
-    setStage(stage: Konva.Stage | null) {
-      this.stage = stage;
-    },
-  },
+// Setup-style store so we can keep Konva instances in a shallowRef
+// (avoids Vue/Pinia unwrapping making Stage not assignable to Stage).
+export const useRuntimeStore = defineStore("runtime", () => {
+  const stage = shallowRef<Stage | null>(null);
+
+  function setStage(s: Stage | null) {
+    stage.value = s ? markRaw(s) : null;
+  }
+
+  return { stage, setStage };
 });
 

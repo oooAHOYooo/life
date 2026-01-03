@@ -6,6 +6,7 @@ import { useEditorStore } from "@/stores/editor";
 import { useRuntimeStore } from "@/stores/runtime";
 import { buildAnnotationLayer } from "@/utils/export";
 import { bboxFromPoints, clamp } from "@/utils/geometry";
+import type { Stage } from "konva/lib/Stage";
 
 const editor = useEditorStore();
 const runtime = useRuntimeStore();
@@ -40,8 +41,8 @@ const stageConfig = computed(() => ({
   scaleY: editor.zoom,
 }));
 
-function getStage(): Konva.Stage | null {
-  const s = stageRef.value?.getNode?.() as Konva.Stage | undefined;
+function getStage(): Stage | null {
+  const s = stageRef.value?.getNode?.() as Stage | undefined;
   return s ?? null;
 }
 
@@ -344,7 +345,7 @@ onMounted(() => {
   if (host.value) ro.observe(host.value);
 
   const stage = getStage();
-  if (stage) runtime.setStage(stage);
+  runtime.setStage(stage);
 });
 
 onBeforeUnmount(() => {
@@ -358,7 +359,7 @@ watch(
   () => stageRef.value,
   () => {
     const stage = getStage();
-    if (stage) runtime.setStage(stage);
+    runtime.setStage(stage);
     setTransformer();
     syncAnnotLayer();
   }
