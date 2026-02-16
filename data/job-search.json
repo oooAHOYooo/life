@@ -1,0 +1,117 @@
+{
+  "mission": "Land a $85k–$115k Leadership/Coordinator role by June 2026",
+  "deadline": "June 2026",
+  "pitch": "I'm transitioning out of the classroom in June. I'm looking for a Leadership or Coordinator role in Educational Technology or Media Arts in the New Haven area. I want to use my background as a Film Professor and Product Designer to help an institution build out their AI, VR, or Digital Media programs. I'm looking for something in the $85k–$100k range where I can focus on high-level projects rather than day-to-day classroom management.",
+  "keywords": [
+    "Instructional Technology Director",
+    "Academic Media Coordinator",
+    "MakerSpace Manager",
+    "EdTech Specialist"
+  ],
+  "comfortMath": {
+    "newJobNet": "$5,300/month (after taxes)",
+    "cpcIncome": "$1,600/month",
+    "total": "$6,900/month",
+    "note": "Hits 'Comfort' goal immediately. 9-to-5 with no grading = fresh brain at 5:01 PM for Ahoy and film."
+  },
+  "targetRoles": [
+    {
+      "title": "Director of Instructional Technology (Private Schools)",
+      "description": "Help other teachers use tech (AI, VR, etc.) and manage the school's MakerSpace.",
+      "pay": "$85,000 – $115,000 ($7k – $9.5k/month)",
+      "targets": ["Hopkins School (New Haven)", "Hamden Hall", "Foote School"],
+      "hiringWindow": "Late Feb – April (for Aug start)",
+      "priority": "High"
+    },
+    {
+      "title": "Media Arts / Film Coordinator (Higher Ed or Prep)",
+      "description": "Managing equipment, studios, and teaching high-level electives. No foundational behavior management.",
+      "pay": "$70,000 – $90,000 ($5.8k – $7.5k/month)",
+      "targets": ["Yale University (Poorvu Center or ITS)", "Quinnipiac", "Choate (staff role)"],
+      "hiringWindow": "Now – May (3–5 month HR cycle)",
+      "priority": "High"
+    },
+    {
+      "title": "Instructional Designer / Learning Architect",
+      "description": "Building 'Learn-at-home' style sites for companies or universities. Build the course once, it lives forever.",
+      "pay": "$80,000 – $105,000 ($6.6k – $8.7/month)",
+      "targets": ["Yale", "Quinnipiac", "UNH", "Remote EdTech companies"],
+      "hiringWindow": "Rolling – 2-3 month cycle",
+      "priority": "Medium"
+    },
+    {
+      "title": "Coordinator, AI Academy / STEM Outreach",
+      "description": "Specialized roles focusing on specific tech initiatives (like Charter Oak State College).",
+      "pay": "$65,000 – $85,000",
+      "targets": ["Charter Oak State College", "Gateway CC", "Southern CT State"],
+      "hiringWindow": "Rolling",
+      "priority": "Medium"
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": "Strategy",
+      "month": "Late Feb",
+      "goal": "Update LinkedIn & Portfolio. Shift from 'STEM Teacher' to 'Educational Technology Leader.' Reach out to 3 friend networks (Apeworx, Choate, New Haven Arts).",
+      "status": "active"
+    },
+    {
+      "phase": "Outreach",
+      "month": "March",
+      "goal": "Active Applications. Focus on 5–10 high-quality 'Director' or 'Coordinator' roles. Don't spray and pray — use portfolio to send direct, tailored messages to hiring managers.",
+      "status": "upcoming"
+    },
+    {
+      "phase": "Interviews",
+      "month": "April / May",
+      "goal": "The Interview Phase. Most education-sector offers finalized here. Know your future by early May.",
+      "status": "upcoming"
+    },
+    {
+      "phase": "Closing",
+      "month": "June",
+      "goal": "Wrap up Bridgeport. Focus on filmmaking/Ahoy projects as you transition out of STEM role.",
+      "status": "upcoming"
+    }
+  ],
+  "hiringCycles": {
+    "privateSchools": "Late Feb – April for late-August start. Looking for Directors of Technology and Media Arts staff RIGHT NOW.",
+    "higherEd": "Notoriously slow (3–5 months). Starting in Feb gives lead time to survive HR bureaucracy for July/Aug start.",
+    "edtechStartups": "2–3 months from first application to first paycheck. Applying March/April lines up June/July start."
+  },
+  "dailyChecklist": {
+    "morning": [
+      { "task": "Check LinkedIn for new job postings matching target roles", "minutes": 10 },
+      { "task": "Check HigherEdJobs, Indeed, and school career pages", "minutes": 10 },
+      { "task": "Review and respond to any recruiter/network messages", "minutes": 5 }
+    ],
+    "midday": [
+      { "task": "Send 1 tailored application OR 1 direct message to a hiring manager", "minutes": 30 },
+      { "task": "Update job tracker (add new leads, update statuses)", "minutes": 5 }
+    ],
+    "evening": [
+      { "task": "Spend 15 min on portfolio/LinkedIn improvements", "minutes": 15 },
+      { "task": "Send 1 networking message (friend, former colleague, or new connection)", "minutes": 10 },
+      { "task": "Review tomorrow's targets and prep any cover letter drafts", "minutes": 10 }
+    ],
+    "weekly": [
+      { "task": "Apply to at least 3 high-quality roles (Mon/Wed/Fri)", "day": "M/W/F" },
+      { "task": "Follow up on all pending applications (check status, send nudges)", "day": "Tuesday" },
+      { "task": "Reach out to 2 people in your network with the 'Pitch'", "day": "Wednesday" },
+      { "task": "Review and refine resume/portfolio based on what's working", "day": "Thursday" },
+      { "task": "Weekly reflection: What worked? What to change? Update roadmap.", "day": "Sunday" }
+    ]
+  },
+  "immediateActions": [
+    { "task": "Update LinkedIn title to 'Educational Technology Leader | Film Professor'", "done": false },
+    { "task": "Update LinkedIn summary with the Pitch script", "done": false },
+    { "task": "Reach out to Apeworx network contacts", "done": false },
+    { "task": "Reach out to Choate network contacts", "done": false },
+    { "task": "Reach out to New Haven Arts network contacts", "done": false },
+    { "task": "Check Hopkins School careers page", "done": false },
+    { "task": "Check Hamden Hall careers page", "done": false },
+    { "task": "Check Yale Poorvu Center / ITS job listings", "done": false },
+    { "task": "Check Quinnipiac University job listings", "done": false },
+    { "task": "Check HigherEdJobs.com for CT roles", "done": false }
+  ]
+}

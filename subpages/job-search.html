@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Mission - LifeOS</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../design-system.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #5a4a3a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        header { margin-bottom: 32px; }
+        header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+        header .deadline { font-size: 14px; color: #6b5d47; }
+
+        /* Pitch Card */
+        .pitch-card {
+            background: #faf8f3;
+            border: 2px solid #3d3424;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .pitch-card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: #6b5d47; margin-bottom: 12px; }
+        .pitch-card blockquote {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #2c2416;
+            border-left: 3px solid #5a4a3a;
+            padding-left: 16px;
+            margin: 0;
+            font-style: italic;
+        }
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .keyword-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: #ebe7dd;
+            border: 1px solid #6b5d47;
+            color: #2c2416;
+        }
+
+        /* Comfort Math */
+        .math-card {
+            background: #faf8f3;
+            border: 2px solid #3d3424;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .math-card h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .math-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ebe7dd;
+            font-size: 14px;
+        }
+        .math-row:last-child { border-bottom: none; }
+        .math-row.total { font-weight: 700; font-size: 16px; border-top: 2px solid #3d3424; margin-top: 8px; padding-top: 12px; }
+        .math-note { font-size: 13px; color: #6b5d47; margin-top: 12px; font-style: italic; }
+
+        /* Sections */
+        .section { margin-bottom: 32px; }
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3d3424;
+        }
+
+        /* Target Roles */
+        .role-card {
+            background: #faf8f3;
+            border: 1px solid #6b5d47;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+        .role-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .role-pay { font-size: 14px; font-weight: 600; color: #5a4a3a; margin-bottom: 8px; }
+        .role-desc { font-size: 13px; color: #6b5d47; margin-bottom: 10px; }
+        .role-targets { font-size: 13px; color: #2c2416; }
+        .role-targets strong { font-weight: 600; }
+        .role-window { font-size: 12px; color: #8b7d6b; margin-top: 6px; }
+        .priority-high { border-left: 4px solid #5a4a3a; }
+        .priority-medium { border-left: 4px solid #8b7d6b; }
+
+        /* Roadmap */
+        .roadmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .roadmap-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: #ebe7dd;
+            border: 1px solid #6b5d47;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .roadmap-table td {
+            padding: 12px;
+            border: 1px solid #ebe7dd;
+            vertical-align: top;
+        }
+        .phase-active { background: #faf8f3; font-weight: 600; }
+        .phase-upcoming { background: transparent; }
+        .phase-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-active { background: #5a4a3a; color: #faf8f3; }
+        .badge-upcoming { background: #ebe7dd; color: #6b5d47; }
+
+        /* Hiring Cycles */
+        .cycle-card {
+            background: #faf8f3;
+            border: 1px solid #6b5d47;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+        }
+        .cycle-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .cycle-card p { font-size: 13px; color: #6b5d47; margin: 0; }
+
+        /* Checklists */
+        .checklist-group { margin-bottom: 24px; }
+        .checklist-group h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6b5d47;
+            margin-bottom: 10px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #faf8f3;
+            border: 1px solid #ebe7dd;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .checklist-item:hover { border-color: #6b5d47; }
+        .checklist-item.checked {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-top: 2px;
+            accent-color: #5a4a3a;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        .checklist-item .time-badge {
+            font-size: 11px;
+            color: #8b7d6b;
+            margin-left: auto;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .checklist-item .day-badge {
+            font-size: 11px;
+            padding: 1px 6px;
+            background: #ebe7dd;
+            border-radius: 3px;
+            color: #6b5d47;
+            margin-left: auto;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Immediate Actions */
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #faf8f3;
+            border: 1px solid #ebe7dd;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .action-item:hover { border-color: #6b5d47; }
+        .action-item.done { opacity: 0.5; text-decoration: line-through; }
+        .action-item input[type="checkbox"] {
+            accent-color: #5a4a3a;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Reset button */
+        .reset-btn {
+            background: none;
+            border: 1px solid #6b5d47;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #6b5d47;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .reset-btn:hover { background: #ebe7dd; }
+
+        /* Counter */
+        .day-counter {
+            text-align: center;
+            padding: 20px;
+            background: #faf8f3;
+            border: 2px solid #3d3424;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        .day-counter .number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2c2416;
+            line-height: 1;
+        }
+        .day-counter .label {
+            font-size: 13px;
+            color: #6b5d47;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        /* Wife script */
+        .script-card {
+            background: #faf8f3;
+            border: 2px solid #3d3424;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .script-card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: #6b5d47; margin-bottom: 12px; }
+        .script-card p { font-size: 14px; line-height: 1.7; color: #2c2416; font-style: italic; }
+
+        @media (max-width: 600px) {
+            .container { padding: 16px; }
+            .day-counter .number { font-size: 36px; }
+            .roadmap-table { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to LifeOS</a>
+
+        <header>
+            <h1>Job Search Mission</h1>
+            <div class="deadline">4-Month Sprint &mdash; Land a role by June 2026</div>
+        </header>
+
+        <!-- Countdown -->
+        <div class="day-counter">
+            <div class="number" id="daysLeft">--</div>
+            <div class="label">Days Remaining</div>
+        </div>
+
+        <!-- Daily Checklist (with localStorage persistence) -->
+        <div class="section" id="dailySection">
+            <h2>Daily Checklist</h2>
+            <p style="font-size:13px;color:#6b5d47;margin-bottom:16px;">Resets every day at midnight. Do these every single day.</p>
+            <div id="dailyChecklists"></div>
+            <button class="reset-btn" id="resetDaily">Reset Today's Checklist</button>
+        </div>
+
+        <!-- Weekly Checklist -->
+        <div class="section" id="weeklySection">
+            <h2>Weekly Checklist</h2>
+            <p style="font-size:13px;color:#6b5d47;margin-bottom:16px;">Resets every Monday. Hit every one of these each week.</p>
+            <div id="weeklyChecklist"></div>
+            <button class="reset-btn" id="resetWeekly">Reset Weekly Checklist</button>
+        </div>
+
+        <!-- Immediate Actions (one-time, persisted) -->
+        <div class="section" id="immediateSection">
+            <h2>Immediate Actions (This Week)</h2>
+            <div id="immediateActions"></div>
+        </div>
+
+        <!-- The Pitch -->
+        <div class="pitch-card">
+            <h2>Your Pitch (Use This Exact Script)</h2>
+            <blockquote id="pitchText"></blockquote>
+            <div class="keywords" id="keywordTags"></div>
+        </div>
+
+        <!-- What to Tell Your Wife -->
+        <div class="script-card">
+            <h2>What to Tell Your Wife</h2>
+            <p>"I have 4 months of guaranteed income from Bridgeport and CPC. I am entering the peak hiring season for the high-paying leadership roles I'm qualified for. If I start my outreach this week, I'm on track to have a new, better-paying contract signed before my last day in Bridgeport."</p>
+        </div>
+
+        <!-- Comfort Math -->
+        <div class="math-card">
+            <h2>The Comfort Math</h2>
+            <div id="mathRows"></div>
+            <div class="math-note" id="mathNote"></div>
+        </div>
+
+        <!-- Target Roles -->
+        <div class="section">
+            <h2>Target Roles</h2>
+            <div id="targetRoles"></div>
+        </div>
+
+        <!-- Hiring Cycles -->
+        <div class="section">
+            <h2>Hiring Cycles (Why NOW)</h2>
+            <div id="hiringCycles"></div>
+        </div>
+
+        <!-- Roadmap -->
+        <div class="section">
+            <h2>Transition Roadmap (Feb &ndash; June)</h2>
+            <table class="roadmap-table" id="roadmapTable">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>When</th>
+                        <th>Goal</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="roadmapBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    class JobSearchPage {
+        constructor() {
+            this.data = null;
+            this.DAILY_KEY = 'jobSearch_daily';
+            this.WEEKLY_KEY = 'jobSearch_weekly';
+            this.IMMEDIATE_KEY = 'jobSearch_immediate';
+            this.init();
+        }
+
+        async init() {
+            await this.loadData();
+            this.renderCountdown();
+            this.renderDailyChecklists();
+            this.renderWeeklyChecklist();
+            this.renderImmediateActions();
+            this.renderPitch();
+            this.renderMath();
+            this.renderTargetRoles();
+            this.renderHiringCycles();
+            this.renderRoadmap();
+            this.bindResets();
+        }
+
+        async loadData() {
+            try {
+                const res = await fetch('../data/job-search.json');
+                this.data = await res.json();
+            } catch (e) {
+                console.error('Error loading job search data:', e);
+            }
+        }
+
+        // --- Countdown ---
+        renderCountdown() {
+            const deadline = new Date('2026-06-15');
+            const now = new Date();
+            const diff = Math.max(0, Math.ceil((deadline - now) / (1000 * 60 * 60 * 24)));
+            document.getElementById('daysLeft').textContent = diff;
+        }
+
+        // --- Daily Checklist (resets at midnight) ---
+        getDailyState() {
+            const today = new Date().toDateString();
+            const stored = JSON.parse(localStorage.getItem(this.DAILY_KEY) || '{}');
+            if (stored.date !== today) {
+                return { date: today, checked: {} };
+            }
+            return stored;
+        }
+
+        saveDailyState(state) {
+            localStorage.setItem(this.DAILY_KEY, JSON.stringify(state));
+        }
+
+        renderDailyChecklists() {
+            const container = document.getElementById('dailyChecklists');
+            const cl = this.data.dailyChecklist;
+            const state = this.getDailyState();
+            let html = '';
+
+            const groups = [
+                { key: 'morning', label: 'Morning (Before Work)', items: cl.morning },
+                { key: 'midday', label: 'Midday (Lunch Break)', items: cl.midday },
+                { key: 'evening', label: 'Evening (After 5 PM)', items: cl.evening }
+            ];
+
+            groups.forEach(group => {
+                html += `<div class="checklist-group"><h3>${group.label}</h3>`;
+                group.items.forEach((item, i) => {
+                    const id = `${group.key}_${i}`;
+                    const checked = state.checked[id] || false;
+                    html += `
+                        <label class="checklist-item ${checked ? 'checked' : ''}">
+                            <input type="checkbox" data-daily-id="${id}" ${checked ? 'checked' : ''}>
+                            <span>${this.esc(item.task)}</span>
+                            <span class="time-badge">${item.minutes} min</span>
+                        </label>`;
+                });
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+
+            container.querySelectorAll('input[data-daily-id]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    const s = this.getDailyState();
+                    s.checked[cb.dataset.dailyId] = cb.checked;
+                    this.saveDailyState(s);
+                    cb.closest('.checklist-item').classList.toggle('checked', cb.checked);
+                });
+            });
+        }
+
+        // --- Weekly Checklist (resets Monday) ---
+        getWeekStart() {
+            const now = new Date();
+            const day = now.getDay();
+            const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+            return new Date(now.setDate(diff)).toDateString();
+        }
+
+        getWeeklyState() {
+            const weekStart = this.getWeekStart();
+            const stored = JSON.parse(localStorage.getItem(this.WEEKLY_KEY) || '{}');
+            if (stored.weekStart !== weekStart) {
+                return { weekStart: weekStart, checked: {} };
+            }
+            return stored;
+        }
+
+        saveWeeklyState(state) {
+            localStorage.setItem(this.WEEKLY_KEY, JSON.stringify(state));
+        }
+
+        renderWeeklyChecklist() {
+            const container = document.getElementById('weeklyChecklist');
+            const items = this.data.dailyChecklist.weekly;
+            const state = this.getWeeklyState();
+            let html = '';
+
+            items.forEach((item, i) => {
+                const id = `weekly_${i}`;
+                const checked = state.checked[id] || false;
+                html += `
+                    <label class="checklist-item ${checked ? 'checked' : ''}">
+                        <input type="checkbox" data-weekly-id="${id}" ${checked ? 'checked' : ''}>
+                        <span>${this.esc(item.task)}</span>
+                        <span class="day-badge">${this.esc(item.day)}</span>
+                    </label>`;
+            });
+
+            container.innerHTML = html;
+
+            container.querySelectorAll('input[data-weekly-id]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    const s = this.getWeeklyState();
+                    s.checked[cb.dataset.weeklyId] = cb.checked;
+                    this.saveWeeklyState(s);
+                    cb.closest('.checklist-item').classList.toggle('checked', cb.checked);
+                });
+            });
+        }
+
+        // --- Immediate Actions (persisted, not resetting) ---
+        getImmediateState() {
+            return JSON.parse(localStorage.getItem(this.IMMEDIATE_KEY) || '{}');
+        }
+
+        saveImmediateState(state) {
+            localStorage.setItem(this.IMMEDIATE_KEY, JSON.stringify(state));
+        }
+
+        renderImmediateActions() {
+            const container = document.getElementById('immediateActions');
+            const items = this.data.immediateActions;
+            const state = this.getImmediateState();
+            let html = '';
+
+            items.forEach((item, i) => {
+                const id = `imm_${i}`;
+                const checked = state[id] || false;
+                html += `
+                    <label class="action-item ${checked ? 'done' : ''}">
+                        <input type="checkbox" data-imm-id="${id}" ${checked ? 'checked' : ''}>
+                        <span>${this.esc(item.task)}</span>
+                    </label>`;
+            });
+
+            container.innerHTML = html;
+
+            container.querySelectorAll('input[data-imm-id]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    const s = this.getImmediateState();
+                    s[cb.dataset.immId] = cb.checked;
+                    this.saveImmediateState(s);
+                    cb.closest('.action-item').classList.toggle('done', cb.checked);
+                });
+            });
+        }
+
+        // --- Pitch ---
+        renderPitch() {
+            document.getElementById('pitchText').textContent = this.data.pitch;
+            const tags = document.getElementById('keywordTags');
+            tags.innerHTML = this.data.keywords.map(k => `<span class="keyword-tag">${this.esc(k)}</span>`).join('');
+        }
+
+        // --- Comfort Math ---
+        renderMath() {
+            const m = this.data.comfortMath;
+            const rows = document.getElementById('mathRows');
+            rows.innerHTML = `
+                <div class="math-row"><span>New Job (net)</span><span>${this.esc(m.newJobNet)}</span></div>
+                <div class="math-row"><span>CPC Income</span><span>${this.esc(m.cpcIncome)}</span></div>
+                <div class="math-row total"><span>Monthly Total</span><span>${this.esc(m.total)}</span></div>`;
+            document.getElementById('mathNote').textContent = m.note;
+        }
+
+        // --- Target Roles ---
+        renderTargetRoles() {
+            const container = document.getElementById('targetRoles');
+            container.innerHTML = this.data.targetRoles.map(r => `
+                <div class="role-card priority-${r.priority.toLowerCase()}">
+                    <h3>${this.esc(r.title)}</h3>
+                    <div class="role-pay">${this.esc(r.pay)}</div>
+                    <div class="role-desc">${this.esc(r.description)}</div>
+                    <div class="role-targets"><strong>Targets:</strong> ${r.targets.map(t => this.esc(t)).join(', ')}</div>
+                    <div class="role-window">Hiring window: ${this.esc(r.hiringWindow)}</div>
+                </div>`).join('');
+        }
+
+        // --- Hiring Cycles ---
+        renderHiringCycles() {
+            const container = document.getElementById('hiringCycles');
+            const hc = this.data.hiringCycles;
+            container.innerHTML = `
+                <div class="cycle-card"><h3>Private Schools</h3><p>${this.esc(hc.privateSchools)}</p></div>
+                <div class="cycle-card"><h3>Higher Ed</h3><p>${this.esc(hc.higherEd)}</p></div>
+                <div class="cycle-card"><h3>EdTech / Startups</h3><p>${this.esc(hc.edtechStartups)}</p></div>`;
+        }
+
+        // --- Roadmap ---
+        renderRoadmap() {
+            const body = document.getElementById('roadmapBody');
+            body.innerHTML = this.data.roadmap.map(r => `
+                <tr class="${r.status === 'active' ? 'phase-active' : 'phase-upcoming'}">
+                    <td><strong>${this.esc(r.phase)}</strong></td>
+                    <td>${this.esc(r.month)}</td>
+                    <td>${this.esc(r.goal)}</td>
+                    <td><span class="phase-badge ${r.status === 'active' ? 'badge-active' : 'badge-upcoming'}">${r.status === 'active' ? 'NOW' : 'Upcoming'}</span></td>
+                </tr>`).join('');
+        }
+
+        // --- Resets ---
+        bindResets() {
+            document.getElementById('resetDaily').addEventListener('click', () => {
+                localStorage.removeItem(this.DAILY_KEY);
+                this.renderDailyChecklists();
+            });
+            document.getElementById('resetWeekly').addEventListener('click', () => {
+                localStorage.removeItem(this.WEEKLY_KEY);
+                this.renderWeeklyChecklist();
+            });
+        }
+
+        esc(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => new JobSearchPage());
+    </script>
+</body>
+</html>
