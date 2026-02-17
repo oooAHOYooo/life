@@ -1,0 +1,89 @@
+{
+  "ue5ProjectPath": "C:\\Users\\agonzalez7\\Documents\\Unreal Projects\\CoPlago",
+  "sourceModuleName": "P2G4W",
+  "targetModuleName": "CoPlago",
+  "files": [
+    {
+      "source": "P2G4W.h",
+      "destination": "Public",
+      "targetName": "CoPlago.h"
+    },
+    {
+      "source": "P2G4W.cpp",
+      "destination": "Private",
+      "targetName": "CoPlago.cpp"
+    },
+    {
+      "source": "P2G4WGameModeBase.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WGameModeBase.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WGameStateBase.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WGameStateBase.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WPlayerState.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WPlayerState.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WPlayerController.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WPlayerController.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WCharacter.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WCharacter.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WGoalZone.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WGoalZone.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WLockOnTargetComponent.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WLockOnTargetComponent.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WEnemy.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WEnemy.cpp",
+      "destination": "Private"
+    },
+    {
+      "source": "P2G4WEnemyWaveSpawner.h",
+      "destination": "Public"
+    },
+    {
+      "source": "P2G4WEnemyWaveSpawner.cpp",
+      "destination": "Private"
+    }
+  ]
+}

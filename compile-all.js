@@ -70,9 +70,28 @@ function compileP2G4WGuide() {
   console.log("compile-all: data/games/suggested-scripts/GUIDE.md → subpages/p2g4w-ue5-guide.html");
 }
 
+function syncUE5Scripts() {
+  // Import and run the sync script
+  const syncScriptPath = path.join(ROOT, "data", "games", "suggested-scripts", "ue5", "sync-to-ue.js");
+  if (!fs.existsSync(syncScriptPath)) {
+    console.warn("compile-all: sync-to-ue.js not found, skipping UE5 sync.");
+    return;
+  }
+  
+  // Run the sync script as a module (quiet mode for compile-all)
+  try {
+    const syncModule = require(syncScriptPath);
+    const result = syncModule.main(true); // quiet = true
+    console.log(`compile-all: Synced ${result.synced} UE5 scripts to CoPlago project`);
+  } catch (error) {
+    console.warn("compile-all: UE5 sync failed:", error.message);
+  }
+}
+
 function main() {
   compileGdd();
   compileP2G4WGuide();
+  syncUE5Scripts();
   console.log("compile-all: done.");
 }
 
