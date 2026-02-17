@@ -1,0 +1,22 @@
+// Example: add to your existing game module .Build.cs (e.g. P2G4W.Build.cs or ClaCo.Build.cs).
+// This lists the modules P2G4W C++ code depends on.
+
+using UnrealBuildTool;
+
+public class P2G4W : ModuleRules
+{
+	public P2G4W(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PCHUsage = PCHUsageMode::UseExplicitOrSharedPCHs;
+
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"Core",
+			"CoreUObject",
+			"Engine",
+			"EnhancedInput",
+			"InputCore",
+			"GameplayTasks"
+		});
+	}
+}

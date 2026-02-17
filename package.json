@@ -1,0 +1,12 @@
+{
+  "name": "life",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LifeOS – personal hub and projects",
+  "scripts": {
+    "compile": "node compile-all.js"
+  },
+  "dependencies": {
+    "marked": "^15.0.4"
+  }
+}

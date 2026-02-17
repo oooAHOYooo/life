@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>P2G4W – UE5 Scripts Guide - LifeOS</title>
+        <link rel="stylesheet" href="../design-system.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Spectral:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <style>
+        body {
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8e0d3 50%, #d4c5b0 100%);
+            background-attachment: fixed;
+            color: #3d2817;
+            font-family: 'Times New Roman', Times, serif;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.0;
+        }
+        
+        /* Paper texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 115, 85, 0.03) 2px,
+                    rgba(139, 115, 85, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 115, 85, 0.03) 2px,
+                    rgba(139, 115, 85, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Aged paper effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(184, 157, 120, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 115, 85, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 50px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 250, 240, 0.85);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            box-shadow: 
+                0 0 40px rgba(139, 115, 85, 0.2),
+                inset 0 0 60px rgba(255, 250, 240, 0.5);
+        }
+        
+        .back-link, .nav-link {
+            color: #8b7355;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-block;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover, .nav-link:hover {
+            color: #6b5a42;
+            text-decoration: underline;
+        }
+        
+        .nav-links {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .print-controls {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .print-button {
+            background: rgba(139, 115, 85, 0.1);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            color: #5c4a37;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .print-button:hover {
+            background: rgba(139, 115, 85, 0.2);
+            border-color: rgba(139, 115, 85, 0.5);
+        }
+        
+            @media print {
+            .print-controls, .nav-links {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                font-family: 'Times New Roman', Times, serif !important;
+                line-height: 1.0 !important;
+            }
+            
+            body::before,
+            body::after {
+                display: none;
+            }
+            
+            .container {
+                background: white;
+                border: none;
+                box-shadow: none;
+                padding: 20px;
+                max-width: 100%;
+            }
+            
+            .content {
+                font-family: 'Times New Roman', Times, serif !important;
+                line-height: 1.0 !important;
+            }
+            
+            .content h1,
+            .content h2,
+            .content h3,
+            .content h4 {
+                font-family: 'Times New Roman', Times, serif !important;
+                color: #1a1a1a;
+                page-break-after: avoid;
+                line-height: 1.0 !important;
+            }
+            
+            .content p {
+                color: #333;
+                line-height: 1.0 !important;
+                margin-bottom: 8px;
+            }
+            
+            .content li {
+                color: #333;
+                line-height: 1.0 !important;
+                margin-bottom: 2px;
+            }
+            
+            .content table {
+                page-break-inside: avoid;
+            }
+            
+            .content table th {
+                font-family: 'Times New Roman', Times, serif !important;
+                background: #f5f5f5 !important;
+                color: #1a1a1a !important;
+                line-height: 1.0 !important;
+            }
+            
+            .content table td {
+                font-family: 'Times New Roman', Times, serif !important;
+                border-color: #ddd;
+                line-height: 1.0 !important;
+            }
+            
+            .content hr {
+                border-color: #ddd;
+            }
+            
+            .content blockquote {
+                border-left-color: #ccc;
+                line-height: 1.0 !important;
+            }
+            
+            header h1 {
+                font-family: 'Times New Roman', Times, serif !important;
+                line-height: 1.0 !important;
+            }
+            
+            header p {
+                font-family: 'Times New Roman', Times, serif !important;
+                line-height: 1.0 !important;
+            }
+            
+            @page {
+                size: 8.5in 11in;
+                margin: 1.5cm;
+            }
+            
+            a {
+                color: #1a1a1a;
+                text-decoration: underline;
+            }
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(139, 115, 85, 0.4);
+            padding-bottom: 25px;
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: rgba(139, 115, 85, 0.6);
+        }
+        
+        header h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 3.5rem;
+            color: #5c4a37;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(139, 115, 85, 0.2);
+        }
+        
+        header p {
+            font-family: 'Times New Roman', Times, serif;
+            color: #8b7355;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        
+        .content {
+            line-height: 1.0;
+            color: #3d2817;
+        }
+        
+        .content h1 {
+            font-family: 'Times New Roman', Times, serif;
+            color: #5c4a37;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(139, 115, 85, 0.3);
+            padding-bottom: 15px;
+            letter-spacing: -0.01em;
+            line-height: 1.0;
+        }
+        
+        .content h2 {
+            font-family: 'Times New Roman', Times, serif;
+            color: #5c4a37;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+            padding-bottom: 10px;
+            letter-spacing: -0.01em;
+            line-height: 1.0;
+        }
+        
+        .content h3 {
+            font-family: 'Times New Roman', Times, serif;
+            color: #5c4a37;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            letter-spacing: -0.005em;
+            line-height: 1.0;
+        }
+        
+        .content h4 {
+            font-family: 'Times New Roman', Times, serif;
+            color: #6b5a42;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            letter-spacing: -0.005em;
+            line-height: 1.0;
+        }
+        
+        .content p {
+            margin-bottom: 12px;
+            line-height: 1.0;
+        }
+        
+        .content strong {
+            color: #5c4a37;
+            font-weight: 600;
+        }
+        
+        .content em {
+            color: #6b5a42;
+            font-style: italic;
+        }
+        
+        .content ul, .content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .content li {
+            margin-bottom: 4px;
+            line-height: 1.0;
+        }
+        
+        .content blockquote {
+            border-left: 3px solid rgba(139, 115, 85, 0.4);
+            padding-left: 20px;
+            margin-left: 0;
+            margin-bottom: 20px;
+            color: #6b5a42;
+            font-style: italic;
+        }
+        
+        .content hr {
+            border: none;
+            border-top: 2px solid rgba(139, 115, 85, 0.3);
+            margin: 40px 0;
+        }
+        
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        
+        .content table th {
+            font-family: 'Times New Roman', Times, serif;
+            background: rgba(139, 115, 85, 0.1);
+            color: #5c4a37;
+            font-weight: 600;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+            line-height: 1.0;
+        }
+        
+        .content table td {
+            padding: 10px 12px;
+            border: 1px solid rgba(139, 115, 85, 0.2);
+            line-height: 1.0;
+        }
+        
+        .content table tr:nth-child(even) {
+            background: rgba(139, 115, 85, 0.05);
+        }
+        
+        .content code {
+            background: rgba(139, 115, 85, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 0.85em;
+            color: #6b5a42;
+        }
+        
+        .content pre {
+            background: rgba(139, 115, 85, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .content pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #8b7355;
+            padding: 60px;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content h1 {
+                font-size: 2rem;
+            }
+            
+            .content h2 {
+                font-size: 1.6rem;
+            }
+            
+            .content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .content table {
+                font-size: 0.9rem;
+            }
+            
+            .content table th,
+            .content table td {
+                padding: 8px;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="nav-links">
+                <a href="../index.html" class="back-link">← HOME</a>
+                <span style="color: #8b7355;">|</span>
+                <a href="2026.html" class="nav-link">2026</a>
+                <span style="color: #8b7355;">|</span>
+                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <span style="color: #8b7355;">|</span>
+                <a href="return-first.html" class="nav-link">Return First</a>
+                <span style="color: #8b7355;">|</span>
+                <a href="gdd.html" class="nav-link">GDD</a>
+                <span style="color: #8b7355;">|</span>
+                <span class="nav-link" style="font-style: normal;">UE5 Guide</span>
+            </div>
+            
+            <div class="print-controls">
+                <button onclick="window.print()" class="print-button">🖨️ Print</button>
+            </div>
+            
+            <header>
+                <h1>P2G4W</h1>
+                <p>UE5 SCRIPTS GUIDE</p>
+            </header>
+            
+            <div id="contentContainer" class="content"><h1>P2G4W – Suggested Scripts Guide</h1>
+<p><strong>For the team:</strong> This guide explains where our game scripts live, how to update them in Cursor, and how to copy them into Unreal Engine 5 (UE5). The repo is the <strong>source of truth</strong> — we edit here, then paste into the UE5 project when ready.</p>
+<hr>
+<h2>Will this update to the repo?</h2>
+<p><strong>Yes.</strong> Everything in this folder lives in the <strong>life</strong> repo. When you:</p>
+<ol>
+<li><strong>Edit</strong> the scripts in Cursor (in <code>data/games/suggested-scripts/</code>)</li>
+<li><strong>Save</strong> and <strong>commit/push</strong> to the repo</li>
+</ol>
+<p>…the repo is updated. Anyone (including your junior developer) can <strong>pull</strong> the latest and use the same scripts. There is no separate “script repo” — it’s all here.</p>
+<hr>
+<h2>What&#39;s the difference between .h and .cpp?</h2>
+<p>In C++ (and UE5):</p>
+<ul>
+<li><strong><code>.h</code> (header)</strong> — Declarations only: class name, member variables, function <strong>signatures</strong> (name, parameters, return type). No function bodies. Other files <code>#include</code> the header to know what the class looks like. One header per class (usually).</li>
+<li><strong><code>.cpp</code> (implementation)</strong> — Definitions: the <strong>actual code</strong> for each function (the logic). Compiled once. Includes its <code>.h</code> and implements the declared functions.</li>
+</ul>
+<p><strong>Rule of thumb:</strong> Change the <strong>interface</strong> (new functions, new member variables) in the <code>.h</code>; write the <strong>behavior</strong> (how it works) in the <code>.cpp</code>. When you copy into UE5, copy <strong>both</strong> the <code>.h</code> and <code>.cpp</code> for each class.</p>
+<hr>
+<h2>What are the “suggested scripts”?</h2>
+<p>We keep <strong>basic script systems</strong> for <strong>P2G4W</strong> (Project 2 Player Game for Wife) in this repo. They are <strong>reference implementations</strong> you can:</p>
+<ul>
+<li><strong>Update in Cursor</strong> (with AI help, search, version control)</li>
+<li><strong>Copy-paste into UE5</strong> when you’re ready to use them in the game project</li>
+</ul>
+<p>Right now we have one set:</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Folder</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>UE5 C++</strong></td>
+<td><code>ue5/</code></td>
+<td>Game Mode (2-player spawn, round/restart), Game State, Player State, Player Controller, Character, and Goal Zone (trigger = win round). Copy all for a playable “first to the goal” prototype.</td>
+</tr>
+</tbody></table>
+<p>You do <strong>not</strong> run these scripts inside the life repo. You <strong>copy</strong> them into your Unreal project and compile there.</p>
+<hr>
+<h2>Workflow: Update in Cursor → Copy into UE5</h2>
+<h3>Step 1: Edit scripts in Cursor (this repo)</h3>
+<ul>
+<li>Open the <strong>life</strong> repo in Cursor.</li>
+<li>Go to <strong><code>data/games/suggested-scripts/ue5/</code></strong>.</li>
+<li>Edit any <code>.h</code> or <code>.cpp</code> file (or add new ones).</li>
+<li>Save, commit, and push so the repo is up to date.</li>
+</ul>
+<h3>Step 2: Copy into your UE5 project</h3>
+<ul>
+<li>In the repo, open <strong><code>data/games/suggested-scripts/ue5/</code></strong>.</li>
+<li>Copy each file into your UE5 project as in the table below.<br><strong>Detailed list and paths:</strong> see <strong><code>ue5/README.md</code></strong> in that same folder.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>In this repo</th>
+<th>In your UE5 project</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>P2G4W.h</code></td>
+<td><code>Source/YourModule/Public/P2G4W.h</code></td>
+</tr>
+<tr>
+<td><code>P2G4W.cpp</code></td>
+<td><code>Source/YourModule/Private/P2G4W.cpp</code></td>
+</tr>
+<tr>
+<td><code>P2G4WGameModeBase.h</code></td>
+<td><code>Source/YourModule/Public/</code></td>
+</tr>
+<tr>
+<td><code>P2G4WGameModeBase.cpp</code></td>
+<td><code>Source/YourModule/Private/</code></td>
+</tr>
+<tr>
+<td>… (GameState, PlayerState, PlayerController, Character, GoalZone)</td>
+<td>Same: .h → Public, .cpp → Private</td>
+</tr>
+</tbody></table>
+<p>Replace <strong>YourModule</strong> with your actual game module name (e.g. P2G4W or ClaCo).</p>
+<h3>Step 3: Build and set up in UE5</h3>
+<ol>
+<li><strong>Build</strong> the UE5 project (e.g. Ctrl+Alt+B or Build in your IDE).</li>
+<li>In <strong>Project Settings → Maps &amp; Modes</strong>, set <strong>Default GameMode</strong> to <code>P2G4WGameModeBase</code> (or your Blueprint child).</li>
+<li>In your level, add two <strong>Player Start</strong> actors. Set <strong>Player Start Tag</strong> to <code>PlayerStart0</code> and <code>PlayerStart1</code>.</li>
+<li>(Optional) Enable <strong>Use Splitscreen</strong> in Project Settings if you want two cameras.</li>
+<li>Create a <strong>Blueprint</strong> based on <code>P2G4WCharacter</code> and assign your <strong>Enhanced Input</strong> actions (Jump, Move, Look, Mouse Look) in Class Defaults.</li>
+</ol>
+<p>Full checklist and Build.cs dependencies are in <strong><code>ue5/README.md</code></strong>.</p>
+<hr>
+<h2>For the junior developer (step-by-step)</h2>
+<ol>
+<li><p><strong>Get the latest scripts</strong><br>Pull the <strong>life</strong> repo so you have the latest <code>data/games/suggested-scripts/ue5/</code> files.</p>
+</li>
+<li><p><strong>Open the file list</strong><br>In the repo, open <strong><code>data/games/suggested-scripts/ue5/README.md</code></strong>. It has the exact table of which file goes in which UE5 folder (Public vs Private).</p>
+</li>
+<li><p><strong>Copy files into UE5</strong><br>For each file in <code>ue5/</code>, copy it to the path shown in that README. All <code>.h</code> files go to <strong>Public</strong>, all <code>.cpp</code> files go to <strong>Private</strong>.</p>
+</li>
+<li><p><strong>Check Build.cs</strong><br>Your UE5 module’s <code>.Build.cs</code> must list: Core, CoreUObject, Engine, EnhancedInput, InputCore, GameplayTasks. See <code>ue5/P2G4W.Build.cs.example</code> for an example.</p>
+</li>
+<li><p><strong>Compile in UE5</strong><br>Build the project. Fix any include or module name mismatches (e.g. if your module is not named P2G4W, replace the module name in the code).</p>
+</li>
+<li><p><strong>Set Game Mode and Player Starts</strong><br>As in Step 3 above: set default Game Mode to <code>P2G4WGameModeBase</code>, add two Player Starts with tags <code>PlayerStart0</code> and <code>PlayerStart1</code>.</p>
+</li>
+<li><p><strong>Character input</strong><br>Use a Blueprint based on <code>P2G4WCharacter</code> and assign the four Input Actions in Class Defaults so movement and camera work.</p>
+</li>
+</ol>
+<hr>
+<h2>Where everything lives (quick reference)</h2>
+<table>
+<thead>
+<tr>
+<th>In the life repo</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>data/games/gdd.md</code></td>
+<td>Game Design Document (what we’re building).</td>
+</tr>
+<tr>
+<td><code>data/games/suggested-scripts/README.md</code></td>
+<td>Index of suggested script sets (right now: UE5).</td>
+</tr>
+<tr>
+<td><code>data/games/suggested-scripts/GUIDE.md</code></td>
+<td><strong>This guide</strong> (workflow + copy-paste).</td>
+</tr>
+<tr>
+<td><code>data/games/suggested-scripts/ue5/</code></td>
+<td>All UE5 C++ files + <code>ue5/README.md</code> (file list and UE5 setup).</td>
+</tr>
+</tbody></table>
+<p>After you run <strong><code>node compile-all.js</code></strong> from the repo root, this guide is also available as <strong><code>subpages/p2g4w-ue5-guide.html</code></strong> so you can read it in the browser and share the link.</p>
+<hr>
+<h2>Summary</h2>
+<ul>
+<li><strong>Repo = source of truth.</strong> Edit scripts in Cursor in <code>data/games/suggested-scripts/</code>, commit and push; the repo updates.</li>
+<li><strong>Suggested scripts</strong> = basic systems (currently UE5 C++) you can update here and then <strong>copy-paste</strong> into UE5.</li>
+<li><strong>Junior dev:</strong> Pull repo → copy from <code>ue5/</code> into UE5 (using <code>ue5/README.md</code>) → build → set Game Mode and Player Starts → assign input on the character Blueprint.</li>
+</ul>
+</div>
+        </div>
+        
+        <!-- Content compiled by compile-all.js -->
+    </body>
+</html>
+
