@@ -24,6 +24,19 @@
 
 ---
 
+## 🤖 Automation: What You Can Script vs. Do in Editor
+
+| Step | Scriptable? | How |
+|------|-------------|-----|
+| **Game Mode** | ✅ Yes | Already set in `Config/DefaultEngine.ini`: `GlobalDefaultGameMode=/Script/CPPd1.CombatGameMode`. To use a Blueprint game mode, set it to your Blueprint path (e.g. `/Game/Blueprints/BP_CombatGameMode.BP_CombatGameMode_C`). |
+| **Split-screen** | ✅ Yes | Edit **Edit → Project Settings → Engine → Game Viewport** (or add to `DefaultEngine.ini` under the viewport section if you know the key). Project already supports 2 players via game mode. |
+| **Player Start actors** | ⚠️ Editor script | Must run **inside** the Unreal Editor. Use the Python script below to add 2 Player Starts to the **current level** (see `Scripts/README.md`). |
+| **World Settings override** | Manual | Per-level Game Mode override is set in **Window → World Settings**; no simple INI for this. |
+
+**Summary:** Game Mode and default maps are in INI; you can script those. Player Start placement is per-level and requires either placing them by hand once or running the provided **editor Python script** with the level open. The script lives in `Scripts/` and is run from UE5’s **Output Log** or **Tools → Execute Python Script**.
+
+---
+
 ## 👹 Creating Enemies Based on Third Person Character
 
 ### Step 1: Create Enemy Blueprint
