@@ -1,0 +1,71 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+
+
+#include "CPPd1PlayerController.h"
+#include "CPPd1PlayerState.h"
+#include "EnhancedInputSubsystems.h"
+#include "Engine/LocalPlayer.h"
+#include "InputMappingContext.h"
+#include "Blueprint/UserWidget.h"
+#include "CPPd1.h"
+#include "Widgets/Input/SVirtualJoystick.h"
+
+void ACPPd1PlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// only spawn touch controls on local player controllers
+	if (SVirtualJoystick::ShouldDisplayTouchInterface() && IsLocalPlayerController())
+	{
+		// spawn the mobile controls widget
+		MobileControlsWidget = CreateWidget<UUserWidget>(this, MobileControlsWidgetClass);
+
+		if (MobileControlsWidget)
+		{
+			// add the controls to the player screen
+			MobileControlsWidget->AddToPlayerScreen(0);
+
+		} else {
+
+			UE_LOG(LogCPPd1, Error, TEXT("Could not spawn mobile controls widget."));
+
+		}
+
+	}
+}
+
+void ACPPd1PlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	// only add IMCs for local player controllers
+	if (IsLocalPlayerController())
+	{
+		// Add Input Mapping Contexts
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+		{
+			for (UInputMappingContext* CurrentContext : DefaultMappingContexts)
+			{
+				Subsystem->AddMappingContext(CurrentContext, 0);
+			}
+
+			// only add these IMCs if we're not using mobile touch input
+			if (!SVirtualJoystick::ShouldDisplayTouchInterface())
+			{
+				for (UInputMappingContext* CurrentContext : MobileExcludedMappingContexts)
+				{
+					Subsystem->AddMappingContext(CurrentContext, 0);
+				}
+			}
+		}
+	}
+}
+
+int32 ACPPd1PlayerController::GetPlayerIndex() const
+{
+	if (ACPPd1PlayerState* PS = GetPlayerState<ACPPd1PlayerState>())
+	{
+		return PS->GetPlayerIndex();
+	}
+	return 0;
+}
