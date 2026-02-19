@@ -2,10 +2,12 @@
 
 #include "NinjaGameMode.h"
 #include "NinjaCharacter.h"
+#include "CubeNinjaCharacter.h"
 #include "NinjaPlayerController.h"
 
 ANinjaGameMode::ANinjaGameMode()
 {
-	DefaultPawnClass = ANinjaCharacter::StaticClass();
+	// Use CubeNinjaCharacter as default - procedural cube body ninja
+	DefaultPawnClass = ACubeNinjaCharacter::StaticClass();
 	PlayerControllerClass = ANinjaPlayerController::StaticClass();
 }

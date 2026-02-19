@@ -126,7 +126,7 @@ UCubeNinjaBodyComponent::UCubeNinjaBodyComponent()
 		USceneComponent* Pivot = CreateDefaultSubobject<USceneComponent>(PivotNames[i]);
 		UProceduralMeshComponent* Mesh = CreateDefaultSubobject<UProceduralMeshComponent>(MeshNames[i]);
 		Mesh->SetupAttachment(Pivot);
-		Mesh->SetRelativeLocation(FVector::ZeroVector);
+		Mesh->SetRelativeLocation(FVector::Zero());
 		Mesh->SetRelativeRotation(FRotator::ZeroRotator);
 		PartPivots.Add(Pivot);
 		PartMeshes.Add(Mesh);
@@ -165,7 +165,11 @@ UCubeNinjaBodyComponent::UCubeNinjaBodyComponent()
 void UCubeNinjaBodyComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	RebuildBody();
+	// Only rebuild if arrays are properly initialized
+	if (PartMeshes.Num() > 0 && PartPivots.Num() > 0)
+	{
+		RebuildBody();
+	}
 }
 
 void UCubeNinjaBodyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -176,23 +180,29 @@ void UCubeNinjaBodyComponent::TickComponent(float DeltaTime, ELevelTick TickType
 
 void UCubeNinjaBodyComponent::RebuildBody()
 {
+	// Safety check
+	if (PartMeshes.Num() == 0 || PartPivots.Num() == 0)
+		return;
+
 	const float S = BodyScale;
 	for (int32 i = 0; i < PartMeshes.Num(); ++i)
 	{
-		if (!PartMeshes[i]) continue;
-		if (PartIsSphere[i])
+		if (!IsValid(PartMeshes[i])) continue;
+		if (PartIsSphere.IsValidIndex(i) && PartIsSphere[i] && PartRadii.IsValidIndex(i))
 			BuildSphereInMesh(PartMeshes[i], PartRadii[i] * S);
-		else
+		else if (PartHalfExtents.IsValidIndex(i))
 			BuildCubeInMesh(PartMeshes[i], PartHalfExtents[i] * S);
 	}
 	for (int32 i = 0; i < PartPivots.Num(); ++i)
-		if (PartPivots[i])
+	{
+		if (IsValid(PartPivots[i]) && PartLocations.IsValidIndex(i))
 			PartPivots[i]->SetRelativeLocation(PartLocations[i] * S);
+	}
 }
 
 void UCubeNinjaBodyComponent::BuildCubeInMesh(UProceduralMeshComponent* Mesh, const FVector& HalfExtents)
 {
-	if (!Mesh) return;
+	if (!IsValid(Mesh)) return;
 	const float Hx = HalfExtents.X, Hy = HalfExtents.Y, Hz = HalfExtents.Z;
 	FVector V[8] = {
 		FVector(-Hx, -Hy, -Hz), FVector(Hx, -Hy, -Hz), FVector(Hx, Hy, -Hz), FVector(-Hx, Hy, -Hz),
@@ -222,7 +232,7 @@ void UCubeNinjaBodyComponent::BuildCubeInMesh(UProceduralMeshComponent* Mesh, co
 
 void UCubeNinjaBodyComponent::BuildSphereInMesh(UProceduralMeshComponent* Mesh, float Radius, int32 Segments)
 {
-	if (!Mesh || Radius <= 0.f) return;
+	if (!IsValid(Mesh) || Radius <= 0.f) return;
 	TArray<FVector> Vertices, Normals;
 	TArray<int32> Triangles;
 	TArray<FVector2D> UV0;
@@ -262,8 +272,16 @@ void UCubeNinjaBodyComponent::BuildSphereInMesh(UProceduralMeshComponent* Mesh, 
 
 void UCubeNinjaBodyComponent::UpdateLimbSwing(float DeltaTime)
 {
+	// Safety checks
+	if (!IsValid(this) || !GetOwner())
+		return;
+
 	ACharacter* Char = Cast<ACharacter>(GetOwner());
-	const float Speed = Char && Char->GetCharacterMovement() ? Char->GetVelocity().Size2D() : 0.f;
+	if (!Char)
+		return;
+
+	UCharacterMovementComponent* Movement = Char->GetCharacterMovement();
+	const float Speed = Movement ? Movement->Velocity.Size2D() : 0.f;
 	const bool bMoving = Speed > 10.f;
 	if (bMoving)
 		WalkCycleTime += DeltaTime * LimbSwingSpeed * 2.f * PI;
@@ -272,11 +290,15 @@ void UCubeNinjaBodyComponent::UpdateLimbSwing(float DeltaTime)
 	const float Swing = FMath::Sin(WalkCycleTime) * LimbSwingAmount;
 	const float SwingLeg = FMath::Sin(WalkCycleTime + PI) * LimbSwingAmount;
 
+	// Safety check for arrays
+	if (!PartPivots.IsValidIndex(0) || PartPivots.Num() == 0)
+		return;
+
 	for (int32 Idx : SwingPartIndices)
 	{
-		if (PartPivots.IsValidIndex(Idx) && PartPivots[Idx])
+		if (PartPivots.IsValidIndex(Idx) && IsValid(PartPivots[Idx]))
 		{
-			FRotator R = PartDefaultRotations[Idx];
+			FRotator R = PartDefaultRotations.IsValidIndex(Idx) ? PartDefaultRotations[Idx] : FRotator::ZeroRotator;
 			if (Idx == L_UA || Idx == R_UA)
 				R += FRotator(Idx == L_UA ? Swing : -Swing, 0.f, 0.f);
 			else

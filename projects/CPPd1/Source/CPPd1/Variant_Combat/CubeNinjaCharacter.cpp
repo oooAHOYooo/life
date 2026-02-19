@@ -10,7 +10,10 @@ ACubeNinjaCharacter::ACubeNinjaCharacter()
 	CubeBody = CreateDefaultSubobject<UCubeNinjaBodyComponent>(TEXT("CubeBody"));
 	CubeBody->SetupAttachment(RootComponent);
 	// Align cube body feet with capsule bottom (pelvis bottom at component origin; offset down by half height)
-	CubeBody->SetRelativeLocation(FVector(0.f, 0.f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
+	if (UCapsuleComponent* Capsule = GetCapsuleComponent())
+	{
+		CubeBody->SetRelativeLocation(FVector(0.f, 0.f, -Capsule->GetScaledCapsuleHalfHeight()));
+	}
 	CubeBody->BodyScale = 0.9f;
 }
 

@@ -2,8 +2,10 @@
 
 #include "NinjaPlayerController.h"
 #include "NinjaCharacter.h"
+#include "CubeNinjaCharacter.h"
 
 ANinjaPlayerController::ANinjaPlayerController()
 {
-	CharacterClass = ANinjaCharacter::StaticClass();
+	// Use CubeNinjaCharacter for spawns and respawns
+	CharacterClass = ACubeNinjaCharacter::StaticClass();
 }
