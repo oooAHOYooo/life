@@ -40,7 +40,24 @@ All guides are in the project root:
 
 ## 💻 Multi-Computer Workflow
 
-### On This Machine:
+### 🚀 **Automatic Sync** (Recommended)
+
+After making changes in UE5, sync to life repo automatically:
+
+```powershell
+# From life repo's CPPd1 folder
+cd "C:\Users\agonzalez7\life\projects\CPPd1"
+
+# One-time sync with auto-commit
+.\sync-ue5-to-life.ps1 -Commit
+
+# Or use watch mode (auto-syncs on file changes)
+.\sync-ue5-to-life.ps1 -Watch -Commit
+```
+
+**Or just double-click `sync-now.bat`** for a quick sync!
+
+### Manual Sync (Alternative):
 ```powershell
 cd "C:\Users\agonzalez7\life"
 git add projects/CPPd1/

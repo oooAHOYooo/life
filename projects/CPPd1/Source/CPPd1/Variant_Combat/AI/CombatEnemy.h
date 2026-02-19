@@ -45,10 +45,6 @@ public:
 	/** Constructor */
 	ACombatEnemy();
 
-	/** Wave intensity (set by spawner). >1 = deal more damage, take less (harder). <1 = easier. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave", meta = (ClampMin = 0.1f, ClampMax = 5.0f))
-	float WaveIntensityScale = 1.0f;
-
 protected:
 
 	/** Max amount of HP the character will have on respawn */
@@ -138,10 +134,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Death")
 	float DeathRemovalTime = 5.0f;
 
-	/** Last actor that dealt damage (for style scoring on death). */
-	UPROPERTY()
-	TObjectPtr<AActor> LastDamageCauser;
-
 	/** Enemy death timer */
 	FTimerHandle DeathTimer;
 
@@ -158,11 +150,6 @@ public:
 	/** Enemy died delegate. Allows external subscribers to respond to enemy death */
 	UPROPERTY(BlueprintAssignable, Category="Events")
 	FOnEnemyDied OnEnemyDied;
-
-	/** Called when this enemy dies; includes the actor that caused the death (for style/acrobatic scoring). */
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnEnemyKilledWithCauser, ACombatEnemy*, DeadEnemy, AActor*, DamageCauser);
-	UPROPERTY(BlueprintAssignable, Category="Events")
-	FOnEnemyKilledWithCauser OnEnemyKilledWithCauser;
 
 public:
 

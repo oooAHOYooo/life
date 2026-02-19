@@ -86,32 +86,30 @@ void ACombatWaveSpawner::SpawnNextWave()
 
 void ACombatWaveSpawner::SpawnEnemyInWave()
 {
-	if (CurrentWaveIndex >= WaveConfigs.Num()) return;
+	if (CurrentWaveIndex >= WaveConfigs.Num())
+	{
+		return;
+	}
 
 	const FCombatWaveConfig& WaveConfig = WaveConfigs[CurrentWaveIndex];
-	if (CurrentSpawnIndex >= WaveConfig.EnemyCount) return;
 
-	// Pick class: mixed pool or single
-	TSubclassOf<ACombatEnemy> ChosenClass = nullptr;
-	if (WaveConfig.EnemyClassPool.Num() > 0)
+	// Check if we've spawned all enemies for this wave
+	if (CurrentSpawnIndex >= WaveConfig.EnemyCount)
 	{
-		TArray<TSubclassOf<ACombatEnemy>> Valid;
-		for (TSubclassOf<ACombatEnemy> C : WaveConfig.EnemyClassPool)
-			if (C) Valid.Add(C);
-		if (Valid.Num() > 0)
-			ChosenClass = Valid[FMath::RandRange(0, Valid.Num() - 1)];
+		// Wave spawning complete, move to next wave when current wave is defeated
+		return;
 	}
-	if (!ChosenClass)
-		ChosenClass = WaveConfig.EnemyClass;
 
-	if (ChosenClass)
+	// Spawn enemy
+	if (WaveConfig.EnemyClass)
 	{
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-		FVector SpawnLocation = GetSpawnLocation();
-		OnSpawnLocationUsed();
+		FVector SpawnLocation = SpawnCapsule->GetComponentLocation();
 		FRotator SpawnRotation = SpawnCapsule->GetComponentRotation();
+
+		// Add some random offset to prevent overlapping
 		SpawnLocation += FVector(
 			FMath::RandRange(-100.0f, 100.0f),
 			FMath::RandRange(-100.0f, 100.0f),
@@ -119,7 +117,7 @@ void ACombatWaveSpawner::SpawnEnemyInWave()
 		);
 
 		ACombatEnemy* SpawnedEnemy = GetWorld()->SpawnActor<ACombatEnemy>(
-			ChosenClass,
+			WaveConfig.EnemyClass,
 			SpawnLocation,
 			SpawnRotation,
 			SpawnParams
@@ -127,36 +125,27 @@ void ACombatWaveSpawner::SpawnEnemyInWave()
 
 		if (SpawnedEnemy)
 		{
-			SpawnedEnemy->WaveIntensityScale = FMath::Max(0.1f, WaveConfig.IntensityScale);
 			CurrentWaveEnemies.Add(SpawnedEnemy);
 			AllSpawnedEnemies.Add(SpawnedEnemy);
+
+			// Subscribe to death event
 			SpawnedEnemy->OnEnemyDied.AddDynamic(this, &ACombatWaveSpawner::OnEnemyDied);
-			OnEnemySpawned.Broadcast(SpawnedEnemy);
 		}
 	}
 
 	CurrentSpawnIndex++;
 
-	const float NextInterval = WaveConfig.bRushWave ? 0.0f : WaveConfig.SpawnInterval;
+	// Schedule next enemy spawn if there are more in this wave
 	if (CurrentSpawnIndex < WaveConfig.EnemyCount)
 	{
 		GetWorld()->GetTimerManager().SetTimer(
 			SpawnTimer,
 			this,
 			&ACombatWaveSpawner::SpawnEnemyInWave,
-			NextInterval,
+			WaveConfig.SpawnInterval,
 			false
 		);
 	}
-}
-
-FVector ACombatWaveSpawner::GetSpawnLocation_Implementation()
-{
-	return SpawnCapsule ? SpawnCapsule->GetComponentLocation() : GetActorLocation();
-}
-
-void ACombatWaveSpawner::OnSpawnLocationUsed_Implementation()
-{
 }
 
 void ACombatWaveSpawner::OnEnemyDied(ACombatEnemy* DeadEnemy)

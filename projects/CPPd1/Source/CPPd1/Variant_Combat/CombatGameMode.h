@@ -66,26 +66,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "CPPd1|Waves")
 	void RegisterWaveSpawner(ACombatWaveSpawner* Spawner);
 
-	/** Called when an enemy is spawned - register with engagement manager (one-on-one fights) */
+	/** Called when a wave starts - registers enemies to engagement manager */
 	UFUNCTION()
-	void OnEnemySpawned(ACombatEnemy* Enemy);
-
-	/** Healing the gods receive when they clear a wave (restoration of damage done by marauders). */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CPPd1|Restoration", meta = (ClampMin = 0.0f, Units = "HP"))
-	float HealPerWaveCleared = 1.0f;
-
-	/** When all waves are cleared, broadcast this so NPCs can congratulate and worship the gods. */
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGodsDefendedRealm);
-	UPROPERTY(BlueprintAssignable, Category = "CPPd1|Restoration")
-	FOnGodsDefendedRealm OnGodsDefendedRealm;
-
-	/** Called when a wave is cleared - heal all player gods (restoration). */
-	UFUNCTION()
-	void OnWaveCompleted(int32 WaveIndex);
-
-	/** Called when all waves are cleared - full restoration, then fire OnGodsDefendedRealm for NPCs. */
-	UFUNCTION()
-	void OnAllWavesCompleted();
+	void OnWaveStarted(int32 WaveIndex);
 
 protected:
 
