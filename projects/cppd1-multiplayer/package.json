@@ -1,0 +1,14 @@
+{
+  "name": "cppd1-multiplayer",
+  "version": "1.0.0",
+  "description": "CPPd1-style third-person game in JS, multiplayer shared world (browser)",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "ws": "^8.18.0"
+  }
+}

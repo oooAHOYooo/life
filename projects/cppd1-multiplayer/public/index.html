@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPPd1 Multiplayer – Shared World</title>
+  <style>
+    * { margin: 0; box-sizing: border-box; }
+    body { overflow: hidden; font-family: system-ui, sans-serif; background: #0f0f12; }
+    #canvas { display: block; width: 100vw; height: 100vh; }
+    #ui {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+      color: #e4e4e7;
+      font-size: 13px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #ui a { pointer-events: auto; color: #a5f3fc; text-decoration: none; }
+    #ui a:hover { text-decoration: underline; }
+    #room { font-weight: 600; letter-spacing: 0.05em; }
+    #copy { margin-left: 8px; padding: 2px 8px; font-size: 11px; cursor: pointer; pointer-events: auto; background: #27272a; border: 1px solid #3f3f46; border-radius: 4px; color: #a1a1aa; }
+    #copy:hover { background: #3f3f46; color: #fff; }
+    #hint { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: #71717a; font-size: 12px; z-index: 10; }
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <span id="room">Room: —</span>
+    <button id="copy" type="button">Copy link</button>
+    <a id="shareLink" href="#" target="_blank" rel="noopener" style="margin-left:8px">Open in new tab</a>
+  </div>
+  <canvas id="canvas"></canvas>
+  <div id="hint">WASD move · Mouse look · Space jump · Share the link to play together</div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
