@@ -5,6 +5,8 @@
 #include "Materials/MaterialInterface.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "TimerManager.h"
+#include "Engine/World.h"
 
 namespace
 {
@@ -124,7 +126,21 @@ UCubeNinjaBodyComponent::UCubeNinjaBodyComponent()
 	for (int32 i = 0; i < NumParts; ++i)
 	{
 		USceneComponent* Pivot = CreateDefaultSubobject<USceneComponent>(PivotNames[i]);
+		if (!Pivot)
+		{
+			UE_LOG(LogTemp, Error, TEXT("Failed to create pivot component %d"), i);
+			continue;
+		}
+		
 		UProceduralMeshComponent* Mesh = CreateDefaultSubobject<UProceduralMeshComponent>(MeshNames[i]);
+		if (!Mesh)
+		{
+			UE_LOG(LogTemp, Error, TEXT("Failed to create mesh component %d"), i);
+			PartPivots.Add(Pivot);
+			PartMeshes.Add(nullptr);
+			continue;
+		}
+		
 		Mesh->SetupAttachment(Pivot);
 		Mesh->SetRelativeLocation(FVector::Zero());
 		Mesh->SetRelativeRotation(FRotator::ZeroRotator);
@@ -133,42 +149,112 @@ UCubeNinjaBodyComponent::UCubeNinjaBodyComponent()
 	}
 
 	auto Attach = [](USceneComponent* Child, USceneComponent* Parent, const FVector& Loc, const FRotator& Rot) {
+		if (!IsValid(Child) || !IsValid(Parent))
+			return;
 		Child->SetupAttachment(Parent);
 		Child->SetRelativeLocation(Loc);
 		Child->SetRelativeRotation(Rot);
 	};
 
-	Attach(PartPivots[Pelvis], this, PartLocations[Pelvis], PartDefaultRotations[Pelvis]);
-	Attach(PartPivots[Spine], PartPivots[Pelvis], PartLocations[Spine], PartDefaultRotations[Spine]);
-	Attach(PartPivots[Chest], PartPivots[Spine], PartLocations[Chest], PartDefaultRotations[Chest]);
-	Attach(PartPivots[Head], PartPivots[Chest], PartLocations[Head], PartDefaultRotations[Head]);
-	Attach(PartPivots[L_Shoulder], PartPivots[Chest], PartLocations[L_Shoulder], PartDefaultRotations[L_Shoulder]);
-	Attach(PartPivots[L_UpperArm], PartPivots[L_Shoulder], PartLocations[L_UpperArm], PartDefaultRotations[L_UpperArm]);
-	Attach(PartPivots[L_Elbow], PartPivots[L_UpperArm], PartLocations[L_Elbow], PartDefaultRotations[L_Elbow]);
-	Attach(PartPivots[L_LowerArm], PartPivots[L_Elbow], PartLocations[L_LowerArm], PartDefaultRotations[L_LowerArm]);
-	Attach(PartPivots[L_Hand], PartPivots[L_LowerArm], PartLocations[L_Hand], PartDefaultRotations[L_Hand]);
-	Attach(PartPivots[R_Shoulder], PartPivots[Chest], PartLocations[R_Shoulder], PartDefaultRotations[R_Shoulder]);
-	Attach(PartPivots[R_UpperArm], PartPivots[R_Shoulder], PartLocations[R_UpperArm], PartDefaultRotations[R_UpperArm]);
-	Attach(PartPivots[R_Elbow], PartPivots[R_UpperArm], PartLocations[R_Elbow], PartDefaultRotations[R_Elbow]);
-	Attach(PartPivots[R_LowerArm], PartPivots[R_Elbow], PartLocations[R_LowerArm], PartDefaultRotations[R_LowerArm]);
-	Attach(PartPivots[R_Hand], PartPivots[R_LowerArm], PartLocations[R_Hand], PartDefaultRotations[R_Hand]);
-	Attach(PartPivots[L_UpperLeg], PartPivots[Pelvis], PartLocations[L_UpperLeg], PartDefaultRotations[L_UpperLeg]);
-	Attach(PartPivots[L_Knee], PartPivots[L_UpperLeg], PartLocations[L_Knee], PartDefaultRotations[L_Knee]);
-	Attach(PartPivots[L_LowerLeg], PartPivots[L_Knee], PartLocations[L_LowerLeg], PartDefaultRotations[L_LowerLeg]);
-	Attach(PartPivots[L_Foot], PartPivots[L_LowerLeg], PartLocations[L_Foot], PartDefaultRotations[L_Foot]);
-	Attach(PartPivots[R_UpperLeg], PartPivots[Pelvis], PartLocations[R_UpperLeg], PartDefaultRotations[R_UpperLeg]);
-	Attach(PartPivots[R_Knee], PartPivots[R_UpperLeg], PartLocations[R_Knee], PartDefaultRotations[R_Knee]);
-	Attach(PartPivots[R_LowerLeg], PartPivots[R_Knee], PartLocations[R_LowerLeg], PartDefaultRotations[R_LowerLeg]);
-	Attach(PartPivots[R_Foot], PartPivots[R_LowerLeg], PartLocations[R_Foot], PartDefaultRotations[R_Foot]);
+	// Attach components with safety checks - only attach if both parent and child are valid
+	if (PartPivots.IsValidIndex(Pelvis) && IsValid(PartPivots[Pelvis]))
+	{
+		Attach(PartPivots[Pelvis], this, PartLocations[Pelvis], PartDefaultRotations[Pelvis]);
+		
+		if (PartPivots.IsValidIndex(Spine) && IsValid(PartPivots[Spine]))
+		{
+			Attach(PartPivots[Spine], PartPivots[Pelvis], PartLocations[Spine], PartDefaultRotations[Spine]);
+			
+			if (PartPivots.IsValidIndex(Chest) && IsValid(PartPivots[Chest]))
+			{
+				Attach(PartPivots[Chest], PartPivots[Spine], PartLocations[Chest], PartDefaultRotations[Chest]);
+				
+				if (PartPivots.IsValidIndex(Head) && IsValid(PartPivots[Head]))
+					Attach(PartPivots[Head], PartPivots[Chest], PartLocations[Head], PartDefaultRotations[Head]);
+				
+				if (PartPivots.IsValidIndex(L_Shoulder) && IsValid(PartPivots[L_Shoulder]))
+				{
+					Attach(PartPivots[L_Shoulder], PartPivots[Chest], PartLocations[L_Shoulder], PartDefaultRotations[L_Shoulder]);
+					if (PartPivots.IsValidIndex(L_UpperArm) && IsValid(PartPivots[L_UpperArm]))
+					{
+						Attach(PartPivots[L_UpperArm], PartPivots[L_Shoulder], PartLocations[L_UpperArm], PartDefaultRotations[L_UpperArm]);
+						if (PartPivots.IsValidIndex(L_Elbow) && IsValid(PartPivots[L_Elbow]))
+						{
+							Attach(PartPivots[L_Elbow], PartPivots[L_UpperArm], PartLocations[L_Elbow], PartDefaultRotations[L_Elbow]);
+							if (PartPivots.IsValidIndex(L_LowerArm) && IsValid(PartPivots[L_LowerArm]))
+							{
+								Attach(PartPivots[L_LowerArm], PartPivots[L_Elbow], PartLocations[L_LowerArm], PartDefaultRotations[L_LowerArm]);
+								if (PartPivots.IsValidIndex(L_Hand) && IsValid(PartPivots[L_Hand]))
+									Attach(PartPivots[L_Hand], PartPivots[L_LowerArm], PartLocations[L_Hand], PartDefaultRotations[L_Hand]);
+							}
+						}
+					}
+				}
+				
+				if (PartPivots.IsValidIndex(R_Shoulder) && IsValid(PartPivots[R_Shoulder]))
+				{
+					Attach(PartPivots[R_Shoulder], PartPivots[Chest], PartLocations[R_Shoulder], PartDefaultRotations[R_Shoulder]);
+					if (PartPivots.IsValidIndex(R_UpperArm) && IsValid(PartPivots[R_UpperArm]))
+					{
+						Attach(PartPivots[R_UpperArm], PartPivots[R_Shoulder], PartLocations[R_UpperArm], PartDefaultRotations[R_UpperArm]);
+						if (PartPivots.IsValidIndex(R_Elbow) && IsValid(PartPivots[R_Elbow]))
+						{
+							Attach(PartPivots[R_Elbow], PartPivots[R_UpperArm], PartLocations[R_Elbow], PartDefaultRotations[R_Elbow]);
+							if (PartPivots.IsValidIndex(R_LowerArm) && IsValid(PartPivots[R_LowerArm]))
+							{
+								Attach(PartPivots[R_LowerArm], PartPivots[R_Elbow], PartLocations[R_LowerArm], PartDefaultRotations[R_LowerArm]);
+								if (PartPivots.IsValidIndex(R_Hand) && IsValid(PartPivots[R_Hand]))
+									Attach(PartPivots[R_Hand], PartPivots[R_LowerArm], PartLocations[R_Hand], PartDefaultRotations[R_Hand]);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		// Legs
+		if (PartPivots.IsValidIndex(L_UpperLeg) && IsValid(PartPivots[L_UpperLeg]))
+		{
+			Attach(PartPivots[L_UpperLeg], PartPivots[Pelvis], PartLocations[L_UpperLeg], PartDefaultRotations[L_UpperLeg]);
+			if (PartPivots.IsValidIndex(L_Knee) && IsValid(PartPivots[L_Knee]))
+			{
+				Attach(PartPivots[L_Knee], PartPivots[L_UpperLeg], PartLocations[L_Knee], PartDefaultRotations[L_Knee]);
+				if (PartPivots.IsValidIndex(L_LowerLeg) && IsValid(PartPivots[L_LowerLeg]))
+				{
+					Attach(PartPivots[L_LowerLeg], PartPivots[L_Knee], PartLocations[L_LowerLeg], PartDefaultRotations[L_LowerLeg]);
+					if (PartPivots.IsValidIndex(L_Foot) && IsValid(PartPivots[L_Foot]))
+						Attach(PartPivots[L_Foot], PartPivots[L_LowerLeg], PartLocations[L_Foot], PartDefaultRotations[L_Foot]);
+				}
+			}
+		}
+		
+		if (PartPivots.IsValidIndex(R_UpperLeg) && IsValid(PartPivots[R_UpperLeg]))
+		{
+			Attach(PartPivots[R_UpperLeg], PartPivots[Pelvis], PartLocations[R_UpperLeg], PartDefaultRotations[R_UpperLeg]);
+			if (PartPivots.IsValidIndex(R_Knee) && IsValid(PartPivots[R_Knee]))
+			{
+				Attach(PartPivots[R_Knee], PartPivots[R_UpperLeg], PartLocations[R_Knee], PartDefaultRotations[R_Knee]);
+				if (PartPivots.IsValidIndex(R_LowerLeg) && IsValid(PartPivots[R_LowerLeg]))
+				{
+					Attach(PartPivots[R_LowerLeg], PartPivots[R_Knee], PartLocations[R_LowerLeg], PartDefaultRotations[R_LowerLeg]);
+					if (PartPivots.IsValidIndex(R_Foot) && IsValid(PartPivots[R_Foot]))
+						Attach(PartPivots[R_Foot], PartPivots[R_LowerLeg], PartLocations[R_Foot], PartDefaultRotations[R_Foot]);
+				}
+			}
+		}
+	}
 }
 
 void UCubeNinjaBodyComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	// Only rebuild if arrays are properly initialized
-	if (PartMeshes.Num() > 0 && PartPivots.Num() > 0)
+	
+	// Delay mesh building to ensure all components are fully initialized
+	// Use a timer to rebuild on next frame
+	if (UWorld* World = GetWorld())
 	{
-		RebuildBody();
+		FTimerHandle RebuildTimer;
+		World->GetTimerManager().SetTimer(RebuildTimer, this, &UCubeNinjaBodyComponent::RebuildBody, 0.01f, false);
 	}
 }
 

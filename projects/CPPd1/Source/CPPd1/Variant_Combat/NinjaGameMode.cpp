@@ -8,6 +8,7 @@
 ANinjaGameMode::ANinjaGameMode()
 {
 	// Use CubeNinjaCharacter as default - procedural cube body ninja
+	// If you get crashes, temporarily switch to ANinjaCharacter::StaticClass() for testing
 	DefaultPawnClass = ACubeNinjaCharacter::StaticClass();
 	PlayerControllerClass = ANinjaPlayerController::StaticClass();
 }
