@@ -1,0 +1,22 @@
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.vscode/
+
+*.sln
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+UpgradeLog.htm
+
+# Keep Unreal content/assets for multi-machine sync
+!Content/**
+!Config/**
+!Source/**
+!*.uproject
+!*.uplugin
