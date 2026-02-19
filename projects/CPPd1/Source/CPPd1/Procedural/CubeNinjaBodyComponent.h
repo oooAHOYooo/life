@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPd1.h"
 #include "Components/SceneComponent.h"
 #include "CubeNinjaBodyComponent.generated.h"
 

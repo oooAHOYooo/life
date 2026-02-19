@@ -106,15 +106,18 @@ void ACombatWaveSpawner::SpawnEnemyInWave()
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-		FVector SpawnLocation = SpawnCapsule->GetComponentLocation();
+		FVector SpawnLocation = GetSpawnLocation();
 		FRotator SpawnRotation = SpawnCapsule->GetComponentRotation();
 
-		// Add some random offset to prevent overlapping
-		SpawnLocation += FVector(
-			FMath::RandRange(-100.0f, 100.0f),
-			FMath::RandRange(-100.0f, 100.0f),
-			0.0f
-		);
+		// Add some random offset to prevent overlapping (if using default spawn location)
+		if (SpawnLocation == SpawnCapsule->GetComponentLocation())
+		{
+			SpawnLocation += FVector(
+				FMath::RandRange(-100.0f, 100.0f),
+				FMath::RandRange(-100.0f, 100.0f),
+				0.0f
+			);
+		}
 
 		ACombatEnemy* SpawnedEnemy = GetWorld()->SpawnActor<ACombatEnemy>(
 			WaveConfig.EnemyClass,
@@ -131,6 +134,9 @@ void ACombatWaveSpawner::SpawnEnemyInWave()
 			// Subscribe to death event
 			SpawnedEnemy->OnEnemyDied.AddDynamic(this, &ACombatWaveSpawner::OnEnemyDied);
 		}
+
+		// Notify that spawn location was used
+		OnSpawnLocationUsed();
 	}
 
 	CurrentSpawnIndex++;
@@ -216,4 +222,14 @@ void ACombatWaveSpawner::ResetWaves()
 
 	GetWorld()->GetTimerManager().ClearTimer(WaveStartTimer);
 	GetWorld()->GetTimerManager().ClearTimer(SpawnTimer);
+}
+
+FVector ACombatWaveSpawner::GetSpawnLocation_Implementation()
+{
+	return SpawnCapsule ? SpawnCapsule->GetComponentLocation() : GetActorLocation();
+}
+
+void ACombatWaveSpawner::OnSpawnLocationUsed_Implementation()
+{
+	// Default implementation does nothing
 }

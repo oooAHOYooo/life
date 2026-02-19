@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "CubeNinjaCharacter.h"
-#include "CubeNinjaBodyComponent.h"
+#include "Procedural/CubeNinjaBodyComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 

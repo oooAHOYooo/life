@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPd1.h"
 #include "Variant_Combat/AI/CombatEnemy.h"
 #include "BruteMarauder.generated.h"
 

@@ -99,6 +99,14 @@ public:
 	/** Spawn a single enemy in the current wave */
 	void SpawnEnemyInWave();
 
+	/** Get spawn location for next enemy (override in subclasses for custom spawn logic) */
+	UFUNCTION(BlueprintNativeEvent, Category = "Spawn")
+	FVector GetSpawnLocation();
+
+	/** Called after spawn location is used (override in subclasses) */
+	UFUNCTION(BlueprintNativeEvent, Category = "Spawn")
+	void OnSpawnLocationUsed();
+
 	/** Called when an enemy dies */
 	UFUNCTION()
 	void OnEnemyDied(ACombatEnemy* DeadEnemy);

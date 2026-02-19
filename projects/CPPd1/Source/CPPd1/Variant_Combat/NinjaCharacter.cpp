@@ -20,7 +20,8 @@ ANinjaCharacter::ANinjaCharacter()
 void ANinjaCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	GetCharacterMovement()->JumpMaxCount = FMath::Max(1, JumpCountMax);
+	// Set jump count - JumpMaxCount is a property of Character, not CharacterMovementComponent
+	JumpMaxCount = FMath::Max(1, JumpCountMax);
 }
 
 void ANinjaCharacter::DoRoll()
@@ -107,7 +108,7 @@ void ANinjaCharacter::DoSideflipRight()
 void ANinjaCharacter::DoFlip360()
 {
 	if (bIsFlipping || bIsRolling) return;
-	StartFlip(ENinjaFlipType::Flip360, FVector::ZeroVector());
+	StartFlip(ENinjaFlipType::Flip360, FVector::Zero());
 }
 
 void ANinjaCharacter::StartFlip(ENinjaFlipType FlipType, const FVector& HorizontalDir)

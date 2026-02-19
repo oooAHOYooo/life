@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPd1.h"
 #include "Variant_Combat/CombatCharacter.h"
 #include "NinjaCharacter.generated.h"
 
@@ -49,6 +50,8 @@ public:
 	/** Number of jumps allowed (1 = single, 2 = double jump). */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ninja|Acrobatics", meta = (ClampMin = 1, ClampMax = 3))
 	int32 JumpCountMax = 2;
+	
+	// Note: JumpMaxCount is inherited from ACharacter and will be set in BeginPlay
 
 	// ---- Flips ----
 	UPROPERTY(EditAnywhere, Category = "Input|Flips")

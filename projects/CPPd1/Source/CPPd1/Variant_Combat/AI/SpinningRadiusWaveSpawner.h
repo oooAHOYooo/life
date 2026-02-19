@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPd1.h"
 #include "Variant_Combat/AI/CombatWaveSpawner.h"
 #include "SpinningRadiusWaveSpawner.generated.h"
 

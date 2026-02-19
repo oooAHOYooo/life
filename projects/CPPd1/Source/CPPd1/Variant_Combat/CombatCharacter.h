@@ -419,6 +419,14 @@ public:
 	UFUNCTION(BlueprintPure, Category="CPPd1|Ghost")
 	FRotator GetEffectiveControlRotation() const;
 
+	/** Get current HP. */
+	UFUNCTION(BlueprintPure, Category="Damage")
+	float GetCurrentHP() const { return CurrentHP; }
+
+	/** Get max HP. */
+	UFUNCTION(BlueprintPure, Category="Damage")
+	float GetMaxHP() const { return MaxHP; }
+
 protected:
 
 	/** Resets the character's current HP to maximum */

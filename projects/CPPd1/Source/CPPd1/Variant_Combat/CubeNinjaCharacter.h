@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPd1.h"
 #include "NinjaCharacter.h"
 #include "CubeNinjaCharacter.generated.h"
 

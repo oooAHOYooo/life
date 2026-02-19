@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPPd1.h"
 #include "GameFramework/Actor.h"
 #include "CPPd1ProceduralCube.generated.h"
 
