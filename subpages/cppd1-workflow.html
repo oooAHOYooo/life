@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>P2G4W – Game Design Document - LifeOS</title>
+        <title>CPPd1 – Workflow Cursor to UE5 - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,11 +453,11 @@
                 <span style="color: #8b7355;">|</span>
                 <a href="2026.html" class="nav-link">2026</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <a href="gdd.html" class="nav-link">GDD</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="cppd1.html" class="nav-link">CPPd1</a>
                 <span style="color: #8b7355;">|</span>
-                <span class="nav-link" style="font-style: normal;">GDD</span>
+                <span class="nav-link" style="font-style: normal;">Workflow</span>
                 <span style="color: #8b7355;">|</span>
                 <a href="p2g4w-ue5-guide.html" class="nav-link">UE5 Guide</a>
             </div>
@@ -467,192 +467,111 @@
             </div>
             
             <header>
-                <h1>P2G4W</h1>
-                <p>GAME DESIGN DOCUMENT</p>
+                <h1>CPPd1 / P2G4W</h1>
+                <p>WORKFLOW CURSOR TO UE5</p>
             </header>
             
-            <div id="contentContainer" class="content"><h1>Game Design Document</h1>
-<p><strong>Working title:</strong> P2G4W <em>(Project 2 Player Game for Wife)</em><br><strong>Last updated:</strong> 2026-02-17<br><strong>Status:</strong> Draft  </p>
-<p><strong>Today’s focus:</strong> Core mechanics (sections 6a–6e below). Other sections can stay light for now.</p>
+            <div id="contentContainer" class="content"><h1>Workflow: Do the work in Cursor / Claude / Antigravity → UE5 updates</h1>
+<p>Use <strong>Cursor</strong> (and Claude, Antigravity, etc.) as your main place to edit code and design. The <strong>life repo</strong> is the single source of truth. When you build from here, UE5 picks up the changes—either by hot-reload (Live Coding) or the next time you open the project.</p>
 <hr>
-<h2>1. Elevator pitch</h2>
-<p><em>One or two sentences. What is this game? Why would someone play it?</em></p>
-<ul>
-<li>You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.</li>
-</ul>
-<hr>
-<h2>2. Vision / high concept</h2>
-<p><em>What’s the big idea? What feeling or experience are you aiming for?</em></p>
-<ul>
-<li>Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.</li>
-</ul>
-<hr>
-<h2>3. Core loop</h2>
-<p><em>What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)</em></p>
+<h2>The idea</h2>
 <ol>
-<li>Defend: marauders spawn (tricksters and/or brutes) and attack.</li>
-<li>Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.</li>
-<li>Clear the wave; next wave starts.</li>
-<li>Repeat until all waves are cleared (win) or both gods fall (lose).</li>
-</ol>
-<hr>
-<h2>4. Design pillars</h2>
-<p><em>3–5 rules that guide every decision. If a feature doesn’t support these, cut it.</em></p>
-<p>1.<br>2.<br>3.<br>4.<br>5. </p>
-<hr>
-<h2>5. Genre &amp; references</h2>
-<ul>
-<li><strong>Genre:</strong> <em>e.g. puzzle, narrative adventure, roguelike, sim</em></li>
-<li><h2><strong>Reference games:</strong> <em>What games does this feel like or take inspiration from?</em></h2>
-- <ul>
-<li></li>
+<li><strong>Edit in Cursor</strong> (or Claude, Antigravity): change C++ under <code>projects/CPPd1/Source/</code>, add docs, tweak config. The life repo is the only place you edit.</li>
+<li><strong>Build from the repo</strong>: run the build script from Cursor’s terminal (or from your repo root).</li>
+<li><strong>UE5 reflects it</strong>:  <ul>
+<li>If the editor is <strong>open</strong> with this project and <strong>Live Coding</strong> is on → compile runs and UE5 hot-reloads.  </li>
+<li>If the editor is <strong>closed</strong> → next time you open the project and hit Play, the new code is already there.</li>
 </ul>
+</li>
+</ol>
+<p>So: <strong>most work in Cursor/Claude/Antigravity → pipe into UE5 by building → UE5 “automatically” has the latest code</strong> (either via Live Coding or on next open).</p>
+<hr>
+<h2>One-time setup</h2>
+<h3>1. Open the project from the life repo in UE5</h3>
+<ul>
+<li>In UE5: <strong>File → Open Project</strong> and choose<br><code>…/life/projects/CPPd1/CPPd1.uproject</code><br>(where <code>life</code> is your repo root).</li>
+<li>Don’t use a copy under “Documents\Unreal Projects” as the main project; the <strong>canonical</strong> project is inside the repo.</li>
+</ul>
+<h3>2. Turn on Live Coding (optional but recommended)</h3>
+<ul>
+<li><strong>Edit → Editor Preferences → General → Live Coding</strong></li>
+<li>Enable <strong>Enable Live Coding</strong>.</li>
+<li>Then when you build from Cursor, you can leave the editor open and it will hot-reload after a successful compile.</li>
+</ul>
+<h3>3. Tell the build script where UE5 is</h3>
+<p><strong>Windows (PowerShell):</strong></p>
+<pre><code class="language-powershell">$env:UE5_ROOT = &quot;C:\Program Files\Epic Games\UE_5.6&quot;
+</code></pre>
+<p>(Use your real install path, e.g. <code>UE_5.5</code> if that’s what you have.)</p>
+<p><strong>Mac (bash/zsh):</strong></p>
+<pre><code class="language-bash">export UE5_ROOT=~/UnrealEngine
+</code></pre>
+<p>Put that in your profile or run it once per terminal before building.</p>
+<hr>
+<h2>Daily workflow</h2>
+<h3>Option A: Build after you’re done editing (simplest)</h3>
+<ol>
+<li><p>Edit in Cursor (CPPd1 C++, docs, config).</p>
+</li>
+<li><p>Save.</p>
+</li>
+<li><p>In Cursor’s terminal (from <strong>repo root</strong>):</p>
+<pre><code class="language-bash">npm run build-cppd1
+</code></pre>
+<p>(Or run the script directly: <code>.\projects\CPPd1\Scripts\build-cppd1.ps1</code> on Windows, <code>./projects/CPPd1/Scripts/build-cppd1.sh</code> on Mac.)</p>
+</li>
+<li><p>If UE5 is open with this project and Live Coding is on → it compiles and hot-reloads.<br>If UE5 is closed → next time you open the project, the new code is already built.</p>
+</li>
+</ol>
+<h3>Option B: Auto-build on save (optional)</h3>
+<p>If you want “save in Cursor → build runs automatically”:</p>
+<ul>
+<li><p>Run the <strong>watch-and-build</strong> script in a terminal and leave it running while you work (from repo root):</p>
+<pre><code class="language-bash">npm run watch-cppd1
+</code></pre>
+<p>It watches <code>projects/CPPd1/Source/</code> and runs the platform build when <code>.cpp</code> or <code>.h</code> files change. Same <code>UE5_ROOT</code> (or <code>UE_ROOT</code>) env var as above.</p>
 </li>
 </ul>
 <hr>
-<h2>6. Core mechanics <em>(today’s focus)</em></h2>
-<h3>6a. Mechanic list</h3>
-<p><em>Name each main mechanic and one line on what it does.</em></p>
+<h2>What “automatically changes” in UE5</h2>
+<ul>
+<li><strong>C++</strong>: Only after a <strong>compile</strong>. So “automatically” means: you run the build (or the watcher runs it), and then either Live Coding applies the new binary in the open editor, or the next time you open the project you’re already on the new code. UE5 does not compile by itself when you save files in Cursor.</li>
+<li><strong>Content (Blueprints, maps, assets)</strong>: Edited in the UE5 editor; the life repo can store them if you commit the Content folder. No “pipe from Cursor” for Blueprint logic—that stays in the editor.</li>
+<li><strong>Config (e.g. DefaultEngine.ini)</strong>: If you edit these in Cursor and save, they’re just files on disk; UE5 will use them the next time the project loads. No build needed.</li>
+</ul>
+<p>So the main “pipe” is: <strong>edit in Cursor → run build script → UE5 gets new C++</strong>. Live Coding makes that feel automatic when the editor is open.</p>
+<hr>
+<h2>Summary</h2>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Mechanic</th>
-<th>One-line description</th>
+<th>Where you work</th>
+<th>What you do</th>
+<th>What happens in UE5</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1</td>
-<td></td>
-<td></td>
+<td>Cursor / Claude / Antigravity</td>
+<td>Edit <code>projects/CPPd1/Source/**</code> and docs</td>
+<td>Nothing until you build</td>
 </tr>
 <tr>
-<td>2</td>
-<td></td>
-<td></td>
+<td>Cursor terminal</td>
+<td>Run <code>build-cppd1.ps1</code> or <code>build-cppd1.sh</code></td>
+<td>Compile runs; if Live Coding on, editor hot-reloads</td>
 </tr>
 <tr>
-<td>3</td>
-<td></td>
-<td></td>
+<td>Optional: run <code>watch-and-build.js</code></td>
+<td>Edit and save C++</td>
+<td>Build runs on save; UE5 hot-reloads if open</td>
 </tr>
 <tr>
-<td>4</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td></td>
-<td></td>
+<td>UE5 editor</td>
+<td>Edit Blueprints, levels, assets</td>
+<td>Normal; save in editor</td>
 </tr>
 </tbody></table>
-<hr>
-<h3>6b. Mechanic deep-dive</h3>
-<p><em>For each mechanic above: what does the player do? What are the rules? What’s the feedback?</em></p>
-<p><strong>Mechanic 1: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong> <em>What does the player actually do (input, decision)?</em></li>
-<li><strong>Rules:</strong> <em>When does it work / not work? Limits?</em></li>
-<li><strong>Feedback:</strong> <em>What do they see/hear/feel when they use it?</em></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 2: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 3: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 4: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 5: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<hr>
-<h3>6c. How mechanics connect</h3>
-<p><em>Which mechanics feed into which? What’s the main “engine” of the game?</em></p>
-<ul>
-<li>Mechanic ___ leads to / enables ___</li>
-<li>Mechanic ___ leads to / enables ___</li>
-<li><em>Optional: one-line “flow” (e.g. “Move → Collect → Build → Defend”)</em></li>
-</ul>
-<hr>
-<h3>6d. Win / lose / flow</h3>
-<ul>
-<li><strong>How do you win?</strong> Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.</li>
-<li><strong>How do you lose / fail?</strong> Both gods are defeated (run over).</li>
-<li><strong>Session shape:</strong> Single run: waves spawn from a spinning radius in the arena; clear all waves to win.</li>
-</ul>
-<hr>
-<h3>6e. 2-player specifics</h3>
-<ul>
-<li><strong>Same screen or separate?</strong> <em>Couch co-op one device, or two devices?</em></li>
-<li><strong>Roles:</strong> <em>Same abilities or different (e.g. one builder, one scout)?</em></li>
-<li><strong>Cooperation vs competition:</strong> <em>Fully coop, fully versus, or hybrid (e.g. shared goal but separate scores)?</em></li>
-<li><strong>What makes it fun for both players at once?</strong> <em>Why 2P and not 1P?</em></li>
-</ul>
-<hr>
-<h2>7. Story / setting (if applicable)</h2>
-<p><em>Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine.</em></p>
-<ul>
-<li><strong>Setting:</strong> A realm of little people. You and your partner are two gods guarding it.</li>
-<li><strong>Tone:</strong> Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).</li>
-<li><strong>Premise / conflict:</strong> Marauders are trying to take over. Two kinds:<ul>
-<li><strong>Tricksters:</strong> Slippery, hard to catch. They dodge and feint; landing a hit feels earned.</li>
-<li><strong>Brutes:</strong> Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.</li>
-</ul>
-</li>
-<li><strong>Lore:</strong> The gods defend the little people. Clearing all waves = the realm is safe (for now).</li>
-<li><strong>Restoration:</strong> The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.</li>
-<li><strong>After victory:</strong> The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm.</li>
-</ul>
-<hr>
-<h2>8. Audience</h2>
-<p><em>Who is this for? Solo dev hobby project, itch audience, Steam, something else?</em></p>
-<ul>
-<li><strong>Primary audience:</strong> </li>
-<li><strong>Platform(s) in mind:</strong> </li>
-<li><strong>Rough scope:</strong> <em>e.g. 2–4 hour experience, endless, 10-level campaign</em></li>
-</ul>
-<hr>
-<h2>9. Scope / MVP</h2>
-<p><em>What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?</em></p>
-<h2><strong>Must have for v1 (MVP):</strong></h2>
-<p>- </p>
-<p>- </p>
-<h2><strong>Nice to have / later:</strong></h2>
-<p>- </p>
-<hr>
-<h2>10. Open questions</h2>
-<p><em>Things to decide as you go.</em></p>
-<p>- </p>
-<p>- </p>
-<p>- </p>
-<hr>
-<h2>11. Notes &amp; links</h2>
-<p><em>Scratch space, references, art docs, tech notes.</em></p>
-<ul>
-<li><strong>Base character (UE5):</strong> 3rd person C++ template <strong>ClaCo</strong> — <code>ClaCoCharacter.cpp</code> in this folder. Spring-arm camera (400), Enhanced Input (Move, Look, MouseLook, Jump), orient to movement, 500 walk speed. Use as reference; actual project lives in UE5 repo.</li>
-<li><strong>Tech checklist for 2P:</strong> <code>tech-notes.md</code> — what to change for 2-player (second pawn, input, camera, spawn) and tunables to expose.</li>
-<li><strong>UE5 C++ scripts:</strong> <code>suggested-scripts/ue5/</code> — full system (Game Mode, Game State, Player State, Player Controller, Character). Copy into your UE5 project; see <code>suggested-scripts/ue5/README.md</code>.</li>
-</ul>
+<p>Single source of truth: <strong>life repo</strong> at <code>projects/CPPd1/</code>. Open that <code>.uproject</code> in UE5 and build from the repo so changes you make in Cursor automatically end up in UE5 after each build.</p>
 </div>
         </div>
         

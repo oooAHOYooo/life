@@ -27,13 +27,25 @@ struct FCombatWaveConfig
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave", meta = (ClampMin = 0.0f, Units = "s"))
 	float WaveStartDelay = 2.0f;
 
-	/** Time between enemy spawns within the wave */
+	/** Time between enemy spawns within the wave. Rush: set to 0 for instant spawn burst. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave", meta = (ClampMin = 0.0f, Units = "s"))
 	float SpawnInterval = 1.0f;
 
-	/** Type of enemy to spawn in this wave */
+	/** Type of enemy to spawn (used if EnemyClassPool is empty) */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave")
 	TSubclassOf<ACombatEnemy> EnemyClass;
+
+	/** If non-empty, each spawn picks a random class from this pool (mixed wave). Otherwise use EnemyClass. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave|Fun")
+	TArray<TSubclassOf<ACombatEnemy>> EnemyClassPool;
+
+	/** Intensity scale for this wave. >1 = enemies deal more damage, take less, move faster. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave|Fun", meta = (ClampMin = 0.1f, ClampMax = 5.0f))
+	float IntensityScale = 1.0f;
+
+	/** If true, spawn all enemies in this wave at once (ignores SpawnInterval for a rush). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave|Fun")
+	bool bRushWave = false;
 };
 
 /**
@@ -99,6 +111,16 @@ public:
 	/** Spawn a single enemy in the current wave */
 	void SpawnEnemyInWave();
 
+	/** Override to change where the next enemy spawns (e.g. spinning radius). Default: SpawnCapsule location. */
+	UFUNCTION(BlueprintNativeEvent, Category = "Waves")
+	FVector GetSpawnLocation();
+	virtual FVector GetSpawnLocation_Implementation();
+
+	/** Called after an enemy is spawned at GetSpawnLocation (e.g. to advance a spinning angle). */
+	UFUNCTION(BlueprintNativeEvent, Category = "Waves")
+	void OnSpawnLocationUsed();
+	virtual void OnSpawnLocationUsed_Implementation();
+
 	/** Called when an enemy dies */
 	UFUNCTION()
 	void OnEnemyDied(ACombatEnemy* DeadEnemy);
@@ -133,10 +155,17 @@ protected:
 	/** Delegate for when all waves complete */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAllWavesCompleted);
 
+	/** Delegate for when a single enemy is spawned (so engagement manager can register it) */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemySpawned, ACombatEnemy*, Enemy);
+
 public:
 	/** Event fired when a wave starts */
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnWaveStarted OnWaveStarted;
+
+	/** Event fired when an enemy is spawned in a wave */
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnEnemySpawned OnEnemySpawned;
 
 	/** Event fired when a wave completes */
 	UPROPERTY(BlueprintAssignable, Category = "Events")

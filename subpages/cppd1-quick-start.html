@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>P2G4W – Game Design Document - LifeOS</title>
+        <title>CPPd1 – Quick Start - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,11 +453,11 @@
                 <span style="color: #8b7355;">|</span>
                 <a href="2026.html" class="nav-link">2026</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <a href="gdd.html" class="nav-link">GDD</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="cppd1.html" class="nav-link">CPPd1</a>
                 <span style="color: #8b7355;">|</span>
-                <span class="nav-link" style="font-style: normal;">GDD</span>
+                <span class="nav-link" style="font-style: normal;">Quick Start</span>
                 <span style="color: #8b7355;">|</span>
                 <a href="p2g4w-ue5-guide.html" class="nav-link">UE5 Guide</a>
             </div>
@@ -467,192 +467,210 @@
             </div>
             
             <header>
-                <h1>P2G4W</h1>
-                <p>GAME DESIGN DOCUMENT</p>
+                <h1>CPPd1 / P2G4W</h1>
+                <p>QUICK START</p>
             </header>
             
-            <div id="contentContainer" class="content"><h1>Game Design Document</h1>
-<p><strong>Working title:</strong> P2G4W <em>(Project 2 Player Game for Wife)</em><br><strong>Last updated:</strong> 2026-02-17<br><strong>Status:</strong> Draft  </p>
-<p><strong>Today’s focus:</strong> Core mechanics (sections 6a–6e below). Other sections can stay light for now.</p>
+            <div id="contentContainer" class="content"><h1>Quick Start Guide - CPPd1 Ninja Game</h1>
+<h2>✅ Compilation Complete!</h2>
+<p>Your project has successfully compiled. Follow these steps to test and deploy:</p>
 <hr>
-<h2>1. Elevator pitch</h2>
-<p><em>One or two sentences. What is this game? Why would someone play it?</em></p>
-<ul>
-<li>You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.</li>
-</ul>
-<hr>
-<h2>2. Vision / high concept</h2>
-<p><em>What’s the big idea? What feeling or experience are you aiming for?</em></p>
-<ul>
-<li>Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.</li>
-</ul>
-<hr>
-<h2>3. Core loop</h2>
-<p><em>What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)</em></p>
+<h2>🎮 Testing in UE5 (Right Now)</h2>
+<h3>Step 1: Open Project in UE5</h3>
 <ol>
-<li>Defend: marauders spawn (tricksters and/or brutes) and attack.</li>
-<li>Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.</li>
-<li>Clear the wave; next wave starts.</li>
-<li>Repeat until all waves are cleared (win) or both gods fall (lose).</li>
+<li>Open Unreal Engine 5.6</li>
+<li>Open your project: <code>CPPd1.uproject</code></li>
+<li>Wait for shader compilation to finish</li>
+</ol>
+<h3>Step 2: Set Up Game Mode</h3>
+<ol>
+<li><strong>Edit → Project Settings → Game → Game Mode</strong><ul>
+<li>Set <strong>Default GameMode</strong> to <code>CombatGameMode</code></li>
+<li>Or set it per-level in <strong>World Settings</strong> (Window → World Settings)</li>
+</ul>
+</li>
+</ol>
+<h3>Step 3: Create/Open a Level</h3>
+<ol>
+<li>Create a new level or open an existing one</li>
+<li>Make sure you have:<ul>
+<li>A player start (or two for split-screen)</li>
+<li>Some ground/floor geometry</li>
+</ul>
+</li>
+</ol>
+<h3>Step 4: Add Wave Spawner</h3>
+<ol>
+<li>In the <strong>Place Actors</strong> panel, search for <code>CombatWaveSpawner</code></li>
+<li>Drag it into your level</li>
+<li>Select it and in the <strong>Details</strong> panel:<ul>
+<li>Set <strong>Enemy Class</strong> (create a Blueprint from <code>CombatEnemy</code> if needed)</li>
+<li>Configure <strong>Wave Configs</strong>:<ul>
+<li>Wave 1: 3 enemies, 2s spawn interval</li>
+<li>Wave 2: 5 enemies, 2s spawn interval</li>
+</ul>
+</li>
+<li>Enable <strong>Start Waves On Begin Play</strong></li>
+</ul>
+</li>
+</ol>
+<h3>Step 5: Test Play</h3>
+<ol>
+<li>Press <strong>Play</strong> (or PIE - Play In Editor)</li>
+<li>You should see:<ul>
+<li>Split-screen (vertical, even with 1 player)</li>
+<li>Enemies spawning in waves</li>
+<li>Only one enemy engages at a time (UFC-style)</li>
+</ul>
+</li>
 </ol>
 <hr>
-<h2>4. Design pillars</h2>
-<p><em>3–5 rules that guide every decision. If a feature doesn’t support these, cut it.</em></p>
-<p>1.<br>2.<br>3.<br>4.<br>5. </p>
-<hr>
-<h2>5. Genre &amp; references</h2>
-<ul>
-<li><strong>Genre:</strong> <em>e.g. puzzle, narrative adventure, roguelike, sim</em></li>
-<li><h2><strong>Reference games:</strong> <em>What games does this feel like or take inspiration from?</em></h2>
-- <ul>
-<li></li>
+<h2>🎮 Xbox Deployment (By Friday)</h2>
+<h3>Prerequisites</h3>
+<ol>
+<li><strong>Xbox Developer Account</strong> (ID@Xbox or Creator Program)</li>
+<li><strong>Xbox Development Kit (XDK)</strong> installed</li>
+<li><strong>Xbox console</strong> in Developer Mode</li>
+</ol>
+<h3>Step 1: Configure for Xbox</h3>
+<ol>
+<li><strong>Edit → Project Settings → Platforms → Xbox Series X|S</strong><ul>
+<li>Set <strong>Target Platform</strong> to Xbox Series X or S</li>
+<li>Configure <strong>Xbox Live</strong> settings if needed</li>
+<li>Set <strong>Build Configuration</strong> to Development or Shipping</li>
 </ul>
 </li>
+</ol>
+<h3>Step 2: Build for Xbox</h3>
+<ol>
+<li><strong>File → Package Project → Xbox Series X|S</strong></li>
+<li>Or use <strong>Build → Build Solution</strong> in Visual Studio with Xbox target</li>
+</ol>
+<h3>Step 3: Deploy to Xbox</h3>
+<ol>
+<li>Connect Xbox to same network</li>
+<li>Use <strong>Unreal Frontend</strong> or <strong>Xbox Dev Portal</strong></li>
+<li>Deploy the <code>.xex</code> file to your console</li>
+</ol>
+<h3>Step 4: Test on Xbox</h3>
+<ol>
+<li>Launch from Xbox dashboard</li>
+<li>Test with 2 Xbox controllers</li>
+<li>Verify split-screen works correctly</li>
+</ol>
+<h3>Important Xbox Considerations:</h3>
+<ul>
+<li><strong>Input</strong>: Xbox controllers should work automatically with Enhanced Input</li>
+<li><strong>Performance</strong>: Test frame rate, especially with split-screen</li>
+<li><strong>Memory</strong>: Monitor memory usage (Xbox Series X has 16GB, Series S has 10GB)</li>
+<li><strong>Certification</strong>: If submitting to Microsoft Store, follow Xbox certification requirements</li>
 </ul>
 <hr>
-<h2>6. Core mechanics <em>(today’s focus)</em></h2>
-<h3>6a. Mechanic list</h3>
-<p><em>Name each main mechanic and one line on what it does.</em></p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Mechanic</th>
-<th>One-line description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<hr>
-<h3>6b. Mechanic deep-dive</h3>
-<p><em>For each mechanic above: what does the player do? What are the rules? What’s the feedback?</em></p>
-<p><strong>Mechanic 1: <em>[name]</em></strong></p>
+<h2>🔄 Combining with Your Life Repo (Git Setup)</h2>
+<h3>Option 1: Add This Project to Existing Repo (Recommended)</h3>
+<pre><code class="language-bash"># Navigate to your life repo
+cd &quot;C:\path\to\your\life\repo&quot;
+
+# Add this project as a subdirectory
+# Copy the entire CPPd1 folder into your repo
+# Then:
+
+git add CPPd1/
+git commit -m &quot;Add CPPd1 ninja game project&quot;
+git push
+</code></pre>
+<h3>Option 2: Merge Two Repos</h3>
+<pre><code class="language-bash"># In your life repo
+cd &quot;C:\path\to\your\life\repo&quot;
+
+# Add this repo as a remote
+git remote add cppd1 &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot;
+
+# Fetch and merge
+git fetch cppd1
+git merge cppd1/main --allow-unrelated-histories
+
+# Or create a submodule
+git submodule add &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot; CPPd1
+</code></pre>
+<h3>Option 3: Initialize Git in This Project (If Not Already)</h3>
+<pre><code class="language-bash">cd &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot;
+
+# Initialize git (if not already)
+git init
+
+# Create .gitignore for Unreal projects
+# (I&#39;ll create this for you)
+
+# Add and commit
+git add .
+git commit -m &quot;Initial commit: CPPd1 ninja game with wave spawning and split-screen&quot;
+</code></pre>
+<h3>Recommended .gitignore for Unreal Projects</h3>
+<p>I&#39;ll create a proper <code>.gitignore</code> file for you that excludes:</p>
 <ul>
-<li><strong>Player action:</strong> <em>What does the player actually do (input, decision)?</em></li>
-<li><strong>Rules:</strong> <em>When does it work / not work? Limits?</em></li>
-<li><strong>Feedback:</strong> <em>What do they see/hear/feel when they use it?</em></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 2: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 3: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 4: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 5: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
+<li><code>Binaries/</code></li>
+<li><code>Intermediate/</code></li>
+<li><code>Saved/</code></li>
+<li><code>DerivedDataCache/</code></li>
+<li><code>*.sln</code>, <code>*.suo</code>, etc.</li>
 </ul>
 <hr>
-<h3>6c. How mechanics connect</h3>
-<p><em>Which mechanics feed into which? What’s the main “engine” of the game?</em></p>
+<h2>📋 Quick Checklist</h2>
+<h3>Before Testing:</h3>
 <ul>
-<li>Mechanic ___ leads to / enables ___</li>
-<li>Mechanic ___ leads to / enables ___</li>
-<li><em>Optional: one-line “flow” (e.g. “Move → Collect → Build → Defend”)</em></li>
+<li><input disabled="" type="checkbox"> Game Mode set to <code>CombatGameMode</code></li>
+<li><input disabled="" type="checkbox"> <code>CombatWaveSpawner</code> placed in level</li>
+<li><input disabled="" type="checkbox"> Enemy class assigned to wave spawner</li>
+<li><input disabled="" type="checkbox"> Player start(s) in level</li>
 </ul>
-<hr>
-<h3>6d. Win / lose / flow</h3>
+<h3>Before Xbox Deployment:</h3>
 <ul>
-<li><strong>How do you win?</strong> Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.</li>
-<li><strong>How do you lose / fail?</strong> Both gods are defeated (run over).</li>
-<li><strong>Session shape:</strong> Single run: waves spawn from a spinning radius in the arena; clear all waves to win.</li>
+<li><input disabled="" type="checkbox"> Xbox Developer Account active</li>
+<li><input disabled="" type="checkbox"> XDK installed</li>
+<li><input disabled="" type="checkbox"> Xbox in Developer Mode</li>
+<li><input disabled="" type="checkbox"> Project configured for Xbox platform</li>
+<li><input disabled="" type="checkbox"> Tested with 2 controllers locally first</li>
 </ul>
-<hr>
-<h3>6e. 2-player specifics</h3>
+<h3>Before Committing to Git:</h3>
 <ul>
-<li><strong>Same screen or separate?</strong> <em>Couch co-op one device, or two devices?</em></li>
-<li><strong>Roles:</strong> <em>Same abilities or different (e.g. one builder, one scout)?</em></li>
-<li><strong>Cooperation vs competition:</strong> <em>Fully coop, fully versus, or hybrid (e.g. shared goal but separate scores)?</em></li>
-<li><strong>What makes it fun for both players at once?</strong> <em>Why 2P and not 1P?</em></li>
+<li><input disabled="" type="checkbox"> <code>.gitignore</code> configured</li>
+<li><input disabled="" type="checkbox"> No sensitive data (API keys, etc.)</li>
+<li><input disabled="" type="checkbox"> Large binary files excluded</li>
+<li><input disabled="" type="checkbox"> Commit message descriptive</li>
 </ul>
 <hr>
-<h2>7. Story / setting (if applicable)</h2>
-<p><em>Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine.</em></p>
+<h2>🐛 Troubleshooting</h2>
+<h3>Split-Screen Not Working?</h3>
 <ul>
-<li><strong>Setting:</strong> A realm of little people. You and your partner are two gods guarding it.</li>
-<li><strong>Tone:</strong> Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).</li>
-<li><strong>Premise / conflict:</strong> Marauders are trying to take over. Two kinds:<ul>
-<li><strong>Tricksters:</strong> Slippery, hard to catch. They dodge and feint; landing a hit feels earned.</li>
-<li><strong>Brutes:</strong> Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.</li>
+<li>Check <code>bForceSplitScreenForSolo</code> is <code>true</code> in GameMode</li>
+<li>Verify <code>SplitScreenManager</code> component exists</li>
+<li>Check console for errors</li>
 </ul>
-</li>
-<li><strong>Lore:</strong> The gods defend the little people. Clearing all waves = the realm is safe (for now).</li>
-<li><strong>Restoration:</strong> The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.</li>
-<li><strong>After victory:</strong> The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm.</li>
-</ul>
-<hr>
-<h2>8. Audience</h2>
-<p><em>Who is this for? Solo dev hobby project, itch audience, Steam, something else?</em></p>
+<h3>Enemies Not Spawning?</h3>
 <ul>
-<li><strong>Primary audience:</strong> </li>
-<li><strong>Platform(s) in mind:</strong> </li>
-<li><strong>Rough scope:</strong> <em>e.g. 2–4 hour experience, endless, 10-level campaign</em></li>
+<li>Verify <code>CombatWaveSpawner</code> is in level</li>
+<li>Check <code>Enemy Class</code> is assigned</li>
+<li>Look at <code>Wave Configs</code> array has entries</li>
+<li>Check Output Log for errors</li>
 </ul>
-<hr>
-<h2>9. Scope / MVP</h2>
-<p><em>What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?</em></p>
-<h2><strong>Must have for v1 (MVP):</strong></h2>
-<p>- </p>
-<p>- </p>
-<h2><strong>Nice to have / later:</strong></h2>
-<p>- </p>
-<hr>
-<h2>10. Open questions</h2>
-<p><em>Things to decide as you go.</em></p>
-<p>- </p>
-<p>- </p>
-<p>- </p>
-<hr>
-<h2>11. Notes &amp; links</h2>
-<p><em>Scratch space, references, art docs, tech notes.</em></p>
+<h3>Xbox Build Fails?</h3>
 <ul>
-<li><strong>Base character (UE5):</strong> 3rd person C++ template <strong>ClaCo</strong> — <code>ClaCoCharacter.cpp</code> in this folder. Spring-arm camera (400), Enhanced Input (Move, Look, MouseLook, Jump), orient to movement, 500 walk speed. Use as reference; actual project lives in UE5 repo.</li>
-<li><strong>Tech checklist for 2P:</strong> <code>tech-notes.md</code> — what to change for 2-player (second pawn, input, camera, spawn) and tunables to expose.</li>
-<li><strong>UE5 C++ scripts:</strong> <code>suggested-scripts/ue5/</code> — full system (Game Mode, Game State, Player State, Player Controller, Character). Copy into your UE5 project; see <code>suggested-scripts/ue5/README.md</code>.</li>
+<li>Verify XDK is installed</li>
+<li>Check Xbox platform settings</li>
+<li>Ensure all dependencies are included</li>
+<li>Check for Xbox-specific API usage</li>
 </ul>
+<hr>
+<h2>📞 Next Steps</h2>
+<ol>
+<li><strong>Test in UE5</strong> - Get basic gameplay working</li>
+<li><strong>Tune Wave System</strong> - Adjust enemy counts, spawn rates</li>
+<li><strong>Polish Combat</strong> - Fine-tune the engagement system</li>
+<li><strong>Xbox Testing</strong> - Deploy and test on hardware</li>
+<li><strong>Git Integration</strong> - Commit to your life repo</li>
+</ol>
+<p>Good luck with your Friday deadline! 🚀</p>
 </div>
         </div>
         

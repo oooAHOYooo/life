@@ -5,7 +5,9 @@
   "description": "LifeOS – personal hub and projects",
   "scripts": {
     "compile": "node compile-all.js",
-    "sync-ue5": "node data/games/suggested-scripts/ue5/sync-to-ue.js"
+    "sync-ue5": "node data/games/suggested-scripts/ue5/sync-to-ue.js",
+    "build-cppd1": "node projects/CPPd1/Scripts/build-cppd1.js",
+    "watch-cppd1": "node projects/CPPd1/Scripts/watch-and-build.js"
   },
   "dependencies": {
     "marked": "^15.0.4"

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>P2G4W – Game Design Document - LifeOS</title>
+        <title>CPPd1 – C++ in UE5 Reference - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,11 +453,11 @@
                 <span style="color: #8b7355;">|</span>
                 <a href="2026.html" class="nav-link">2026</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <a href="gdd.html" class="nav-link">GDD</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="cppd1.html" class="nav-link">CPPd1</a>
                 <span style="color: #8b7355;">|</span>
-                <span class="nav-link" style="font-style: normal;">GDD</span>
+                <span class="nav-link" style="font-style: normal;">C++ Reference</span>
                 <span style="color: #8b7355;">|</span>
                 <a href="p2g4w-ue5-guide.html" class="nav-link">UE5 Guide</a>
             </div>
@@ -467,192 +467,145 @@
             </div>
             
             <header>
-                <h1>P2G4W</h1>
-                <p>GAME DESIGN DOCUMENT</p>
+                <h1>CPPd1 / P2G4W</h1>
+                <p>C++ IN UE5 REFERENCE</p>
             </header>
             
-            <div id="contentContainer" class="content"><h1>Game Design Document</h1>
-<p><strong>Working title:</strong> P2G4W <em>(Project 2 Player Game for Wife)</em><br><strong>Last updated:</strong> 2026-02-17<br><strong>Status:</strong> Draft  </p>
-<p><strong>Today’s focus:</strong> Core mechanics (sections 6a–6e below). Other sections can stay light for now.</p>
+            <div id="contentContainer" class="content"><h1>C++ in UE5: What Auto-Works &amp; Building 3D in Code</h1>
+<p>Quick reference for CPPd1: which C++ types show up in the editor automatically, and how to create 3D geometry in code.</p>
 <hr>
-<h2>1. Elevator pitch</h2>
-<p><em>One or two sentences. What is this game? Why would someone play it?</em></p>
+<h2>1. C++ files that “automatically work” in UE5</h2>
+<p>Any C++ class in your <strong>CPPd1</strong> module (under <code>Source/CPPd1/</code>) that uses UE’s reflection macros is picked up by the editor after a successful compile. You don’t register files by hand.</p>
+<h3>Rules</h3>
 <ul>
-<li>You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.</li>
+<li><strong>Same module:</strong> <code>.h</code> / <code>.cpp</code> live under <code>Source/CPPd1/</code> (or a subfolder; add the folder to <code>PublicIncludePaths</code> in <code>CPPd1.Build.cs</code> if you use a new folder like <code>Procedural/</code>).</li>
+<li><strong>Reflection:</strong> Use <code>UCLASS()</code>, <code>UPROPERTY()</code>, <code>UFUNCTION()</code> (and optionally <code>USTRUCT()</code>, <code>UENUM()</code>) so the class appears in the editor and Blueprints.</li>
+<li><strong>Base class:</strong> Inherit from an engine type (<code>AActor</code>, <code>UActorComponent</code>, <code>AGameModeBase</code>, <code>UObject</code>, etc.).</li>
 </ul>
-<hr>
-<h2>2. Vision / high concept</h2>
-<p><em>What’s the big idea? What feeling or experience are you aiming for?</em></p>
-<ul>
-<li>Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.</li>
-</ul>
-<hr>
-<h2>3. Core loop</h2>
-<p><em>What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)</em></p>
-<ol>
-<li>Defend: marauders spawn (tricksters and/or brutes) and attack.</li>
-<li>Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.</li>
-<li>Clear the wave; next wave starts.</li>
-<li>Repeat until all waves are cleared (win) or both gods fall (lose).</li>
-</ol>
-<hr>
-<h2>4. Design pillars</h2>
-<p><em>3–5 rules that guide every decision. If a feature doesn’t support these, cut it.</em></p>
-<p>1.<br>2.<br>3.<br>4.<br>5. </p>
-<hr>
-<h2>5. Genre &amp; references</h2>
-<ul>
-<li><strong>Genre:</strong> <em>e.g. puzzle, narrative adventure, roguelike, sim</em></li>
-<li><h2><strong>Reference games:</strong> <em>What games does this feel like or take inspiration from?</em></h2>
-- <ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2>6. Core mechanics <em>(today’s focus)</em></h2>
-<h3>6a. Mechanic list</h3>
-<p><em>Name each main mechanic and one line on what it does.</em></p>
+<h3>Types you can add (they’ll just work)</h3>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Mechanic</th>
-<th>One-line description</th>
+<th>Kind</th>
+<th>Base class</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1</td>
-<td></td>
-<td></td>
+<td><strong>Placeable actor</strong></td>
+<td><code>AActor</code></td>
+<td>Drag into level (e.g. <code>ACPPd1ProceduralCube</code>).</td>
 </tr>
 <tr>
-<td>2</td>
-<td></td>
-<td></td>
+<td><strong>Component</strong></td>
+<td><code>UActorComponent</code>, <code>USceneComponent</code></td>
+<td>Add to actors in C++ or Blueprint.</td>
 </tr>
 <tr>
-<td>3</td>
-<td></td>
-<td></td>
+<td><strong>Character</strong></td>
+<td><code>ACharacter</code></td>
+<td>Player or AI pawn.</td>
 </tr>
 <tr>
-<td>4</td>
-<td></td>
-<td></td>
+<td><strong>Game mode</strong></td>
+<td><code>AGameModeBase</code></td>
+<td>PIE / packaged game.</td>
 </tr>
 <tr>
-<td>5</td>
-<td></td>
-<td></td>
+<td><strong>Game state</strong></td>
+<td><code>AGameStateBase</code></td>
+<td>Replicated / shared state.</td>
+</tr>
+<tr>
+<td><strong>Player state</strong></td>
+<td><code>APlayerState</code></td>
+<td>Per-player data.</td>
+</tr>
+<tr>
+<td><strong>Player controller</strong></td>
+<td><code>APlayerController</code></td>
+<td>Input and UI.</td>
+</tr>
+<tr>
+<td><strong>Subsystem</strong></td>
+<td><code>UWorldSubsystem</code>, <code>UGameInstanceSubsystem</code></td>
+<td>Global services.</td>
+</tr>
+<tr>
+<td><strong>Data asset</strong></td>
+<td><code>UDataAsset</code></td>
+<td>Design-time data.</td>
+</tr>
+<tr>
+<td><strong>Interface</strong></td>
+<td><code>UInterface</code> (with <code>UINTERFACE</code>)</td>
+<td>“Can do X” contracts.</td>
+</tr>
+<tr>
+<td><strong>Struct</strong></td>
+<td><code>USTRUCT()</code></td>
+<td>Blueprint / replication structs.</td>
+</tr>
+<tr>
+<td><strong>Enum</strong></td>
+<td><code>UENUM()</code></td>
+<td>Dropdowns and flags.</td>
 </tr>
 </tbody></table>
+<p>Example for a new actor: create <code>MyNewActor.h</code> / <code>MyNewActor.cpp</code> with <code>UCLASS(BlueprintType, Blueprintable)</code>, inherit from <code>AActor</code>, put them in <code>Source/CPPd1/</code> (or a subfolder with include path), compile → class appears in <strong>Place Actors</strong> and in <strong>Blueprint Parent Class</strong>.</p>
 <hr>
-<h3>6b. Mechanic deep-dive</h3>
-<p><em>For each mechanic above: what does the player do? What are the rules? What’s the feedback?</em></p>
-<p><strong>Mechanic 1: <em>[name]</em></strong></p>
+<h2>2. Building 3D objects with code</h2>
+<p>Yes — you can create 3D geometry entirely in C++.</p>
+<h3>Options</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Procedural Mesh Component</strong></td>
+<td>Full control: vertices, triangles, normals, UVs. Good for cubes, grids, terrain, custom shapes.</td>
+</tr>
+<tr>
+<td><strong>Spawn <code>UStaticMesh</code></strong></td>
+<td>Use existing assets; set transform, scale, material at runtime.</td>
+</tr>
+<tr>
+<td><strong>Instanced Static Mesh</strong></td>
+<td>Many copies of one mesh (e.g. foliage, bullets) with one draw call.</td>
+</tr>
+<tr>
+<td><strong>Spline + Spline Mesh</strong></td>
+<td>Shape a path in code; mesh follows the spline.</td>
+</tr>
+<tr>
+<td><strong>Geometry Script (UE5)</strong></td>
+<td>Higher-level procedural geometry; can be used from C++ where exposed.</td>
+</tr>
+</tbody></table>
+<h3>Example in this project: procedural cube</h3>
 <ul>
-<li><strong>Player action:</strong> <em>What does the player actually do (input, decision)?</em></li>
-<li><strong>Rules:</strong> <em>When does it work / not work? Limits?</em></li>
-<li><strong>Feedback:</strong> <em>What do they see/hear/feel when they use it?</em></li>
-<li><strong>Notes:</strong></li>
+<li><strong>Class:</strong> <code>ACPPd1ProceduralCube</code> in <code>Source/CPPd1/Procedural/</code>.</li>
+<li><strong>What it does:</strong> Uses <code>UProceduralMeshComponent</code> to build a cube from vertices and triangles in <code>BuildCubeMesh()</code>.</li>
+<li><strong>Usage:</strong> Place the actor in the level (search “ProceduralCube” in Place Actors). Change <strong>Size</strong> in the Details panel; use <strong>Rebuild Mesh</strong> (or move the actor) to refresh.</li>
+<li><strong>Dependency:</strong> <strong>ProceduralMeshComponent</strong> plugin is enabled in the project and in <code>CPPd1.Build.cs</code>.</li>
 </ul>
-<p><strong>Mechanic 2: <em>[name]</em></strong></p>
+<p>To go further:</p>
 <ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 3: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 4: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 5: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<hr>
-<h3>6c. How mechanics connect</h3>
-<p><em>Which mechanics feed into which? What’s the main “engine” of the game?</em></p>
-<ul>
-<li>Mechanic ___ leads to / enables ___</li>
-<li>Mechanic ___ leads to / enables ___</li>
-<li><em>Optional: one-line “flow” (e.g. “Move → Collect → Build → Defend”)</em></li>
-</ul>
-<hr>
-<h3>6d. Win / lose / flow</h3>
-<ul>
-<li><strong>How do you win?</strong> Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.</li>
-<li><strong>How do you lose / fail?</strong> Both gods are defeated (run over).</li>
-<li><strong>Session shape:</strong> Single run: waves spawn from a spinning radius in the arena; clear all waves to win.</li>
+<li>Add more sections in <code>ProceduralMesh</code> for multiple materials.</li>
+<li>Generate other shapes (sphere, cylinder, grid, heightfield) by filling <code>Vertices</code> / <code>Triangles</code> / <code>Normals</code> / <code>UV0</code>.</li>
+<li>Assign a material: <code>ProceduralMesh-&gt;SetMaterial(0, YourMaterial)</code>.</li>
 </ul>
 <hr>
-<h3>6e. 2-player specifics</h3>
+<h2>3. Where to put new C++ files</h2>
 <ul>
-<li><strong>Same screen or separate?</strong> <em>Couch co-op one device, or two devices?</em></li>
-<li><strong>Roles:</strong> <em>Same abilities or different (e.g. one builder, one scout)?</em></li>
-<li><strong>Cooperation vs competition:</strong> <em>Fully coop, fully versus, or hybrid (e.g. shared goal but separate scores)?</em></li>
-<li><strong>What makes it fun for both players at once?</strong> <em>Why 2P and not 1P?</em></li>
+<li><strong>General / shared:</strong> <code>Source/CPPd1/</code> (e.g. <code>CPPd1ProceduralCube</code> could live here; we use <code>Procedural/</code> to group).</li>
+<li><strong>Variant-specific:</strong> <code>Source/CPPd1/Variant_Combat/</code>, <code>Variant_Platforming/</code>, <code>Variant_SideScrolling/</code> (and subfolders already in <code>PublicIncludePaths</code>).</li>
+<li><strong>New folder:</strong> Add to <code>PublicIncludePaths</code> in <code>CPPd1.Build.cs</code>, e.g. <code>&quot;CPPd1/Procedural&quot;</code>.</li>
 </ul>
-<hr>
-<h2>7. Story / setting (if applicable)</h2>
-<p><em>Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine.</em></p>
-<ul>
-<li><strong>Setting:</strong> A realm of little people. You and your partner are two gods guarding it.</li>
-<li><strong>Tone:</strong> Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).</li>
-<li><strong>Premise / conflict:</strong> Marauders are trying to take over. Two kinds:<ul>
-<li><strong>Tricksters:</strong> Slippery, hard to catch. They dodge and feint; landing a hit feels earned.</li>
-<li><strong>Brutes:</strong> Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.</li>
-</ul>
-</li>
-<li><strong>Lore:</strong> The gods defend the little people. Clearing all waves = the realm is safe (for now).</li>
-<li><strong>Restoration:</strong> The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.</li>
-<li><strong>After victory:</strong> The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm.</li>
-</ul>
-<hr>
-<h2>8. Audience</h2>
-<p><em>Who is this for? Solo dev hobby project, itch audience, Steam, something else?</em></p>
-<ul>
-<li><strong>Primary audience:</strong> </li>
-<li><strong>Platform(s) in mind:</strong> </li>
-<li><strong>Rough scope:</strong> <em>e.g. 2–4 hour experience, endless, 10-level campaign</em></li>
-</ul>
-<hr>
-<h2>9. Scope / MVP</h2>
-<p><em>What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?</em></p>
-<h2><strong>Must have for v1 (MVP):</strong></h2>
-<p>- </p>
-<p>- </p>
-<h2><strong>Nice to have / later:</strong></h2>
-<p>- </p>
-<hr>
-<h2>10. Open questions</h2>
-<p><em>Things to decide as you go.</em></p>
-<p>- </p>
-<p>- </p>
-<p>- </p>
-<hr>
-<h2>11. Notes &amp; links</h2>
-<p><em>Scratch space, references, art docs, tech notes.</em></p>
-<ul>
-<li><strong>Base character (UE5):</strong> 3rd person C++ template <strong>ClaCo</strong> — <code>ClaCoCharacter.cpp</code> in this folder. Spring-arm camera (400), Enhanced Input (Move, Look, MouseLook, Jump), orient to movement, 500 walk speed. Use as reference; actual project lives in UE5 repo.</li>
-<li><strong>Tech checklist for 2P:</strong> <code>tech-notes.md</code> — what to change for 2-player (second pawn, input, camera, spawn) and tunables to expose.</li>
-<li><strong>UE5 C++ scripts:</strong> <code>suggested-scripts/ue5/</code> — full system (Game Mode, Game State, Player State, Player Controller, Character). Copy into your UE5 project; see <code>suggested-scripts/ue5/README.md</code>.</li>
-</ul>
+<p>No need to list each <code>.cpp</code> in the build; Unreal Build Tool discovers them in the module.</p>
 </div>
         </div>
         

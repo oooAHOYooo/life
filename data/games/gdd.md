@@ -12,7 +12,7 @@
 
 _One or two sentences. What is this game? Why would someone play it?_
 
-- 
+- You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.
 
 ---
 
@@ -20,7 +20,7 @@ _One or two sentences. What is this game? Why would someone play it?_
 
 _What’s the big idea? What feeling or experience are you aiming for?_
 
-- 
+- Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.
 
 ---
 
@@ -28,10 +28,10 @@ _What’s the big idea? What feeling or experience are you aiming for?_
 
 _What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)_
 
-1. 
-2. 
-3. 
-_(repeat)_
+1. Defend: marauders spawn (tricksters and/or brutes) and attack.
+2. Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.
+3. Clear the wave; next wave starts.
+4. Repeat until all waves are cleared (win) or both gods fall (lose).
 
 ---
 
@@ -121,9 +121,9 @@ _Which mechanics feed into which? What’s the main “engine” of the game?_
 
 ### 6d. Win / lose / flow
 
-- **How do you win?** _Or: is there no “win,” just a session or endless loop?_
-- **How do you lose / fail?** _Or: no lose state?_
-- **Session shape:** _Single round, best of 3, timed run, open-ended, etc._
+- **How do you win?** Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.
+- **How do you lose / fail?** Both gods are defeated (run over).
+- **Session shape:** Single run: waves spawn from a spinning radius in the arena; clear all waves to win.
 
 ---
 
@@ -140,9 +140,14 @@ _Which mechanics feed into which? What’s the main “engine” of the game?_
 
 _Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine._
 
-- **Setting:** 
-- **Tone:** 
-- **Premise / conflict:** 
+- **Setting:** A realm of little people. You and your partner are two gods guarding it.
+- **Tone:** Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).
+- **Premise / conflict:** Marauders are trying to take over. Two kinds:
+  - **Tricksters:** Slippery, hard to catch. They dodge and feint; landing a hit feels earned.
+  - **Brutes:** Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.
+- **Lore:** The gods defend the little people. Clearing all waves = the realm is safe (for now).
+- **Restoration:** The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.
+- **After victory:** The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm. 
 
 ---
 

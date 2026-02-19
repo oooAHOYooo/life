@@ -8,9 +8,11 @@
 #include "CPPd1SplitScreenManager.h"
 #include "Variant_Combat/AI/CombatWaveSpawner.h"
 #include "Variant_Combat/AI/CombatEnemy.h"
+#include "CombatDamageable.h"
 #include "Engine/GameInstance.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/PlayerState.h"
 
 ACombatGameMode::ACombatGameMode()
 {
@@ -82,17 +84,48 @@ void ACombatGameMode::RegisterWaveSpawner(ACombatWaveSpawner* Spawner)
 	}
 
 	WaveSpawner = Spawner;
-
-	// Connect wave spawner events to engagement manager
-	WaveSpawner->OnWaveStarted.AddDynamic(this, &ACombatGameMode::OnWaveStarted);
+	WaveSpawner->OnEnemySpawned.AddDynamic(this, &ACombatGameMode::OnEnemySpawned);
+	WaveSpawner->OnWaveCompleted.AddDynamic(this, &ACombatGameMode::OnWaveCompleted);
+	WaveSpawner->OnAllWavesCompleted.AddDynamic(this, &ACombatGameMode::OnAllWavesCompleted);
 }
 
-void ACombatGameMode::OnWaveStarted(int32 WaveIndex)
+void ACombatGameMode::OnEnemySpawned(ACombatEnemy* Enemy)
 {
-	// When a wave starts, register all enemies to engagement manager
-	if (WaveSpawner && EngagementManager)
+	if (EngagementManager && Enemy)
+		EngagementManager->RegisterEnemy(Enemy);
+}
+
+void ACombatGameMode::OnWaveCompleted(int32 WaveIndex)
+{
+	// Restore the gods: heal all player characters (duo ninjas) after each wave cleared
+	UWorld* World = GetWorld();
+	if (!World || HealPerWaveCleared <= 0.0f) return;
+	for (FConstPlayerControllerIterator It = World->GetPlayerControllerIterator(); It; ++It)
 	{
-		TArray<ACombatEnemy*> WaveEnemies = WaveSpawner->GetCurrentWaveEnemies();
-		EngagementManager->RegisterEnemies(WaveEnemies);
+		if (APawn* Pawn = It->Get()->GetPawn())
+		{
+			if (ICombatDamageable* Damageable = Cast<ICombatDamageable>(Pawn))
+				Damageable->ApplyHealing(HealPerWaveCleared, this);
+		}
 	}
+}
+
+void ACombatGameMode::OnAllWavesCompleted()
+{
+	// Full restoration: heal all player gods to max (realm is restored)
+	UWorld* World = GetWorld();
+	if (!World) return;
+	for (FConstPlayerControllerIterator It = World->GetPlayerControllerIterator(); It; ++It)
+	{
+		if (APawn* Pawn = It->Get()->GetPawn())
+		{
+			if (ACombatCharacter* Char = Cast<ACombatCharacter>(Pawn))
+			{
+				// Heal to full (use a large value; ApplyHealing clamps to MaxHP)
+				Char->ApplyHealing(999.0f, this);
+			}
+		}
+	}
+	// NPCs congratulate and worship: broadcast so Blueprint/level can trigger NPC behavior
+	OnGodsDefendedRealm.Broadcast();
 }

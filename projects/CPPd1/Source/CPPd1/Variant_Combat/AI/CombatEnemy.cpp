@@ -153,10 +153,8 @@ void ACombatEnemy::DoAttackTrace(FName DamageSourceBone)
 				{
 					// knock upwards and away from the impact normal
 					const FVector Impulse = (CurrentHit.ImpactNormal * -MeleeKnockbackImpulse) + (FVector::UpVector * MeleeLaunchImpulse);
-
-					// pass the damage event to the actor
-					Damageable->ApplyDamage(MeleeDamage, this, CurrentHit.ImpactPoint, Impulse);
-
+					const float ScaledDamage = MeleeDamage * FMath::Max(0.1f, WaveIntensityScale);
+					Damageable->ApplyDamage(ScaledDamage, this, CurrentHit.ImpactPoint, Impulse);
 				}
 			}
 		}
@@ -237,8 +235,8 @@ void ACombatEnemy::HandleDeath()
 	// enable full ragdoll physics
 	GetMesh()->SetSimulatePhysics(true);
 
-	// call the died delegate to notify any subscribers
 	OnEnemyDied.Broadcast(this);
+	OnEnemyKilledWithCauser.Broadcast(this, LastDamageCauser);
 
 	// set up the death timer
 	GetWorld()->GetTimerManager().SetTimer(DeathTimer, this, &ACombatEnemy::RemoveFromLevel, DeathRemovalTime);
@@ -257,13 +255,10 @@ void ACombatEnemy::RemoveFromLevel()
 
 float ACombatEnemy::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	// only process damage if the character is still alive
-	if (CurrentHP <= 0.0f)
-	{
-		return 0.0f;
-	}
-
-	// reduce the current HP
+	if (CurrentHP <= 0.0f) return 0.0f;
+	LastDamageCauser = DamageCauser;
+	const float Scale = FMath::Max(0.1f, WaveIntensityScale);
+	Damage = Damage / Scale;
 	CurrentHP -= Damage;
 
 	// have we run out of HP?
@@ -303,18 +298,17 @@ void ACombatEnemy::Landed(const FHitResult& Hit)
 
 void ACombatEnemy::BeginPlay()
 {
-	// reset HP to maximum
 	CurrentHP = MaxHP;
-
-	// we top the HP before BeginPlay so StateTree picks it up at the right value
 	Super::BeginPlay();
-
-	// get the life bar widget from the widget comp
 	LifeBarWidget = Cast<UCombatLifeBar>(LifeBar->GetUserWidgetObject());
 	check(LifeBarWidget);
-
-	// fill the life bar
 	LifeBarWidget->SetLifePercentage(1.0f);
+	// Scale movement speed with intensity (harder waves = slightly faster enemies)
+	if (WaveIntensityScale > 1.0f)
+	{
+		const float SpeedScale = FMath::Sqrt(WaveIntensityScale);
+		GetCharacterMovement()->MaxWalkSpeed *= FMath::Clamp(SpeedScale, 1.0f, 1.5f);
+	}
 }
 
 void ACombatEnemy::EndPlay(EEndPlayReason::Type EndPlayReason)

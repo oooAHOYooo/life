@@ -18,7 +18,8 @@ public class CPPd1 : ModuleRules
 			"StateTreeModule",
 			"GameplayStateTreeModule",
 			"UMG",
-			"Slate"
+			"Slate",
+			"ProceduralMeshComponent"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
@@ -37,7 +38,8 @@ public class CPPd1 : ModuleRules
 			"CPPd1/Variant_SideScrolling/AI",
 			"CPPd1/Variant_SideScrolling/Gameplay",
 			"CPPd1/Variant_SideScrolling/Interfaces",
-			"CPPd1/Variant_SideScrolling/UI"
+			"CPPd1/Variant_SideScrolling/UI",
+			"CPPd1/Procedural"
 		});
 
 		// Uncomment if you are using Slate UI

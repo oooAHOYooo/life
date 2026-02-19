@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>P2G4W – Game Design Document - LifeOS</title>
+        <title>CPPd1 – Setup Guide - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,11 +453,11 @@
                 <span style="color: #8b7355;">|</span>
                 <a href="2026.html" class="nav-link">2026</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <a href="gdd.html" class="nav-link">GDD</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="cppd1.html" class="nav-link">CPPd1</a>
                 <span style="color: #8b7355;">|</span>
-                <span class="nav-link" style="font-style: normal;">GDD</span>
+                <span class="nav-link" style="font-style: normal;">Setup</span>
                 <span style="color: #8b7355;">|</span>
                 <a href="p2g4w-ue5-guide.html" class="nav-link">UE5 Guide</a>
             </div>
@@ -467,192 +467,205 @@
             </div>
             
             <header>
-                <h1>P2G4W</h1>
-                <p>GAME DESIGN DOCUMENT</p>
+                <h1>CPPd1 / P2G4W</h1>
+                <p>SETUP GUIDE</p>
             </header>
             
-            <div id="contentContainer" class="content"><h1>Game Design Document</h1>
-<p><strong>Working title:</strong> P2G4W <em>(Project 2 Player Game for Wife)</em><br><strong>Last updated:</strong> 2026-02-17<br><strong>Status:</strong> Draft  </p>
-<p><strong>Today’s focus:</strong> Core mechanics (sections 6a–6e below). Other sections can stay light for now.</p>
-<hr>
-<h2>1. Elevator pitch</h2>
-<p><em>One or two sentences. What is this game? Why would someone play it?</em></p>
-<ul>
-<li>You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.</li>
-</ul>
-<hr>
-<h2>2. Vision / high concept</h2>
-<p><em>What’s the big idea? What feeling or experience are you aiming for?</em></p>
-<ul>
-<li>Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.</li>
-</ul>
-<hr>
-<h2>3. Core loop</h2>
-<p><em>What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)</em></p>
+            <div id="contentContainer" class="content"><h1>CPPd1 Ninja Game Setup Guide</h1>
+<h2>🎮 Setting Up 2-Player Support</h2>
+<h3>Step 1: Configure Game Mode</h3>
 <ol>
-<li>Defend: marauders spawn (tricksters and/or brutes) and attack.</li>
-<li>Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.</li>
-<li>Clear the wave; next wave starts.</li>
-<li>Repeat until all waves are cleared (win) or both gods fall (lose).</li>
+<li>Open your level in Unreal Editor</li>
+<li>Go to <strong>Edit → Project Settings → Game → Game Mode</strong></li>
+<li>Set <strong>Default Game Mode</strong> to your <code>CombatGameMode</code> Blueprint (or create one)</li>
+<li>Or set it in <strong>World Settings</strong> (Window → World Settings)</li>
 </ol>
-<hr>
-<h2>4. Design pillars</h2>
-<p><em>3–5 rules that guide every decision. If a feature doesn’t support these, cut it.</em></p>
-<p>1.<br>2.<br>3.<br>4.<br>5. </p>
-<hr>
-<h2>5. Genre &amp; references</h2>
+<h3>Step 2: Set Up Player Spawn Points</h3>
+<ol>
+<li>In your level, add <strong>Player Start</strong> actors (Place Actors → All Classes → Player Start)</li>
+<li>Place at least 2 Player Start actors for 2-player support</li>
+<li>The game mode will automatically assign player indices (0 and 1)</li>
+</ol>
+<h3>Step 3: Enable Split-Screen (Optional)</h3>
+<ol>
+<li>Go to <strong>Edit → Project Settings → Engine → Game Viewport</strong></li>
+<li>Enable <strong>Two Player Splitscreen</strong> or configure as needed</li>
+<li>Or use <strong>Window → Virtual Cameras</strong> for separate views</li>
+</ol>
+<h3>Step 4: Test 2-Player</h3>
 <ul>
-<li><strong>Genre:</strong> <em>e.g. puzzle, narrative adventure, roguelike, sim</em></li>
-<li><h2><strong>Reference games:</strong> <em>What games does this feel like or take inspiration from?</em></h2>
-- <ul>
-<li></li>
-</ul>
-</li>
+<li><strong>Local Multiplayer</strong>: Add a second player controller in Play settings</li>
+<li><strong>Network</strong>: Set up as a multiplayer game mode</li>
 </ul>
 <hr>
-<h2>6. Core mechanics <em>(today’s focus)</em></h2>
-<h3>6a. Mechanic list</h3>
-<p><em>Name each main mechanic and one line on what it does.</em></p>
+<h2>🤖 Automation: What You Can Script vs. Do in Editor</h2>
 <table>
 <thead>
 <tr>
-<th>#</th>
-<th>Mechanic</th>
-<th>One-line description</th>
+<th>Step</th>
+<th>Scriptable?</th>
+<th>How</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1</td>
-<td></td>
-<td></td>
+<td><strong>Game Mode</strong></td>
+<td>✅ Yes</td>
+<td>Already set in <code>Config/DefaultEngine.ini</code>: <code>GlobalDefaultGameMode=/Script/CPPd1.CombatGameMode</code>. To use a Blueprint game mode, set it to your Blueprint path (e.g. <code>/Game/Blueprints/BP_CombatGameMode.BP_CombatGameMode_C</code>).</td>
 </tr>
 <tr>
-<td>2</td>
-<td></td>
-<td></td>
+<td><strong>Split-screen</strong></td>
+<td>✅ Yes</td>
+<td>Edit <strong>Edit → Project Settings → Engine → Game Viewport</strong> (or add to <code>DefaultEngine.ini</code> under the viewport section if you know the key). Project already supports 2 players via game mode.</td>
 </tr>
 <tr>
-<td>3</td>
-<td></td>
-<td></td>
+<td><strong>Player Start actors</strong></td>
+<td>⚠️ Editor script</td>
+<td>Must run <strong>inside</strong> the Unreal Editor. Use the Python script below to add 2 Player Starts to the <strong>current level</strong> (see <code>Scripts/README.md</code>).</td>
 </tr>
 <tr>
-<td>4</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td></td>
-<td></td>
+<td><strong>World Settings override</strong></td>
+<td>Manual</td>
+<td>Per-level Game Mode override is set in <strong>Window → World Settings</strong>; no simple INI for this.</td>
 </tr>
 </tbody></table>
+<p><strong>Summary:</strong> Game Mode and default maps are in INI; you can script those. Player Start placement is per-level and requires either placing them by hand once or running the provided <strong>editor Python script</strong> with the level open. The script lives in <code>Scripts/</code> and is run from UE5’s <strong>Output Log</strong> or <strong>Tools → Execute Python Script</strong>.</p>
 <hr>
-<h3>6b. Mechanic deep-dive</h3>
-<p><em>For each mechanic above: what does the player do? What are the rules? What’s the feedback?</em></p>
-<p><strong>Mechanic 1: <em>[name]</em></strong></p>
+<h2>👹 Creating Enemies Based on Third Person Character</h2>
+<h3>Step 1: Create Enemy Blueprint</h3>
+<ol>
+<li>In Content Browser, right-click → <strong>Blueprint Class</strong></li>
+<li>Search for <code>CombatEnemy</code> (your C++ class)</li>
+<li>Name it <code>BP_CombatEnemy</code> or similar</li>
+</ol>
+<h3>Step 2: Set Up Enemy Mesh</h3>
+<ol>
+<li>Open your enemy Blueprint</li>
+<li>In <strong>Components</strong>, select the <strong>Mesh</strong> component</li>
+<li>Set <strong>Skeletal Mesh</strong> to the Third Person Character mesh (or your ninja mesh)</li>
+<li>Set <strong>Animation Blueprint</strong> to Third Person anim blueprint (or create custom)</li>
+</ol>
+<h3>Step 3: Configure Enemy Properties</h3>
+<p>In the enemy Blueprint, set these in <strong>Details</strong>:</p>
 <ul>
-<li><strong>Player action:</strong> <em>What does the player actually do (input, decision)?</em></li>
-<li><strong>Rules:</strong> <em>When does it work / not work? Limits?</em></li>
-<li><strong>Feedback:</strong> <em>What do they see/hear/feel when they use it?</em></li>
-<li><strong>Notes:</strong></li>
+<li><strong>Max HP</strong>: 3.0 (default) - adjust as needed</li>
+<li><strong>Melee Damage</strong>: 1.0 - how much damage enemy deals</li>
+<li><strong>Melee Trace Distance</strong>: 75.0 - attack range</li>
+<li><strong>Melee Trace Radius</strong>: 50.0 - attack hitbox size</li>
+<li><strong>Combo Attack Montage</strong>: Assign attack animation</li>
+<li><strong>Charged Attack Montage</strong>: Assign charged attack animation</li>
 </ul>
-<p><strong>Mechanic 2: <em>[name]</em></strong></p>
+<h3>Step 4: Add Lock-On Target Component</h3>
+<p>The <code>CombatEnemy</code> class already has a <code>LockOnTargetComponent</code> added in C++!</p>
 <ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
+<li>It&#39;s automatically set up</li>
+<li>You can configure the <strong>Target Bone Or Socket Name</strong> in Blueprint if you want to lock-on to a specific bone</li>
+<li>The <strong>Target Offset</strong> can be adjusted for fine-tuning</li>
 </ul>
-<p><strong>Mechanic 3: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 4: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 5: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<hr>
-<h3>6c. How mechanics connect</h3>
-<p><em>Which mechanics feed into which? What’s the main “engine” of the game?</em></p>
-<ul>
-<li>Mechanic ___ leads to / enables ___</li>
-<li>Mechanic ___ leads to / enables ___</li>
-<li><em>Optional: one-line “flow” (e.g. “Move → Collect → Build → Defend”)</em></li>
-</ul>
-<hr>
-<h3>6d. Win / lose / flow</h3>
-<ul>
-<li><strong>How do you win?</strong> Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.</li>
-<li><strong>How do you lose / fail?</strong> Both gods are defeated (run over).</li>
-<li><strong>Session shape:</strong> Single run: waves spawn from a spinning radius in the arena; clear all waves to win.</li>
-</ul>
-<hr>
-<h3>6e. 2-player specifics</h3>
-<ul>
-<li><strong>Same screen or separate?</strong> <em>Couch co-op one device, or two devices?</em></li>
-<li><strong>Roles:</strong> <em>Same abilities or different (e.g. one builder, one scout)?</em></li>
-<li><strong>Cooperation vs competition:</strong> <em>Fully coop, fully versus, or hybrid (e.g. shared goal but separate scores)?</em></li>
-<li><strong>What makes it fun for both players at once?</strong> <em>Why 2P and not 1P?</em></li>
-</ul>
-<hr>
-<h2>7. Story / setting (if applicable)</h2>
-<p><em>Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine.</em></p>
-<ul>
-<li><strong>Setting:</strong> A realm of little people. You and your partner are two gods guarding it.</li>
-<li><strong>Tone:</strong> Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).</li>
-<li><strong>Premise / conflict:</strong> Marauders are trying to take over. Two kinds:<ul>
-<li><strong>Tricksters:</strong> Slippery, hard to catch. They dodge and feint; landing a hit feels earned.</li>
-<li><strong>Brutes:</strong> Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.</li>
+<h3>Step 5: Set Up AI Behavior</h3>
+<ol>
+<li>The enemy uses <strong>StateTree</strong> for AI behavior</li>
+<li>Create a StateTree asset:<ul>
+<li>Right-click → <strong>Artificial Intelligence → State Tree</strong></li>
+<li>Name it <code>ST_CombatEnemy</code></li>
 </ul>
 </li>
-<li><strong>Lore:</strong> The gods defend the little people. Clearing all waves = the realm is safe (for now).</li>
-<li><strong>Restoration:</strong> The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.</li>
-<li><strong>After victory:</strong> The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm.</li>
+<li>Configure StateTree tasks:<ul>
+<li><strong>Chase Player</strong>: Use <code>CombatStateTreeUtility</code> tasks</li>
+<li><strong>Attack Player</strong>: Use enemy&#39;s <code>DoAIComboAttack()</code> or <code>DoAIChargedAttack()</code></li>
+<li><strong>Patrol</strong>: Add patrol behavior if needed</li>
 </ul>
+</li>
+</ol>
+<h3>Step 6: Assign AI Controller</h3>
+<ol>
+<li>In enemy Blueprint, set <strong>AI Controller Class</strong> to <code>CombatAIController</code></li>
+<li>Set <strong>Auto Possess AI</strong> to <strong>Placed in World or Spawned</strong></li>
+<li>Assign your StateTree to the AI Controller</li>
+</ol>
 <hr>
-<h2>8. Audience</h2>
-<p><em>Who is this for? Solo dev hobby project, itch audience, Steam, something else?</em></p>
+<h2>🎯 Using Enemy Spawners</h2>
+<h3>Step 1: Create Enemy Spawner</h3>
+<ol>
+<li>In Content Browser, create Blueprint from <code>CombatEnemySpawner</code></li>
+<li>Name it <code>BP_EnemySpawner</code></li>
+</ol>
+<h3>Step 2: Configure Spawner</h3>
+<ol>
+<li>Place <code>BP_EnemySpawner</code> in your level</li>
+<li>Set <strong>Enemy Class</strong> to your <code>BP_CombatEnemy</code></li>
+<li>Set <strong>Spawn Count</strong>: How many enemies to spawn</li>
+<li>Set <strong>Respawn Delay</strong>: Time between enemy spawns</li>
+<li><strong>Should Spawn Enemies Immediately</strong>: Check to spawn on level start</li>
+</ol>
+<h3>Step 3: Link Spawners (Optional)</h3>
 <ul>
-<li><strong>Primary audience:</strong> </li>
-<li><strong>Platform(s) in mind:</strong> </li>
-<li><strong>Rough scope:</strong> <em>e.g. 2–4 hour experience, endless, 10-level campaign</em></li>
+<li>Spawners can activate other spawners when depleted</li>
+<li>Add spawners to <strong>Actors To Activate When Depleted</strong> array</li>
+<li>This creates wave-based enemy spawning</li>
 </ul>
 <hr>
-<h2>9. Scope / MVP</h2>
-<p><em>What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?</em></p>
-<h2><strong>Must have for v1 (MVP):</strong></h2>
-<p>- </p>
-<p>- </p>
-<h2><strong>Nice to have / later:</strong></h2>
-<p>- </p>
+<h2>🏁 Setting Up Goal Zones</h2>
+<h3>Step 1: Create Goal Zone</h3>
+<ol>
+<li>Create Blueprint from <code>CPPd1GoalZone</code></li>
+<li>Name it <code>BP_GoalZone</code></li>
+</ol>
+<h3>Step 2: Place in Level</h3>
+<ol>
+<li>Place <code>BP_GoalZone</code> where players should reach</li>
+<li>Adjust the <strong>Trigger Box</strong> size to cover the goal area</li>
+<li>Set <strong>One Win Per Round</strong>: Check if only first player should win</li>
+</ol>
+<h3>Step 3: Handle Round End</h3>
+<ol>
+<li>In Blueprint, bind to <strong>On Round Won</strong> event</li>
+<li>This fires when a player reaches the goal</li>
+<li>You can:<ul>
+<li>Show victory UI</li>
+<li>Advance to next round</li>
+<li>Update scores/honor</li>
+<li>Reset level for next round</li>
+</ul>
+</li>
+</ol>
 <hr>
-<h2>10. Open questions</h2>
-<p><em>Things to decide as you go.</em></p>
-<p>- </p>
-<p>- </p>
-<p>- </p>
-<hr>
-<h2>11. Notes &amp; links</h2>
-<p><em>Scratch space, references, art docs, tech notes.</em></p>
+<h2>🎨 Quick Setup Checklist</h2>
 <ul>
-<li><strong>Base character (UE5):</strong> 3rd person C++ template <strong>ClaCo</strong> — <code>ClaCoCharacter.cpp</code> in this folder. Spring-arm camera (400), Enhanced Input (Move, Look, MouseLook, Jump), orient to movement, 500 walk speed. Use as reference; actual project lives in UE5 repo.</li>
-<li><strong>Tech checklist for 2P:</strong> <code>tech-notes.md</code> — what to change for 2-player (second pawn, input, camera, spawn) and tunables to expose.</li>
-<li><strong>UE5 C++ scripts:</strong> <code>suggested-scripts/ue5/</code> — full system (Game Mode, Game State, Player State, Player Controller, Character). Copy into your UE5 project; see <code>suggested-scripts/ue5/README.md</code>.</li>
+<li><input disabled="" type="checkbox"> Set Game Mode to <code>CombatGameMode</code> (or Blueprint version)</li>
+<li><input disabled="" type="checkbox"> Place 2+ Player Start actors in level</li>
+<li><input disabled="" type="checkbox"> Create <code>BP_CombatEnemy</code> Blueprint with Third Person mesh</li>
+<li><input disabled="" type="checkbox"> Assign attack animations to enemy</li>
+<li><input disabled="" type="checkbox"> Create StateTree for enemy AI behavior</li>
+<li><input disabled="" type="checkbox"> Place <code>BP_EnemySpawner</code> actors in level</li>
+<li><input disabled="" type="checkbox"> Configure spawner with enemy class</li>
+<li><input disabled="" type="checkbox"> Place <code>BP_GoalZone</code> for round-winning</li>
+<li><input disabled="" type="checkbox"> Test 2-player spawn and gameplay</li>
+<li><input disabled="" type="checkbox"> Test lock-on targeting on enemies</li>
+<li><input disabled="" type="checkbox"> Test enemy AI chasing and attacking</li>
 </ul>
+<hr>
+<h2>💡 Tips</h2>
+<ol>
+<li><strong>Enemy Mesh</strong>: Use the Third Person Character mesh, or import your own ninja/enemy mesh</li>
+<li><strong>Animations</strong>: Reuse Third Person animations, or create custom attack animations</li>
+<li><strong>Lock-On</strong>: Enemies automatically have lock-on component - just make sure it&#39;s enabled</li>
+<li><strong>AI Behavior</strong>: Start simple with chase + attack, then add patrol/patrol behaviors</li>
+<li><strong>2-Player Testing</strong>: Use &quot;Number of Players&quot; in Play settings to test locally</li>
+</ol>
+<hr>
+<h2>🔧 C++ Classes Reference</h2>
+<ul>
+<li><strong>CPPd1GameModeBase</strong>: Base game mode with 2-player support, respawn, ghost characters</li>
+<li><strong>CPPd1PlayerState</strong>: Tracks player index (0/1) and honor/score</li>
+<li><strong>CPPd1GameStateBase</strong>: Tracks game phases and rounds</li>
+<li><strong>CombatCharacter</strong>: Player character with lock-on, melee combat, health</li>
+<li><strong>CombatEnemy</strong>: AI enemy with combat capabilities and lock-on target</li>
+<li><strong>CPPd1GoalZone</strong>: Round-winning trigger volume</li>
+<li><strong>CPPd1LockOnTargetComponent</strong>: Makes actors lock-on targets</li>
+<li><strong>CombatEnemySpawner</strong>: Spawns enemies in waves</li>
+</ul>
+<hr>
+<p>Happy ninja game development! 🥷</p>
 </div>
         </div>
         

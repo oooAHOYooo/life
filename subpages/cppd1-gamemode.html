@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>P2G4W – Game Design Document - LifeOS</title>
+        <title>CPPd1 – Gamemode Setup - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,11 +453,11 @@
                 <span style="color: #8b7355;">|</span>
                 <a href="2026.html" class="nav-link">2026</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <a href="gdd.html" class="nav-link">GDD</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="cppd1.html" class="nav-link">CPPd1</a>
                 <span style="color: #8b7355;">|</span>
-                <span class="nav-link" style="font-style: normal;">GDD</span>
+                <span class="nav-link" style="font-style: normal;">Gamemode</span>
                 <span style="color: #8b7355;">|</span>
                 <a href="p2g4w-ue5-guide.html" class="nav-link">UE5 Guide</a>
             </div>
@@ -467,191 +467,140 @@
             </div>
             
             <header>
-                <h1>P2G4W</h1>
-                <p>GAME DESIGN DOCUMENT</p>
+                <h1>CPPd1 / P2G4W</h1>
+                <p>GAMEMODE SETUP</p>
             </header>
             
-            <div id="contentContainer" class="content"><h1>Game Design Document</h1>
-<p><strong>Working title:</strong> P2G4W <em>(Project 2 Player Game for Wife)</em><br><strong>Last updated:</strong> 2026-02-17<br><strong>Status:</strong> Draft  </p>
-<p><strong>Today’s focus:</strong> Core mechanics (sections 6a–6e below). Other sections can stay light for now.</p>
+            <div id="contentContainer" class="content"><h1>Game Mode Setup Guide</h1>
+<h2>🎯 Why Game Modes Don&#39;t Appear in Dropdown</h2>
+<p>C++ classes need to be <strong>compiled first</strong> before they appear in UE5 dropdowns. Here&#39;s how to fix it:</p>
 <hr>
-<h2>1. Elevator pitch</h2>
-<p><em>One or two sentences. What is this game? Why would someone play it?</em></p>
-<ul>
-<li>You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.</li>
-</ul>
-<hr>
-<h2>2. Vision / high concept</h2>
-<p><em>What’s the big idea? What feeling or experience are you aiming for?</em></p>
-<ul>
-<li>Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.</li>
-</ul>
-<hr>
-<h2>3. Core loop</h2>
-<p><em>What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)</em></p>
+<h2>✅ Step 1: Compile the Code</h2>
 <ol>
-<li>Defend: marauders spawn (tricksters and/or brutes) and attack.</li>
-<li>Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.</li>
-<li>Clear the wave; next wave starts.</li>
-<li>Repeat until all waves are cleared (win) or both gods fall (lose).</li>
+<li><strong>In Unreal Editor</strong>, press <strong>Ctrl+Alt+F11</strong> (or go to <strong>Tools → Compile</strong>)</li>
+<li>Wait for compilation to finish</li>
+<li>Check the <strong>Output Log</strong> for any errors</li>
 </ol>
 <hr>
-<h2>4. Design pillars</h2>
-<p><em>3–5 rules that guide every decision. If a feature doesn’t support these, cut it.</em></p>
-<p>1.<br>2.<br>3.<br>4.<br>5. </p>
-<hr>
-<h2>5. Genre &amp; references</h2>
-<ul>
-<li><strong>Genre:</strong> <em>e.g. puzzle, narrative adventure, roguelike, sim</em></li>
-<li><h2><strong>Reference games:</strong> <em>What games does this feel like or take inspiration from?</em></h2>
-- <ul>
-<li></li>
+<h2>✅ Step 2: Where to Find Game Modes</h2>
+<p>After compiling, you can set the game mode in <strong>two places</strong>:</p>
+<h3>Option A: World Settings (Per-Level)</h3>
+<ol>
+<li>Open your level</li>
+<li>Go to <strong>Window → World Settings</strong> (or press <strong>Shift+F1</strong>)</li>
+<li>In <strong>Game Mode</strong> section, click the dropdown next to <strong>GameMode Override</strong></li>
+<li>You should see:<ul>
+<li><strong>CPPd1GameMode</strong> (base game mode with 2-player support)</li>
+<li><strong>CombatGameMode</strong> (combat variant with 2-player support)</li>
 </ul>
 </li>
-</ul>
+</ol>
+<h3>Option B: Project Settings (Default for All Levels)</h3>
+<ol>
+<li>Go to <strong>Edit → Project Settings</strong></li>
+<li>Navigate to <strong>Game → Game Mode</strong></li>
+<li>Set <strong>Default Game Mode</strong> to your game mode class</li>
+</ol>
 <hr>
-<h2>6. Core mechanics <em>(today’s focus)</em></h2>
-<h3>6a. Mechanic list</h3>
-<p><em>Name each main mechanic and one line on what it does.</em></p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Mechanic</th>
-<th>One-line description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<hr>
-<h3>6b. Mechanic deep-dive</h3>
-<p><em>For each mechanic above: what does the player do? What are the rules? What’s the feedback?</em></p>
-<p><strong>Mechanic 1: <em>[name]</em></strong></p>
+<h2>✅ Step 3: Create Blueprint (Recommended)</h2>
+<p>Even though the C++ classes are available, it&#39;s better to create <strong>Blueprint classes</strong> so you can:</p>
 <ul>
-<li><strong>Player action:</strong> <em>What does the player actually do (input, decision)?</em></li>
-<li><strong>Rules:</strong> <em>When does it work / not work? Limits?</em></li>
-<li><strong>Feedback:</strong> <em>What do they see/hear/feel when they use it?</em></li>
-<li><strong>Notes:</strong></li>
+<li>Set default pawn classes visually</li>
+<li>Configure settings in the editor</li>
+<li>Make changes without recompiling</li>
 </ul>
-<p><strong>Mechanic 2: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 3: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 4: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 5: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<hr>
-<h3>6c. How mechanics connect</h3>
-<p><em>Which mechanics feed into which? What’s the main “engine” of the game?</em></p>
-<ul>
-<li>Mechanic ___ leads to / enables ___</li>
-<li>Mechanic ___ leads to / enables ___</li>
-<li><em>Optional: one-line “flow” (e.g. “Move → Collect → Build → Defend”)</em></li>
-</ul>
-<hr>
-<h3>6d. Win / lose / flow</h3>
-<ul>
-<li><strong>How do you win?</strong> Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.</li>
-<li><strong>How do you lose / fail?</strong> Both gods are defeated (run over).</li>
-<li><strong>Session shape:</strong> Single run: waves spawn from a spinning radius in the arena; clear all waves to win.</li>
-</ul>
-<hr>
-<h3>6e. 2-player specifics</h3>
-<ul>
-<li><strong>Same screen or separate?</strong> <em>Couch co-op one device, or two devices?</em></li>
-<li><strong>Roles:</strong> <em>Same abilities or different (e.g. one builder, one scout)?</em></li>
-<li><strong>Cooperation vs competition:</strong> <em>Fully coop, fully versus, or hybrid (e.g. shared goal but separate scores)?</em></li>
-<li><strong>What makes it fun for both players at once?</strong> <em>Why 2P and not 1P?</em></li>
-</ul>
-<hr>
-<h2>7. Story / setting (if applicable)</h2>
-<p><em>Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine.</em></p>
-<ul>
-<li><strong>Setting:</strong> A realm of little people. You and your partner are two gods guarding it.</li>
-<li><strong>Tone:</strong> Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).</li>
-<li><strong>Premise / conflict:</strong> Marauders are trying to take over. Two kinds:<ul>
-<li><strong>Tricksters:</strong> Slippery, hard to catch. They dodge and feint; landing a hit feels earned.</li>
-<li><strong>Brutes:</strong> Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.</li>
+<h3>How to Create Blueprint Game Mode:</h3>
+<ol>
+<li>In <strong>Content Browser</strong>, right-click in an empty area</li>
+<li>Select <strong>Blueprint Class</strong></li>
+<li>In the <strong>Pick Parent Class</strong> dialog, search for:<ul>
+<li><code>CombatGameMode</code> (for combat)</li>
+<li><code>CPPd1GameMode</code> (for base)</li>
 </ul>
 </li>
-<li><strong>Lore:</strong> The gods defend the little people. Clearing all waves = the realm is safe (for now).</li>
-<li><strong>Restoration:</strong> The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.</li>
-<li><strong>After victory:</strong> The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm.</li>
+<li>Name it (e.g., <code>BP_CombatGameMode</code>)</li>
+<li>Open the Blueprint</li>
+<li>In <strong>Class Defaults</strong>, set:<ul>
+<li><strong>Default Pawn Class</strong>: Your character Blueprint (e.g., <code>BP_CombatCharacter</code>)</li>
+<li><strong>Player Controller Class</strong>: <code>CombatPlayerController</code> or <code>CPPd1PlayerController</code></li>
+<li><strong>HUD Class</strong>: (optional)</li>
+<li><strong>Game State Class</strong>: Should auto-set to <code>CPPd1GameStateBase</code></li>
+<li><strong>Player State Class</strong>: Should auto-set to <code>CPPd1PlayerState</code></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>🔍 Troubleshooting</h2>
+<h3>Game Mode Still Not Showing?</h3>
+<ol>
+<li><p><strong>Check Compilation</strong>:</p>
+<ul>
+<li>Look for errors in <strong>Output Log</strong></li>
+<li>Make sure compilation succeeded (green checkmark)</li>
+</ul>
+</li>
+<li><p><strong>Refresh Editor</strong>:</p>
+<ul>
+<li>Close and reopen Unreal Editor</li>
+<li>Sometimes classes need a refresh to appear</li>
+</ul>
+</li>
+<li><p><strong>Check Class Names</strong>:</p>
+<ul>
+<li>Make sure you&#39;re searching for the exact class name</li>
+<li><code>CombatGameMode</code> (not <code>Combat Game Mode</code>)</li>
+</ul>
+</li>
+<li><p><strong>Verify UCLASS Macro</strong>:</p>
+<ul>
+<li>Classes should have <code>UCLASS(BlueprintType, Blueprintable)</code></li>
+<li>✅ <code>CPPd1GameMode</code> - Has it</li>
+<li>✅ <code>CombatGameMode</code> - Has it</li>
+</ul>
+</li>
+</ol>
+<h3>Still Not Working?</h3>
+<p>Try creating the Blueprint manually:</p>
+<ol>
+<li>In Content Browser → <strong>Add → Blueprint Class</strong></li>
+<li>Search for <code>GameModeBase</code> as parent</li>
+<li>In the Blueprint, go to <strong>File → Reparent Blueprint</strong></li>
+<li>Search for <code>CombatGameMode</code> or <code>CPPd1GameMode</code></li>
+<li>This forces UE5 to recognize the C++ class</li>
+</ol>
+<hr>
+<h2>📋 Quick Checklist</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Code compiled successfully (Ctrl+Alt+F11)</li>
+<li><input disabled="" type="checkbox"> No compilation errors in Output Log</li>
+<li><input disabled="" type="checkbox"> Checked World Settings → Game Mode dropdown</li>
+<li><input disabled="" type="checkbox"> Checked Project Settings → Default Game Mode</li>
+<li><input disabled="" type="checkbox"> Created Blueprint from C++ class (recommended)</li>
+<li><input disabled="" type="checkbox"> Set Default Pawn Class in Blueprint</li>
+<li><input disabled="" type="checkbox"> Set Player Controller Class in Blueprint</li>
 </ul>
 <hr>
-<h2>8. Audience</h2>
-<p><em>Who is this for? Solo dev hobby project, itch audience, Steam, something else?</em></p>
+<h2>🎮 Recommended Setup</h2>
+<p><strong>For Combat Game:</strong></p>
+<ol>
+<li>Create <code>BP_CombatGameMode</code> from <code>CombatGameMode</code> C++ class</li>
+<li>Set <strong>Default Pawn Class</strong> to your <code>BP_CombatCharacter</code></li>
+<li>Set <strong>Player Controller Class</strong> to <code>CombatPlayerController</code></li>
+<li>Use this Blueprint in <strong>World Settings</strong> or <strong>Project Settings</strong></li>
+</ol>
+<p>This gives you the best of both worlds:</p>
 <ul>
-<li><strong>Primary audience:</strong> </li>
-<li><strong>Platform(s) in mind:</strong> </li>
-<li><strong>Rough scope:</strong> <em>e.g. 2–4 hour experience, endless, 10-level campaign</em></li>
+<li>C++ functionality (2-player, respawn, etc.)</li>
+<li>Blueprint flexibility (easy tweaking)</li>
 </ul>
 <hr>
-<h2>9. Scope / MVP</h2>
-<p><em>What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?</em></p>
-<h2><strong>Must have for v1 (MVP):</strong></h2>
-<p>- </p>
-<p>- </p>
-<h2><strong>Nice to have / later:</strong></h2>
-<p>- </p>
-<hr>
-<h2>10. Open questions</h2>
-<p><em>Things to decide as you go.</em></p>
-<p>- </p>
-<p>- </p>
-<p>- </p>
-<hr>
-<h2>11. Notes &amp; links</h2>
-<p><em>Scratch space, references, art docs, tech notes.</em></p>
+<h2>💡 Pro Tip</h2>
+<p>After creating the Blueprint, you can:</p>
 <ul>
-<li><strong>Base character (UE5):</strong> 3rd person C++ template <strong>ClaCo</strong> — <code>ClaCoCharacter.cpp</code> in this folder. Spring-arm camera (400), Enhanced Input (Move, Look, MouseLook, Jump), orient to movement, 500 walk speed. Use as reference; actual project lives in UE5 repo.</li>
-<li><strong>Tech checklist for 2P:</strong> <code>tech-notes.md</code> — what to change for 2-player (second pawn, input, camera, spawn) and tunables to expose.</li>
-<li><strong>UE5 C++ scripts:</strong> <code>suggested-scripts/ue5/</code> — full system (Game Mode, Game State, Player State, Player Controller, Character). Copy into your UE5 project; see <code>suggested-scripts/ue5/README.md</code>.</li>
+<li>Expose C++ variables in the Blueprint</li>
+<li>Add Blueprint-only logic</li>
+<li>Override C++ functions in Blueprint</li>
+<li>All without touching C++ code!</li>
 </ul>
 </div>
         </div>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>P2G4W – Game Design Document - LifeOS</title>
+        <title>CPPd1 – Sync with Life Repo - LifeOS</title>
         <link rel="stylesheet" href="../design-system.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,11 +453,11 @@
                 <span style="color: #8b7355;">|</span>
                 <a href="2026.html" class="nav-link">2026</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="xmas-break.html" class="nav-link">Christmas Break</a>
+                <a href="gdd.html" class="nav-link">GDD</a>
                 <span style="color: #8b7355;">|</span>
-                <a href="return-first.html" class="nav-link">Return First</a>
+                <a href="cppd1.html" class="nav-link">CPPd1</a>
                 <span style="color: #8b7355;">|</span>
-                <span class="nav-link" style="font-style: normal;">GDD</span>
+                <span class="nav-link" style="font-style: normal;">Sync</span>
                 <span style="color: #8b7355;">|</span>
                 <a href="p2g4w-ue5-guide.html" class="nav-link">UE5 Guide</a>
             </div>
@@ -467,192 +467,174 @@
             </div>
             
             <header>
-                <h1>P2G4W</h1>
-                <p>GAME DESIGN DOCUMENT</p>
+                <h1>CPPd1 / P2G4W</h1>
+                <p>SYNC WITH LIFE REPO</p>
             </header>
             
-            <div id="contentContainer" class="content"><h1>Game Design Document</h1>
-<p><strong>Working title:</strong> P2G4W <em>(Project 2 Player Game for Wife)</em><br><strong>Last updated:</strong> 2026-02-17<br><strong>Status:</strong> Draft  </p>
-<p><strong>Today’s focus:</strong> Core mechanics (sections 6a–6e below). Other sections can stay light for now.</p>
+            <div id="contentContainer" class="content"><h1>Syncing CPPd1 with Your Life Repo</h1>
+<h2>📍 Where Your .md Files Are</h2>
+<p>All documentation files are in the <strong>root</strong> of your CPPd1 project:</p>
+<pre><code>C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1\
+├── NEW_C++_FEATURES.md
+├── QUICK_START_GUIDE.md
+├── GIT_SETUP.md
+├── WAVE_SYSTEM_GUIDE.md
+├── QUICK_SETUP_GUIDE.md
+├── GAMEMODE_SETUP.md
+├── TUNING_VARIABLES_REFERENCE.md
+├── ADVANCED_SYSTEMS_GUIDE.md
+├── SETUP_GUIDE.md
+└── SYNC_WITH_LIFE_REPO.md (this file)
+</code></pre>
 <hr>
-<h2>1. Elevator pitch</h2>
-<p><em>One or two sentences. What is this game? Why would someone play it?</em></p>
+<h2>🔄 Sync Process - Choose Your Method</h2>
+<h3>Method 1: Add CPPd1 as Subdirectory to Life Repo (Recommended)</h3>
+<p><strong>Best for:</strong> Keeping all projects organized in one repo</p>
+<pre><code class="language-powershell"># Step 1: Navigate to your life repo
+cd &quot;C:\path\to\your\life\repo&quot;
+
+# Step 2: Copy the entire CPPd1 folder into your life repo
+# (Or move it if you want it there permanently)
+# Example: Copy-Item &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot; -Destination &quot;.\projects\CPPd1&quot; -Recurse
+
+# Step 3: Add to Git
+git add projects/CPPd1/  # or wherever you put it
+git commit -m &quot;Add CPPd1 ninja game project&quot;
+git push
+</code></pre>
+<p><strong>Result:</strong> Your life repo now contains CPPd1 as a subdirectory.</p>
+<hr>
+<h3>Method 2: Initialize Git Here and Push to Life Repo</h3>
+<p><strong>Best for:</strong> Keeping CPPd1 separate but synced</p>
+<pre><code class="language-powershell"># Step 1: Navigate to CPPd1 project
+cd &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot;
+
+# Step 2: Initialize Git (if not already)
+git init
+
+# Step 3: Add all files (respects .gitignore)
+git add .
+
+# Step 4: First commit
+git commit -m &quot;Initial commit: CPPd1 ninja game with all systems&quot;
+
+# Step 5: Add your life repo as remote
+# Replace &lt;LIFE_REPO_URL&gt; with your actual repo URL
+git remote add origin &lt;LIFE_REPO_URL&gt;
+
+# Step 6: Push to life repo
+git push -u origin main
+# Or if your life repo uses &#39;master&#39;:
+# git push -u origin master
+</code></pre>
+<p><strong>Result:</strong> CPPd1 is now a branch/folder in your life repo.</p>
+<hr>
+<h3>Method 3: Use Git Submodule (Advanced)</h3>
+<p><strong>Best for:</strong> Keeping projects separate but linked</p>
+<pre><code class="language-powershell"># Step 1: Initialize Git in CPPd1
+cd &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot;
+git init
+git add .
+git commit -m &quot;Initial commit&quot;
+
+# Step 2: In your life repo, add as submodule
+cd &quot;C:\path\to\your\life\repo&quot;
+git submodule add &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot; projects/CPPd1
+git commit -m &quot;Add CPPd1 as submodule&quot;
+git push
+</code></pre>
+<p><strong>Result:</strong> Life repo references CPPd1 as a submodule (keeps them separate but linked).</p>
+<hr>
+<h2>🎯 Recommended: Method 1 (Subdirectory)</h2>
+<p><strong>Why:</strong></p>
 <ul>
-<li>You and a partner are two gods defending a realm of little people from marauders. Clear all waves to win.</li>
+<li>✅ Simplest to manage</li>
+<li>✅ All code in one place</li>
+<li>✅ Easy to navigate</li>
+<li>✅ Single repo to backup</li>
 </ul>
-<hr>
-<h2>2. Vision / high concept</h2>
-<p><em>What’s the big idea? What feeling or experience are you aiming for?</em></p>
-<ul>
-<li>Two gods, co-op, protecting the small and helpless. One enemy type is slippery and hard to catch (tricksters); the other wants to wrestle and asks you to put the sword away—fighting them unarmed is more satisfying even though the sword still works.</li>
-</ul>
-<hr>
-<h2>3. Core loop</h2>
-<p><em>What does the player do minute-to-minute? (e.g. “Explore → Find clue → Solve puzzle → Unlock new area → Repeat.”)</em></p>
+<p><strong>Steps:</strong></p>
 <ol>
-<li>Defend: marauders spawn (tricksters and/or brutes) and attack.</li>
-<li>Fight: lock on, dodge, use sword or wrestle; one enemy engages at a time.</li>
-<li>Clear the wave; next wave starts.</li>
-<li>Repeat until all waves are cleared (win) or both gods fall (lose).</li>
+<li>Find your life repo location</li>
+<li>Create a <code>projects/</code> or <code>games/</code> folder in it</li>
+<li>Copy CPPd1 into that folder</li>
+<li><code>git add</code>, <code>git commit</code>, <code>git push</code></li>
 </ol>
 <hr>
-<h2>4. Design pillars</h2>
-<p><em>3–5 rules that guide every decision. If a feature doesn’t support these, cut it.</em></p>
-<p>1.<br>2.<br>3.<br>4.<br>5. </p>
+<h2>📋 Quick Sync Script</h2>
+<p>Save this as <code>sync-to-life.ps1</code> in your CPPd1 folder:</p>
+<pre><code class="language-powershell"># Configure this path
+$LifeRepoPath = &quot;C:\path\to\your\life\repo&quot;
+
+# Navigate to life repo
+cd $LifeRepoPath
+
+# Pull latest changes
+git pull
+
+# Copy CPPd1 (adjust source path if needed)
+$SourcePath = &quot;C:\Users\agonzalez7\Documents\Unreal Projects\CPPd1&quot;
+$DestPath = &quot;$LifeRepoPath\projects\CPPd1&quot;
+
+# Remove old copy
+if (Test-Path $DestPath) {
+    Remove-Item $DestPath -Recurse -Force
+}
+
+# Copy new version
+Copy-Item $SourcePath -Destination $DestPath -Recurse -Exclude @(&quot;.git&quot;, &quot;Binaries&quot;, &quot;Intermediate&quot;, &quot;Saved&quot;, &quot;DerivedDataCache&quot;)
+
+# Add and commit
+cd $LifeRepoPath
+git add projects/CPPd1/
+git commit -m &quot;Update CPPd1 project - $(Get-Date -Format &#39;yyyy-MM-dd HH:mm&#39;)&quot;
+git push
+
+Write-Host &quot;✅ Synced to life repo!&quot;
+</code></pre>
 <hr>
-<h2>5. Genre &amp; references</h2>
+<h2>🔍 Find Your Life Repo</h2>
+<p>If you&#39;re not sure where your life repo is, run:</p>
+<pre><code class="language-powershell"># Search for .git folders (repos)
+Get-ChildItem -Path &quot;C:\Users\agonzalez7&quot; -Filter &quot;.git&quot; -Directory -Recurse -ErrorAction SilentlyContinue | Select-Object FullName
+</code></pre>
+<p>Or tell me the path and I&#39;ll help you set it up!</p>
+<hr>
+<h2>⚠️ Important Notes</h2>
+<ol>
+<li><p><strong>.gitignore is already set up</strong> - It excludes:</p>
 <ul>
-<li><strong>Genre:</strong> <em>e.g. puzzle, narrative adventure, roguelike, sim</em></li>
-<li><h2><strong>Reference games:</strong> <em>What games does this feel like or take inspiration from?</em></h2>
-- <ul>
-<li></li>
+<li><code>Binaries/</code>, <code>Intermediate/</code>, <code>Saved/</code> (build files)</li>
+<li>Visual Studio files</li>
+<li>Keeps all source code (<code>.cpp</code>, <code>.h</code>)</li>
 </ul>
 </li>
-</ul>
-<hr>
-<h2>6. Core mechanics <em>(today’s focus)</em></h2>
-<h3>6a. Mechanic list</h3>
-<p><em>Name each main mechanic and one line on what it does.</em></p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Mechanic</th>
-<th>One-line description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<hr>
-<h3>6b. Mechanic deep-dive</h3>
-<p><em>For each mechanic above: what does the player do? What are the rules? What’s the feedback?</em></p>
-<p><strong>Mechanic 1: <em>[name]</em></strong></p>
+<li><p><strong>Multi-computer workflow:</strong></p>
 <ul>
-<li><strong>Player action:</strong> <em>What does the player actually do (input, decision)?</em></li>
-<li><strong>Rules:</strong> <em>When does it work / not work? Limits?</em></li>
-<li><strong>Feedback:</strong> <em>What do they see/hear/feel when they use it?</em></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 2: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 3: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 4: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<p><strong>Mechanic 5: <em>[name]</em></strong></p>
-<ul>
-<li><strong>Player action:</strong></li>
-<li><strong>Rules:</strong></li>
-<li><strong>Feedback:</strong></li>
-<li><strong>Notes:</strong></li>
-</ul>
-<hr>
-<h3>6c. How mechanics connect</h3>
-<p><em>Which mechanics feed into which? What’s the main “engine” of the game?</em></p>
-<ul>
-<li>Mechanic ___ leads to / enables ___</li>
-<li>Mechanic ___ leads to / enables ___</li>
-<li><em>Optional: one-line “flow” (e.g. “Move → Collect → Build → Defend”)</em></li>
-</ul>
-<hr>
-<h3>6d. Win / lose / flow</h3>
-<ul>
-<li><strong>How do you win?</strong> Clear all waves. When the last marauder of the last wave is defeated, the gods have defended the realm.</li>
-<li><strong>How do you lose / fail?</strong> Both gods are defeated (run over).</li>
-<li><strong>Session shape:</strong> Single run: waves spawn from a spinning radius in the arena; clear all waves to win.</li>
-</ul>
-<hr>
-<h3>6e. 2-player specifics</h3>
-<ul>
-<li><strong>Same screen or separate?</strong> <em>Couch co-op one device, or two devices?</em></li>
-<li><strong>Roles:</strong> <em>Same abilities or different (e.g. one builder, one scout)?</em></li>
-<li><strong>Cooperation vs competition:</strong> <em>Fully coop, fully versus, or hybrid (e.g. shared goal but separate scores)?</em></li>
-<li><strong>What makes it fun for both players at once?</strong> <em>Why 2P and not 1P?</em></li>
-</ul>
-<hr>
-<h2>7. Story / setting (if applicable)</h2>
-<p><em>Brief: world, tone, main conflict or premise. “Story-light” or “no story” is fine.</em></p>
-<ul>
-<li><strong>Setting:</strong> A realm of little people. You and your partner are two gods guarding it.</li>
-<li><strong>Tone:</strong> Mythic, co-op, slightly playful (tricksters) and honorable (brutes who want a fair wrestle).</li>
-<li><strong>Premise / conflict:</strong> Marauders are trying to take over. Two kinds:<ul>
-<li><strong>Tricksters:</strong> Slippery, hard to catch. They dodge and feint; landing a hit feels earned.</li>
-<li><strong>Brutes:</strong> Big, tough, no weapons. They want to wrestle and ask you to put the weapons down. You can still use the sword, but fighting them unarmed is more enjoyable and thematically right.</li>
+<li>Pull from life repo</li>
+<li>Right-click <code>.uproject</code> → Generate Visual Studio files</li>
+<li>Compile in UE5</li>
 </ul>
 </li>
-<li><strong>Lore:</strong> The gods defend the little people. Clearing all waves = the realm is safe (for now).</li>
-<li><strong>Restoration:</strong> The duo can restore damage done by the marauders—to the realm and to themselves. When a wave is cleared, the gods’ wounds mend somewhat; when the realm is fully defended, the land and people heal. The little people feel this and respond.</li>
-<li><strong>After victory:</strong> The NPCs (little people) congratulate the two gods, then begin to worship them. They gather, celebrate, and honor the pair who restored the realm.</li>
-</ul>
-<hr>
-<h2>8. Audience</h2>
-<p><em>Who is this for? Solo dev hobby project, itch audience, Steam, something else?</em></p>
+<li><p><strong>Don&#39;t commit:</strong></p>
 <ul>
-<li><strong>Primary audience:</strong> </li>
-<li><strong>Platform(s) in mind:</strong> </li>
-<li><strong>Rough scope:</strong> <em>e.g. 2–4 hour experience, endless, 10-level campaign</em></li>
+<li>Large binary files (already in .gitignore)</li>
+<li>Personal API keys</li>
+<li>Temporary files</li>
 </ul>
+</li>
+</ol>
 <hr>
-<h2>9. Scope / MVP</h2>
-<p><em>What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?</em></p>
-<h2><strong>Must have for v1 (MVP):</strong></h2>
-<p>- </p>
-<p>- </p>
-<h2><strong>Nice to have / later:</strong></h2>
-<p>- </p>
-<hr>
-<h2>10. Open questions</h2>
-<p><em>Things to decide as you go.</em></p>
-<p>- </p>
-<p>- </p>
-<p>- </p>
-<hr>
-<h2>11. Notes &amp; links</h2>
-<p><em>Scratch space, references, art docs, tech notes.</em></p>
-<ul>
-<li><strong>Base character (UE5):</strong> 3rd person C++ template <strong>ClaCo</strong> — <code>ClaCoCharacter.cpp</code> in this folder. Spring-arm camera (400), Enhanced Input (Move, Look, MouseLook, Jump), orient to movement, 500 walk speed. Use as reference; actual project lives in UE5 repo.</li>
-<li><strong>Tech checklist for 2P:</strong> <code>tech-notes.md</code> — what to change for 2-player (second pawn, input, camera, spawn) and tunables to expose.</li>
-<li><strong>UE5 C++ scripts:</strong> <code>suggested-scripts/ue5/</code> — full system (Game Mode, Game State, Player State, Player Controller, Character). Copy into your UE5 project; see <code>suggested-scripts/ue5/README.md</code>.</li>
-</ul>
+<h2>🚀 Quick Start</h2>
+<p><strong>Tell me your life repo path and I&#39;ll create a custom sync script for you!</strong></p>
+<p>Or use Method 1 manually:</p>
+<ol>
+<li>Copy CPPd1 folder into your life repo</li>
+<li><code>git add projects/CPPd1/</code></li>
+<li><code>git commit -m &quot;Add CPPd1 project&quot;</code></li>
+<li><code>git push</code></li>
+</ol>
+<p>Done! 🎉</p>
 </div>
         </div>
         
