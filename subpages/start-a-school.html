@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a School - LifeOS</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../design-system.css">
+    <style>
+        /* Super Hello–inspired palette: pink #F5A8E1, yellow #FDC15C, orange #FF6B00, dark #222, teal #6DD5ED */
+        body.start-a-school-page { background: #FDC15C; color: #222; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FF6B00;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover { color: #222; text-decoration: underline; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        header { margin-bottom: 32px; }
+        header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; color: #222; }
+        header .subtitle { font-size: 14px; color: #333; }
+
+        .section { margin-bottom: 32px; }
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #222;
+            color: #222;
+        }
+        .section ul, .section ol {
+            margin: 0 0 12px 0;
+            padding-left: 24px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .section li { margin-bottom: 8px; }
+        .section p { margin-bottom: 12px; line-height: 1.7; color: #222; }
+
+        .card {
+            background: #F5A8E1;
+            border: 2px solid #e88bc9;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .card h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: #222; margin-bottom: 12px; }
+        .card ul { margin: 0; padding-left: 20px; color: #222; }
+        .card li { margin-bottom: 6px; }
+
+        .note-box {
+            background: #6DD5ED;
+            border: 2px solid #4fc4e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+            font-size: 14px;
+            font-style: italic;
+            color: #222;
+        }
+
+        .todo-list { list-style: none; padding-left: 0; }
+        .todo-list li {
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 6px;
+            border-left: 4px solid #FF6B00;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .todo-list li::before { content: "☐"; font-size: 18px; color: #222; }
+        .math-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .math-table th, .math-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #222; }
+        .math-table th { font-weight: 600; }
+        .math-table .total { font-weight: 700; border-top: 2px solid #222; }
+        .math-table .highlight { background: rgba(255,107,0,0.2); }
+        .revenue-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .revenue-item {
+            background: #F5A8E1;
+            border: 2px solid #e88bc9;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .revenue-item strong { display: block; margin-bottom: 4px; }
+        .revenue-item span { font-size: 13px; color: #333; }
+
+        .expandable { margin-bottom: 24px; }
+        .expandable summary {
+            list-style: none;
+            cursor: pointer;
+            background: #F5A8E1;
+            border: 2px solid #e88bc9;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #222;
+        }
+        .expandable summary::-webkit-details-marker { display: none; }
+        .expandable summary::after { content: " \u25BC"; font-size: 10px; opacity: 0.8; }
+        .expandable[open] summary::after { content: " \u25B2"; }
+        .expandable .expandable-inner {
+            background: #F5A8E1;
+            border: 2px solid #e88bc9;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 20px 24px;
+            margin-top: -2px;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 16px; }
+        }
+    </style>
+</head>
+<body class="start-a-school-page">
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to LifeOS</a>
+
+        <header>
+            <h1>Start a School</h1>
+            <div class="subtitle">School / development studio — ideas & vision</div>
+        </header>
+
+        <div class="section">
+            <h2>Inspired by</h2>
+            <ul>
+                <li>Nintendo</li>
+                <li>Starting a school / development studio</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Model: School + Studio</h3>
+            <ul>
+                <li><strong>Students at the end</strong> can join a collective or form their own LLC. If they want the &ldquo;advance route,&rdquo; they can start their own LLC and put their products to market.</li>
+                <li><strong>Internally</strong>, the studio also has products for market — kids would be the playtesters.</li>
+                <li>The school/studio would make <strong>Video Games + Films</strong>.</li>
+                <li><strong>Schedule:</strong> During the day, teach kids; mornings + nights make games/film — and &ldquo;all the time sell coffee.&rdquo;</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Kids &amp; programming</h2>
+            <ul>
+                <li>Luekens (and others)</li>
+                <li>Open to kids 11–15</li>
+                <li><strong>$100/month</strong> membership for &ldquo;bASICS&rdquo; (basics tier)</li>
+                <li>Classes: 4pm–5pm</li>
+                <li>Building exits: 5:15pm</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Todo — launch &amp; run</h2>
+            <ul class="todo-list">
+                <li>Form entity (LLC / nonprofit) and get EIN</li>
+                <li>Find space (classroom + studio + coffee area)</li>
+                <li>Insurance (liability, property)</li>
+                <li>Curriculum: path from basics → ship a product → form LLC</li>
+                <li>Get relationships with schools (referrals, after-school)</li>
+                <li>Set up bASICS tier: $100/mo, 4–5pm, exit 5:15pm</li>
+                <li>Coffee setup (equipment, supplier) — “all the time sell coffee”</li>
+                <li>First cohort: recruit Luekens + others (ages 11–15)</li>
+                <li>Studio products pipeline (games/film) so kids can playtest</li>
+                <li>Document “advance route”: how students form LLC and launch</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Monthly cost vs. enrollments</h3>
+            <p style="margin-bottom:16px;">Rough numbers to update. Goal: cover fixed costs with enrollments + other revenue so the studio can run and students can eventually form LLCs and launch products.</p>
+            <table class="math-table">
+                <thead>
+                    <tr><th>Monthly cost</th><th>Estimate</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Rent (space)</td><td>$1,200</td></tr>
+                    <tr><td>Insurance</td><td>$200</td></tr>
+                    <tr><td>Supplies / software / gear</td><td>$300</td></tr>
+                    <tr><td>Coffee (inventory + small equipment)</td><td>$150</td></tr>
+                    <tr><td>Buffer / misc</td><td>$150</td></tr>
+                    <tr class="total"><td>Total fixed (approx)</td><td>$2,000</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:16px; font-size:14px;">
+                <strong>Break-even from bASICS alone:</strong> $2,000 ÷ $100 per student = <strong>20 students</strong> to cover fixed costs. Fewer students needed if coffee + studio products bring in revenue.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Coffee: costs &amp; price tiers</h3>
+            <p style="margin-bottom:16px;">Rough numbers to update. Same style as monthly costs — single estimates you can tweak as you get real supplier and volume data.</p>
+
+            <p style="font-size:13px; font-weight:600; margin-bottom:8px;">Cost per drink (estimate)</p>
+            <table class="math-table">
+                <thead>
+                    <tr><th>Item</th><th>Estimate</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Beans (espresso, per shot)</td><td>$0.45</td></tr>
+                    <tr><td>Milk (per drink, 6 oz)</td><td>$0.25</td></tr>
+                    <tr><td>Syrup / flavor (per drink)</td><td>$0.15</td></tr>
+                    <tr><td>Cup + lid + sleeve</td><td>$0.12</td></tr>
+                    <tr class="total"><td>Base drink (e.g. latte)</td><td>$0.97</td></tr>
+                </tbody>
+            </table>
+
+            <p style="font-size:13px; font-weight:600; margin:20px 0 8px;">Price by tier (estimate)</p>
+            <table class="math-table">
+                <thead>
+                    <tr><th>Tier</th><th>Example drinks</th><th>Cost</th><th>Price</th><th>Margin</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Base</td><td>Drip, americano, espresso</td><td>$0.55</td><td>$3.00</td><td>$2.45</td></tr>
+                    <tr><td>Standard</td><td>Latte, cappuccino, flat white</td><td>$0.97</td><td>$4.75</td><td>$3.78</td></tr>
+                    <tr><td>Premium</td><td>Mocha, cold brew, flavored, alt milk</td><td>$1.15</td><td>$6.25</td><td>$5.10</td></tr>
+                    <tr><td>Advanced</td><td>Signature, single-origin, add-ons</td><td>$1.50</td><td>$8.00</td><td>$6.50</td></tr>
+                </tbody>
+            </table>
+
+            <p style="font-size:13px; font-weight:600; margin:20px 0 8px;">Add-ons (estimate)</p>
+            <table class="math-table">
+                <thead>
+                    <tr><th>Add-on</th><th>Estimate (cost)</th><th>Add to price</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Oat / almond / alternative milk</td><td>$0.30</td><td>+$0.85</td></tr>
+                    <tr><td>Extra shot</td><td>$0.20</td><td>+$0.85</td></tr>
+                    <tr><td>House syrup / flavor</td><td>$0.15</td><td>+$0.60</td></tr>
+                    <tr><td>Single-origin / specialty bean</td><td>$0.40</td><td>+$1.25</td></tr>
+                    <tr><td>Cold foam / whip / topping</td><td>$0.22</td><td>+$0.75</td></tr>
+                    <tr><td>Large (vs medium)</td><td>$0.20</td><td>+$0.60</td></tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top:16px; font-size:14px;">
+                <strong>Break-even (coffee only):</strong> $2,000 ÷ $3.78 per drink ≈ <strong>530 drinks/month</strong> (about 18/day) at Standard tier. Fewer if you sell more Premium/Advanced; more if you sell more Base.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Monthly revenue (estimate)</h3>
+            <p style="margin-bottom:16px;">Bring costs and coffee tiers together. Plug in your expected student count, drinks per month, and other revenue. Update the numbers as you get real data.</p>
+            <table class="math-table">
+                <thead>
+                    <tr><th>Revenue source</th><th>Estimate</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>bASICS (e.g. 15 students × $120)</td><td>$1,800</td></tr>
+                    <tr><td>Coffee (e.g. 400 drinks × $4.25 avg margin)</td><td>$1,700</td></tr>
+                    <tr><td>Coffee membership / punch cards (e.g. 5 members × $25)</td><td>$125</td></tr>
+                    <tr><td>Classes / workshops (e.g. 4 sessions × $50 or 2 workshops × $95)</td><td>$390</td></tr>
+                    <tr><td>Parent / adult classes (e.g. 1 class × $250)</td><td>$250</td></tr>
+                    <tr><td>Higher tiers / advance (e.g. 2 students × $250)</td><td>$500</td></tr>
+                    <tr><td>Merch / small products (e.g.)</td><td>$90</td></tr>
+                    <tr><td>Studio / games or film (one-off or recurring)</td><td>$0</td></tr>
+                    <tr><td>Grants, partnerships, other</td><td>$0</td></tr>
+                    <tr class="total"><td>Total monthly revenue (approx)</td><td>$4,855</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:16px; font-size:14px;">
+                <strong>Vs. fixed costs:</strong> Total fixed ≈ $2,000. This example assumes slightly higher prices across the board (e.g. bASICS $120, higher coffee margin, more per class). Gives ~$2,855 buffer. Change the “e.g.” numbers to match your pricing.
+            </p>
+        </div>
+
+        <details class="expandable">
+            <summary>Ways to make money (easy + other)</summary>
+            <div class="expandable-inner">
+                <p style="margin-bottom:12px;">Low-friction ideas and broader revenue so the school can stay afloat and keep the focus on students building real products and forming LLCs.</p>
+                <p style="font-size:13px; font-weight:600; margin-bottom:8px;">Easy ways to increase monthly rev</p>
+                <ul style="margin:0 0 20px 20px; padding-left:20px; line-height:1.8;">
+                    <li><strong>Teach classes / workshops</strong> — One-off or short series (e.g. “Intro to game dev,” “Make a short film”). Price per session or per series. Parents and adults pay; kids already there can upsell.</li>
+                    <li><strong>Parent or adult classes</strong> — “Code with your kid” or “Game design basics.” Fills seats and builds community; often higher willingness to pay.</li>
+                    <li><strong>Merch / small products</strong> — T-shirts, stickers, or simple “student game” downloads. Margin on each sale; builds brand and a bit of recurring rev.</li>
+                    <li><strong>Coffee upsells</strong> — Monthly “coffee membership” or punch cards. Locks in regulars and smooths revenue.</li>
+                    <li><strong>Charge a bit more across the board</strong> — Slightly higher bASICS, coffee prices, class fees, and higher-tier tuition. Same volume, more rev per unit.</li>
+                    <li><strong>More higher-tier students</strong> — Advance route or premium tracks at $250–300/mo. Same teaching time, higher rev per seat.</li>
+                </ul>
+                <p style="font-size:13px; font-weight:600; margin-bottom:8px;">Other ways to make money</p>
+                <div class="revenue-grid">
+                    <div class="revenue-item"><strong>Coffee</strong><span>Walk-in, parents, events. “All the time sell coffee.”</span></div>
+                    <div class="revenue-item"><strong>Studio games / film</strong><span>Internal products for market; kids playtest. Revenue shares or direct sales.</span></div>
+                    <div class="revenue-item"><strong>Higher tiers</strong><span>Premium tracks (e.g. “advance route” prep, LLC formation support) at higher monthly rate.</span></div>
+                    <div class="revenue-item"><strong>Grants &amp; partnerships</strong><span>Ed grants, school contracts, after-school programs.</span></div>
+                    <div class="revenue-item"><strong>Student LLCs</strong><span>Graduates launch products; optional revenue share or affiliate when they ship (aligns with “form LLC and put products to market”).</span></div>
+                </div>
+            </div>
+        </details>
+
+        <div class="section">
+            <h2>Additional notes</h2>
+            <ul>
+                <li>Get relationships with schools</li>
+                <li>Hard — not easy road</li>
+            </ul>
+        </div>
+
+        <div class="note-box">
+            This page is a living doc for the school/studio idea. Update as the vision evolves.
+        </div>
+    </div>
+</body>
+</html>
