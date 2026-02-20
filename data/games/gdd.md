@@ -39,11 +39,10 @@ _What does the player do minute-to-minute? (e.g. “Explore → Find clue → So
 
 _3–5 rules that guide every decision. If a feature doesn’t support these, cut it._
 
-1. 
-2. 
-3. 
-4. 
-5. 
+1. **Co-op Dependency:** Players must cover each other's blind spots and work together.
+2. **Predictable Chaos:** Waves should be readable but overwhelming if ignored.
+3. **Satisfying Unarmed Combat:** Beating Brutes with bare hands should feel weighty and punishing.
+4. **Distinct Pacing:** Slippery Tricksters vs Heavy Brutes force players to constantly adapt their timing and approach.
 
 ---
 
@@ -65,11 +64,11 @@ _Name each main mechanic and one line on what it does._
 
 | # | Mechanic | One-line description |
 |---|----------|------------------------|
-| 1 |          |                        |
-| 2 |          |                        |
-| 3 |          |                        |
-| 4 |          |                        |
-| 5 |          |                        |
+| 1 | Movement & Dodge | Position carefully to corral enemies and avoid surrounds. |
+| 2 | Weapon Swing (Sword) | Primary attack meant for slippery Tricksters. |
+| 3 | Unarmed Wrestle | Grapple and throw mechanics intended for Brutes. |
+| 4 | Lock-On | Focus on a single target to manage one-on-one engagements. |
+| 5 | Revive/Heal Partner | Bring a fallen god back into the fight. |
 
 ---
 
@@ -77,35 +76,35 @@ _Name each main mechanic and one line on what it does._
 
 _For each mechanic above: what does the player do? What are the rules? What’s the feedback?_
 
-**Mechanic 1: _[name]_**
-- **Player action:** _What does the player actually do (input, decision)?_
-- **Rules:** _When does it work / not work? Limits?_
-- **Feedback:** _What do they see/hear/feel when they use it?_
-- **Notes:**
+**Mechanic 1: _Movement & Dodge_**
+- **Player action:** Left stick/WASD to move, button to dodge/roll.
+- **Rules:** Dodge has i-frames but a short cooldown/stamina cost.
+- **Feedback:** Distinct woosh sound and visual trail during dodge.
+- **Notes:** Essential for avoiding Tricksters' attacks.
 
-**Mechanic 2: _[name]_**
-- **Player action:**
-- **Rules:**
-- **Feedback:**
-- **Notes:**
+**Mechanic 2: _Weapon Swing (Sword)_**
+- **Player action:** Attack button. Can combo up to 3 hits.
+- **Rules:** Works on all enemies, but Brutes block/absorb it mostly. Tricksters dodge it unless timed right.
+- **Feedback:** Sharp metallic slash sounds, hit-stop on connect.
+- **Notes:** Need to feel crisp and responsive.
 
-**Mechanic 3: _[name]_**
-- **Player action:**
-- **Rules:**
-- **Feedback:**
-- **Notes:**
+**Mechanic 3: _Unarmed Wrestle_**
+- **Player action:** Must put away sword first. Press grapple button near a Brute.
+- **Rules:** Only works on Brutes. Puts player in a mini grapple-state. Can throw Brute into other enemies.
+- **Feedback:** Heavy thud sounds, camera shake, visual dust impact on throw.
+- **Notes:** The highlight of combat vs Brutes.
 
-**Mechanic 4: _[name]_**
-- **Player action:**
-- **Rules:**
-- **Feedback:**
-- **Notes:**
+**Mechanic 4: _Lock-On_**
+- **Player action:** Click right-stick/middle-mouse.
+- **Rules:** Snaps camera to target, strafe around them. Breaks if they move too far.
+- **Feedback:** Subtle UI reticle on the locked enemy.
+- **Notes:** Crucial for 1v1 encounters within the wave.
 
-**Mechanic 5: _[name]_**
-- **Player action:**
-- **Rules:**
-- **Feedback:**
-- **Notes:**
+**Mechanic 5: _Revive/Heal Partner_**
+- **Player action:** Hold interact button near fallen partner.
+- **Rules:** Takes 3 seconds, leaves player vulnerable to attacks.
+- **Feedback:** Glowing light, rising sound effect, partner stands up.
+- **Notes:** High risk, high reward.
 
 ---
 
@@ -166,13 +165,18 @@ _Who is this for? Solo dev hobby project, itch audience, Steam, something else?_
 _What’s the smallest version you’d still call “the game”? What’s in v1 and what’s “later”?_
 
 **Must have for v1 (MVP):**
-- 
-- 
-- 
+- 1 Arena map
+- Basic player movement, sword attack, and dodge
+- Wave Spawner system
+- Trickster enemy (Basic dodge AI)
+- Brute enemy (Basic charge AI + grapple prompt)
+- 2-Player local co-op basic state
 
 **Nice to have / later:**
-- 
-- 
+- Deep wrestling mechanics (suplexes, environment throws)
+- Extensive lore and narrative events
+- Networked multiplayer
+- Complex boss battles
 
 ---
 

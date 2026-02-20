@@ -11,4 +11,10 @@ ANinjaGameMode::ANinjaGameMode()
 	// If you get crashes, temporarily switch to ANinjaCharacter::StaticClass() for testing
 	DefaultPawnClass = ACubeNinjaCharacter::StaticClass();
 	PlayerControllerClass = ANinjaPlayerController::StaticClass();
+
+	// Enable split screen by default
+	bEnableSplitScreen = true;
+	bUseVerticalSplit = true; // Vertical split (left/right)
+	bForceSplitScreenForSolo = true; // Even solo play uses split screen (for ghost partner)
+	NumSplitScreenPlayers = 2;
 }

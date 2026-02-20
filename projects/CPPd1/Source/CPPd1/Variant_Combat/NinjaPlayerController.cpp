@@ -4,6 +4,7 @@
 #include "NinjaCharacter.h"
 #include "CubeNinjaCharacter.h"
 #include "Variant_Combat/UI/InputModeSelection.h"
+#include "Variant_Combat/UI/NinjaHUD.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputMappingContext.h"
 #include "Engine/LocalPlayer.h"
@@ -20,6 +21,12 @@ ANinjaPlayerController::ANinjaPlayerController()
 void ANinjaPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Create HUD dynamically if not already set
+	if (!HUDWidget && IsLocalPlayerController())
+	{
+		CreateDynamicHUD();
+	}
 
 	// Show input mode selection if not already selected
 	// TODO: Load from save game to persist selection
@@ -57,7 +64,7 @@ void ANinjaPlayerController::ShowInputModeSelection()
 
 void ANinjaPlayerController::OnInputModeSelected(EInputMode SelectedMode)
 {
-	SetInputMode(SelectedMode);
+	SetCustomInputMode(SelectedMode);
 	bHasSelectedInputMode = true;
 	
 	// Hide selection widget
@@ -71,7 +78,7 @@ void ANinjaPlayerController::OnInputModeSelected(EInputMode SelectedMode)
 	CreateControlsOverlay();
 }
 
-void ANinjaPlayerController::SetInputMode(EInputMode NewInputMode)
+void ANinjaPlayerController::SetCustomInputMode(EInputMode NewInputMode)
 {
 	CurrentInputMode = NewInputMode;
 	UpdateInputMappings();
@@ -150,5 +157,31 @@ void ANinjaPlayerController::SetControlsOverlayVisible(bool bVisible)
 	if (ControlsOverlayWidget)
 	{
 		ControlsOverlayWidget->SetOverlayVisible(bVisible);
+	}
+}
+
+void ANinjaPlayerController::CreateDynamicHUD()
+{
+	if (!IsLocalPlayerController())
+	{
+		return;
+	}
+
+	// Create NinjaHUD widget dynamically
+	// Use the C++ class directly - no Blueprint required
+	UNinjaHUD* NinjaHUD = CreateWidget<UNinjaHUD>(this);
+	if (NinjaHUD)
+	{
+		HUDWidget = NinjaHUD;
+		HUDWidget->AddToPlayerScreen();
+
+		// Set the character for the HUD
+		if (APawn* CurrentPawn = GetPawn())
+		{
+			if (ACombatCharacter* CombatChar = Cast<ACombatCharacter>(CurrentPawn))
+			{
+				NinjaHUD->SetCharacter(CombatChar);
+			}
+		}
 	}
 }

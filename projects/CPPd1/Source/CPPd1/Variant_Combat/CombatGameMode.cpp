@@ -10,7 +10,9 @@
 #include "Variant_Combat/AI/CombatEnemy.h"
 #include "Engine/GameInstance.h"
 #include "Engine/LocalPlayer.h"
+#include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
 
 ACombatGameMode::ACombatGameMode()
 {
@@ -56,6 +58,16 @@ void ACombatGameMode::InitializeSplitScreen()
 	if (bEnableSplitScreen)
 	{
 		SetupSplitScreen();
+
+		// Force spawn player 2 to trigger split screen if we are supposed to have multiple players
+		if (bForceSplitScreenForSolo || NumSplitScreenPlayers > 1)
+		{
+			// Check if we only have 1 player
+			if (GetNumPlayers() == 1 && GetWorld())
+			{
+				UGameplayStatics::CreatePlayer(this, -1, true);
+			}
+		}
 	}
 }
 

@@ -22,6 +22,9 @@ void ANinjaCharacter::BeginPlay()
 	Super::BeginPlay();
 	// Set jump count - JumpMaxCount is a property of Character, not CharacterMovementComponent
 	JumpMaxCount = FMath::Max(1, JumpCountMax);
+
+	// Start at relaxed walk speed
+	GetCharacterMovement()->MaxWalkSpeed = RelaxedWalkSpeed;
 }
 
 void ANinjaCharacter::DoRoll()
@@ -226,6 +229,19 @@ void ANinjaCharacter::DoAttackTrace(FName DamageSourceBone)
 
 void ANinjaCharacter::Tick(float DeltaTime)
 {
+	// Movement Speed Logic (Sprint when locked on, Walk when not)
+	if (!bIsFlying)
+	{
+		if (LockOnTarget != nullptr)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = CombatSprintSpeed;
+		}
+		else
+		{
+			GetCharacterMovement()->MaxWalkSpeed = RelaxedWalkSpeed;
+		}
+	}
+
 	if (bIsRolling)
 	{
 		RollTimeRemaining -= DeltaTime;
@@ -254,6 +270,32 @@ void ANinjaCharacter::Tick(float DeltaTime)
 	}
 }
 
+void ANinjaCharacter::ToggleFlight()
+{
+	bIsFlying = !bIsFlying;
+
+	if (bIsFlying)
+	{
+		GetCharacterMovement()->SetMovementMode(MOVE_Flying);
+		GetCharacterMovement()->MaxFlySpeed = CombatSprintSpeed * 2.0f; // DBZ fly fast
+	}
+	else
+	{
+		GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+	}
+
+	if (GhostCharacter)
+	{
+		ANinjaCharacter* G = Cast<ANinjaCharacter>(GhostCharacter);
+		if (G)
+		{
+			G->bIsFlying = bIsFlying;
+			if (bIsFlying) G->GetCharacterMovement()->SetMovementMode(MOVE_Flying);
+			else G->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+		}
+	}
+}
+
 void ANinjaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -275,4 +317,6 @@ void ANinjaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		EIC->BindAction(Flip360Action, ETriggerEvent::Started, this, &ANinjaCharacter::DoFlip360);
 	if (KickAction)
 		EIC->BindAction(KickAction, ETriggerEvent::Started, this, &ANinjaCharacter::DoKick);
+	if (FlightAction)
+		EIC->BindAction(FlightAction, ETriggerEvent::Started, this, &ANinjaCharacter::ToggleFlight);
 }

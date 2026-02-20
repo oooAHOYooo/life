@@ -9,6 +9,7 @@
 
 /**
  * HUD widget for ninja game - health bar positioned top-left
+ * Created dynamically in C++ - no Blueprint required
  */
 UCLASS(BlueprintType, Blueprintable)
 class CPPd1_API UNinjaHUD : public UCombatHUD
@@ -19,6 +20,10 @@ public:
 	UNinjaHUD(const FObjectInitializer& ObjectInitializer);
 
 	virtual void NativeConstruct() override;
+
+	/** Build the HUD layout dynamically */
+	UFUNCTION(BlueprintCallable, Category = "Ninja|HUD")
+	void BuildDynamicLayout();
 
 protected:
 	/** Health bar container (for positioning top-left) */

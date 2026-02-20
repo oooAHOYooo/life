@@ -36,7 +36,7 @@ public:
 
 	/** Set input mode (called from selection widget) */
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void SetInputMode(EInputMode NewInputMode);
+	void SetCustomInputMode(EInputMode NewInputMode);
 
 	/** Toggle controls overlay visibility */
 	UFUNCTION(BlueprintCallable, Category = "UI")
@@ -83,4 +83,7 @@ protected:
 
 	/** Create and show controls overlay */
 	void CreateControlsOverlay();
+
+	/** Create HUD dynamically in C++ (no Blueprint required) */
+	void CreateDynamicHUD();
 };

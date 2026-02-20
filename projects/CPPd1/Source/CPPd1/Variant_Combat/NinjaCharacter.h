@@ -99,6 +99,24 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ninja")
 	void DoKick();
 
+	// ---- Non-Combat Movement ----
+	/** Relaxed walk speed when not locked onto an enemy */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ninja|Movement")
+	float RelaxedWalkSpeed = 250.0f;
+	/** Sprint speed when locked on (original movement speed) */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ninja|Movement")
+	float CombatSprintSpeed = 500.0f;
+
+	// ---- DBZ Flight ----
+	UPROPERTY(EditAnywhere, Category = "Input|Flight")
+	TObjectPtr<UInputAction> FlightAction;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ninja|Flight")
+	bool bIsFlying = false;
+
+	UFUNCTION(BlueprintCallable, Category = "Ninja")
+	void ToggleFlight();
+
 	/** Returns true if the last damage we dealt was during a flip (for style scoring); clears the flag. */
 	UFUNCTION(BlueprintCallable, Category = "Ninja")
 	bool ConsumeLastHitWasDuringFlip();
