@@ -1,0 +1,41 @@
+{
+  "2025-01": [
+    {
+      "title": "Dune: Part Two",
+      "watched": false,
+      "addedDate": "2025-01-15",
+      "watchedDate": null,
+      "rating": null,
+      "poster": "https://image.tmdb.org/t/p/w500/d5NXSklXo0qyJYjbEakW2Fj3hbd.jpg"
+    },
+    {
+      "title": "The Zone of Interest",
+      "watched": false,
+      "addedDate": "2025-01-10",
+      "watchedDate": null,
+      "rating": null,
+      "poster": "https://image.tmdb.org/t/p/w500/4HodYYKEIsgDH1Hp8Ub5bFReflX.jpg"
+    }
+  ],
+  "2025-02": [
+    {
+      "title": "Poor Things",
+      "watched": true,
+      "addedDate": "2025-02-01",
+      "watchedDate": "2025-02-15",
+      "rating": 8.5,
+      "poster": "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg"
+    },
+    {
+      "title": "Anatomy of a Fall",
+      "watched": false,
+      "addedDate": "2025-02-05",
+      "watchedDate": null,
+      "rating": null,
+      "poster": "https://image.tmdb.org/t/p/w500/kQs6keheMwCxHuX75blaP8vqj3S.jpg"
+    }
+  ],
+  "2025-03": []
+}
+
+

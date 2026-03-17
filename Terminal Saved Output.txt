@@ -1,0 +1,179 @@
+Last login: Tue Mar 17 06:29:04 on ttys041
+agworkywork@AG-Workhorse-1 film % cd ..
+agworkywork@AG-Workhorse-1 ~ % cd life
+agworkywork@AG-Workhorse-1 life % git fetch -all
+error: did you mean `--all` (with two dashes)?
+agworkywork@AG-Workhorse-1 life % git fetch --all
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 5 (delta 2), reused 5 (delta 2), pack-reused 0 (from 0)
+Unpacking objects: 100% (5/5), 1.00 KiB | 256.00 KiB/s, done.
+From https://github.com/oooAHOYooo/life
+   00aab28..c230fe1  main       -> origin/main
+agworkywork@AG-Workhorse-1 life % git checkout main
+Already on 'main'
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+agworkywork@AG-Workhorse-1 life % git pull
+Updating 00aab28..c230fe1
+Fast-forward
+ words/3_10_26_dumps.md | 12 ++++++++++++
+ words/ideasMarch26.md  | 37 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 words/3_10_26_dumps.md
+ create mode 100644 words/ideasMarch26.md
+agworkywork@AG-Workhorse-1 life % ls
+archive			design-system.css	games			package.json		styles.css		ue5_sync.sh
+compile-all.js		experiments		index.html		projects		subpages		words
+data			game			package-lock.json	README.md		ue5_sync.bat
+agworkywork@AG-Workhorse-1 life % cd words
+agworkywork@AG-Workhorse-1 words % ls
+26_actors.md		26_poems_1.md		26_premises_1.md	26_snowDay3.md		3_10_26_dumps.md	ideasMarch26.md
+agworkywork@AG-Workhorse-1 words % mkdir yada
+agworkywork@AG-Workhorse-1 words % clear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+agworkywork@AG-Workhorse-1 words % micro yada.md
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 1 gosh i don't feel good right now                                                                                                                                                                               
+ 2 I am nervous                                                                                                                                                                                                   
+ 3 worried that I am going to be a failure                                                                                                                                                                        
+ 4 boom maybe thats the ideal                                                                                                                                                                                     
+ 5 worried that I am not going to have enough energy to last through the kids today                                                                                                                               
+ 6 that i went to bed at 1130pm - and woke up at 540am - and now gotta teach all day - i should have slept that extra hour                                                                                        
+ 7 but nope                                                                                                                                                                                                       
+ 8 woke up and baked                                                                                                                                                                                              
+ 9 and now baked and have 20 min before I have to get ready                                                                                                                                                       
+10 and i just hate it                                                                                                                                                                                             
+11 i hate that part of me                                                                                                                                                                                         
+12 that self abuse                                                                                                                                                                                                
+13 help me Lord                                                                                                                                                                                                   
+14 I don't know what else to say                                                                                                                                                                                  
+15 I am a coward to approach you o Lord because I do not want to give up the comforts of life                                                                                                                     
+16 this past week's sermon really convincted me - i listened - i was with my parents and my wife                                                                                                                  
+17 and still                                                                                                                                                                                                      
+18 I feel like I am a mess                                                                                                                                                                                        
+19 and the timer and pressure is cooking                                                                                                                                                                          
+20 but its all hearsay                                                                                                                                                                                            
+21 help me Lord                                                                                                                                                                                                   
+22 I feel as if I have to get a job - or I am going to stick with my job and take the safe route - and that makes me fear that I will morph into a coward                                                         
+23 but what am I looking for?                                                                                                                                                                                     
+24 I do like working with kids - but there is no money in - and the real world seems further and further away                                                                                                     
+25 But then what - be a web developer?                                                                                                                                                                            
+26 Perhaps - but I ought do that on the side.                                                                                                                                                                     
+27 What else? Do ahoy? do I want that kind of pressure?                                                                                                                                                           
+28 what else                                                                                                                                                                                                      
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+                                                                                                                                                                                                                  
+yada.md + (28,10) | ft:markdown | unix | utf-8                                                                                                                                       Alt-g: bindings, Ctrl-g: help
+                                                                                                                                                                                                                  

@@ -1,0 +1,28 @@
+gosh i don't feel good right now
+I am nervous
+worried that I am going to be a failure
+boom maybe thats the ideal
+worried that I am not going to have enough energy to last through the kids today
+that i went to bed at 1130pm - and woke up at 540am - and now gotta teach all day - i should have slept that extra hour
+but nope
+woke up and baked
+and now baked and have 20 min before I have to get ready
+and i just hate it
+i hate that part of me
+that self abuse
+help me Lord
+I don't know what else to say
+I am a coward to approach you o Lord because I do not want to give up the comforts of life
+this past week's sermon really convincted me - i listened - i was with my parents and my wife
+and still
+I feel like I am a mess
+and the timer and pressure is cooking
+but its all hearsay
+help me Lord
+I feel as if I have to get a job - or I am going to stick with my job and take the safe route - and that makes me fear that I will morph into a coward
+but what am I looking for?
+I do like working with kids - but there is no money in - and the real world seems further and further away
+But then what - be a web developer? 
+Perhaps - but I ought do that on the side. 
+What else? Do ahoy? do I want that kind of pressure? 
+what else

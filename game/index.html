@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game: 2P Co-op Combat — LifeOS</title>
+    <style>
+        :root {
+            --color-text: #2c2416;
+            --color-text-muted: #6b5d47;
+            --color-bg: #f5f1e8;
+            --color-bg-alt: #ebe7dd;
+            --color-border: #3d3424;
+            --color-border-light: #6b5d47;
+            --color-accent: #5a4a3a;
+            --color-card-bg: #faf8f3;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --radius-md: 8px;
+            --font-size-sm: 13px;
+            --font-size-base: 14px;
+            --font-size-md: 16px;
+            --font-size-lg: 18px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+            color: var(--color-text);
+            background: var(--color-bg);
+            padding: var(--spacing-lg);
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text);
+        }
+        .subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-lg);
+        }
+        .panel {
+            background: var(--color-card-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        .panel-title {
+            font-size: var(--font-size-md);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+        .panel p {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-md);
+        }
+        .link-list { list-style: none; }
+        .link-list li { margin-bottom: 8px; }
+        .link-list a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+        }
+        .link-list a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Personal Hub</a>
+
+        <h1>Game: 2P Co-op Combat</h1>
+        <p class="subtitle">UE5 · Xbox · Prototype target: next Monday</p>
+
+        <section class="panel">
+            <h2 class="panel-title">Overview</h2>
+            <p>2-player co-op action game: MMA-style controls + Skate-style flick stick + weapons + Dragon Ball Z–style combat. Mario-inspired themed worlds, fight spots, time limits, and stylish points. Replay = same spots, better grades, lock-in vs pursue. Goal: basic prototype on Xbox (2P, one arena, move + attack) by next Monday.</p>
+        </section>
+
+        <section class="panel">
+            <h2 class="panel-title">Docs</h2>
+            <ul class="link-list">
+                <li><a href="GDD.md">GDD.md</a> — Full game design document</li>
+                <li><a href="LUNCH-BREAK-PLAN.md">LUNCH-BREAK-PLAN.md</a> — Day-by-day lunch break plan to ship the prototype</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
