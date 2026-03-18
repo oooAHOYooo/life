@@ -1,0 +1,222 @@
+[
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "category": "AI / Language Model",
+    "tagline": "Conversational AI that powers productivity",
+    "description": "OpenAI's flagship language model delivering human-like conversation, code generation, and creative writing. Industry-leading inference speed and quality.",
+    "beepScore": 92,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 90,
+      "Performance": 94,
+      "Integration": 85,
+      "UX": 96,
+      "Innovation": 93
+    },
+    "consensusVerdict": "Essential tool for productivity. Unmatched conversational ability.",
+    "tags": ["ai", "productivity", "code", "writing"],
+    "circuitsApproved": 12,
+    "circuitsRejected": 2
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "Cloud Infrastructure",
+    "tagline": "The cloud platform for everything",
+    "description": "Amazon Web Services: comprehensive cloud infrastructure with EC2, RDS, S3, and 200+ services. Industry standard but complex.",
+    "beepScore": 85,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 88,
+      "Performance": 84,
+      "Integration": 82,
+      "UX": 76,
+      "Innovation": 87
+    },
+    "consensusVerdict": "Gold standard infrastructure. Steep learning curve, pricing can surprise.",
+    "tags": ["cloud", "infrastructure", "compute", "storage"],
+    "circuitsApproved": 11,
+    "circuitsRejected": 3
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "category": "Developer Tools",
+    "tagline": "AI pair programmer for every developer",
+    "description": "GitHub's AI-powered code completion tool. Real-time suggestions, supports 20+ languages, reduces boilerplate writing.",
+    "beepScore": 88,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 86,
+      "Performance": 91,
+      "Integration": 89,
+      "UX": 88,
+      "Innovation": 87
+    },
+    "consensusVerdict": "Transforms how developers code. Worth the subscription.",
+    "tags": ["ai", "devtools", "code", "productivity"],
+    "circuitsApproved": 12,
+    "circuitsRejected": 2
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "Deployment / Frontend Platform",
+    "tagline": "The frontend cloud for Next.js and React",
+    "description": "Vercel's edge platform with serverless functions, auto-scaling, and sub-100ms global deployments. Built for Next.js.",
+    "beepScore": 90,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 91,
+      "Performance": 94,
+      "Integration": 88,
+      "UX": 92,
+      "Innovation": 88
+    },
+    "consensusVerdict": "Best-in-class frontend deployment. The gold standard.",
+    "tags": ["frontend", "deployment", "serverless", "performance"],
+    "circuitsApproved": 13,
+    "circuitsRejected": 1
+  },
+  {
+    "id": "notion",
+    "name": "Notion",
+    "category": "Productivity / Workspace",
+    "tagline": "All-in-one workspace for notes, databases, and collaboration",
+    "description": "Notion's flexible workspace combines databases, wikis, and documents. Slow sync, feature-rich but sometimes overwhelming.",
+    "beepScore": 81,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 79,
+      "Performance": 72,
+      "Integration": 78,
+      "UX": 87,
+      "Innovation": 85
+    },
+    "consensusVerdict": "Powerful but slow. Best for organized teams with patience.",
+    "tags": ["productivity", "collaboration", "database", "wiki"],
+    "circuitsApproved": 9,
+    "circuitsRejected": 5
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "Infrastructure / Security",
+    "tagline": "Global network platform for performance and security",
+    "description": "Cloudflare's edge network provides DDoS protection, CDN, workers, and security. Reliable and fast.",
+    "beepScore": 89,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 92,
+      "Performance": 91,
+      "Integration": 87,
+      "UX": 84,
+      "Innovation": 88
+    },
+    "consensusVerdict": "Best-kept secret in infrastructure. Worth every dollar.",
+    "tags": ["infrastructure", "cdn", "security", "performance"],
+    "circuitsApproved": 12,
+    "circuitsRejected": 2
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "category": "Project Management",
+    "tagline": "Issue tracking for fast-moving teams",
+    "description": "Linear's blazing-fast issue tracker with keyboard shortcuts, automations, and GitHub integration. Built for speed.",
+    "beepScore": 91,
+    "totalReviews": 14,
+    "scoreBreakdown": {
+      "Reliability": 93,
+      "Performance": 96,
+      "Integration": 90,
+      "UX": 92,
+      "Innovation": 87
+    },
+    "consensusVerdict": "Jira killer. So much faster, so much better UX.",
+    "tags": ["project-management", "issue-tracking", "productivity", "devtools"],
+    "circuitsApproved": 13,
+    "circuitsRejected": 1
+  },
+  {
+    "id": "raspberry-pi-5",
+    "name": "Raspberry Pi 5",
+    "category": "Hardware",
+    "tagline": "Affordable single-board computer for makers and developers",
+    "description": "Raspberry Pi 5: quad-core ARM processor, 4GB RAM, PCIe, real performance. The affordable micro-computer standard.",
+    "beepScore": 93,
+    "totalReviews": 13,
+    "scoreBreakdown": {
+      "Reliability": 92,
+      "Performance": 94,
+      "Integration": 93,
+      "UX": 91,
+      "Innovation": 95
+    },
+    "consensusVerdict": "Amazing value. The best of its kind. Shipping delays excepted.",
+    "tags": ["hardware", "maker", "embedded", "affordable"],
+    "circuitsApproved": 13,
+    "circuitsRejected": 0
+  },
+  {
+    "id": "openai-api",
+    "name": "OpenAI API",
+    "category": "AI / API",
+    "tagline": "Bring GPT-4 capabilities into your application",
+    "description": "OpenAI's API provides GPT-4, embeddings, and vision models via REST. Expensive but powerful. Frequent updates.",
+    "beepScore": 90,
+    "totalReviews": 13,
+    "scoreBreakdown": {
+      "Reliability": 88,
+      "Performance": 91,
+      "Integration": 92,
+      "UX": 87,
+      "Innovation": 94
+    },
+    "consensusVerdict": "Cutting-edge AI in an API. Pricing is the tradeoff.",
+    "tags": ["ai", "api", "llm", "innovation"],
+    "circuitsApproved": 12,
+    "circuitsRejected": 1
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "category": "Design / Collaboration",
+    "tagline": "The collaborative design platform",
+    "description": "Figma's browser-based design tool powers design teams worldwide. Real-time collaboration, plugins, prototyping.",
+    "beepScore": 89,
+    "totalReviews": 13,
+    "scoreBreakdown": {
+      "Reliability": 87,
+      "Performance": 88,
+      "Integration": 88,
+      "UX": 92,
+      "Innovation": 89
+    },
+    "consensusVerdict": "Revolutionized design collaboration. Few complaints.",
+    "tags": ["design", "collaboration", "ui", "prototyping"],
+    "circuitsApproved": 12,
+    "circuitsRejected": 1
+  },
+  {
+    "id": "datadog",
+    "name": "Datadog",
+    "category": "Monitoring / Observability",
+    "tagline": "Unified monitoring and analytics for modern applications",
+    "description": "Datadog combines metrics, logs, traces, and APM. Comprehensive observability platform. Cost can escalate quickly.",
+    "beepScore": 86,
+    "totalReviews": 13,
+    "scoreBreakdown": {
+      "Reliability": 88,
+      "Performance": 85,
+      "Integration": 87,
+      "UX": 84,
+      "Innovation": 85
+    },
+    "consensusVerdict": "Best-in-class observability. Pricing requires discipline.",
+    "tags": ["monitoring", "observability", "devops", "analytics"],
+    "circuitsApproved": 11,
+    "circuitsRejected": 2
+  }
+]

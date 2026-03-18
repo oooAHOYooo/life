@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEEP Trainer - Bot Evolution & Engagement Platform</title>
+    <link rel="stylesheet" href="../design-system.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%); }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: 260px 1fr 300px;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border-1);
+            border-radius: var(--radius-2);
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 15px;
+        }
+
+        .nav-btn {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--color-border-1);
+            color: var(--color-text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--color-accent-1);
+            color: var(--color-accent-1);
+        }
+
+        .user-stats {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--color-border-1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .stat-label { color: var(--color-text-muted); }
+        .stat-value { color: var(--color-accent-1); font-weight: 600; }
+
+        /* MAIN CONTENT */
+        .main-content {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border-1);
+            border-radius: var(--radius-2);
+            padding: 30px;
+        }
+
+        .panel-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+        }
+
+        /* DASHBOARD */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .bots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .bot-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 2px solid var(--color-border-1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .bot-card:hover {
+            border-color: var(--color-accent-1);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .bot-card.adopted {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .bot-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .bot-name {
+            font-weight: 700;
+            color: var(--color-text);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .bot-level {
+            font-size: 0.8rem;
+            color: var(--color-accent-1);
+            margin-bottom: 8px;
+        }
+
+        .bot-winrate {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-bottom: 10px;
+        }
+
+        .bot-action-btn {
+            width: 100%;
+            padding: 6px;
+            background: var(--color-accent-1);
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .bot-action-btn:hover {
+            background: var(--color-accent-2);
+        }
+
+        .bot-action-btn.manage {
+            background: #22c55e;
+        }
+
+        /* BATTLE ARENA */
+        .battle-arena {
+            display: none;
+        }
+
+        .battle-arena.active {
+            display: block;
+        }
+
+        .battle-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--color-border-1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .battle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .battle-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .battle-timer {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .battle-matchup {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .battle-bot {
+            text-align: center;
+            padding: 15px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+        }
+
+        .battle-bot-emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .battle-bot-name {
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 5px;
+        }
+
+        .battle-bot-owner {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .battle-vs {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .battle-progress {
+            margin: 15px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--color-border-1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #818cf8, #a78bfa);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* LEADERBOARD */
+        .leaderboard {
+            display: none;
+        }
+
+        .leaderboard.active {
+            display: block;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-1);
+        }
+
+        .leaderboard-table th {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--color-accent-1);
+            font-weight: 600;
+        }
+
+        .leaderboard-table tr:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .rank {
+            font-weight: 700;
+            color: var(--color-accent-1);
+            min-width: 30px;
+        }
+
+        .rank.gold { color: #fbbf24; }
+        .rank.silver { color: #d4d4d4; }
+        .rank.bronze { color: #ea580c; }
+
+        .bot-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bot-info-emoji {
+            font-size: 1.5rem;
+        }
+
+        .bot-info-text {
+            flex: 1;
+        }
+
+        .bot-info-name {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .bot-info-owner {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .winrate {
+            text-align: center;
+        }
+
+        .winrate-value {
+            font-weight: 700;
+            color: #22c55e;
+            font-size: 1.1rem;
+        }
+
+        .winrate-trend {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* TRAINING */
+        .training {
+            display: none;
+        }
+
+        .training.active {
+            display: block;
+        }
+
+        .training-interface {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        .training-sidebar {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--color-border-1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .training-bot-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--color-border-1);
+        }
+
+        .training-bot-emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .training-bot-name {
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 5px;
+        }
+
+        .training-stats {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .training-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .training-panel {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--color-border-1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .training-section-title {
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 15px;
+        }
+
+        .training-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--color-border-1);
+            color: var(--color-text);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+
+        .training-input:focus {
+            outline: none;
+            border-color: var(--color-accent-1);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .training-button {
+            width: 100%;
+            padding: 12px;
+            background: var(--color-accent-1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .training-button:hover {
+            background: var(--color-accent-2);
+        }
+
+        .training-boost-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .boost-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--color-border-1);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .boost-card:hover {
+            border-color: var(--color-accent-1);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .boost-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--color-text);
+            margin-bottom: 5px;
+        }
+
+        .boost-price {
+            font-size: 0.8rem;
+            color: var(--color-accent-1);
+        }
+
+        /* RIGHT SIDEBAR - STATS */
+        .right-sidebar {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border-1);
+            border-radius: var(--radius-2);
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .right-sidebar h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--color-border-1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .stat-item-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+        }
+
+        .stat-item-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent-1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(30, 41, 59, 0.95);
+            border: 2px solid var(--color-border-1);
+            border-radius: var(--radius-2);
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .adopt-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .adopt-option {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--color-border-1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .adopt-option:hover {
+            border-color: var(--color-accent-1);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .adopt-emoji {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .adopt-name {
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .adopt-specialty {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--color-accent-1);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: var(--color-accent-2);
+        }
+
+        @media (max-width: 1200px) {
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar,
+            .right-sidebar {
+                position: static;
+            }
+
+            .training-interface {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <a href="../index.html" class="back-link">← Back</a>
+            <h2>BEEP Trainer</h2>
+            <button class="nav-btn active" onclick="switchPage('dashboard')">Dashboard</button>
+            <button class="nav-btn" onclick="switchPage('battles')">Battle Arena</button>
+            <button class="nav-btn" onclick="switchPage('leaderboard')">Leaderboard</button>
+            <button class="nav-btn" onclick="switchPage('training')">Training</button>
+
+            <div class="user-stats">
+                <div class="stat-row">
+                    <span class="stat-label">Bots Owned</span>
+                    <span class="stat-value" id="botsOwned">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Avg Winrate</span>
+                    <span class="stat-value" id="avgWinrate">0%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Rank</span>
+                    <span class="stat-value" id="playerRank">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Credits</span>
+                    <span class="stat-value" id="credits">500</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <h1 class="panel-title">BEEP Trainer</h1>
+
+            <!-- DASHBOARD -->
+            <div id="dashboard" class="dashboard active">
+                <h2 style="color: var(--color-text); margin-bottom: 20px;">Your Bots</h2>
+                <div class="bots-grid" id="yourBots"></div>
+
+                <h2 style="color: var(--color-text); margin-bottom: 20px; margin-top: 30px;">Wild Bots</h2>
+                <div class="bots-grid" id="wildBots"></div>
+            </div>
+
+            <!-- BATTLE ARENA -->
+            <div id="battles" class="battle-arena">
+                <h2 style="color: var(--color-text); margin-bottom: 20px;">Weekly Strategy Battles</h2>
+                <div id="battlesContainer"></div>
+            </div>
+
+            <!-- LEADERBOARD -->
+            <div id="leaderboard" class="leaderboard">
+                <h2 style="color: var(--color-text); margin-bottom: 20px;">Top Bots</h2>
+                <table class="leaderboard-table" id="leaderboardTable"></table>
+            </div>
+
+            <!-- TRAINING -->
+            <div id="training" class="training">
+                <h2 style="color: var(--color-text); margin-bottom: 20px;">Train Your Bot</h2>
+                <div class="training-interface">
+                    <div class="training-sidebar" id="trainingSidebar"></div>
+                    <div class="training-panel" id="trainingPanel"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="right-sidebar">
+            <h3>Your Stats</h3>
+            <div class="stat-item">
+                <div class="stat-item-label">Total Battles</div>
+                <div class="stat-item-value" id="totalBattles">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item-label">Wins</div>
+                <div class="stat-item-value" id="totalWins">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item-label">Best Bot</div>
+                <div class="stat-item-value" id="bestBot">--</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-item-label">Play Time</div>
+                <div class="stat-item-value" id="playTime">0h</div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ADOPT MODAL -->
+    <div id="adoptModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdoptModal()">×</button>
+            <h2 class="modal-title">Adopt a Bot</h2>
+            <div class="adopt-grid" id="adoptGrid"></div>
+            <p style="text-align: center; color: var(--color-text-muted); font-size: 0.9rem;">Cost: 50 Credits</p>
+        </div>
+    </div>
+
+    <script src="../data/beep-bots.json" type="application/json" id="botsData"></script>
+    <script>
+        // Game State
+        const gameState = {
+            user: {
+                id: 'player1',
+                name: 'Trainer',
+                credits: 500,
+                adoptedBots: [],
+                battles: [],
+                joinedAt: new Date().toISOString()
+            },
+            bots: [],
+            allBots: [],
+            battles: []
+        };
+
+        // Initialize
+        async function init() {
+            await loadBots();
+            renderDashboard();
+            updateStats();
+            generateBattles();
+        }
+
+        async function loadBots() {
+            // Fetch bots from our JSON
+            const response = await fetch('../data/beep-bots.json');
+            gameState.allBots = await response.json();
+
+            // Initialize with stats
+            gameState.allBots.forEach(bot => {
+                bot.level = Math.floor(Math.random() * 20) + 1;
+                bot.wins = Math.floor(Math.random() * 50) + 10;
+                bot.losses = Math.floor(Math.random() * 40) + 5;
+                bot.winrate = Math.round((bot.wins / (bot.wins + bot.losses)) * 100);
+                bot.trainingKnowledge = [];
+                bot.isAdopted = false;
+                bot.adoptedBy = null;
+            });
+
+            // Give player 2 random bots to start
+            const startingBots = gameState.allBots.sort(() => Math.random() - 0.5).slice(0, 2);
+            startingBots.forEach(bot => {
+                bot.isAdopted = true;
+                bot.adoptedBy = 'player1';
+                gameState.user.adoptedBots.push(bot.id);
+            });
+        }
+
+        function renderDashboard() {
+            const yourBots = gameState.allBots.filter(b => b.isAdopted && b.adoptedBy === 'player1');
+            const wildBots = gameState.allBots.filter(b => !b.isAdopted);
+
+            document.getElementById('yourBots').innerHTML = yourBots.map(bot => `
+                <div class="bot-card adopted" onclick="selectBotForTraining('${bot.id}')">
+                    <span class="bot-emoji">${bot.avatar}</span>
+                    <div class="bot-name">${bot.name}</div>
+                    <div class="bot-level">Level ${bot.level}</div>
+                    <div class="bot-winrate">${bot.winrate}% WR</div>
+                    <button class="bot-action-btn manage">Manage</button>
+                </div>
+            `).join('');
+
+            document.getElementById('wildBots').innerHTML = wildBots.slice(0, 12).map(bot => `
+                <div class="bot-card" onclick="openAdoptModal('${bot.id}')">
+                    <span class="bot-emoji">${bot.avatar}</span>
+                    <div class="bot-name">${bot.name}</div>
+                    <div class="bot-level">Level ${bot.level}</div>
+                    <div class="bot-winrate">${bot.winrate}% WR</div>
+                    <button class="bot-action-btn">Adopt</button>
+                </div>
+            `).join('');
+        }
+
+        function renderBattles() {
+            const battles = generateBattles().slice(0, 5);
+            document.getElementById('battlesContainer').innerHTML = battles.map((battle, i) => {
+                const progress = battle.bot1Score / (battle.bot1Score + battle.bot2Score) * 100;
+                const timeRemaining = Math.floor(Math.random() * 7) + 1;
+
+                return `
+                    <div class="battle-card">
+                        <div class="battle-header">
+                            <div class="battle-title">${battle.name}</div>
+                            <div class="battle-timer">${timeRemaining} days remaining</div>
+                        </div>
+
+                        <div class="battle-matchup">
+                            <div class="battle-bot">
+                                <div class="battle-bot-emoji">${battle.bot1.avatar}</div>
+                                <div class="battle-bot-name">${battle.bot1.name}</div>
+                                <div class="battle-bot-owner">${battle.bot1.adoptedBy === 'player1' ? 'Your Bot' : 'AI Bot'}</div>
+                            </div>
+                            <div class="battle-vs">vs</div>
+                            <div class="battle-bot">
+                                <div class="battle-bot-emoji">${battle.bot2.avatar}</div>
+                                <div class="battle-bot-name">${battle.bot2.name}</div>
+                                <div class="battle-bot-owner">${battle.bot2.adoptedBy === 'player1' ? 'Your Bot' : 'AI Bot'}</div>
+                            </div>
+                        </div>
+
+                        <div class="battle-progress">
+                            <div class="progress-label">
+                                <span>${battle.bot1.name}</span>
+                                <span>${battle.bot1.adoptedBy === 'player1' ? '⭐ Your Bot' : ''}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%">${battle.bot1Score}</div>
+                            </div>
+                            <div class="progress-label" style="margin-top: 10px;">
+                                <span>${battle.bot2.name}</span>
+                                <span>${battle.bot2.adoptedBy === 'player1' ? '⭐ Your Bot' : ''}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${100 - progress}%">${battle.bot2Score}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderLeaderboard() {
+            const sorted = [...gameState.allBots].sort((a, b) => b.winrate - a.winrate).slice(0, 20);
+
+            document.getElementById('leaderboardTable').innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Bot</th>
+                        <th style="text-align: center;">Winrate</th>
+                        <th style="text-align: center;">Record</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${sorted.map((bot, i) => `
+                        <tr>
+                            <td>
+                                <span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">
+                                    #${i + 1}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="bot-info">
+                                    <div class="bot-info-emoji">${bot.avatar}</div>
+                                    <div class="bot-info-text">
+                                        <div class="bot-info-name">${bot.name}</div>
+                                        <div class="bot-info-owner">${bot.adoptedBy === 'player1' ? '👤 Your Bot' : '🤖 Wild'}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="winrate">
+                                    <div class="winrate-value">${bot.winrate}%</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="winrate">
+                                    <div class="winrate-value">${bot.wins}W-${bot.losses}L</div>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+        }
+
+        function generateBattles() {
+            const battles = [];
+            const strategies = [
+                'Trend-Following vs Mean-Reversion',
+                'Aggressive Growth vs Conservative',
+                'Cloud Infrastructure Showdown',
+                'DevOps Tool Battle',
+                'AI Model Comparison'
+            ];
+
+            for (let i = 0; i < 5; i++) {
+                const bot1 = gameState.allBots[Math.floor(Math.random() * gameState.allBots.length)];
+                const bot2 = gameState.allBots[Math.floor(Math.random() * gameState.allBots.length)];
+
+                if (bot1.id !== bot2.id) {
+                    battles.push({
+                        id: `battle-${i}`,
+                        name: strategies[i],
+                        bot1,
+                        bot2,
+                        bot1Score: Math.floor(Math.random() * 100) + 50,
+                        bot2Score: Math.floor(Math.random() * 100) + 50,
+                        startDate: new Date(Date.now() - Math.random() * 86400000 * 7),
+                        endDate: new Date(Date.now() + Math.random() * 86400000 * 7)
+                    });
+                }
+            }
+
+            gameState.battles = battles;
+            return battles;
+        }
+
+        function updateStats() {
+            const yourBots = gameState.allBots.filter(b => b.isAdopted && b.adoptedBy === 'player1');
+            const avgWinrate = yourBots.length > 0
+                ? Math.round(yourBots.reduce((sum, b) => sum + b.winrate, 0) / yourBots.length)
+                : 0;
+
+            document.getElementById('botsOwned').textContent = yourBots.length;
+            document.getElementById('avgWinrate').textContent = avgWinrate + '%';
+            document.getElementById('credits').textContent = gameState.user.credits;
+
+            // Right sidebar
+            const totalBattles = yourBots.reduce((sum, b) => sum + b.wins + b.losses, 0);
+            const totalWins = yourBots.reduce((sum, b) => sum + b.wins, 0);
+            const bestBot = yourBots.length > 0 ? yourBots.sort((a, b) => b.winrate - a.winrate)[0] : null;
+
+            document.getElementById('totalBattles').textContent = totalBattles;
+            document.getElementById('totalWins').textContent = totalWins;
+            document.getElementById('bestBot').textContent = bestBot ? bestBot.name : '--';
+        }
+
+        function selectBotForTraining(botId) {
+            const bot = gameState.allBots.find(b => b.id === botId);
+            if (!bot) return;
+
+            switchPage('training');
+
+            document.getElementById('trainingSidebar').innerHTML = `
+                <div class="training-bot-info">
+                    <div class="training-bot-emoji">${bot.avatar}</div>
+                    <div class="training-bot-name">${bot.name}</div>
+                    <div class="training-stats">
+                        <div class="training-stat">
+                            <span>Level</span>
+                            <span>${bot.level}</span>
+                        </div>
+                        <div class="training-stat">
+                            <span>Winrate</span>
+                            <span>${bot.winrate}%</span>
+                        </div>
+                        <div class="training-stat">
+                            <span>Record</span>
+                            <span>${bot.wins}W-${bot.losses}L</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('trainingPanel').innerHTML = `
+                <div class="training-section-title">Feed Knowledge</div>
+                <textarea class="training-input" id="knowledgeInput" placeholder="Teach this bot something...&#10;Example: Focus on detecting volatility spikes in trending markets" rows="6"></textarea>
+                <button class="training-button" onclick="trainBot('${botId}')">✓ Teach Bot</button>
+
+                <div style="margin-top: 25px;">
+                    <div class="training-section-title">Boosts</div>
+                    <div class="training-boost-grid">
+                        <div class="boost-card" onclick="purchaseBoost('${botId}', 'knowledge')">
+                            <div class="boost-name">📚 Knowledge +1</div>
+                            <div class="boost-price">50 Credits</div>
+                        </div>
+                        <div class="boost-card" onclick="purchaseBoost('${botId}', 'edge')">
+                            <div class="boost-name">⚡ Edge Detection</div>
+                            <div class="boost-price">75 Credits</div>
+                        </div>
+                        <div class="boost-card" onclick="purchaseBoost('${botId}', 'accuracy')">
+                            <div class="boost-name">🎯 +5% Accuracy</div>
+                            <div class="boost-price">100 Credits</div>
+                        </div>
+                        <div class="boost-card" onclick="purchaseBoost('${botId}', 'speed')">
+                            <div class="boost-name">⏱️ Decision Speed</div>
+                            <div class="boost-price">60 Credits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px; padding: 15px; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                    <div style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 10px;">
+                        <strong>Training Tips:</strong>
+                    </div>
+                    <ul style="color: var(--color-text-muted); font-size: 0.8rem; margin: 0; padding-left: 20px;">
+                        <li>Teach specific strategies for better results</li>
+                        <li>Knowledge compounds - train regularly</li>
+                        <li>Boosts activate before next battle</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function trainBot(botId) {
+            const knowledge = document.getElementById('knowledgeInput').value.trim();
+            if (!knowledge) return;
+
+            const bot = gameState.allBots.find(b => b.id === botId);
+            bot.trainingKnowledge.push({
+                text: knowledge,
+                timestamp: new Date().toISOString()
+            });
+
+            // Slight improvement to winrate
+            bot.winrate = Math.min(100, bot.winrate + 2);
+            bot.level += 1;
+
+            document.getElementById('knowledgeInput').value = '';
+            alert(`${bot.name} learned something new! Level up to ${bot.level}!`);
+            updateStats();
+        }
+
+        function purchaseBoost(botId, boostType) {
+            const costs = { knowledge: 50, edge: 75, accuracy: 100, speed: 60 };
+            const cost = costs[boostType];
+
+            if (gameState.user.credits < cost) {
+                alert('Not enough credits!');
+                return;
+            }
+
+            gameState.user.credits -= cost;
+            const bot = gameState.allBots.find(b => b.id === botId);
+
+            // Apply boost
+            switch(boostType) {
+                case 'accuracy':
+                    bot.winrate = Math.min(100, bot.winrate + 5);
+                    break;
+                case 'knowledge':
+                    bot.level += 1;
+                    break;
+                case 'edge':
+                    bot.wins += 5;
+                    bot.winrate = Math.round((bot.wins / (bot.wins + bot.losses)) * 100);
+                    break;
+                case 'speed':
+                    bot.level += 0.5;
+                    break;
+            }
+
+            updateStats();
+            alert('Boost applied!');
+            selectBotForTraining(botId);
+        }
+
+        function openAdoptModal(botId) {
+            const modal = document.getElementById('adoptModal');
+            const bot = gameState.allBots.find(b => b.id === botId);
+
+            if (gameState.user.credits < 50) {
+                alert('Need 50 credits to adopt. Not enough!');
+                return;
+            }
+
+            modal.classList.add('active');
+            document.getElementById('adoptGrid').innerHTML = `
+                <div class="adopt-option" onclick="confirmAdopt('${botId}')">
+                    <div class="adopt-emoji">${bot.avatar}</div>
+                    <div class="adopt-name">${bot.name}</div>
+                    <div class="adopt-specialty">${bot.specialty}</div>
+                </div>
+            `;
+        }
+
+        function confirmAdopt(botId) {
+            const bot = gameState.allBots.find(b => b.id === botId);
+            if (!bot || gameState.user.credits < 50) return;
+
+            bot.isAdopted = true;
+            bot.adoptedBy = 'player1';
+            gameState.user.credits -= 50;
+            gameState.user.adoptedBots.push(botId);
+
+            closeAdoptModal();
+            renderDashboard();
+            updateStats();
+            alert(`Welcome ${bot.name} to your team! 🎉`);
+        }
+
+        function closeAdoptModal() {
+            document.getElementById('adoptModal').classList.remove('active');
+        }
+
+        function switchPage(page) {
+            // Hide all pages
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('battles').classList.remove('active');
+            document.getElementById('leaderboard').classList.remove('active');
+            document.getElementById('training').classList.remove('active');
+
+            // Remove active from nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Show selected page
+            switch(page) {
+                case 'dashboard':
+                    document.getElementById('dashboard').classList.add('active');
+                    document.querySelectorAll('.nav-btn')[0].classList.add('active');
+                    renderDashboard();
+                    break;
+                case 'battles':
+                    document.getElementById('battles').classList.add('active');
+                    document.querySelectorAll('.nav-btn')[1].classList.add('active');
+                    renderBattles();
+                    break;
+                case 'leaderboard':
+                    document.getElementById('leaderboard').classList.add('active');
+                    document.querySelectorAll('.nav-btn')[2].classList.add('active');
+                    renderLeaderboard();
+                    break;
+                case 'training':
+                    document.getElementById('training').classList.add('active');
+                    document.querySelectorAll('.nav-btn')[3].classList.add('active');
+                    const yourBots = gameState.allBots.filter(b => b.isAdopted && b.adoptedBy === 'player1');
+                    if (yourBots.length > 0) {
+                        selectBotForTraining(yourBots[0].id);
+                    }
+                    break;
+            }
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
