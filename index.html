@@ -449,6 +449,82 @@
             color: var(--color-text);
         }
 
+        /* Simple List Styles */
+        .simple-list {
+            list-style: none;
+        }
+
+        .simple-list li {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .simple-list a {
+            display: block;
+            padding: var(--spacing-md);
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.2s ease;
+        }
+
+        .simple-list a:hover {
+            border-color: var(--color-border);
+            background: var(--color-card-bg);
+            transform: translateY(-1px);
+        }
+
+        .simple-list a:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .simple-list-title {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .simple-list-desc {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+        }
+
+        /* Collapsible Sections */
+        .panel-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .panel-header::after {
+            content: '▼';
+            display: inline-block;
+            transition: transform 0.2s ease;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-left: var(--spacing-md);
+            flex-shrink: 0;
+        }
+
+        .panel.collapsed .panel-header::after {
+            transform: rotate(-90deg);
+        }
+
+        .panel-content {
+            max-height: 10000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .panel.collapsed .panel-content {
+            max-height: 0;
+            opacity: 0;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .menu-toggle {
@@ -580,15 +656,6 @@
                             <li class="nav-item">
                                 <a href="experiments/base-studio/" class="nav-link">BASE Studio (experimental)</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="subpages/p2g4w-ue5-guide.html" class="nav-link">P2G4W UE5 Guide</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/cppd1.html" class="nav-link">CPPd1 / P2G4W Project</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/beep.html" class="nav-link">BEEP (experimental)</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="nav-section">
@@ -644,170 +711,162 @@
 
                     <section class="panel">
                         <div class="panel-header">
-                            <h2 class="panel-title">Game</h2>
-                            <p class="panel-description">Game development projects and prototypes</p>
+                            <h2 class="panel-title">Game Prototypes</h2>
+                            <p class="panel-description">Active game development and browser prototypes</p>
                         </div>
                         <div class="link-grid">
                             <a href="games/ninja-game/index.html" class="link-card">
                                 <div class="link-card-title">Ninja Game</div>
                                 <div class="link-card-url">Browser prototype - double jump, flips, roll, cube ninja</div>
                             </a>
-                            <a href="projects/cppd1-multiplayer/public/index.html" class="link-card">
-                                <div class="link-card-title">CPPd1 Multiplayer</div>
-                                <div class="link-card-url">Shared world multiplayer prototype</div>
-                            </a>
                         </div>
                     </section>
 
                     <section class="panel">
                         <div class="panel-header">
-                            <h2 class="panel-title">P2G4W – Active Game Dev</h2>
-                            <p class="panel-description">2-player game for wife: scripts, GDD, and copy-paste guide for UE5</p>
+                            <h2 class="panel-title">AGSawdust – Unfinished Projects</h2>
+                            <p class="panel-description">CPPd1 / P2G4W and experimental work</p>
                         </div>
-                        <div class="link-grid">
-                            <a href="subpages/cppd1.html" class="link-card">
-                                <div class="link-card-title">CPPd1 Project Hub</div>
-                                <div class="link-card-url">GDD, guides, ninja, marauders, workflow, setup</div>
-                            </a>
-                            <a href="subpages/p2g4w-ue5-guide.html" class="link-card">
-                                <div class="link-card-title">UE5 Scripts Guide</div>
-                                <div class="link-card-url">Update scripts in Cursor → copy into UE5 (for junior dev)</div>
-                            </a>
-                            <a href="subpages/gdd.html" class="link-card">
-                                <div class="link-card-title">Game Design Document</div>
-                                <div class="link-card-url">P2G4W GDD – mechanics, 2P, scope</div>
-                            </a>
+                        <ul class="simple-list">
+                            <li>
+                                <a href="subpages/cppd1.html">
+                                    <div class="simple-list-title">CPPd1 Project Hub</div>
+                                    <div class="simple-list-desc">All guides, GDD, ninja setup, marauders, workflow, C++ reference</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="subpages/gdd.html">
+                                    <div class="simple-list-title">Game Design Document</div>
+                                    <div class="simple-list-desc">P2G4W mechanics, 2-player design, scope</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="subpages/p2g4w-ue5-guide.html">
+                                    <div class="simple-list-title">UE5 Scripts Guide</div>
+                                    <div class="simple-list-desc">How to update scripts in Cursor and copy into UE5</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="projects/cppd1-multiplayer/public/index.html">
+                                    <div class="simple-list-title">CPPd1 Multiplayer Prototype</div>
+                                    <div class="simple-list-desc">Shared world multiplayer test</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="panel collapsed">
+                        <div class="panel-header">
+                            <div>
+                                <h2 class="panel-title">Deployed Apps</h2>
+                                <p class="panel-description">Netlify and Render hosted projects</p>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div style="margin-top: var(--spacing-md);">
+                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Netlify</h3>
+                                <div class="link-grid">
+                                    <a href="https://ag-film.netlify.app/" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Film</div>
+                                        <div class="link-card-url">ag-film.netlify.app</div>
+                                    </a>
+                                    <a href="https://agpo.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Pecans</div>
+                                        <div class="link-card-url">agpo.netlify.app</div>
+                                    </a>
+                                    <a href="https://agscout.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Land Scout</div>
+                                        <div class="link-card-url">agscout.netlify.app</div>
+                                    </a>
+                                    <a href="https://barnbarn.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Barnacle</div>
+                                        <div class="link-card-url">barnbarn.netlify.app</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="margin-top: var(--spacing-lg);">
+                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Render</h3>
+                                <div class="link-grid">
+                                    <a href="https://app.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Ahoy Platform</div>
+                                        <div class="link-card-url">app.ahoy.ooo</div>
+                                    </a>
+                                    <a href="https://newhaven.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Ahoy New Haven</div>
+                                        <div class="link-card-url">newhaven.ahoy.ooo</div>
+                                    </a>
+                                    <a href="https://pathr.onrender.com/" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Pathr</div>
+                                        <div class="link-card-url">pathr.onrender.com</div>
+                                    </a>
+                                    <a href="https://cpc-web-app.onrender.com/" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">CPC Web App</div>
+                                        <div class="link-card-url">cpc-web-app.onrender.com</div>
+                                    </a>
+                                    <a href="https://phoenix-pne7.onrender.com/" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Phoenix (Bot Editor)</div>
+                                        <div class="link-card-url">phoenix-pne7.onrender.com</div>
+                                    </a>
+                                    <a href="https://elm-7t8e.onrender.com" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Elm City Daily</div>
+                                        <div class="link-card-url">elm-7t8e.onrender.com</div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
-                    <section class="panel">
+                    <section class="panel collapsed">
                         <div class="panel-header">
-                            <h2 class="panel-title">Active Netlify Projects</h2>
-                            <p class="panel-description">Deployed projects on Netlify</p>
+                            <div>
+                                <h2 class="panel-title">Reference & Admin</h2>
+                                <p class="panel-description">Teaching, portfolio, maintained sites, guides</p>
+                            </div>
                         </div>
-                        <div class="link-grid">
-                            <a href="https://ag-film.netlify.app/" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Film</div>
-                                <div class="link-card-url">ag-film.netlify.app</div>
-                            </a>
-                            <a href="https://agpo.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Pecans</div>
-                                <div class="link-card-url">agpo.netlify.app</div>
-                            </a>
-                            <a href="https://agscout.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Land Scout</div>
-                                <div class="link-card-url">agscout.netlify.app</div>
-                            </a>
-                            <a href="https://barnbarn.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Barnacle</div>
-                                <div class="link-card-url">barnbarn.netlify.app</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Render Apps</h2>
-                            <p class="panel-description">Applications hosted on Render</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="https://app.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Ahoy Platform</div>
-                                <div class="link-card-url">app.ahoy.ooo</div>
-                            </a>
-                            <a href="https://newhaven.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Ahoy New Haven</div>
-                                <div class="link-card-url">newhaven.ahoy.ooo</div>
-                            </a>
-                            <a href="https://pathr.onrender.com/" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Pathr</div>
-                                <div class="link-card-url">pathr.onrender.com</div>
-                            </a>
-                            <a href="https://cpc-web-app.onrender.com/" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">CPC Web App</div>
-                                <div class="link-card-url">cpc-web-app.onrender.com</div>
-                            </a>
-                            <a href="https://phoenix-pne7.onrender.com/" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Phoenix (Bot Editor)</div>
-                                <div class="link-card-url">phoenix-pne7.onrender.com</div>
-                            </a>
-                            <a href="https://elm-7t8e.onrender.com" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Elm City Daily</div>
-                                <div class="link-card-url">elm-7t8e.onrender.com</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Teaching</h2>
-                            <p class="panel-description">Educational resources and materials</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="https://mrg-stem.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">MRG STEM</div>
-                                <div class="link-card-url">mrg-stem.netlify.app</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Public Portfolio</h2>
-                            <p class="panel-description">Public-facing portfolio and work</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="https://alexgonzalez.ooo" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">alexgonzalez.ooo</div>
-                                <div class="link-card-url">alexgonzalez.ooo</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Websites I Maintain</h2>
-                            <p class="panel-description">Sites under active maintenance</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="https://cpcnewhaven.org" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">CPC</div>
-                                <div class="link-card-url">cpcnewhaven.org</div>
-                            </a>
-                            <a href="https://ape-market.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Firebird (Ape Redesign)</div>
-                                <div class="link-card-url">ape-market.netlify.app</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Professional Projects</h2>
-                            <p class="panel-description">Professional development projects</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="https://github.com/oooAHOYooo/aracastone" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">ArcaStone</div>
-                                <div class="link-card-url">github.com/oooAHOYooo/aracastone</div>
-                            </a>
-                            <a href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Zuki</div>
-                                <div class="link-card-url">alexgonzalez.ooo/portfolio/zuki</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Misc Projects</h2>
-                            <p class="panel-description">Miscellaneous guides, side-projects, and references</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="projects/retropie-n64-guide.md" class="link-card">
-                                <div class="link-card-title">RetroPie N64 Guide</div>
-                                <div class="link-card-url">Step-by-step setup for Raspberry Pi 5</div>
-                            </a>
+                        <div class="panel-content">
+                            <div style="margin-bottom: var(--spacing-lg);">
+                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Portfolio & Teaching</h3>
+                                <div class="link-grid">
+                                    <a href="https://alexgonzalez.ooo" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">alexgonzalez.ooo</div>
+                                        <div class="link-card-url">Public portfolio</div>
+                                    </a>
+                                    <a href="https://mrg-stem.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">MRG STEM</div>
+                                        <div class="link-card-url">Educational resources</div>
+                                    </a>
+                                    <a href="https://github.com/oooAHOYooo/aracastone" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">ArcaStone</div>
+                                        <div class="link-card-url">github.com/oooAHOYooo/aracastone</div>
+                                    </a>
+                                    <a href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Zuki</div>
+                                        <div class="link-card-url">Portfolio project</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: var(--spacing-lg);">
+                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Active Maintenance</h3>
+                                <div class="link-grid">
+                                    <a href="https://cpcnewhaven.org" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">CPC</div>
+                                        <div class="link-card-url">cpcnewhaven.org</div>
+                                    </a>
+                                    <a href="https://ape-market.netlify.app" target="_blank" rel="noopener" class="link-card">
+                                        <div class="link-card-title">Firebird (Ape Redesign)</div>
+                                        <div class="link-card-url">ape-market.netlify.app</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Guides</h3>
+                                <div class="link-grid">
+                                    <a href="projects/retropie-n64-guide.md" class="link-card">
+                                        <div class="link-card-title">RetroPie N64 Guide</div>
+                                        <div class="link-card-url">Step-by-step Raspberry Pi 5 setup</div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
@@ -1010,6 +1069,24 @@
 
         // App initialization
         function initApp() {
+            // Collapsible sections
+            document.querySelectorAll('.panel-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const panel = this.closest('.panel');
+                    panel.classList.toggle('collapsed');
+                    localStorage.setItem('panel_' + panel.querySelector('.panel-title').textContent, panel.classList.contains('collapsed'));
+                });
+            });
+
+            // Restore collapsed state from localStorage
+            document.querySelectorAll('.panel').forEach(panel => {
+                const title = panel.querySelector('.panel-title')?.textContent;
+                const isCollapsed = localStorage.getItem('panel_' + title) === 'true';
+                if (isCollapsed) {
+                    panel.classList.add('collapsed');
+                }
+            });
+
             // Time display (updates every second)
             function updateTime() {
                 const timeElement = document.getElementById('currentTime');
