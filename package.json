@@ -7,7 +7,8 @@
     "compile": "node compile-all.js",
     "sync-ue5": "node data/games/suggested-scripts/ue5/sync-to-ue.js",
     "build-cppd1": "node projects/CPPd1/Scripts/build-cppd1.js",
-    "watch-cppd1": "node projects/CPPd1/Scripts/watch-and-build.js"
+    "watch-cppd1": "node projects/CPPd1/Scripts/watch-and-build.js",
+    "life": "node cli/life.js"
   },
   "dependencies": {
     "marked": "^15.0.4"

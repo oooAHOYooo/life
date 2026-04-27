@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git *)",
+      "Bash(python3 -c 'import json,sys; d=json.load\\(open\\('\\\\''__TRACKED_VAR__'\\\\''\\)\\); t=type\\(d\\).__name__; keys=list\\(d.keys\\(\\)\\) if isinstance\\(d,dict\\) else None; print\\('\\\\''type:'\\\\'',t,'\\\\''keys:'\\\\'',keys,'\\\\''len:'\\\\'',len\\(d\\)\\); sample=d[list\\(d.keys\\(\\)\\)[0]] if isinstance\\(d,dict\\) else d[0] if isinstance\\(d,list\\) and len\\(d\\)>0 else None; print\\('\\\\''sample:'\\\\'',json.dumps\\(sample,indent=2\\)[:600]\\)')",
+      "Bash(python3 *)",
+      "Bash(chmod +x *)",
+      "Bash(node *)"
     ]
   }
 }
