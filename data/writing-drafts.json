@@ -89,5 +89,31 @@
     "status": "Drafting",
     "notes": "A story about the mayoral race and Gonzalez's campaign",
     "tags": ["fiction", "the-havens", "politics"]
+  },
+  {
+    "id": "journal-2026-05-04",
+    "title": "Journal - May 4, 2026 (Tello)",
+    "projectId": "personal-journal",
+    "version": "1.0",
+    "fileType": "md",
+    "filePath": "data/journal/2026-05-04-tello.md",
+    "wordCount": 0,
+    "lastModified": "2026-05-04",
+    "status": "Drafting",
+    "notes": "Processing feelings about Tello.",
+    "tags": ["journal", "tello", "personal"]
+  },
+  {
+    "id": "tello-bio-pic-outline",
+    "title": "Tello: A Bio Pic - Outline",
+    "projectId": "tello-bio-pic",
+    "version": "1.0",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/tello-bio-pic/outline-v1.md",
+    "wordCount": 0,
+    "lastModified": "2026-05-04",
+    "status": "Planning",
+    "notes": "Initial brainstorming for the bio pic.",
+    "tags": ["screenplay", "tello", "biography"]
   }
 ]

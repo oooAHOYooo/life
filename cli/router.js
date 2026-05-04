@@ -70,6 +70,7 @@ const handlers = {
   movies:      require('./commands/movies'),
   decisions:   require('./commands/decisions'),
   beep:        require('./commands/beep'),
+  journal:     require('./commands/journal'),
 }
 
 function dispatch(resource, subResource, action, flags) {

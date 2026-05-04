@@ -48,5 +48,25 @@
     "lastUpdated": "2025-11-04",
     "notes": "Collection of stories set in the Havens.",
     "filePath": "the-havens/"
+  },
+  {
+    "title": "Personal Journal",
+    "description": "A daily log of thoughts, feelings, and events.",
+    "category": "Journaling",
+    "status": "In Progress",
+    "wordCount": "0",
+    "lastUpdated": "2026-05-04",
+    "notes": "Used for processing emotions and daily reflections.",
+    "filePath": "data/journal/"
+  },
+  {
+    "title": "Tello: A Bio Pic",
+    "description": "A biographical project honoring the life and memory of Tello.",
+    "category": "Screenplay",
+    "status": "Planning",
+    "wordCount": "0",
+    "lastUpdated": "2026-05-04",
+    "notes": "Commemorating Tello's life.",
+    "filePath": "data/writing-drafts/tello-bio-pic/"
   }
 ]

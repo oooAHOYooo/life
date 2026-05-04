@@ -610,7 +610,7 @@
         <header class="topbar">
             <div class="topbar-brand">
                 <h1>Personal Hub</h1>
-                <span class="subtitle">LifeOS</span>
+                <span class="subtitle">LifeOS <span style="opacity: 0.5; margin-left: 8px;">v1.0.0</span></span>
             </div>
             <div class="topbar-actions">
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
@@ -618,7 +618,7 @@
                     <div class="weather-time" id="currentTime"></div>
                     <div class="weather-temp" id="currentTemp">--°F</div>
                 </div>
-                <div class="topbar-date" id="currentDate"></div>
+                <div class="topbar-date" id="currentDate">Monday, May 4, 2026</div>
                 <span class="status-pill" id="statusPill">Unlocked</span>
                 <a href="subpages/job-search.html" class="topbar-button" style="font-weight:600; border-color:#5a4a3a;">Mission</a>
                 <a href="subpages/2026.html" class="topbar-button">2026</a>
@@ -630,7 +630,21 @@
             <aside class="sidebar" id="sidebar">
                 <nav class="sidebar-nav" aria-label="Main navigation">
                     <div class="nav-section">
-                        <div class="nav-section-title">Primary</div>
+                        <div class="nav-section-title">This Month</div>
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="data/journal/2026-05-04-tello.md" class="nav-link" style="color: #8b4513; font-weight: 500;">May 4: Tello Journal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#networking" class="nav-link">Networking Log</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#events" class="nav-link">Upcoming Events</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-section">
+                        <div class="nav-section-title">Systems</div>
                         <ul class="nav-list">
                             <li class="nav-item">
                                 <a href="subpages/bookmarks.html" class="nav-link">Bookmarks</a>
@@ -647,40 +661,16 @@
                             <li class="nav-item">
                                 <a href="subpages/writing.html" class="nav-link">Writing</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="subpages/project-sitemap.html" class="nav-link">Project Sitemap</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/stats.html" class="nav-link">Statistics</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="experiments/base-studio/" class="nav-link">BASE Studio (experimental)</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="nav-section">
-                        <div class="nav-section-title">Quick</div>
+                        <div class="nav-section-title">Personal Admin</div>
                         <ul class="nav-list">
                             <li class="nav-item">
-                                <a href="subpages/quick-access.html" class="nav-link">Quick Access</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/reminders.html" class="nav-link">Reminders & Upkeep</a>
+                                <a href="subpages/reminders.html" class="nav-link">Reminders</a>
                             </li>
                             <li class="nav-item">
                                 <a href="subpages/expenses.html" class="nav-link">Expenses</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/2026.html" class="nav-link">2026</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/xmas-break.html" class="nav-link">Christmas Break</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="subpages/last-before-break.html" class="nav-link">Last Before Break</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://ag-film.netlify.app/pages/summer/storybook" target="_blank" class="nav-link">Creatures Storybook</a>
                             </li>
                             <li class="nav-item">
                                 <a href="subpages/bills.html" class="nav-link">Bills</a>
@@ -692,213 +682,179 @@
 
             <main class="main-content">
                 <div class="main-inner">
-                    <section class="panel" style="border-color:#5a4a3a; border-width:3px; background:#faf8f3;">
-                        <div class="panel-header">
-                            <h2 class="panel-title" style="font-size:18px;">Job Search Mission</h2>
-                            <p class="panel-description">4 months to land a $85k–$115k Leadership/Coordinator role. Daily checklists, target roles, roadmap.</p>
+                    <!-- MAY 2026 SNAPSHOT -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--spacing-xl);">
+                        <div>
+                            <h2 style="font-size: var(--font-size-2xl); font-weight: 700;">May 2026</h2>
+                            <p style="color: var(--color-text-muted);">The month of transition, reflection, and stabilization.</p>
                         </div>
-                        <div class="link-grid">
-                            <a href="subpages/job-search.html" class="link-card" style="border-color:#5a4a3a; font-weight:600;">
-                                <div class="link-card-title">Open Mission Dashboard</div>
-                                <div class="link-card-url">Daily checklists, targets, roadmap, pitch</div>
-                            </a>
-                            <a href="subpages/jobs.html" class="link-card">
-                                <div class="link-card-title">Job Tracker</div>
-                                <div class="link-card-url">Active applications & leads</div>
-                            </a>
+                        <div style="text-align: right;">
+                            <span class="status-pill" style="background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7;">v1.1.0-beta</span>
                         </div>
-                    </section>
+                    </div>
 
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Game Prototypes</h2>
-                            <p class="panel-description">Active game development and browser prototypes</p>
-                        </div>
-                        <div class="link-grid">
-                            <a href="games/ninja-game/index.html" class="link-card">
-                                <div class="link-card-title">Ninja Game</div>
-                                <div class="link-card-url">Browser prototype - double jump, flips, roll, cube ninja</div>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">AGSawdust – Unfinished Projects</h2>
-                            <p class="panel-description">CPPd1 / P2G4W and experimental work</p>
-                        </div>
-                        <ul class="simple-list">
-                            <li>
-                                <a href="subpages/cppd1.html">
-                                    <div class="simple-list-title">CPPd1 Project Hub</div>
-                                    <div class="simple-list-desc">All guides, GDD, ninja setup, marauders, workflow, C++ reference</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="subpages/gdd.html">
-                                    <div class="simple-list-title">Game Design Document</div>
-                                    <div class="simple-list-desc">P2G4W mechanics, 2-player design, scope</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="subpages/p2g4w-ue5-guide.html">
-                                    <div class="simple-list-title">UE5 Scripts Guide</div>
-                                    <div class="simple-list-desc">How to update scripts in Cursor and copy into UE5</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="projects/cppd1-multiplayer/public/index.html">
-                                    <div class="simple-list-title">CPPd1 Multiplayer Prototype</div>
-                                    <div class="simple-list-desc">Shared world multiplayer test</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section class="panel collapsed">
+                    <!-- Journal & Tello Memorial -->
+                    <section class="panel" style="border-color:#8b4513; border-width:3px; background:#fffcf5;">
                         <div class="panel-header">
                             <div>
-                                <h2 class="panel-title">Deployed Apps</h2>
-                                <p class="panel-description">Netlify and Render hosted projects</p>
+                                <h2 class="panel-title" style="font-size:18px; color: #8b4513;">Journal & Reflections</h2>
+                                <p class="panel-description">Processing Tello's loss and May's momentum.</p>
                             </div>
-                        </div>
-                        <div class="panel-content">
-                            <div style="margin-top: var(--spacing-md);">
-                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Netlify</h3>
-                                <div class="link-grid">
-                                    <a href="https://ag-film.netlify.app/" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Film</div>
-                                        <div class="link-card-url">ag-film.netlify.app</div>
-                                    </a>
-                                    <a href="https://agpo.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Pecans</div>
-                                        <div class="link-card-url">agpo.netlify.app</div>
-                                    </a>
-                                    <a href="https://agscout.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Land Scout</div>
-                                        <div class="link-card-url">agscout.netlify.app</div>
-                                    </a>
-                                    <a href="https://barnbarn.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Barnacle</div>
-                                        <div class="link-card-url">barnbarn.netlify.app</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div style="margin-top: var(--spacing-lg);">
-                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Render</h3>
-                                <div class="link-grid">
-                                    <a href="https://app.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Ahoy Platform</div>
-                                        <div class="link-card-url">app.ahoy.ooo</div>
-                                    </a>
-                                    <a href="https://newhaven.ahoy.ooo" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Ahoy New Haven</div>
-                                        <div class="link-card-url">newhaven.ahoy.ooo</div>
-                                    </a>
-                                    <a href="https://pathr.onrender.com/" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Pathr</div>
-                                        <div class="link-card-url">pathr.onrender.com</div>
-                                    </a>
-                                    <a href="https://cpc-web-app.onrender.com/" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">CPC Web App</div>
-                                        <div class="link-card-url">cpc-web-app.onrender.com</div>
-                                    </a>
-                                    <a href="https://phoenix-pne7.onrender.com/" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Phoenix (Bot Editor)</div>
-                                        <div class="link-card-url">phoenix-pne7.onrender.com</div>
-                                    </a>
-                                    <a href="https://elm-7t8e.onrender.com" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Elm City Daily</div>
-                                        <div class="link-card-url">elm-7t8e.onrender.com</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="panel collapsed">
-                        <div class="panel-header">
-                            <div>
-                                <h2 class="panel-title">Reference & Admin</h2>
-                                <p class="panel-description">Teaching, portfolio, maintained sites, guides</p>
-                            </div>
-                        </div>
-                        <div class="panel-content">
-                            <div style="margin-bottom: var(--spacing-lg);">
-                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Portfolio & Teaching</h3>
-                                <div class="link-grid">
-                                    <a href="https://alexgonzalez.ooo" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">alexgonzalez.ooo</div>
-                                        <div class="link-card-url">Public portfolio</div>
-                                    </a>
-                                    <a href="https://mrg-stem.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">MRG STEM</div>
-                                        <div class="link-card-url">Educational resources</div>
-                                    </a>
-                                    <a href="https://github.com/oooAHOYooo/aracastone" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">ArcaStone</div>
-                                        <div class="link-card-url">github.com/oooAHOYooo/aracastone</div>
-                                    </a>
-                                    <a href="https://alexgonzalez.ooo/portfolio/zuki/hello-zuki.html" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Zuki</div>
-                                        <div class="link-card-url">Portfolio project</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div style="margin-bottom: var(--spacing-lg);">
-                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Active Maintenance</h3>
-                                <div class="link-grid">
-                                    <a href="https://cpcnewhaven.org" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">CPC</div>
-                                        <div class="link-card-url">cpcnewhaven.org</div>
-                                    </a>
-                                    <a href="https://ape-market.netlify.app" target="_blank" rel="noopener" class="link-card">
-                                        <div class="link-card-title">Firebird (Ape Redesign)</div>
-                                        <div class="link-card-url">ape-market.netlify.app</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Guides</h3>
-                                <div class="link-grid">
-                                    <a href="projects/retropie-n64-guide.md" class="link-card">
-                                        <div class="link-card-title">RetroPie N64 Guide</div>
-                                        <div class="link-card-url">Step-by-step Raspberry Pi 5 setup</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">Active Writing and Scripts</h2>
-                            <p class="panel-description">Current writing projects and film scripts in development</p>
                         </div>
                         <div class="link-grid">
-                            <a href="https://ag-film.netlify.app/pages/summer/storybook" target="_blank" rel="noopener" class="link-card">
-                                <div class="link-card-title">Creatures in the Tall Grass</div>
-                                <div class="link-card-url">ag-film.netlify.app/pages/summer/storybook</div>
+                            <a href="data/journal/2026-05-04-tello.md" class="link-card" style="border-color:#8b4513;">
+                                <div class="link-card-title">Latest: Reflections on Tello</div>
+                                <div class="link-card-url">May 4, 2026 - A hard transition</div>
+                            </a>
+                            <a href="data/writing-drafts/tello-bio-pic/outline-v1.md" class="link-card" style="border-color:#8b4513;">
+                                <div class="link-card-title">Tello: A Bio Pic</div>
+                                <div class="link-card-url">Commemorative project outline</div>
                             </a>
                         </div>
                     </section>
 
-                    <section class="panel">
-                        <div class="panel-header">
-                            <h2 class="panel-title">BEEP</h2>
-                            <p class="panel-description">Pokémon for AI bots. Adopt bots, train them, watch them battle. Experimental game.</p>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing-lg);">
+                        <!-- LEFT COLUMN: ACTIVE PROJECTS -->
+                        <div>
+                            <section class="panel">
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Active for May</h2>
+                                    <p class="panel-description">Current focus areas and easy wins</p>
+                                </div>
+                                <div class="simple-list">
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #f0fdf4; border: 2px solid #22c55e; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
+                                            <span style="font-weight: 700; color: #166534;">Creatures Filming Prep</span>
+                                            <span style="font-size: 10px; padding: 2px 6px; background: #22c55e; color: #ffffff; border-radius: 4px;">JUNE START</span>
+                                        </div>
+                                        <p style="font-size: var(--font-size-xs); color: #166534;">Finalize equipment lists, crew check-ins, and scene breakdowns for June 1st.</p>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
+                                            <span style="font-weight: 700; color: #e65100;">Ahoy Mobile Release</span>
+                                            <span style="font-size: 10px; padding: 2px 6px; background: #e65100; color: #ffffff; border-radius: 4px;">CRITICAL</span>
+                                        </div>
+                                        <p style="font-size: var(--font-size-xs); color: #854d0e;">Submit to Apple App Store and Google Play Store. Final polish and store assets.</p>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
+                                            <span style="font-weight: 600;">Ahoy Indie Media MVP</span>
+                                            <span style="font-size: 10px; padding: 2px 6px; background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; border-radius: 4px;">PRIORITY</span>
+                                        </div>
+                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Stabilize Flask app and Render deploy. Ship public beta.</p>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
+                                            <span style="font-weight: 600;">Teaching Curricula</span>
+                                            <span style="font-size: 10px; padding: 2px 6px; background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 4px;">EASY WIN</span>
+                                        </div>
+                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Finalize syllabus for AI Art and Podcasting.</p>
+                                    </div>
+                                    <div style="padding: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
+                                            <span style="font-weight: 600;">CPC Admin Portal</span>
+                                            <span style="font-size: 10px; padding: 2px 6px; background: #f1f8e9; color: #33691e; border: 1px solid #dcedc8; border-radius: 4px;">WRAP UP</span>
+                                        </div>
+                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">JSON export logic refinement and handover.</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="networking" class="panel">
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Networking & Talks</h2>
+                                    <p class="panel-description">Who we're talking to this month</p>
+                                </div>
+                                <div class="simple-list">
+                                    <div style="font-size: var(--font-size-sm);">
+                                        <div style="display: flex; border-bottom: 1px solid var(--color-border-light); padding: var(--spacing-sm) 0;">
+                                            <div style="width: 40%; font-weight: 500;">Library Director</div>
+                                            <div style="width: 30%; color: var(--color-text-muted);">In Talks</div>
+                                            <div style="width: 30%; text-align: right; color: var(--color-accent);">Follow up 5/12</div>
+                                        </div>
+                                        <div style="display: flex; border-bottom: 1px solid var(--color-border-light); padding: var(--spacing-sm) 0;">
+                                            <div style="width: 40%; font-weight: 500;">YMCA Coordinator</div>
+                                            <div style="width: 30%; color: var(--color-text-muted);">Outreach</div>
+                                            <div style="width: 30%; text-align: right; color: var(--color-accent);">Send Syllabus</div>
+                                        </div>
+                                        <div style="display: flex; padding: var(--spacing-sm) 0;">
+                                            <div style="width: 40%; font-weight: 500;">CPC Tech Team</div>
+                                            <div style="width: 30%; color: var(--color-text-muted);">Active</div>
+                                            <div style="width: 30%; text-align: right; color: var(--color-accent);">Review Export</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
-                        <div class="link-grid">
-                            <a href="subpages/beep-game.html" class="link-card">
-                                <div class="link-card-title">BEEP Trainer</div>
-                                <div class="link-card-url">Adopt and train AI bots, compete in weekly battles</div>
-                            </a>
-                            <a href="subpages/beep.html" class="link-card">
-                                <div class="link-card-title">BEEP Reviews (Archive)</div>
-                                <div class="link-card-url">Original review platform (deprecated)</div>
-                            </a>
+
+                        <!-- RIGHT COLUMN: EVENTS & QUICK LINKS -->
+                        <div>
+                            <section id="events" class="panel">
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Upcoming</h2>
+                                </div>
+                                <div class="simple-list">
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 9</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Birthday Party</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 12</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Boys & Girls Club Pitch</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #e65100;">May 15</div>
+                                        <div style="font-size: var(--font-size-xs); color: #e65100; font-weight: 600;">Ahoy App Store Submission</div>
+                                        <div style="font-size: var(--font-size-xs); color: #8b4513;">New Haven Night Market</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 600; font-size: var(--font-size-sm); color: #e65100;">May 18</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Ahoy Google Play Submission</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 20</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Ahoy Indie Beta Release</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 23</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Pints on the Patio (Ellen hosting)</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 25</div>
+                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">CPC Portal Handover</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #166534;">June 1</div>
+                                        <div style="font-size: var(--font-size-xs); color: #166534; font-weight: 600;">START FILMING: Creatures</div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="panel collapsed">
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Monthly Links</h2>
+                                </div>
+                                <div class="panel-content">
+                                    <div class="nav-list" style="margin-top: var(--spacing-md);">
+                                        <a href="subpages/job-search.html" class="nav-link">Mission Dash</a>
+                                        <a href="subpages/expenses.html" class="nav-link">Expenses Log</a>
+                                        <a href="subpages/goals.html" class="nav-link">2026 Goals</a>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="panel">
+                                <div class="panel-header">
+                                    <h2 class="panel-title">Prototypes</h2>
+                                </div>
+                                <div class="nav-list" style="font-size: var(--font-size-xs);">
+                                    <a href="games/ninja-game/index.html" class="nav-link">Ninja Game</a>
+                                    <a href="subpages/cppd1.html" class="nav-link">CPPd1 Hub</a>
+                                    <a href="subpages/beep-game.html" class="nav-link">BEEP Trainer</a>
+                                </div>
+                            </section>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </main>
         </div>

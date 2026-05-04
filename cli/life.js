@@ -24,6 +24,7 @@ Resources:
   movies        Movies to watch
   decisions     Decisions log
   beep          BEEP game data (read-only)
+  journal       Personal journal entries
 
 Options:
   --json        Force JSON output
@@ -146,6 +147,18 @@ Examples:
   beep bots get --id <id>
   beep feed list [--limit <n>]
   beep products list`,
+
+    journal: `journal <action>
+
+Actions:
+  list           List journal entries
+  add            Add journal entry --title <t> [--notes <n>]
+  update         Update journal entry --id <id> [--notes <n>]
+  delete         Delete journal entry --id <id>
+
+Examples:
+  life journal list
+  life journal add --title "Reflections" --notes "Today was hard."`,
   }
 
   const text = helpText[resource]

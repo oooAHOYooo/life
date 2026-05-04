@@ -1,0 +1,65 @@
+[
+  {
+    "id": "event-bday",
+    "title": "Birthday Party",
+    "date": "2026-05-09",
+    "type": "Social",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-1",
+    "title": "Teaching Contract Pitch - Boys & Girls Club",
+    "date": "2026-05-12",
+    "type": "Meeting",
+    "importance": "High"
+  },
+  {
+    "id": "event-ahoy-ios",
+    "title": "Ahoy - Apple App Store Submission",
+    "date": "2026-05-15",
+    "type": "Release",
+    "importance": "Critical"
+  },
+  {
+    "id": "event-night-market",
+    "title": "New Haven Night Market",
+    "date": "2026-05-15",
+    "type": "Community",
+    "importance": "High"
+  },
+  {
+    "id": "event-ahoy-android",
+    "title": "Ahoy - Google Play Store Submission",
+    "date": "2026-05-18",
+    "type": "Release",
+    "importance": "Critical"
+  },
+  {
+    "id": "event-2",
+    "title": "Ahoy Indie Media MVP Internal Beta",
+    "date": "2026-05-20",
+    "type": "Release",
+    "importance": "High"
+  },
+  {
+    "id": "event-pints",
+    "title": "Pints on the Patio (Ellen hosting)",
+    "date": "2026-05-23",
+    "type": "Social",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-3",
+    "title": "CPC Admin Portal Handover",
+    "date": "2026-05-25",
+    "type": "Deadline",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-filming",
+    "title": "START FILMING: Creatures in the Tall Grass",
+    "date": "2026-06-01",
+    "type": "Production",
+    "importance": "Critical"
+  }
+]
