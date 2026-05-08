@@ -89,5 +89,54 @@
     "date": "2026-06-01",
     "type": "Production",
     "importance": "Critical"
+  },
+  {
+    "id": "event-june-review",
+    "title": "Creatures - First Week Review",
+    "date": "2026-06-15",
+    "type": "Production",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-barnum-exit",
+    "title": "Exit Barnum Final Handover",
+    "date": "2026-06-30",
+    "type": "Admin",
+    "importance": "High"
+  },
+  {
+    "id": "event-ahoy-beta",
+    "title": "Ahoy MVP Beta Launch",
+    "date": "2026-07-10",
+    "type": "Release",
+    "importance": "Critical"
+  },
+  {
+    "id": "event-july-assembly",
+    "title": "Creatures - Mid-Prod Assembly",
+    "date": "2026-07-25",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-prod-wrap",
+    "title": "Creatures - Production Wrap",
+    "date": "2026-08-15",
+    "type": "Production",
+    "importance": "Critical"
+  },
+  {
+    "id": "event-ahoy-release-prep",
+    "title": "Ahoy Public Release Prep",
+    "date": "2026-08-20",
+    "type": "Release",
+    "importance": "High"
+  },
+  {
+    "id": "event-post-kickoff",
+    "title": "Post-Production Kickoff",
+    "date": "2026-08-30",
+    "type": "Production",
+    "importance": "Medium"
   }
 ]
