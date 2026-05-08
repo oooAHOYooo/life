@@ -362,5 +362,18 @@
     "status": "Active",
     "notes": "Verbatim import.",
     "tags": ["land", "tldr"]
+  },
+  {
+    "id": "pro-mpt",
+    "title": "pro-mpt README",
+    "projectId": "pro-mpt",
+    "version": "1.0",
+    "fileType": "md",
+    "filePath": "data/writing-drafts/pro-mpt.md",
+    "wordCount": 0,
+    "lastModified": "2026-05-07",
+    "status": "In Progress",
+    "notes": "Project vision and features.",
+    "tags": ["software", "ai", "productivity"]
   }
 ]

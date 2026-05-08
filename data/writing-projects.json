@@ -88,5 +88,15 @@
     "lastUpdated": "2026-05-07",
     "notes": "Financial calculations and specifications for land projects.",
     "filePath": "plans/lands/"
+  },
+  {
+    "title": "pro-mpt",
+    "description": "Your personal prompt archive, expertise tracker, and thinking partner.",
+    "category": "Software",
+    "status": "In Progress",
+    "wordCount": "0",
+    "lastUpdated": "2026-05-07",
+    "notes": "Local-first prompt archiving and analysis tool.",
+    "filePath": "data/writing-drafts/pro-mpt.md"
   }
 ]
