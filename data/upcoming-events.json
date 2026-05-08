@@ -91,6 +91,118 @@
     "importance": "Critical"
   },
   {
+    "id": "event-filming-d1",
+    "title": "Filming Day 1: Dallas House (Asher, Dallas, Makayla)",
+    "date": "2026-06-07",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d2",
+    "title": "Filming Day 2: s02 + s25 (Dallas)",
+    "date": "2026-06-09",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d3",
+    "title": "Filming Day 3: s13 + s14 (Dallas)",
+    "date": "2026-06-12",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d4",
+    "title": "Filming Day 4: Big Cast (Dallas, Dominic, etc.)",
+    "date": "2026-06-13",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d5",
+    "title": "Filming Day 5: s03 + s05 + s06 (Dallas, Dominic, Pat)",
+    "date": "2026-06-14",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d6",
+    "title": "Filming Day 6: s15 + s16 (Dallas, Dominic)",
+    "date": "2026-06-16",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d7",
+    "title": "Filming Day 7",
+    "date": "2026-06-18",
+    "type": "Production",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-filming-d8",
+    "title": "Filming Day 8: s09 (Dallas)",
+    "date": "2026-06-19",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d9",
+    "title": "Filming Day 9: Dallas Bedroom (Asher, Dallas, etc.)",
+    "date": "2026-06-20",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d10",
+    "title": "Filming Day 10",
+    "date": "2026-06-26",
+    "type": "Production",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-filming-d11",
+    "title": "Filming Day 11: Big Cast (Asher, Dallas, Dominic, etc.)",
+    "date": "2026-06-27",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d12",
+    "title": "Filming Day 12: s21 + s22 + s23 + s24 (Asher, Dallas, etc.)",
+    "date": "2026-06-28",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d13",
+    "title": "Filming Day 13",
+    "date": "2026-07-01",
+    "type": "Production",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-filming-d14",
+    "title": "Filming Day 14: s31 + s32 + s33 + s37 (Asher, Dallas, etc.)",
+    "date": "2026-07-02",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d15",
+    "title": "Filming Day 15: s34 + s35 + s36 (Asher, Dallas, etc.)",
+    "date": "2026-07-03",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
+    "id": "event-filming-d16",
+    "title": "Filming Day 16: s33 + s38 + s39 (Asher, Makayla, Pat)",
+    "date": "2026-07-05",
+    "type": "Production",
+    "importance": "High"
+  },
+  {
     "id": "event-june-review",
     "title": "Creatures - First Week Review",
     "date": "2026-06-15",
