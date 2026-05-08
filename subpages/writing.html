@@ -310,10 +310,19 @@
                 const draft = this.drafts.find(d => d.id === draftId);
                 if (draft) {
                     if (draft.fileType === 'pdf') {
-                        window.open(draft.filePath, '_blank');
+                        window.open(`../${draft.filePath}`, '_blank');
+                    } else if (draft.fileType === 'md') {
+                        // Use the new journal viewer for MD files
+                        const fileName = draft.filePath.split('/').pop();
+                        const folder = draft.filePath.split('/')[1]; // assuming data/journal/file.md
+                        if (folder === 'journal') {
+                            window.location.href = `journal.html?file=${fileName}`;
+                        } else {
+                            // Fallback for other MD files
+                            window.open(`../${draft.filePath}`, '_blank');
+                        }
                     } else {
-                        // For markdown files, we could open in a new tab or modal
-                        window.open(draft.filePath, '_blank');
+                        window.open(`../${draft.filePath}`, '_blank');
                     }
                 }
             }
@@ -321,9 +330,7 @@
             editDraft(draftId) {
                 const draft = this.drafts.find(d => d.id === draftId);
                 if (draft) {
-                    // For now, just open the file
-                    // In a real implementation, this might open an editor
-                    window.open(draft.filePath, '_blank');
+                    window.open(`../${draft.filePath}`, '_blank');
                 }
             }
 
@@ -343,10 +350,13 @@
 
             async viewFile(filePath, fileType) {
                 if (fileType === 'pdf') {
-                    // For PDFs, open in new tab
                     window.open(`../${filePath}`, '_blank');
+                } else if (fileType === 'md') {
+                    // Use the journal viewer for markdown
+                    const fileName = filePath.split('/').pop();
+                    window.location.href = `journal.html?file=${fileName}`;
                 } else {
-                    // For markdown/text files, fetch and display in modal
+                    // For other text files, use modal
                     try {
                         const response = await fetch(`../${filePath}`);
                         if (!response.ok) throw new Error('Failed to load file');
@@ -354,7 +364,6 @@
                         this.showFileModal(content, filePath);
                     } catch (error) {
                         console.error('Error loading file:', error);
-                        alert('Failed to load file. Opening in new tab instead.');
                         window.open(`../${filePath}`, '_blank');
                     }
                 }
