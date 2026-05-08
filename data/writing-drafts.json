@@ -104,6 +104,19 @@
     "tags": ["journal", "tello", "personal"]
   },
   {
+    "id": "journal-2026-05-04-summer",
+    "title": "Journal - May 4, 2026 (Summer Start)",
+    "projectId": "personal-journal",
+    "version": "1.0",
+    "fileType": "md",
+    "filePath": "data/journal/2026-05-04-summer-start.md",
+    "wordCount": 155,
+    "lastModified": "2026-05-04T16:20:00Z",
+    "status": "Drafting",
+    "notes": "Kickoff for the May/Summer daily tracking.",
+    "tags": ["journal", "summer-2026", "daily"]
+  },
+  {
     "id": "tello-bio-pic-outline",
     "title": "Tello: A Bio Pic - Outline",
     "projectId": "tello-bio-pic",
@@ -115,5 +128,18 @@
     "status": "Planning",
     "notes": "Initial brainstorming for the bio pic.",
     "tags": ["screenplay", "tello", "biography"]
+  },
+  {
+    "id": "journal-2026-05-05-bridgeport",
+    "title": "Journal - May 5, 2026 (Bridgeport Public Schools)",
+    "projectId": "personal-journal",
+    "version": "1.0",
+    "fileType": "md",
+    "filePath": "data/journal/2026-05-05-bridgeport.md",
+    "wordCount": 0,
+    "lastModified": "2026-05-05T08:30:00Z",
+    "status": "Drafting",
+    "notes": "Tracking the day at Bridgeport Public Schools while processing sadness.",
+    "tags": ["journal", "bridgeport", "personal", "daily"]
   }
 ]

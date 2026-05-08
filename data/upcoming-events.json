@@ -7,6 +7,27 @@
     "importance": "Medium"
   },
   {
+    "id": "event-ear-drops",
+    "title": "Purchase Ear Drops",
+    "date": "2026-05-10",
+    "type": "Health",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-tello-memorial",
+    "title": "Tello's Wake & Funeral",
+    "date": "2026-05-06",
+    "type": "Personal",
+    "importance": "Critical"
+  },
+  {
+    "id": "event-car-oil",
+    "title": "Get Car Oil (40%)",
+    "date": "2026-05-14",
+    "type": "Maintenance",
+    "importance": "Medium"
+  },
+  {
     "id": "event-1",
     "title": "Teaching Contract Pitch - Boys & Girls Club",
     "date": "2026-05-12",

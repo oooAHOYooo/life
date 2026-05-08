@@ -618,8 +618,8 @@
                     <div class="weather-time" id="currentTime"></div>
                     <div class="weather-temp" id="currentTemp">--°F</div>
                 </div>
-                <div class="topbar-date" id="currentDate">Monday, May 4, 2026</div>
-                <span class="status-pill" id="statusPill">Unlocked</span>
+                <div class="topbar-date" id="currentDate">Thursday, May 7, 2026</div>
+                <span class="status-pill" id="statusPill" style="background: #fff3e0; color: #e65100; border-color: #ffe0b2;">Sprint Mode</span>
                 <a href="subpages/job-search.html" class="topbar-button" style="font-weight:600; border-color:#5a4a3a;">Mission</a>
                 <a href="subpages/2026.html" class="topbar-button">2026</a>
                 <a href="subpages/xmas-break.html" class="topbar-button">Break</a>
@@ -633,7 +633,13 @@
                         <div class="nav-section-title">This Month</div>
                         <ul class="nav-list">
                             <li class="nav-item">
-                                <a href="data/journal/2026-05-04-tello.md" class="nav-link" style="color: #8b4513; font-weight: 500;">May 4: Tello Journal</a>
+                                <a href="data/journal/2026-05-07-evening.md" class="nav-link" style="color: #8b4513; font-weight: 500;">May 7: Evening Sprint (Aldo Bday)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="data/journal/2026-05-06-morning.md" class="nav-link">May 6: Morning Session</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="data/journal/2026-05-05-bridgeport.md" class="nav-link">May 5: Bridgeport (Vibe Coding)</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#networking" class="nav-link">Networking Log</a>
@@ -702,13 +708,17 @@
                             </div>
                         </div>
                         <div class="link-grid">
-                            <a href="data/journal/2026-05-04-tello.md" class="link-card" style="border-color:#8b4513;">
-                                <div class="link-card-title">Latest: Reflections on Tello</div>
-                                <div class="link-card-url">May 4, 2026 - A hard transition</div>
+                            <a href="data/journal/2026-05-07-evening.md" class="link-card" style="border-color:#8b4513;">
+                                <div class="link-card-title">Latest: Evening Sprint</div>
+                                <div class="link-card-url">May 7, 2026 - Aldo's Bday / Tello's Funeral</div>
                             </a>
-                            <a href="data/writing-drafts/tello-bio-pic/outline-v1.md" class="link-card" style="border-color:#8b4513;">
-                                <div class="link-card-title">Tello: A Bio Pic</div>
-                                <div class="link-card-url">Commemorative project outline</div>
+                            <a href="data/journal/2026-05-06-morning.md" class="link-card" style="border-color:#8b4513; opacity: 0.8;">
+                                <div class="link-card-title">Morning Session</div>
+                                <div class="link-card-url">May 6, 2026 - Bridgeport Morning</div>
+                            </a>
+                            <a href="subpages/writing.html" class="link-card" style="border-style: dashed; opacity: 0.8;">
+                                <div class="link-card-title">View All Journals →</div>
+                                <div class="link-card-url">Access all drafts and reflections</div>
                             </a>
                         </div>
                     </section>
@@ -716,46 +726,65 @@
                     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing-lg);">
                         <!-- LEFT COLUMN: ACTIVE PROJECTS -->
                         <div>
-                            <section class="panel">
+                            <section class="panel" style="border-color: #e65100;">
                                 <div class="panel-header">
-                                    <h2 class="panel-title">Active for May</h2>
-                                    <p class="panel-description">Current focus areas and easy wins</p>
+                                    <h2 class="panel-title" style="color: #e65100;">🚀 Sprint: 2-Hour Focus (Ends 10:40 PM)</h2>
+                                    <p class="panel-description">Clear the overwhelm. One thing at a time.</p>
                                 </div>
                                 <div class="simple-list">
-                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #f0fdf4; border: 2px solid #22c55e; border-radius: var(--radius-sm);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
-                                            <span style="font-weight: 700; color: #166534;">Creatures Filming Prep</span>
-                                            <span style="font-size: 10px; padding: 2px 6px; background: #22c55e; color: #ffffff; border-radius: 4px;">JUNE START</span>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <input type="checkbox" style="margin-top: 4px;">
+                                            <div>
+                                                <div style="font-weight: 700; color: #e65100;">Compile Storyboard PDFs</div>
+                                                <p style="font-size: var(--font-size-xs); color: #854d0e;">Latest PDFs from film repo - confirm current progress.</p>
+                                            </div>
                                         </div>
-                                        <p style="font-size: var(--font-size-xs); color: #166534;">Finalize equipment lists, crew check-ins, and scene breakdowns for June 1st.</p>
                                     </div>
                                     <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
-                                            <span style="font-weight: 700; color: #e65100;">Ahoy Mobile Release</span>
-                                            <span style="font-size: 10px; padding: 2px 6px; background: #e65100; color: #ffffff; border-radius: 4px;">CRITICAL</span>
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <input type="checkbox" style="margin-top: 4px;">
+                                            <div>
+                                                <div style="font-weight: 700; color: #e65100;">Ahoy v1.1.0 Prep</div>
+                                                <p style="font-size: var(--font-size-xs); color: #854d0e;">Final stability checks for release.</p>
+                                            </div>
                                         </div>
-                                        <p style="font-size: var(--font-size-xs); color: #854d0e;">Submit to Apple App Store and Google Play Store. Final polish and store assets.</p>
                                     </div>
-                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
-                                            <span style="font-weight: 600;">Ahoy Indie Media MVP</span>
-                                            <span style="font-size: 10px; padding: 2px 6px; background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; border-radius: 4px;">PRIORITY</span>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <input type="checkbox" style="margin-top: 4px;">
+                                            <div>
+                                                <div style="font-weight: 700; color: #e65100;">Party Communication</div>
+                                                <p style="font-size: var(--font-size-xs); color: #854d0e;">Send essential updates for the upcoming party.</p>
+                                            </div>
                                         </div>
-                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Stabilize Flask app and Render deploy. Ship public beta.</p>
                                     </div>
-                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
-                                            <span style="font-weight: 600;">Teaching Curricula</span>
-                                            <span style="font-size: 10px; padding: 2px 6px; background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 4px;">EASY WIN</span>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <input type="checkbox" style="margin-top: 4px;">
+                                            <div>
+                                                <div style="font-weight: 700; color: #e65100;">Edit CPC Podcast</div>
+                                                <p style="font-size: var(--font-size-xs); color: #854d0e;">Baseline edit pass for current episode.</p>
+                                            </div>
                                         </div>
-                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Finalize syllabus for AI Art and Podcasting.</p>
                                     </div>
-                                    <div style="padding: var(--spacing-md); background: var(--color-bg-alt); border: 1px solid var(--color-border-light); border-radius: var(--radius-sm);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
-                                            <span style="font-weight: 600;">CPC Admin Portal</span>
-                                            <span style="font-size: 10px; padding: 2px 6px; background: #f1f8e9; color: #33691e; border: 1px solid #dcedc8; border-radius: 4px;">WRAP UP</span>
+                                    <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <input type="checkbox" style="margin-top: 4px;">
+                                            <div>
+                                                <div style="font-weight: 700; color: #e65100;">Pay Bills</div>
+                                                <p style="font-size: var(--font-size-xs); color: #854d0e;">Check bills.json and clear outstanding balances.</p>
+                                            </div>
                                         </div>
-                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">JSON export logic refinement and handover.</p>
+                                    </div>
+                                    <div style="padding: var(--spacing-md); background: #fff8f1; border: 2px solid #ff9800; border-radius: var(--radius-sm);">
+                                        <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                            <input type="checkbox" style="margin-top: 4px;">
+                                            <div>
+                                                <div style="font-weight: 700; color: #e65100;">Car Oil / Health Check</div>
+                                                <p style="font-size: var(--font-size-xs); color: #854d0e;">Schedule oil change (was at 40%).</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -794,13 +823,25 @@
                                     <h2 class="panel-title">Upcoming</h2>
                                 </div>
                                 <div class="simple-list">
+                                    <div style="margin-bottom: var(--spacing-md); background: rgba(139, 69, 19, 0.1); padding: 8px; border-left: 4px solid #8b4513;">
+                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #8b4513;">PAST - May 6</div>
+                                        <div style="font-size: var(--font-size-xs); color: #8b4513; font-weight: 700;">Tello's Wake & Funeral</div>
+                                    </div>
                                     <div style="margin-bottom: var(--spacing-md);">
                                         <div style="font-weight: 600; font-size: var(--font-size-sm);">May 9</div>
                                         <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Birthday Party</div>
                                     </div>
                                     <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #8b4513;">May 10</div>
+                                        <div style="font-size: var(--font-size-xs); color: #8b4513; font-weight: 600;">Purchase Ear Drops</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
                                         <div style="font-weight: 600; font-size: var(--font-size-sm);">May 12</div>
                                         <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Boys & Girls Club Pitch</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--spacing-md);">
+                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #854d0e;">May 14</div>
+                                        <div style="font-size: var(--font-size-xs); color: #854d0e; font-weight: 600;">Get Car Oil (40%)</div>
                                     </div>
                                     <div style="margin-bottom: var(--spacing-md);">
                                         <div style="font-weight: 700; font-size: var(--font-size-sm); color: #e65100;">May 15</div>
