@@ -68,5 +68,25 @@
     "lastUpdated": "2026-05-04",
     "notes": "Commemorating Tello's life.",
     "filePath": "data/writing-drafts/tello-bio-pic/"
+  },
+  {
+    "title": "Words & Ideas",
+    "description": "A collection of poems, premises, and miscellaneous thoughts from 2026.",
+    "category": "Creative Writing",
+    "status": "In Progress",
+    "wordCount": "0",
+    "lastUpdated": "2026-05-07",
+    "notes": "Raw thoughts and creative sparks.",
+    "filePath": "words/"
+  },
+  {
+    "title": "Land Planning",
+    "description": "Research and plans for property development, including Catskill and cottage builds.",
+    "category": "Research",
+    "status": "Active",
+    "wordCount": "0",
+    "lastUpdated": "2026-05-07",
+    "notes": "Financial calculations and specifications for land projects.",
+    "filePath": "plans/lands/"
   }
 ]

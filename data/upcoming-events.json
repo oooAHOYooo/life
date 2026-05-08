@@ -77,6 +77,13 @@
     "importance": "Medium"
   },
   {
+    "id": "event-pa-trip",
+    "title": "Travel: Head to PA (Potential)",
+    "date": "2026-05-30",
+    "type": "Personal",
+    "importance": "Medium"
+  },
+  {
     "id": "event-filming",
     "title": "START FILMING: Creatures in the Tall Grass",
     "date": "2026-06-01",
