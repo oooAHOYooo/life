@@ -652,7 +652,10 @@
                         <div class="nav-section-title">This Month</div>
                         <ul class="nav-list">
                             <li class="nav-item">
-                                <a href="subpages/journal.html?file=2026-05-11-monday.md" class="nav-link" style="color: #8b4513; font-weight: 600;">May 11: Night Market Week</a>
+                                <a href="subpages/journal.html?file=2026-05-12-tuesday.md" class="nav-link" style="color: #8b4513; font-weight: 600;">May 12: Poem in Progress</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="subpages/journal.html?file=2026-05-11-monday.md" class="nav-link">May 11: Night Market Week</a>
                             </li>
                             <li class="nav-item">
                                 <a href="subpages/journal.html?file=2026-05-07-evening.md" class="nav-link" style="color: #8b4513; font-weight: 400;">May 7: Evening Sprint (Aldo Bday)</a>
@@ -834,17 +837,17 @@
                         <div class="panel-header">
                             <div>
                                 <h2 class="panel-title" style="font-size:18px; color: #8b4513;">Journal & Reflections</h2>
-                                <p class="panel-description">Night market week. Film. Sugar. One thing at a time.</p>
+                                <p class="panel-description">Week of transition. Principal meeting, job leads, filming prep.</p>
                             </div>
                         </div>
                         <div class="link-grid">
-                            <a href="subpages/journal.html?file=2026-05-11-monday.md" class="link-card" style="border-color:#8b4513;">
-                                <div class="link-card-title">Latest: Night Market Week</div>
-                                <div class="link-card-url">May 11, 2026 - Overwhelmed / Restless</div>
+                            <a href="subpages/journal.html?file=2026-05-12-tuesday.md" class="link-card" style="border-color:#8b4513;">
+                                <div class="link-card-title">Latest: Poem in Progress</div>
+                                <div class="link-card-url">May 12, 2026 - Late Night Writing</div>
                             </a>
-                            <a href="subpages/journal.html?file=2026-05-07-evening.md" class="link-card" style="border-color:#8b4513; opacity: 0.8;">
-                                <div class="link-card-title">Evening Sprint</div>
-                                <div class="link-card-url">May 7, 2026 - Aldo's Bday / Tello's Funeral</div>
+                            <a href="subpages/journal.html?file=2026-05-11-monday.md" class="link-card" style="border-color:#8b4513; opacity: 0.8;">
+                                <div class="link-card-title">Night Market Week</div>
+                                <div class="link-card-url">May 11, 2026 - Overwhelmed / Restless</div>
                             </a>
                             <a href="subpages/writing.html" class="link-card" style="border-style: dashed; opacity: 0.8;">
                                 <div class="link-card-title">View All Journals →</div>
@@ -881,7 +884,7 @@
                                             <span style="font-weight: 600;">Ahoy Indie Media MVP</span>
                                             <span style="font-size: 10px; padding: 2px 6px; background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; border-radius: 4px;">PRIORITY</span>
                                         </div>
-                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Stabilize Flask app and Render deploy. Ship public beta.</p>
+                                        <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Ship internal beta May 20. Cancel Render hosting — migrate or wind down.</p>
                                     </div>
                                 </div>
                             </section>
@@ -925,143 +928,15 @@
                                     <h2 class="panel-title">Upcoming & Timeline</h2>
                                 </div>
                                 
-                                <!-- PAST SECTION (Collapsible) -->
-                                <div class="panel collapsed" style="border: none; padding: 0; margin-bottom: var(--spacing-md);">
+                                <div id="timeline-past" class="panel collapsed" style="border: none; padding: 0; margin-bottom: var(--spacing-md);">
                                     <div class="panel-header" style="font-size: var(--font-size-xs); color: var(--color-text-muted); padding: var(--spacing-sm); background: var(--color-bg-alt); border-radius: var(--radius-sm);">
-                                        PAST EVENTS (May 1 - May 7)
+                                        PAST EVENTS
                                     </div>
                                     <div class="panel-content">
-                                        <div class="simple-list" style="padding-top: var(--spacing-sm);">
-                                            <div style="margin-bottom: var(--spacing-sm); opacity: 0.6;">
-                                                <div style="font-weight: 600; font-size: var(--font-size-xs);">May 4</div>
-                                                <div style="font-size: var(--font-size-xs);">Tello Journal & Summer Start</div>
-                                            </div>
-                                            <div style="margin-bottom: var(--spacing-sm); opacity: 0.6;">
-                                                <div style="font-weight: 600; font-size: var(--font-size-xs);">May 5</div>
-                                                <div style="font-size: var(--font-size-xs);">Bridgeport (Vibe Coding)</div>
-                                            </div>
-                                            <div style="margin-bottom: var(--spacing-sm); opacity: 0.8; background: rgba(139, 69, 19, 0.05); padding: 4px; border-left: 2px solid #8b4513;">
-                                                <div style="font-weight: 700; font-size: var(--font-size-xs); color: #8b4513;">May 6</div>
-                                                <div style="font-size: var(--font-size-xs); color: #8b4513;">Tello's Wake & Funeral</div>
-                                            </div>
-                                            <div style="margin-bottom: var(--spacing-sm); opacity: 0.8;">
-                                                <div style="font-weight: 700; font-size: var(--font-size-xs); color: #e65100;">May 7</div>
-                                                <div style="font-size: var(--font-size-xs); color: #e65100;">Evening Sprint Mode</div>
-                                            </div>
-                                        </div>
+                                        <div id="timeline-past-list" class="simple-list" style="padding-top: var(--spacing-sm);"></div>
                                     </div>
                                 </div>
-
-                                <div class="simple-list">
-                                    <!-- MAY -->
-                                    <div style="font-size: 10px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--color-border-light);">May</div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 9</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Birthday Party</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #8b4513;">May 10</div>
-                                        <div style="font-size: var(--font-size-xs); color: #8b4513; font-weight: 600;">Purchase Ear Drops</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 12</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Boys & Girls Club Pitch</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #854d0e;">May 14</div>
-                                        <div style="font-size: var(--font-size-xs); color: #854d0e; font-weight: 600;">Get Car Oil (40%)</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #e65100;">May 15</div>
-                                        <div style="font-size: var(--font-size-xs); color: #e65100; font-weight: 600;">Ahoy SOFT LAUNCH</div>
-                                        <div style="font-size: var(--font-size-xs); color: #8b4513;">New Haven Night Market</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm); color: #e65100;">May 18</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Ahoy Google Play Submission</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 20</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Ahoy Indie Beta Release</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 23</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Pints on the Patio (Ellen hosting)</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">May 25</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">CPC Portal Handover</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #8b4513;">May 30-31</div>
-                                        <div style="font-size: var(--font-size-xs); color: #8b4513; font-weight: 600;">Travel: Head to PA (Potential)</div>
-                                    </div>
-
-                                    <!-- JUNE -->
-                                    <div style="font-size: 10px; font-weight: 700; color: #166534; text-transform: uppercase; margin: var(--spacing-md) 0 var(--spacing-sm); border-bottom: 1px solid #a5d6a7;">June</div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #e65100;">June 1</div>
-                                        <div style="font-size: var(--font-size-xs); color: #e65100; font-weight: 600;">Ahoy APPLE HARD LAUNCH</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #166534;">June 1</div>
-                                        <div style="font-size: var(--font-size-xs); color: #166534; font-weight: 600;">START FILMING: Creatures</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-sm); padding-left: 8px; border-left: 2px solid #a5d6a7;">
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 7: Filming Day 1 (Dallas House)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 9: Filming Day 2 (s02+s25)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 12: Filming Day 3 (s13+s14)</div>
-                                        <div style="font-size: 11px; font-weight: 700; color: #166534;">Jun 13: Filming Day 4 (Big Cast)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 14: Filming Day 5 (s03+s05+s06)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 16: Filming Day 6 (s15+s16)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 18: Filming Day 7</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 19: Filming Day 8 (s09)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 20: Filming Day 9 (Dallas Bedroom)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 26: Filming Day 10</div>
-                                        <div style="font-size: 11px; font-weight: 700; color: #166534;">Jun 27: Filming Day 11 (Big Cast)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jun 28: Filming Day 12 (s21-s24)</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">June 15</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Creatures - First Week Review</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #1565c0;">June 30</div>
-                                        <div style="font-size: var(--font-size-xs); color: #1565c0; font-weight: 600;">Exit Barnum Final Handover</div>
-                                    </div>
-
-                                    <!-- JULY -->
-                                    <div style="font-size: 10px; font-weight: 700; color: #0277bd; text-transform: uppercase; margin: var(--spacing-md) 0 var(--spacing-sm); border-bottom: 1px solid #81d4fa;">July</div>
-                                    <div style="margin-bottom: var(--spacing-sm); padding-left: 8px; border-left: 2px solid #81d4fa;">
-                                        <div style="font-size: 11px; font-weight: 600;">Jul 1: Filming Day 13</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jul 2: Filming Day 14 (s31-s33)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jul 3: Filming Day 15 (s34-s36)</div>
-                                        <div style="font-size: 11px; font-weight: 600;">Jul 5: Filming Day 16 (s33-s39)</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #e65100;">July 10</div>
-                                        <div style="font-size: var(--font-size-xs); color: #e65100; font-weight: 600;">Ahoy MVP Beta Launch</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">July 25</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Creatures - Mid-Prod Assembly</div>
-                                    </div>
-
-                                    <!-- AUGUST -->
-                                    <div style="font-size: 10px; font-weight: 700; color: #ad1457; text-transform: uppercase; margin: var(--spacing-md) 0 var(--spacing-sm); border-bottom: 1px solid #f48fb1;">August</div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #166534;">August 15</div>
-                                        <div style="font-size: var(--font-size-xs); color: #166534; font-weight: 600;">Creatures - Production Wrap</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 700; font-size: var(--font-size-sm); color: #e65100;">August 20</div>
-                                        <div style="font-size: var(--font-size-xs); color: #e65100; font-weight: 600;">Ahoy Public Release Prep</div>
-                                    </div>
-                                    <div style="margin-bottom: var(--spacing-md);">
-                                        <div style="font-weight: 600; font-size: var(--font-size-sm);">August 30</div>
-                                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">Post-Production Kickoff</div>
-                                    </div>
-                                </div>
+                                <div id="timeline-upcoming" class="simple-list"></div>
                             </section>
 
                             <section class="panel">
@@ -1302,8 +1177,69 @@
             }, 100);
         })();
 
+        // Dynamic timeline from upcoming-events.json
+        async function loadTimeline() {
+            try {
+                const res = await fetch('/data/upcoming-events.json');
+                const events = await res.json();
+                const today = new Date();
+                today.setHours(0,0,0,0);
+
+                const importanceColor = { Critical: '#e65100', High: '#854d0e', Medium: '#374151', Low: '#6b7280' };
+                const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+                const past = events.filter(e => new Date(e.date + 'T00:00:00') < today).sort((a,b) => new Date(b.date) - new Date(a.date));
+                const upcoming = events.filter(e => new Date(e.date + 'T00:00:00') >= today).sort((a,b) => new Date(a.date) - new Date(b.date));
+
+                // Render past
+                const pastList = document.getElementById('timeline-past-list');
+                if (past.length === 0) {
+                    pastList.innerHTML = '<div style="font-size:11px;color:var(--color-text-muted);font-style:italic;">None</div>';
+                } else {
+                    pastList.innerHTML = past.map(e => {
+                        const d = new Date(e.date + 'T00:00:00');
+                        const label = `${monthNames[d.getMonth()]} ${d.getDate()}`;
+                        return `<div style="margin-bottom:var(--spacing-sm);opacity:0.6;">
+                            <div style="font-weight:600;font-size:var(--font-size-xs);">${label}</div>
+                            <div style="font-size:var(--font-size-xs);">${e.title}</div>
+                        </div>`;
+                    }).join('');
+                }
+                document.getElementById('timeline-past').querySelector('.panel-header').textContent = `PAST EVENTS (${past.length})`;
+
+                // Render upcoming grouped by month
+                const upcomingEl = document.getElementById('timeline-upcoming');
+                if (upcoming.length === 0) {
+                    upcomingEl.innerHTML = '<div style="font-size:11px;color:var(--color-text-muted);font-style:italic;">Nothing scheduled.</div>';
+                    return;
+                }
+                let currentMonth = null;
+                let html = '';
+                upcoming.forEach(e => {
+                    const d = new Date(e.date + 'T00:00:00');
+                    const month = d.getMonth();
+                    const isToday = d.getTime() === today.getTime();
+                    const color = importanceColor[e.importance] || '#374151';
+                    const isCritical = e.importance === 'Critical';
+                    if (month !== currentMonth) {
+                        html += `<div style="font-size:10px;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;margin:${currentMonth !== null ? 'var(--spacing-md)' : '0'} 0 var(--spacing-sm);border-bottom:1px solid var(--color-border-light);">${monthNames[month]}</div>`;
+                        currentMonth = month;
+                    }
+                    html += `<div style="margin-bottom:var(--spacing-md);${isToday ? 'background:#fef9c3;border-left:3px solid #f59e0b;padding-left:6px;border-radius:2px;' : ''}">
+                        <div style="font-weight:${isCritical ? '700' : '600'};font-size:var(--font-size-sm);color:${color};">${monthNames[d.getMonth()].slice(0,3)} ${d.getDate()}${isToday ? ' · Today' : ''}</div>
+                        <div style="font-size:var(--font-size-xs);color:${isCritical ? color : 'var(--color-text-muted)'};font-weight:${isCritical ? '600' : '400'};">${e.title}</div>
+                        ${e.note ? `<div style="font-size:10px;color:#94a3b8;margin-top:2px;">${e.note.length > 80 ? e.note.slice(0,80)+'…' : e.note}</div>` : ''}
+                    </div>`;
+                });
+                upcomingEl.innerHTML = html;
+            } catch(err) {
+                document.getElementById('timeline-upcoming').innerHTML = '<div style="font-size:11px;color:#ef4444;">Could not load events.</div>';
+            }
+        }
+
         // App initialization
         function initApp() {
+            loadTimeline();
             // Collapsible sections
             document.querySelectorAll('.panel-header').forEach(header => {
                 header.addEventListener('click', function() {
