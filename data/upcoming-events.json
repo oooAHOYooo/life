@@ -1,24 +1,91 @@
 [
   {
-    "id": "event-bday",
-    "title": "Birthday Party",
-    "date": "2026-05-09",
-    "type": "Social",
-    "importance": "Medium"
-  },
-  {
-    "id": "event-ear-drops",
-    "title": "Purchase Ear Drops",
-    "date": "2026-05-10",
-    "type": "Health",
-    "importance": "Medium"
-  },
-  {
-    "id": "event-tello-memorial",
-    "title": "Tello's Wake & Funeral",
-    "date": "2026-05-06",
+    "id": "event-ribs-tonight",
+    "title": "Make Ribs with Ellen Tonight",
+    "date": "2026-05-17",
     "type": "Personal",
-    "importance": "Critical"
+    "importance": "Medium",
+    "note": "Sunday night rib night with Ellen — enjoy it"
+  },
+  {
+    "id": "event-aldo-gift",
+    "title": "Get Aldo a Birthday Present",
+    "date": "2026-05-17",
+    "type": "Personal",
+    "importance": "High",
+    "note": "Aldo's birthday was May 7 — get the gift ASAP"
+  },
+  {
+    "id": "event-dan-carbonella-call",
+    "title": "Schedule Call with Dan Carbonella",
+    "date": "2026-05-18",
+    "type": "Personal",
+    "importance": "Medium",
+    "note": "Reach out to Dan Carbonella to lock in a time for a phone call"
+  },
+  {
+    "id": "event-foote-school-lead",
+    "title": "Reply to Kiran — STEM Job Introduction (via Lisa Sandine)",
+    "date": "2026-05-18",
+    "type": "Work",
+    "importance": "High",
+    "note": "Lisa Sandine (4th Grade, Tuttle Elementary, East Haven) emailed Kiran on May 15 introducing you as a STEM teacher in Bridgeport looking for local opportunities. Reply to Kiran directly. DRAFT: 'Hi Kiran Agrawal, so nice to meet you — thank you Lisa for the warm introduction! I am currently a STEM teacher in Bridgeport and am exploring local opportunities for next year. I would love to connect and learn more about what you have going on. Would you be open to a quick call sometime this week or next? Looking forward to it. — Alex'"
+  },
+  {
+    "id": "event-principal-meeting",
+    "title": "Schedule Meeting with Principal — Contract Renewal",
+    "date": "2026-05-18",
+    "type": "Work",
+    "importance": "High",
+    "note": "Reach out to schedule — topic is contract renewal for next year. Decision: not returning. Use this meeting to communicate that professionally."
+  },
+  {
+    "id": "event-movie-night",
+    "title": "Movie Night",
+    "date": "2026-05-19",
+    "type": "Social",
+    "importance": "Medium",
+    "note": "Tuesday night movie night with friends"
+  },
+  {
+    "id": "event-mercy-day-photos",
+    "title": "Post Mercy Day Photos to Life Group",
+    "date": "2026-05-18",
+    "type": "Admin",
+    "importance": "Medium",
+    "note": "Post CPC Mercy Day pictures to the life group — do this Monday"
+  },
+  {
+    "id": "event-nhind-footage",
+    "title": "Send New Haven Independent Footage",
+    "date": "2026-05-19",
+    "type": "Production",
+    "importance": "High",
+    "note": "Send footage to New Haven Independent — deadline Tuesday"
+  },
+  {
+    "id": "event-church-cc",
+    "title": "Get Credit Card for Church (CPC)",
+    "date": "2026-05-17",
+    "type": "Finance",
+    "importance": "High",
+    "note": "Set up a dedicated credit card for church expenses"
+  },
+  {
+    "id": "event-cancel-render",
+    "title": "Cancel Render — Stop Paying for cpc-web-app",
+    "date": "2026-05-17",
+    "type": "Finance",
+    "importance": "High",
+    "note": "Stop paying for Render hosting on cpc-web-app — cancel or downgrade the plan"
+  },
+  {
+    "id": "event-geico-bill",
+    "title": "GEICO Bill — Hook up to CC 1755",
+    "date": "2026-05-13",
+    "type": "Finance",
+    "importance": "High",
+    "note": "Set up GEICO auto-pay or one-time payment on credit card ending in 1755"
   },
   {
     "id": "event-car-oil",
@@ -99,10 +166,33 @@
   },
   {
     "id": "event-filming-d1",
-    "title": "Filming Day 1: Dallas House (Asher, Dallas, Makayla)",
+    "title": "Filming Day 1: Jerry's House (First Day of Shooting)",
     "date": "2026-06-07",
     "type": "Production",
     "importance": "High"
+  },
+  {
+    "id": "event-jerry-creature-meeting",
+    "title": "Meet with Jerry - Creature Design",
+    "date": "2026-05-15",
+    "type": "Meeting",
+    "importance": "High",
+    "note": "Schedule this week (May 11-17) — confirm exact day with Jerry"
+  },
+  {
+    "id": "event-aldo-gift",
+    "title": "Get Gift for Aldo",
+    "date": "2026-05-14",
+    "type": "Personal",
+    "importance": "Medium"
+  },
+  {
+    "id": "event-moza-air2",
+    "title": "Figure Out Moza Air 2",
+    "date": "2026-05-14",
+    "type": "Production",
+    "importance": "High",
+    "note": "Get correct batteries + test if Komodo 6K fits on it — resolve before filming begins"
   },
   {
     "id": "event-filming-d2",

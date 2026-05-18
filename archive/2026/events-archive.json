@@ -1,0 +1,27 @@
+[
+  {
+    "id": "event-tello-memorial",
+    "title": "Tello's Wake & Funeral",
+    "date": "2026-05-06",
+    "type": "Personal",
+    "importance": "Critical",
+    "archivedOn": "2026-05-11",
+    "note": "A heavy day. Also Aldo's birthday."
+  },
+  {
+    "id": "event-bday",
+    "title": "Birthday Party",
+    "date": "2026-05-09",
+    "type": "Social",
+    "importance": "Medium",
+    "archivedOn": "2026-05-11"
+  },
+  {
+    "id": "event-ear-drops",
+    "title": "Purchase Ear Drops",
+    "date": "2026-05-10",
+    "type": "Health",
+    "importance": "Medium",
+    "archivedOn": "2026-05-11"
+  }
+]
