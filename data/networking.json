@@ -1,29 +1,29 @@
 [
   {
-    "id": "contact-1",
-    "name": "Library Director (New Haven)",
-    "role": "Potential Teaching Client",
-    "status": "In Talks",
-    "lastContact": "2026-04-28",
-    "nextStep": "Follow up on Fall curriculum pitch",
-    "tags": ["teaching", "contract"]
-  },
-  {
-    "id": "contact-2",
-    "name": "YMCA Coordinator",
-    "role": "Potential Teaching Client",
-    "status": "Outreach",
-    "lastContact": "2026-05-01",
-    "nextStep": "Send podcasting syllabus",
-    "tags": ["teaching", "podcasting"]
-  },
-  {
-    "id": "contact-3",
+    "id": "contact-cpc-tech",
     "name": "CPC Tech Team",
     "role": "Client Work",
     "status": "Active",
     "lastContact": "2026-05-02",
     "nextStep": "Review JSON export logic",
     "tags": ["client", "cpc"]
+  },
+  {
+    "id": "contact-kiran-agrawal",
+    "name": "Kiran Agrawal",
+    "role": "Potential Teaching Opportunity",
+    "status": "Intro Made",
+    "lastContact": "2026-05-15",
+    "nextStep": "Reply to Lisa Sandine's intro email — draft ready",
+    "tags": ["education", "job-lead"]
+  },
+  {
+    "id": "contact-foote-school",
+    "name": "The Foote School",
+    "role": "Potential Teaching Role",
+    "status": "Lead",
+    "lastContact": "2026-05-17",
+    "nextStep": "Follow up via Lisa Sandine connection",
+    "tags": ["education", "job-lead"]
   }
 ]
