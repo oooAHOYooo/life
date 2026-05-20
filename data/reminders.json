@@ -1,5 +1,21 @@
 [
   {
+    "id": "ally-ahoy-info-review",
+    "category": "business",
+    "name": "Ally: Confirm Ahoy Indie Media Company Info",
+    "vendor": "Ally Bank",
+    "planName": "Account Compliance Review",
+    "purchaseDate": "2026-05-20",
+    "renewsOn": "2026-07-19",
+    "billingPeriod": "Once",
+    "url": "",
+    "notes": "Ally legally required periodic check — confirm company info on file for Ahoy Indie Media is accurate to avoid account disruption.",
+    "desiredAction": "Review and confirm company information",
+    "actionPolicy": "before_date",
+    "actionOnOrAfter": "2026-07-19",
+    "notifyDaysBefore": 14
+  },
+  {
     "id": "tello-memorial",
     "category": "personal",
     "name": "Tello's Wake & Funeral",
