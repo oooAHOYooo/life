@@ -6,19 +6,13 @@
         <title>Reminders & Upkeep</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet" media="print" onload="this.media='all'">
-        <noscript><link
-                href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-                rel="stylesheet"></noscript>
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
         <link rel="stylesheet" href="../design-system.css">
         <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
@@ -28,255 +22,327 @@
             overflow-x: hidden;
             position: relative;
         }
+
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background:
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.09) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.07) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        }
+
         .container {
-            max-width: 1200px;
+            max-width: 860px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 28px 20px 48px;
             position: relative;
             z-index: 1;
         }
+
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #818cf8;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 28px;
+            color: #6b7280;
             text-decoration: none;
+            font-size: 0.85rem;
             font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            z-index: 1;
+            transition: color 0.2s;
         }
-        .back-link:hover {
-            color: #a78bfa;
-            text-decoration: underline;
-        }
+        .back-link:hover { color: #818cf8; }
+
         header {
-            text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
         header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: 1.75rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #60a5fa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
+            color: #e8eaed;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
         }
         header p {
-            color: #9ca3af;
-            font-size: 1rem;
+            color: #6b7280;
+            font-size: 0.875rem;
         }
-        .card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-        }
+
+        /* Controls */
         .controls {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 16px;
+            margin-bottom: 28px;
         }
         .controls input, .controls select {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
             color: #e8eaed;
-            padding: 10px 12px;
+            padding: 8px 12px;
             border-radius: 8px;
+            font-size: 0.875rem;
+            font-family: inherit;
             outline: none;
+            transition: border-color 0.2s;
         }
-        .table {
-            width: 100%;
-            border-collapse: collapse;
+        .controls input:focus, .controls select:focus {
+            border-color: rgba(99, 102, 241, 0.5);
         }
-        .table th, .table td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.15);
-            vertical-align: top;
+        .controls input { flex: 1; min-width: 180px; }
+        .controls select option { background: #1a1f3a; }
+
+        /* Section (month group) */
+        .month-section {
+            margin-bottom: 32px;
         }
-        .table th {
-            color: #c7d2fe;
+        .month-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .month-label-text {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6366f1;
+        }
+        .month-label-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(99, 102, 241, 0.15);
+        }
+        .month-label-count {
+            font-size: 0.72rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        /* Reminder row */
+        .reminder-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(99, 102, 241, 0.12);
+            border-radius: 10px;
+            margin-bottom: 6px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .reminder-row:hover {
+            border-color: rgba(99, 102, 241, 0.28);
+            background: rgba(15, 23, 42, 0.65);
+        }
+        .reminder-row.status-overdue { border-left: 3px solid rgba(239, 68, 68, 0.6); }
+        .reminder-row.status-soon    { border-left: 3px solid rgba(251, 191, 36, 0.6); }
+        .reminder-row.status-ok      { border-left: 3px solid rgba(34, 197, 94, 0.4); }
+
+        .reminder-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .dot-ok      { background: #22c55e; }
+        .dot-soon    { background: #fbbf24; }
+        .dot-overdue { background: #ef4444; }
+
+        .reminder-main { flex: 1; min-width: 0; }
+        .reminder-name {
             font-weight: 600;
-            border-bottom: 2px solid rgba(99, 102, 241, 0.3);
-            position: sticky;
-            top: 0;
-            background: rgba(15, 23, 42, 0.9);
+            color: #e8eaed;
+            font-size: 0.925rem;
+            margin-bottom: 2px;
         }
+        .reminder-meta {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        .reminder-notes {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+        .reminder-action-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: #818cf8;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 999px;
+            padding: 2px 8px;
+            margin-top: 5px;
+        }
+
+        .reminder-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .reminder-date {
+            font-size: 0.8rem;
+            color: #c7d2fe;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .reminder-days {
+            font-size: 0.75rem;
+            color: #4b5563;
+            margin-top: 2px;
+        }
+        .reminder-days.soon    { color: #fbbf24; }
+        .reminder-days.overdue { color: #f87171; }
+
+        /* Badge */
         .badge {
             display: inline-block;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 999px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
+            margin-top: 6px;
         }
-        .badge-ok { background: rgba(34,197,94,0.2); color: #86efac; border: 1px solid rgba(34,197,94,0.35); }
-        .badge-soon { background: rgba(251,191,36,0.2); color: #fde68a; border: 1px solid rgba(251,191,36,0.35); }
-        .badge-overdue { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.35); }
-        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
-        .muted { color: #9ca3af; }
-        .note { color: #e5e7eb; }
-        .footer-note {
-            color: #9ca3af;
-            font-size: 0.9rem;
-            margin-top: 10px;
+        .badge-ok      { background: rgba(34,197,94,0.15);  color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+        .badge-soon    { background: rgba(251,191,36,0.15); color: #fde68a; border: 1px solid rgba(251,191,36,0.3); }
+        .badge-overdue { background: rgba(239,68,68,0.15);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+
+        /* Empty state */
+        .empty { color: #4b5563; font-size: 0.875rem; padding: 12px 0; }
+
+        /* Count note */
+        .count-note { font-size: 0.8rem; color: #4b5563; margin-top: 4px; }
+
+        /* Divider */
+        .section-divider {
+            height: 1px;
+            background: rgba(99, 102, 241, 0.1);
+            margin: 36px 0;
         }
-        .schema {
-            font-size: 0.9rem;
-            background: rgba(15,23,42,0.7);
-            padding: 12px;
+
+        /* Section title */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e8eaed;
+            margin-bottom: 4px;
+        }
+        .section-subtitle { font-size: 0.825rem; color: #6b7280; margin-bottom: 20px; }
+
+        /* Bills */
+        .bills-category-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6366f1;
+            margin: 28px 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bills-category-label:first-child { margin-top: 0; }
+        .bills-category-label-line { flex: 1; height: 1px; background: rgba(99, 102, 241, 0.15); }
+        .bill-cat-est { font-size: 0.72rem; color: #4b5563; font-weight: 500; }
+
+        .bill-row {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(99, 102, 241, 0.12);
+            border-radius: 10px;
+            margin-bottom: 6px;
+            gap: 12px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .bill-row:hover { border-color: rgba(99, 102, 241, 0.25); background: rgba(15, 23, 42, 0.65); }
+        .bill-row.cancelled { opacity: 0.5; }
+        .bill-name  { font-weight: 600; color: #e8eaed; font-size: 0.9rem; }
+        .bill-sub   { font-size: 0.775rem; color: #6b7280; margin-top: 2px; }
+        .bill-note  { font-size: 0.775rem; color: #9ca3af; margin-top: 4px; line-height: 1.4; }
+        .bill-middle { flex: 1; min-width: 0; }
+        .bill-right { text-align: right; flex-shrink: 0; }
+        .bill-due-date { font-size: 0.8rem; color: #c7d2fe; white-space: nowrap; font-weight: 500; }
+        .bill-due-rel  { font-size: 0.72rem; color: #4b5563; margin-top: 2px; }
+        .bill-amount   { font-weight: 700; color: #e8eaed; font-size: 0.9rem; margin-top: 4px; }
+        .bill-amount.zero { color: #4b5563; font-weight: 500; }
+
+        /* Utility summary mini cards */
+        .util-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+            margin: 8px 0 10px 0;
+        }
+        .util-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.18);
             border-radius: 8px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            overflow-x: auto;
-            white-space: pre;
+            padding: 10px 12px;
         }
+        .util-card-label { font-size: 0.72rem; color: #6b7280; margin-bottom: 3px; }
+        .util-card-value { font-weight: 700; color: #e8eaed; font-size: 0.95rem; }
+        .util-card-sub   { font-size: 0.72rem; color: #6b7280; margin-top: 1px; }
+        .util-link { font-size: 0.8rem; color: #818cf8; text-decoration: none; font-weight: 500; }
+        .util-link:hover { text-decoration: underline; }
+        .util-section-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 6px; margin-top: 14px; letter-spacing: 0.01em; }
+
+        .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
         </style>
     </head>
     <body>
         <div class="container">
-            <a href="../index.html" class="back-link">← Back to LifeOS</a>
+            <a href="../index.html" class="back-link">← LifeOS</a>
+
             <header>
                 <h1>Reminders & Upkeep</h1>
-                <p>Track software subscriptions, renewals, and planned
-                    upgrades</p>
+                <p>Subscriptions, renewals, and action items</p>
             </header>
 
-            <!-- Gas Bill summary moved under Bills & Utilities section below -->
-
-            <!-- Electric Bill summary moved under Bills & Utilities section below -->
-
-            <div class="card">
-                <div class="controls">
-                    <input id="searchInput" type="search"
-                        placeholder="Search name or vendor...">
-                    <select id="statusFilter">
-                        <option value="all">All statuses</option>
-                        <option value="soon">Due soon</option>
-                        <option value="overdue">Overdue</option>
-                        <option value="ok">OK</option>
-                    </select>
-                    <select id="sortSelect">
-                        <option value="nextDateAsc">Next date (soonest
-                            first)</option>
-                        <option value="nextDateDesc">Next date (latest
-                            first)</option>
-                        <option value="nameAsc">Name (A→Z)</option>
-                    </select>
-                </div>
-                <div style="overflow:auto;">
-                    <table class="table" id="remindersTable">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Plan</th>
-                                <th>Next Date</th>
-                                <th>Action</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="remindersBody">
-                            <tr><td colspan="5"
-                                    class="muted">Loading...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="footer-note" id="countNote"></div>
+            <div class="controls">
+                <input id="searchInput" type="search" placeholder="Search...">
+                <select id="statusFilter">
+                    <option value="all">All statuses</option>
+                    <option value="soon">Due soon</option>
+                    <option value="overdue">Overdue</option>
+                    <option value="ok">OK</option>
+                </select>
             </div>
 
-            <div class="card">
-                <h3 style="margin-bottom:8px;">How to add more items</h3>
-                <p class="muted" style="margin-bottom:12px;">Edit <span
-                        class="mono">data/reminders.json</span> and add a new
-                    object with this shape:</p>
-                <div class="schema" id="schemaBlock"></div>
-            </div>
+            <div id="remindersSection"></div>
+            <div class="count-note" id="countNote"></div>
 
-            <div class="card">
-                <header style="text-align:left;margin-bottom:12px;">
-                    <h2
-                        style="font-size:1.4rem;font-weight:700;color:#e8eaed;margin:0 0 4px 0;">Current
-                        Bills</h2>
-                    <p class="muted" style="margin:0;">Organized by section with
-                        estimated next charge date</p>
-                </header>
-                <div id="billsSummary" class="muted"
-                    style="margin-bottom:12px;"></div>
-                <div id="billsContainer"></div>
-                <div class="footer-note">Edit <span
-                        class="mono">data/bills.json</span> to add or update
-                    bills.</div>
-            </div>
+            <div class="section-divider"></div>
+
+            <div class="section-title">Bills</div>
+            <div class="section-subtitle" id="billsSummary"></div>
+            <div id="billsContainer"></div>
         </div>
 
         <script>
-        const DATA_URL = '../data/reminders.json';
+        const DATA_URL  = '../data/reminders.json';
         const BILLS_URL = '../data/bills.json';
-
-        const schemaExample = {
-            id: "unique-id",
-            category: "subscription",
-            name: "Product Name",
-            vendor: "Company",
-            planName: "Plan",
-            devicesAllowed: 0,
-            devicesInUse: 0,
-            purchaseDate: "YYYY-MM-DD",
-            renewsOn: "YYYY-MM-DD",
-            billingPeriod: "1 Year",
-            url: "",
-            notes: "Optional notes",
-            desiredAction: "Upgrade",
-            actionPolicy: "at_or_after_date",
-            actionOnOrAfter: "YYYY-MM-DD",
-            notifyDaysBefore: 45
-        };
 
         class RemindersPage {
             constructor() {
                 this.all = [];
-                this.filtered = [];
                 this.bills = null;
-                this.dom = {
-                    body: document.getElementById('remindersBody'),
-                    count: document.getElementById('countNote'),
-                    search: document.getElementById('searchInput'),
-                    filter: document.getElementById('statusFilter'),
-                    sort: document.getElementById('sortSelect'),
-                    schema: document.getElementById('schemaBlock'),
-                    billsContainer: document.getElementById('billsContainer'),
-                    billsSummary: document.getElementById('billsSummary')
-                };
                 this.init();
             }
 
             async init() {
-                this.dom.schema.textContent = JSON.stringify(schemaExample, null, 2);
                 await Promise.all([this.loadData(), this.loadBills()]);
-                this.bindEvents();
-                this.applyFiltersAndRender();
+                document.getElementById('searchInput').addEventListener('input', () => this.render());
+                document.getElementById('statusFilter').addEventListener('change', () => this.render());
+                this.render();
                 this.renderBills();
             }
 
@@ -286,8 +352,7 @@
                     if (!res.ok) throw new Error(res.statusText);
                     this.all = await res.json();
                 } catch (e) {
-                    console.error('Failed to load reminders:', e);
-                    this.dom.body.innerHTML = '<tr><td colspan="5" class="muted">Failed to load reminders.</td></tr>';
+                    document.getElementById('remindersSection').innerHTML = '<div class="empty">Failed to load reminders.</div>';
                 }
             }
 
@@ -297,265 +362,234 @@
                     if (!res.ok) throw new Error(res.statusText);
                     this.bills = await res.json();
                 } catch (e) {
-                    console.error('Failed to load bills:', e);
-                    this.dom.billsContainer.innerHTML = '<div class="muted">Failed to load bills.</div>';
+                    document.getElementById('billsContainer').innerHTML = '<div class="empty">Failed to load bills.</div>';
                 }
             }
 
-            bindEvents() {
-                this.dom.search.addEventListener('input', () => this.applyFiltersAndRender());
-                this.dom.filter.addEventListener('change', () => this.applyFiltersAndRender());
-                this.dom.sort.addEventListener('change', () => this.applyFiltersAndRender());
-            }
-
-            applyFiltersAndRender() {
-                const q = (this.dom.search.value || '').toLowerCase();
-                const status = this.dom.filter.value;
+            computeItem(item) {
                 const now = new Date();
-
-                const withComputed = this.all.map(item => {
-                    const renew = item.renewsOn ? new Date(item.renewsOn + 'T00:00:00') : null;
-                    const actionEarliest = item.actionOnOrAfter ? new Date(item.actionOnOrAfter + 'T00:00:00') : null;
-                    const nextDate = renew || actionEarliest || null;
-                    const daysUntil = nextDate ? Math.ceil((nextDate - now) / (1000 * 60 * 60 * 24)) : null;
-                    let statusKey = 'ok';
-                    if (nextDate) {
-                        if (daysUntil < 0) statusKey = 'overdue';
-                        else if (typeof item.notifyDaysBefore === 'number' && daysUntil <= item.notifyDaysBefore) statusKey = 'soon';
-                        else statusKey = 'ok';
-                    }
-                    return { ...item, nextDate, daysUntil, statusKey };
-                });
-
-                let list = withComputed.filter(r => {
-                    const matchesQ = !q || (r.name?.toLowerCase().includes(q) || r.vendor?.toLowerCase().includes(q));
-                    const matchesStatus = status === 'all' || r.statusKey === status;
-                    return matchesQ && matchesStatus;
-                });
-
-                const sort = this.dom.sort.value;
-                list.sort((a, b) => {
-                    if (sort === 'nameAsc') {
-                        return (a.name || '').localeCompare(b.name || '');
-                    }
-                    if (sort === 'nextDateDesc') {
-                        return (b.nextDate?.getTime() || 0) - (a.nextDate?.getTime() || 0);
-                    }
-                    // default nextDateAsc
-                    return (a.nextDate?.getTime() || 0) - (b.nextDate?.getTime() || 0);
-                });
-
-                this.filtered = list;
-                this.render();
+                const renew = item.renewsOn ? new Date(item.renewsOn + 'T00:00:00') : null;
+                const actionDate = item.actionOnOrAfter ? new Date(item.actionOnOrAfter + 'T00:00:00') : null;
+                const nextDate = renew || actionDate || null;
+                const daysUntil = nextDate ? Math.ceil((nextDate - now) / (1000 * 60 * 60 * 24)) : null;
+                let status = 'ok';
+                if (nextDate) {
+                    if (daysUntil < 0) status = 'overdue';
+                    else if (typeof item.notifyDaysBefore === 'number' && daysUntil <= item.notifyDaysBefore) status = 'soon';
+                }
+                return { ...item, nextDate, daysUntil, status };
             }
 
             render() {
-                if (!this.filtered.length) {
-                    this.dom.body.innerHTML = '<tr><td colspan="5" class="muted">No items found.</td></tr>';
-                    this.dom.count.textContent = '';
+                const q = (document.getElementById('searchInput').value || '').toLowerCase();
+                const statusFilter = document.getElementById('statusFilter').value;
+
+                let items = this.all.map(i => this.computeItem(i)).filter(r => {
+                    const matchesQ = !q || (r.name?.toLowerCase().includes(q) || r.vendor?.toLowerCase().includes(q));
+                    const matchesStatus = statusFilter === 'all' || r.status === statusFilter;
+                    return matchesQ && matchesStatus;
+                });
+
+                // Sort by next date ascending (nulls last), then overdue first
+                items.sort((a, b) => {
+                    if (!a.nextDate && !b.nextDate) return 0;
+                    if (!a.nextDate) return 1;
+                    if (!b.nextDate) return -1;
+                    return a.nextDate - b.nextDate;
+                });
+
+                // Group by month
+                const groups = new Map();
+                const noDateKey = '__none__';
+                for (const item of items) {
+                    let key;
+                    if (!item.nextDate) {
+                        key = noDateKey;
+                    } else {
+                        key = item.nextDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                    }
+                    if (!groups.has(key)) groups.set(key, []);
+                    groups.get(key).push(item);
+                }
+
+                const section = document.getElementById('remindersSection');
+                const countNote = document.getElementById('countNote');
+
+                if (!items.length) {
+                    section.innerHTML = '<div class="empty">No items found.</div>';
+                    countNote.textContent = '';
                     return;
                 }
-                this.dom.body.innerHTML = this.filtered.map(this.renderRow).join('');
-                this.dom.count.textContent = `${this.filtered.length} item${this.filtered.length === 1 ? '' : 's'}`;
+
+                let html = '';
+                for (const [month, monthItems] of groups) {
+                    const label = month === noDateKey ? 'No Date' : month;
+                    html += `
+                        <div class="month-section">
+                            <div class="month-label">
+                                <span class="month-label-text">${this.escape(label)}</span>
+                                <div class="month-label-line"></div>
+                                <span class="month-label-count">${monthItems.length}</span>
+                            </div>
+                            ${monthItems.map(r => this.renderRow(r)).join('')}
+                        </div>
+                    `;
+                }
+
+                section.innerHTML = html;
+                countNote.textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
             }
 
-            renderRow = (r) => {
-                const nextDateStr = r.nextDate ? r.nextDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
-                const days = (r.daysUntil !== null && r.daysUntil !== undefined) ? `${r.daysUntil}d` : '—';
-                const badgeClass = r.statusKey === 'soon' ? 'badge-soon' : r.statusKey === 'overdue' ? 'badge-overdue' : 'badge-ok';
-                const statusLabel = r.statusKey === 'soon' ? 'Due soon' : r.statusKey === 'overdue' ? 'Overdue' : 'OK';
-                const planLine = [
-                    r.planName ? `${this.escape(r.planName)}` : null,
-                    (typeof r.devicesAllowed === 'number' && typeof r.devicesInUse === 'number') ? `${r.devicesInUse}/${r.devicesAllowed} devices` : null,
-                    r.billingPeriod ? this.escape(r.billingPeriod) : null
-                ].filter(Boolean).join(' • ');
-                const actionLine = [
-                    r.desiredAction ? this.escape(r.desiredAction) : null,
-                    r.actionOnOrAfter ? `on/after ${this.escape(r.actionOnOrAfter)}` : null,
-                    r.actionPolicy === 'at_renewal' ? '(at renewal)' : null
-                ].filter(Boolean).join(' ');
-                const nameBlock = `
-                    <div style="font-weight:600;color:#e8eaed;">${this.escape(r.name || '')}</div>
-                    <div class="muted">${this.escape(r.vendor || '')}</div>
-                    ${r.url ? `<div><a href="${this.escape(r.url)}" target="_blank" rel="noopener" style="color:#819cf8;text-decoration:none;">Manage</a></div>` : ''}
-                    ${r.notes ? `<div class="note" style="margin-top:6px;">${this.escape(r.notes)}</div>` : ''}
-                `;
+            renderRow(r) {
+                const dateStr = r.nextDate
+                    ? r.nextDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                    : '—';
+                const daysText = r.daysUntil !== null
+                    ? (r.daysUntil === 0 ? 'today' : r.daysUntil > 0 ? `in ${r.daysUntil}d` : `${Math.abs(r.daysUntil)}d ago`)
+                    : '';
+                const dotClass = `dot-${r.status}`;
+                const rowClass = `status-${r.status}`;
+                const badgeClass = `badge-${r.status}`;
+                const badgeLabel = r.status === 'overdue' ? 'Overdue' : r.status === 'soon' ? 'Due soon' : 'OK';
+                const daysClass = r.status === 'soon' ? 'soon' : r.status === 'overdue' ? 'overdue' : '';
+
+                const metaParts = [r.vendor, r.planName, r.billingPeriod].filter(Boolean).map(s => this.escape(s));
+                const meta = metaParts.join(' · ');
+
                 return `
-                    <tr>
-                        <td>${nameBlock}</td>
-                        <td>${planLine || '—'}</td>
-                        <td>
-                            <div>${nextDateStr}</div>
-                            <div class="muted">${days}</div>
-                        </td>
-                        <td>${actionLine || '—'}</td>
-                        <td><span class="badge ${badgeClass}">${statusLabel}</span></td>
-                    </tr>
+                    <div class="reminder-row ${rowClass}">
+                        <div class="reminder-dot ${dotClass}"></div>
+                        <div class="reminder-main">
+                            <div class="reminder-name">${this.escape(r.name || '')}</div>
+                            ${meta ? `<div class="reminder-meta">${meta}</div>` : ''}
+                            ${r.notes ? `<div class="reminder-notes">${this.escape(r.notes)}</div>` : ''}
+                            ${r.desiredAction ? `<span class="reminder-action-pill">${this.escape(r.desiredAction)}</span>` : ''}
+                        </div>
+                        <div class="reminder-right">
+                            <div class="reminder-date">${dateStr}</div>
+                            <div class="reminder-days ${daysClass}">${daysText}</div>
+                            <div><span class="badge ${badgeClass}">${badgeLabel}</span></div>
+                        </div>
+                    </div>
                 `;
             }
 
-            escape(text) {
-                const div = document.createElement('div');
-                div.textContent = String(text ?? '');
-                return div.innerHTML;
-            }
-
-            // ------- Bills UI --------
+            // ---- Bills ----
             renderBills() {
                 if (!this.bills || !Array.isArray(this.bills.categories)) {
-                    this.dom.billsContainer.innerHTML = '<div class="muted">No bills data.</div>';
+                    document.getElementById('billsContainer').innerHTML = '<div class="empty">No bills data.</div>';
                     return;
                 }
                 const now = new Date();
+                let totalYearly = 0;
+                let totalCount = 0;
 
-                const categoryBlocks = this.bills.categories.map(cat => {
-                    const enriched = cat.items.map(item => this.computeBillDates(item, now));
-                    const yearly = enriched.reduce((sum, it) => sum + this.estimateYearly(it.amount, it.frequency), 0);
-                    const header = `
-                        <div style="margin:14px 0 6px 0;font-weight:700;color:#e8eaed;">
-                            ${this.escape(cat.title)} <span class="muted" style="font-weight:500;">• est ${this.formatCurrency(yearly)}/yr</span>
+                let html = '';
+                for (const cat of this.bills.categories) {
+                    const enriched = cat.items
+                        .map(it => this.computeBillDates(it, now))
+                        .sort((a, b) => {
+                            if (!a.nextEstimatedDate && !b.nextEstimatedDate) return 0;
+                            if (!a.nextEstimatedDate) return 1;
+                            if (!b.nextEstimatedDate) return -1;
+                            return a.nextEstimatedDate - b.nextEstimatedDate;
+                        });
+                    const catYearly = enriched.reduce((s, it) => s + this.estimateYearly(it.amount, it.frequency), 0);
+                    totalYearly += catYearly;
+                    totalCount += enriched.length;
+
+                    html += `
+                        <div class="bills-category-label">
+                            ${this.escape(cat.title)}
+                            <div class="bills-category-label-line"></div>
+                            <span class="bill-cat-est">${this.formatCurrency(catYearly)}/yr</span>
                         </div>
                     `;
-                    // Inline Gas (SCG) and Electric (UI) summaries under Bills & Utilities
-                    const utilitiesInline = (cat.title === 'Bills & Utilities') ? `
-                        <div style="margin:6px 0 12px 0; display:grid; grid-template-columns: 1fr; gap:14px;">
-                            <div>
-                                <div class="muted" style="margin-bottom:6px;">SCG Gas Bill • Account 05000117275128</div>
-                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Next bill due</div>
-                                        <div style="font-weight:700;color:#e8eaed;">Dec 4, 2025</div>
-                                        <div class="muted">$67.55</div>
-                                    </div>
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Average (8 months)</div>
-                                        <div style="font-weight:700;color:#e8eaed;">$69.02</div>
-                                    </div>
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Last 3 months avg</div>
-                                        <div style="font-weight:700;color:#e8eaed;">$54.19</div>
-                                    </div>
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Last 6 months avg</div>
-                                        <div style="font-weight:700;color:#e8eaed;">$51.41</div>
-                                    </div>
+
+                    if (cat.title === 'Bills & Utilities') {
+                        html += `
+                            <div class="util-section-title">SCG Gas — Account 05000117275128</div>
+                            <div class="util-grid">
+                                <div class="util-card"><div class="util-card-label">Next bill due</div><div class="util-card-value">Dec 4, 2025</div><div class="util-card-sub">$67.55</div></div>
+                                <div class="util-card"><div class="util-card-label">8-month avg</div><div class="util-card-value">$69.02</div></div>
+                                <div class="util-card"><div class="util-card-label">3-month avg</div><div class="util-card-value">$54.19</div></div>
+                                <div class="util-card"><div class="util-card-label">6-month avg</div><div class="util-card-value">$51.41</div></div>
+                            </div>
+                            <a href="./gas-bill-stats.html" class="util-link" style="display:inline-block;margin-bottom:14px;">View gas bill history →</a>
+
+                            <div class="util-section-title">UI Electric — Account 01000020024211</div>
+                            <div class="util-grid">
+                                <div class="util-card"><div class="util-card-label">Last bill</div><div class="util-card-value">Nov 7, 2025</div><div class="util-card-sub">-$15.40 credit</div></div>
+                                <div class="util-card"><div class="util-card-label">9-month avg</div><div class="util-card-value">$72.42</div></div>
+                                <div class="util-card"><div class="util-card-label">3-month avg</div><div class="util-card-value">$78.04</div></div>
+                                <div class="util-card"><div class="util-card-label">6-month avg</div><div class="util-card-value">$87.21</div></div>
+                            </div>
+                            <a href="./electric-bill-stats.html" class="util-link" style="display:inline-block;margin-bottom:14px;">View electric bill history →</a>
+                        `;
+                    }
+
+                    for (const it of enriched) {
+                        const dateStr = it.nextEstimatedDate ? this.formatDate(it.nextEstimatedDate) : '—';
+                        const rel = it.dueRelative || '—';
+                        const cancelled = it.amount === 0 && it.notes && /cancel/i.test(it.notes);
+                        const amountClass = it.amount === 0 ? 'bill-amount zero' : 'bill-amount';
+                        const amountStr = it.amount === 0 ? (cancelled ? 'Cancelled' : '$0') : this.formatCurrency(it.amount);
+                        const subParts = [it.frequency, it.account].filter(Boolean).map(s => this.escape(s));
+                        html += `
+                            <div class="bill-row${cancelled ? ' cancelled' : ''}">
+                                <div class="bill-middle">
+                                    <div class="bill-name">${this.escape(it.name)}</div>
+                                    <div class="bill-sub">${subParts.join(' · ')}</div>
+                                    ${it.notes ? `<div class="bill-note">${this.escape(it.notes)}</div>` : ''}
                                 </div>
-                                <div class="muted" style="margin-top:6px;">Source: SCG Bills & Payments portal.</div>
-                                <div style="margin-top:8px;">
-                                    <a href="./gas-bill-stats.html" style="color:#819cf8;text-decoration:none;font-weight:600;">View full gas bill history →</a>
+                                <div class="bill-right">
+                                    <div class="bill-due-date">${dateStr}</div>
+                                    <div class="bill-due-rel">${this.escape(rel)}</div>
+                                    <div class="${amountClass}">${amountStr}</div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="muted" style="margin:10px 0 6px 0;">UI Electric Bill • Account 01000020024211</div>
-                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Next bill status</div>
-                                        <div style="font-weight:700;color:#e8eaed;">Nov 7, 2025</div>
-                                        <div class="muted">- $15.40 (credit)</div>
-                                    </div>
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Average (9 months)</div>
-                                        <div style="font-weight:700;color:#e8eaed;">$72.42</div>
-                                    </div>
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Last 3 months avg</div>
-                                        <div style="font-weight:700;color:#e8eaed;">$78.04</div>
-                                    </div>
-                                    <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px;">
-                                        <div class="muted" style="font-size:0.85rem;">Last 6 months avg</div>
-                                        <div style="font-weight:700;color:#e8eaed;">$87.21</div>
-                                    </div>
-                                </div>
-                                <div class="muted" style="margin-top:6px;">Source: UI Bills & Payments portal.</div>
-                                <div style="margin-top:8px;">
-                                    <a href="./electric-bill-stats.html" style="color:#819cf8;text-decoration:none;font-weight:600;">View full electric bill history →</a>
-                                </div>
-                            </div>
-                        </div>
-                    ` : '';
-                    const rows = enriched.map(it => this.renderBillRow(it)).join('');
-                    const table = `
-                        <div style="overflow:auto;">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Name/Frequency</th>
-                                        <th>Account</th>
-                                        <th>User</th>
-                                        <th>Due</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>${rows}</tbody>
-                            </table>
-                        </div>
-                    `;
-                    return header + utilitiesInline + table;
-                }).join('');
+                        `;
+                    }
+                }
 
-                // Overall summary
-                const totals = this.bills.categories.reduce((acc, cat) => {
-                    const yearly = cat.items.reduce((sum, it) => sum + this.estimateYearly(it.amount, it.frequency), 0);
-                    acc.yearly += yearly;
-                    acc.count += cat.items.length;
-                    return acc;
-                }, { yearly: 0, count: 0 });
-                this.dom.billsSummary.textContent = `${totals.count} items • est ${this.formatCurrency(totals.yearly)}/yr`;
-
-                this.dom.billsContainer.innerHTML = categoryBlocks;
+                document.getElementById('billsSummary').textContent = `${totalCount} items · est ${this.formatCurrency(totalYearly)}/yr`;
+                document.getElementById('billsContainer').innerHTML = html;
             }
 
             computeBillDates(item, now) {
                 const periodDays = this.periodDays(item.frequency);
                 const generatedAt = this.bills?.generatedAt ? new Date(this.bills.generatedAt + 'T00:00:00') : null;
 
-                // 1) Absolute next due date takes precedence
                 if (item.nextDueOn) {
                     let next = new Date(item.nextDueOn + 'T00:00:00');
                     if (isFinite(next)) {
-                        if (periodDays > 0) {
-                            while (next < now) {
-                                next = new Date(next.getTime() + periodDays * 24 * 60 * 60 * 1000);
-                            }
-                        }
+                        if (periodDays > 0) while (next < now) next = new Date(next.getTime() + periodDays * 86400000);
                         return { ...item, nextEstimatedDate: next, dueRelative: this.relativeFromNow(next) };
                     }
                 }
 
-                // 2) Billing day of month for recurring monthly-like bills
                 if (item.billingDayOfMonth && /monthly|quarterly|yearly|annually/i.test(String(item.frequency || ''))) {
-                    const day = Math.max(1, Math.min(28, Number(item.billingDayOfMonth))); // safe bound 1..28
+                    const day = Math.max(1, Math.min(28, Number(item.billingDayOfMonth)));
                     let candidate = new Date(now.getFullYear(), now.getMonth(), day);
                     if (candidate < new Date(now.getFullYear(), now.getMonth(), now.getDate())) {
-                        // move to next cycle
-                        if (/quarterly/i.test(item.frequency)) {
-                            candidate = new Date(now.getFullYear(), now.getMonth() + 3, day);
-                        } else if (/yearly|annually/i.test(item.frequency)) {
-                            candidate = new Date(now.getFullYear() + 1, now.getMonth(), day);
-                        } else {
-                            candidate = new Date(now.getFullYear(), now.getMonth() + 1, day);
-                        }
+                        if (/quarterly/i.test(item.frequency)) candidate = new Date(now.getFullYear(), now.getMonth() + 3, day);
+                        else if (/yearly|annually/i.test(item.frequency)) candidate = new Date(now.getFullYear() + 1, now.getMonth(), day);
+                        else candidate = new Date(now.getFullYear(), now.getMonth() + 1, day);
                     }
                     return { ...item, nextEstimatedDate: candidate, dueRelative: this.relativeFromNow(candidate) };
                 }
 
-                // 3) Relative anchor from file's generatedAt and dueInDays
                 if (generatedAt && typeof item.dueInDays === 'number') {
-                    let next = new Date(generatedAt.getTime() + item.dueInDays * 24 * 60 * 60 * 1000);
-                    if (periodDays > 0) {
-                        while (next < now) {
-                            next = new Date(next.getTime() + periodDays * 24 * 60 * 60 * 1000);
-                        }
-                    }
+                    let next = new Date(generatedAt.getTime() + item.dueInDays * 86400000);
+                    if (periodDays > 0) while (next < now) next = new Date(next.getTime() + periodDays * 86400000);
                     return { ...item, nextEstimatedDate: next, dueRelative: this.relativeFromNow(next) };
                 }
 
-                // 4) Fallback: nothing known
                 return { ...item, nextEstimatedDate: null, dueRelative: '—' };
             }
 
-            periodDays(frequency) {
-                const f = String(frequency || '').toLowerCase();
+            periodDays(f) {
+                f = String(f || '').toLowerCase();
                 if (f === 'weekly') return 7;
                 if (f === 'monthly') return 30;
                 if (f === 'quarterly') return 90;
@@ -563,8 +597,8 @@
                 return 30;
             }
 
-            estimateYearly(amount, frequency) {
-                const f = String(frequency || '').toLowerCase();
+            estimateYearly(amount, f) {
+                f = String(f || '').toLowerCase();
                 if (f === 'weekly') return amount * 52;
                 if (f === 'monthly') return amount * 12;
                 if (f === 'quarterly') return amount * 4;
@@ -572,41 +606,25 @@
                 return amount * 12;
             }
 
-            renderBillRow(it) {
-                const dateStr = it.nextEstimatedDate ? this.formatDate(it.nextEstimatedDate) : '—';
-                const rel = it.dueRelative || (it.nextEstimatedDate ? this.relativeFromNow(it.nextEstimatedDate) : '—');
-                return `
-                    <tr>
-                        <td>
-                            <div style="font-weight:600;color:#e8eaed;">${this.escape(it.name)}</div>
-                            <div class="muted">${this.escape(it.frequency || '')}</div>
-                            ${it.notes ? `<div class="note" style="margin-top:4px;">${this.escape(it.notes)}</div>` : ''}
-                        </td>
-                        <td>${this.escape(it.account || '')}</td>
-                        <td>${this.escape(it.assumedUsername || '—')}</td>
-                        <td>
-                            <div>${dateStr}</div>
-                            <div class="muted">${this.escape(rel)}</div>
-                        </td>
-                        <td>${this.formatCurrency(it.amount)}</td>
-                    </tr>
-                `;
-            }
-
             formatDate(d) {
-                return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             }
 
             relativeFromNow(target) {
-                const now = new Date();
-                const diffDays = Math.round((target - now) / (1000 * 60 * 60 * 24));
+                const diffDays = Math.round((target - new Date()) / 86400000);
                 if (diffDays === 0) return 'today';
-                if (diffDays > 0) return `in ${diffDays} days`;
-                return `${Math.abs(diffDays)} days ago`;
+                if (diffDays > 0) return `in ${diffDays}d`;
+                return `${Math.abs(diffDays)}d ago`;
             }
 
             formatCurrency(n) {
                 return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(n || 0);
+            }
+
+            escape(text) {
+                const d = document.createElement('div');
+                d.textContent = String(text ?? '');
+                return d.innerHTML;
             }
         }
 
