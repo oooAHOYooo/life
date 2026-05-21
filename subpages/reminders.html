@@ -296,6 +296,52 @@
         .util-section-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 6px; margin-top: 14px; letter-spacing: 0.01em; }
 
         .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+        @media print {
+            body, body::before { background: none !important; color: #000 !important; }
+            .container { max-width: 100%; padding: 0; }
+            .back-link, .controls { display: none !important; }
+            header h1 { color: #000 !important; font-size: 1.4rem; }
+            header p, .section-subtitle, .count-note { color: #555 !important; }
+
+            .reminder-row, .bill-row, .util-card {
+                background: none !important;
+                border: 1px solid #ccc !important;
+                border-left-width: 1px !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+            .reminder-row.status-overdue,
+            .reminder-row.status-soon,
+            .reminder-row.status-ok { border-left: 3px solid #000 !important; }
+
+            .reminder-name, .bill-name, .section-title,
+            .reminder-date, .bill-due-date, .bill-amount { color: #000 !important; }
+            .reminder-meta, .reminder-notes, .bill-sub, .bill-note,
+            .reminder-days, .bill-due-rel, .bill-cat-est,
+            .util-card-label, .util-card-sub, .util-section-title,
+            .section-subtitle, .month-label-count { color: #555 !important; }
+            .util-card-value { color: #000 !important; }
+
+            .reminder-dot { background: #000 !important; }
+            .reminder-action-pill {
+                background: none !important;
+                border: 1px solid #999 !important;
+                color: #000 !important;
+            }
+            .badge {
+                background: none !important;
+                border: 1px solid #999 !important;
+                color: #000 !important;
+            }
+            .month-label-text, .bills-category-label { color: #000 !important; }
+            .month-label-line, .bills-category-label-line { background: #ccc !important; }
+            .section-divider { background: #ccc !important; }
+            .util-link { color: #000 !important; }
+            .bill-amount.zero { color: #555 !important; }
+            .bill-row.cancelled { opacity: 0.6 !important; }
+            .month-section { break-inside: avoid; }
+        }
         </style>
     </head>
     <body>
