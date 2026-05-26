@@ -220,6 +220,63 @@
         /* Count note */
         .count-note { font-size: 0.8rem; color: #4b5563; margin-top: 4px; }
 
+        /* Today's Capture */
+        .capture-section {
+            margin-bottom: 36px;
+        }
+        .capture-header {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .capture-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #a78bfa;
+        }
+        .capture-date {
+            font-size: 0.72rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+        .capture-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(167, 139, 250, 0.15);
+        }
+        .capture-card {
+            background: rgba(167, 139, 250, 0.06);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+        }
+        .capture-card-name {
+            font-weight: 600;
+            color: #e8eaed;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+        .capture-card-notes {
+            font-size: 0.825rem;
+            color: #9ca3af;
+            line-height: 1.55;
+            white-space: pre-wrap;
+        }
+        .capture-card-action {
+            display: inline-block;
+            font-size: 0.72rem;
+            color: #a78bfa;
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.25);
+            border-radius: 999px;
+            padding: 2px 8px;
+            margin-top: 8px;
+        }
+
         /* Divider */
         .section-divider {
             height: 1px;
@@ -297,6 +354,100 @@
 
         .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
 
+        /* Collapsible time groups */
+        .group-section { margin-bottom: 6px; }
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            padding: 8px 2px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+        .group-header:hover { background: rgba(99, 102, 241, 0.06); }
+        .group-toggle {
+            font-size: 0.6rem;
+            color: #6366f1;
+            transition: transform 0.2s;
+            width: 12px;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+        .group-header.is-collapsed .group-toggle { transform: rotate(-90deg); }
+        .group-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .group-line { flex: 1; height: 1px; background: rgba(99, 102, 241, 0.13); }
+        .group-count { font-size: 0.72rem; color: #4b5563; font-weight: 500; }
+        .group-body {
+            overflow: hidden;
+            transition: max-height 0.28s ease, opacity 0.18s ease;
+            max-height: 9999px;
+            opacity: 1;
+        }
+        .group-body.is-collapsed { max-height: 0 !important; opacity: 0; }
+
+        /* Mind Dump */
+        .mind-dump-wrap {
+            margin-top: 44px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(99, 102, 241, 0.15);
+        }
+        .mind-dump-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            padding: 4px 2px 10px;
+        }
+        .mind-dump-toggle {
+            font-size: 0.6rem;
+            color: #6366f1;
+            transition: transform 0.2s;
+            width: 12px;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+        .mind-dump-wrap.is-collapsed .mind-dump-toggle { transform: rotate(-90deg); }
+        .mind-dump-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6366f1;
+        }
+        .mind-dump-line { flex: 1; height: 1px; background: rgba(99, 102, 241, 0.13); }
+        .mind-dump-body {
+            overflow: hidden;
+            transition: max-height 0.28s ease;
+            max-height: 600px;
+        }
+        .mind-dump-wrap.is-collapsed .mind-dump-body { max-height: 0; }
+        .mind-dump-textarea {
+            width: 100%;
+            min-height: 200px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            color: #e8eaed;
+            font-family: inherit;
+            font-size: 0.875rem;
+            line-height: 1.65;
+            padding: 14px 16px;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .mind-dump-textarea::placeholder { color: #374151; }
+        .mind-dump-textarea:focus { border-color: rgba(99, 102, 241, 0.45); }
+        .mind-dump-saved { font-size: 0.72rem; color: #4b5563; margin-top: 6px; min-height: 16px; }
+
         @media print {
             body, body::before { background: none !important; color: #000 !important; }
             .container { max-width: 100%; padding: 0; }
@@ -341,6 +492,37 @@
             .bill-amount.zero { color: #555 !important; }
             .bill-row.cancelled { opacity: 0.6 !important; }
             .month-section { break-inside: avoid; }
+
+            /* Expand all collapsed groups for print */
+            .group-body.is-collapsed {
+                max-height: 9999px !important;
+                opacity: 1 !important;
+            }
+            .mind-dump-wrap.is-collapsed .mind-dump-body {
+                max-height: 9999px !important;
+            }
+            .group-toggle, .mind-dump-toggle { display: none !important; }
+            .group-label, .mind-dump-title { color: #000 !important; }
+            .group-line, .mind-dump-line { background: #ccc !important; }
+            .group-count { color: #555 !important; }
+            .mind-dump-textarea {
+                background: none !important;
+                border: 1px solid #ccc !important;
+                color: #000 !important;
+                resize: none !important;
+                min-height: unset !important;
+            }
+            .mind-dump-saved { display: none !important; }
+            .capture-card {
+                background: none !important;
+                border: 1px solid #ccc !important;
+            }
+            .capture-card-name { color: #000 !important; }
+            .capture-card-notes { color: #444 !important; }
+            .capture-card-action { color: #000 !important; background: none !important; border-color: #999 !important; }
+            .capture-title { color: #000 !important; }
+            .capture-date { color: #555 !important; }
+            .capture-line { background: #ccc !important; }
         }
         </style>
     </head>
@@ -353,6 +535,8 @@
                 <p>Subscriptions, renewals, and action items</p>
             </header>
 
+            <div id="captureSection"></div>
+
             <div class="controls">
                 <input id="searchInput" type="search" placeholder="Search...">
                 <select id="statusFilter">
@@ -361,6 +545,7 @@
                     <option value="overdue">Overdue</option>
                     <option value="ok">OK</option>
                 </select>
+                <button onclick="window.print()" style="background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.2);color:#9ca3af;padding:8px 14px;border-radius:8px;font-size:0.875rem;font-family:inherit;cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(99,102,241,0.5)';this.style.color='#e8eaed'" onmouseout="this.style.borderColor='rgba(99,102,241,0.2)';this.style.color='#9ca3af'">Print</button>
             </div>
 
             <div id="remindersSection"></div>
@@ -371,6 +556,18 @@
             <div class="section-title">Bills</div>
             <div class="section-subtitle" id="billsSummary"></div>
             <div id="billsContainer"></div>
+
+            <div class="mind-dump-wrap" id="mindDumpWrap">
+                <div class="mind-dump-header" id="mindDumpHeader">
+                    <span class="mind-dump-toggle">▼</span>
+                    <span class="mind-dump-title">Mind Dump</span>
+                    <div class="mind-dump-line"></div>
+                </div>
+                <div class="mind-dump-body">
+                    <textarea id="mindDumpText" class="mind-dump-textarea" placeholder="Dump thoughts here — sort later..."></textarea>
+                    <div class="mind-dump-saved" id="mindDumpSaved"></div>
+                </div>
+            </div>
         </div>
 
         <script>
@@ -388,8 +585,10 @@
                 await Promise.all([this.loadData(), this.loadBills()]);
                 document.getElementById('searchInput').addEventListener('input', () => this.render());
                 document.getElementById('statusFilter').addEventListener('change', () => this.render());
+                this.renderCapture();
                 this.render();
                 this.renderBills();
+                this.initMindDump();
             }
 
             async loadData() {
@@ -412,6 +611,35 @@
                 }
             }
 
+            renderCapture() {
+                const today = new Date();
+                const todayStr = today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+                const todayKey = today.toISOString().slice(0, 10);
+
+                const items = this.all.filter(i => i.category === 'scratch');
+                const el = document.getElementById('captureSection');
+                if (!items.length) { el.innerHTML = ''; return; }
+
+                const cards = items.map(i => `
+                    <div class="capture-card">
+                        <div class="capture-card-name">${this.escape(i.name || 'Untitled')}</div>
+                        ${i.notes ? `<div class="capture-card-notes">${this.escape(i.notes).replace(/\n/g, '<br>')}</div>` : ''}
+                        ${i.desiredAction ? `<span class="capture-card-action">${this.escape(i.desiredAction)}</span>` : ''}
+                    </div>
+                `).join('');
+
+                el.innerHTML = `
+                    <div class="capture-section">
+                        <div class="capture-header">
+                            <span class="capture-title">Today's Capture</span>
+                            <span class="capture-date">${this.escape(todayStr)}</span>
+                            <div class="capture-line"></div>
+                        </div>
+                        ${cards}
+                    </div>
+                `;
+            }
+
             computeItem(item) {
                 const now = new Date();
                 const renew = item.renewsOn ? new Date(item.renewsOn + 'T00:00:00') : null;
@@ -431,12 +659,12 @@
                 const statusFilter = document.getElementById('statusFilter').value;
 
                 let items = this.all.map(i => this.computeItem(i)).filter(r => {
+                    if (r.category === 'scratch') return false;
                     const matchesQ = !q || (r.name?.toLowerCase().includes(q) || r.vendor?.toLowerCase().includes(q));
                     const matchesStatus = statusFilter === 'all' || r.status === statusFilter;
                     return matchesQ && matchesStatus;
                 });
 
-                // Sort by next date ascending (nulls last), then overdue first
                 items.sort((a, b) => {
                     if (!a.nextDate && !b.nextDate) return 0;
                     if (!a.nextDate) return 1;
@@ -444,19 +672,17 @@
                     return a.nextDate - b.nextDate;
                 });
 
-                // Group by month
-                const groups = new Map();
-                const noDateKey = '__none__';
-                for (const item of items) {
-                    let key;
-                    if (!item.nextDate) {
-                        key = noDateKey;
-                    } else {
-                        key = item.nextDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
-                    }
-                    if (!groups.has(key)) groups.set(key, []);
-                    groups.get(key).push(item);
-                }
+                const groupDefs = [
+                    { key: 'overdue',     label: 'Overdue',     color: '#ef4444' },
+                    { key: 'today',       label: 'Today',       color: '#fbbf24' },
+                    { key: 'this-week',   label: 'This Week',   color: '#818cf8' },
+                    { key: 'this-month',  label: 'This Month',  color: '#6366f1' },
+                    { key: 'later',       label: 'Later',       color: '#4b5563' },
+                    { key: 'no-date',     label: 'No Date',     color: '#4b5563' },
+                ];
+                const buckets = {};
+                for (const g of groupDefs) buckets[g.key] = [];
+                for (const item of items) buckets[this.getTimeGroup(item.daysUntil)].push(item);
 
                 const section = document.getElementById('remindersSection');
                 const countNote = document.getElementById('countNote');
@@ -468,22 +694,69 @@
                 }
 
                 let html = '';
-                for (const [month, monthItems] of groups) {
-                    const label = month === noDateKey ? 'No Date' : month;
+                for (const g of groupDefs) {
+                    const groupItems = buckets[g.key];
+                    if (!groupItems.length) continue;
+                    const collapsed = localStorage.getItem(`reminders_grp_${g.key}`) === '1';
                     html += `
-                        <div class="month-section">
-                            <div class="month-label">
-                                <span class="month-label-text">${this.escape(label)}</span>
-                                <div class="month-label-line"></div>
-                                <span class="month-label-count">${monthItems.length}</span>
+                        <div class="group-section">
+                            <div class="group-header${collapsed ? ' is-collapsed' : ''}" data-gkey="${g.key}">
+                                <span class="group-toggle">▼</span>
+                                <span class="group-label" style="color:${g.color}">${g.label}</span>
+                                <div class="group-line"></div>
+                                <span class="group-count">${groupItems.length}</span>
                             </div>
-                            ${monthItems.map(r => this.renderRow(r)).join('')}
+                            <div class="group-body${collapsed ? ' is-collapsed' : ''}">
+                                ${groupItems.map(r => this.renderRow(r)).join('')}
+                            </div>
                         </div>
                     `;
                 }
 
                 section.innerHTML = html;
                 countNote.textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
+
+                section.querySelectorAll('.group-header').forEach(h => {
+                    h.addEventListener('click', () => {
+                        h.classList.toggle('is-collapsed');
+                        h.nextElementSibling.classList.toggle('is-collapsed');
+                        localStorage.setItem(`reminders_grp_${h.dataset.gkey}`, h.classList.contains('is-collapsed') ? '1' : '0');
+                    });
+                });
+            }
+
+            getTimeGroup(daysUntil) {
+                if (daysUntil === null) return 'no-date';
+                if (daysUntil < 0)  return 'overdue';
+                if (daysUntil === 0) return 'today';
+                if (daysUntil <= 7)  return 'this-week';
+                if (daysUntil <= 30) return 'this-month';
+                return 'later';
+            }
+
+            initMindDump() {
+                const wrap   = document.getElementById('mindDumpWrap');
+                const header = document.getElementById('mindDumpHeader');
+                const ta     = document.getElementById('mindDumpText');
+                const saved  = document.getElementById('mindDumpSaved');
+
+                ta.value = localStorage.getItem('lifeos_mind_dump') || '';
+                if (localStorage.getItem('reminders_mindDump_collapsed') === '1') wrap.classList.add('is-collapsed');
+
+                header.addEventListener('click', () => {
+                    wrap.classList.toggle('is-collapsed');
+                    localStorage.setItem('reminders_mindDump_collapsed', wrap.classList.contains('is-collapsed') ? '1' : '0');
+                });
+
+                let timer;
+                ta.addEventListener('input', () => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => {
+                        localStorage.setItem('lifeos_mind_dump', ta.value);
+                        saved.textContent = 'Saved';
+                        setTimeout(() => { saved.textContent = ''; }, 2000);
+                    }, 600);
+                });
             }
 
             renderRow(r) {

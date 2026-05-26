@@ -588,6 +588,37 @@
             }
         }
 
+        /* Today's Capture + Week Ahead */
+        .dash-capture-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 5px 0;
+            font-size: var(--font-size-sm);
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        .dash-capture-line:last-child { border-bottom: none; }
+        .dash-capture-bullet {
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .dash-week-item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--color-border-light);
+            font-size: var(--font-size-sm);
+        }
+        .dash-week-item:last-child { border-bottom: none; }
+        .dash-week-name { font-weight: 500; color: var(--color-text); }
+        .dash-week-action { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 2px; }
+        .dash-week-date { font-size: var(--font-size-xs); color: var(--color-text-muted); white-space: nowrap; text-align: right; }
+        .dash-week-rel { font-size: 10px; text-align: right; margin-top: 2px; }
+
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -718,6 +749,28 @@
 
             <main class="main-content">
                 <div class="main-inner">
+                    <!-- TODAY'S CAPTURE + WEEK AHEAD -->
+                    <div style="display: grid; grid-template-columns: 3fr 2fr; gap: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+                        <section class="panel" style="margin-bottom: 0; border-color: #5a4a3a; border-width: 2px;">
+                            <div class="panel-header" style="border-bottom: 1px solid var(--color-border-light); padding-bottom: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div>
+                                    <h2 class="panel-title">Today's Capture</h2>
+                                    <p class="panel-description" id="dashCaptureDate"></p>
+                                </div>
+                            </div>
+                            <div id="dashCaptureBody"></div>
+                        </section>
+                        <section class="panel" style="margin-bottom: 0;">
+                            <div class="panel-header" style="border-bottom: 1px solid var(--color-border-light); padding-bottom: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                <div>
+                                    <h2 class="panel-title">Week Ahead</h2>
+                                    <p class="panel-description">Reminders & tasks due soon</p>
+                                </div>
+                            </div>
+                            <div id="dashWeekAheadBody"></div>
+                        </section>
+                    </div>
+
                     <!-- MAY 2026 SNAPSHOT -->
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--spacing-xl);">
                         <div>
@@ -1213,10 +1266,90 @@
             grid.innerHTML = html;
         }
 
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = String(text ?? '');
+            return d.innerHTML;
+        }
+
+        async function loadDashCapture() {
+            let all = [];
+            try {
+                const res = await fetch('/data/reminders.json');
+                all = await res.json();
+            } catch(e) {
+                document.getElementById('dashCaptureBody').innerHTML = '<div style="font-size:var(--font-size-sm);color:#8b4513;">Could not load reminders.</div>';
+                return;
+            }
+
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            document.getElementById('dashCaptureDate').textContent =
+                today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+            // Today's Capture
+            const scratch = all.filter(i => i.category === 'scratch');
+            const captureBody = document.getElementById('dashCaptureBody');
+            if (!scratch.length) {
+                captureBody.innerHTML = '<div style="font-size:var(--font-size-sm);color:var(--color-text-muted);font-style:italic;">Nothing captured yet.</div>';
+            } else {
+                let html = '';
+                for (const item of scratch) {
+                    if (item.notes) {
+                        const lines = item.notes.split('\n').filter(l => l.trim());
+                        html += lines.map(line => `
+                            <div class="dash-capture-line">
+                                <span class="dash-capture-bullet">—</span>
+                                <span>${escapeHtml(line.replace(/^—\s*/, ''))}</span>
+                            </div>
+                        `).join('');
+                    }
+                }
+                captureBody.innerHTML = html || '<div style="font-size:var(--font-size-sm);color:var(--color-text-muted);">No notes.</div>';
+            }
+
+            // Week Ahead (next 14 days)
+            const in14 = new Date(today);
+            in14.setDate(today.getDate() + 14);
+
+            const upcoming = all
+                .filter(i => i.category !== 'scratch')
+                .map(i => {
+                    const raw = i.renewsOn || i.actionOnOrAfter || null;
+                    const d = raw ? new Date(raw + 'T00:00:00') : null;
+                    return { ...i, _date: d };
+                })
+                .filter(i => i._date && i._date >= today && i._date <= in14)
+                .sort((a, b) => a._date - b._date);
+
+            const weekBody = document.getElementById('dashWeekAheadBody');
+            if (!upcoming.length) {
+                weekBody.innerHTML = '<div style="font-size:var(--font-size-sm);color:var(--color-text-muted);font-style:italic;">Nothing in the next 14 days.</div>';
+            } else {
+                weekBody.innerHTML = upcoming.map(i => {
+                    const dateLabel = i._date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    const daysUntil = Math.ceil((i._date - today) / 86400000);
+                    const daysLabel = daysUntil === 0 ? 'today' : daysUntil === 1 ? 'tomorrow' : `in ${daysUntil}d`;
+                    const urgent = daysUntil <= 3;
+                    return `<div class="dash-week-item">
+                        <div style="min-width:0;">
+                            <div class="dash-week-name">${escapeHtml(i.name || '')}</div>
+                            ${i.desiredAction ? `<div class="dash-week-action">${escapeHtml(i.desiredAction)}</div>` : ''}
+                        </div>
+                        <div style="flex-shrink:0;">
+                            <div class="dash-week-date">${dateLabel}</div>
+                            <div class="dash-week-rel" style="color:${urgent ? '#8b4513' : 'var(--color-text-muted)'};">${daysLabel}</div>
+                        </div>
+                    </div>`;
+                }).join('');
+            }
+        }
+
         // App initialization
         function initApp() {
             loadTimeline();
             loadWeek();
+            loadDashCapture();
             // Collapsible sections
             document.querySelectorAll('.panel-header').forEach(header => {
                 header.addEventListener('click', function() {
