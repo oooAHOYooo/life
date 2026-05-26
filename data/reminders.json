@@ -1,21 +1,5 @@
 [
   {
-    "id": "film-jerrys-tonight",
-    "category": "filmmaking",
-    "name": "Jerry's House — Tonight",
-    "vendor": "Film Project",
-    "planName": "Location Prep",
-    "purchaseDate": "2026-05-26",
-    "renewsOn": "2026-05-26",
-    "billingPeriod": "Once",
-    "url": "",
-    "notes": "Bring: PC square, lighting, basic broom. Spend ~25 min cleaning and doing a first pass on the space.",
-    "desiredAction": "Go tonight, clean 25 min",
-    "actionPolicy": "at_or_after_date",
-    "actionOnOrAfter": "2026-05-26",
-    "notifyDaysBefore": 1
-  },
-  {
     "id": "film-jerrys-tomorrow",
     "category": "filmmaking",
     "name": "Jerry's House — Tomorrow (May 27)",
@@ -121,7 +105,7 @@
     "renewsOn": "",
     "billingPeriod": "Once",
     "url": "",
-    "notes": "— Jerry's house TONIGHT: bring PC square, lighting, broom — 25 min clean\n— Film project: June 7 & 9 shoot days at Jerry's. House needs cleaning/propping. Scene 002 = Dallas exploring neighborhood. Day 1 = some of 002 + walking b-roll. Suitcase shot idea (cheesy?). Computer visuals not locked. Wardrobes not locked. Need to decide how much of 002 to break into Day 1 vs Day 2.\n— Podcast: need to do it\n— CPC web app: drastically improve it\n— Tallboyz: put a new video on for something with Ahoy\n— Poets #11: coordinate filming and audio recording\n— Date night: thinking about seeing a movie later — figure out what's playing",
+    "notes": "— Podcast: ✓ done\n— CPC web app: drastically improve it\n— Tallboyz: put a new video on for something with Ahoy (try quickly before date night)\n— Poets #11: coordinate filming and audio recording\n— Date night: planning\n\nTOMORROW (May 27): Visit Jerry's house with lights for location prep.",
     "desiredAction": "Sort and organize",
     "actionPolicy": "at_or_after_date",
     "actionOnOrAfter": "2026-05-26",
