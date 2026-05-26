@@ -16,6 +16,22 @@
     "notifyDaysBefore": 1
   },
   {
+    "id": "film-jerrys-tomorrow",
+    "category": "filmmaking",
+    "name": "Jerry's House — Tomorrow (May 27)",
+    "vendor": "Film Project",
+    "planName": "Location Prep",
+    "purchaseDate": "2026-05-26",
+    "renewsOn": "2026-05-27",
+    "billingPeriod": "Once",
+    "url": "",
+    "notes": "Visit Jerry's house. Bring lights for location prep.",
+    "desiredAction": "Visit and bring lights",
+    "actionPolicy": "at_or_after_date",
+    "actionOnOrAfter": "2026-05-27",
+    "notifyDaysBefore": 0
+  },
+  {
     "id": "film-location-prep",
     "category": "filmmaking",
     "name": "Film Prep: Clean & Prop Jerry's House",
