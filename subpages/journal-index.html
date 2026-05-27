@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal — LifeOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-text: #292929;
+            --color-text-muted: #757575;
+            --color-bg: #ffffff;
+            --color-accent: #8b4513;
+            --font-serif: 'Lora', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .navbar {
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .navbar-content {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--color-text); }
+
+        .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .page-header {
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--color-text-muted);
+        }
+
+        .new-entry-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--color-accent);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .new-entry-btn:hover { opacity: 0.85; }
+
+        .month-group {
+            margin-bottom: 40px;
+        }
+
+        .month-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .entry-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .entry-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f7f7f7;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: background 0.15s;
+            border-radius: 6px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .entry-row:hover { background: #fdf6f0; }
+
+        .entry-date-chip {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-accent);
+            background: #fdf6f0;
+            border: 1px solid #e8d5c4;
+            border-radius: 4px;
+            padding: 2px 8px;
+            white-space: nowrap;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .entry-title {
+            font-size: 16px;
+            font-family: var(--font-serif);
+            flex: 1;
+        }
+
+        .entry-arrow {
+            font-size: 14px;
+            color: #ccc;
+        }
+        .entry-row:hover .entry-arrow { color: var(--color-accent); }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--color-text-muted);
+        }
+
+        .how-to {
+            margin-top: 60px;
+            padding: 24px;
+            background: #fafafa;
+            border-radius: 10px;
+            border: 1px solid #efefef;
+        }
+        .how-to h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-text-muted);
+            margin-bottom: 12px;
+        }
+        .how-to ol {
+            padding-left: 20px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            line-height: 2;
+        }
+        .how-to code {
+            background: #efefef;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: var(--color-text);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="../index.html" class="navbar-brand">LifeOS</a>
+            <a href="../index.html" class="back-link">← Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1 class="page-title">Journal</h1>
+            <p class="page-subtitle" id="entryCount">Loading entries...</p>
+        </div>
+
+        <div id="journalList"><p class="empty-state">Loading...</p></div>
+
+        <div class="how-to">
+            <h3>Adding a New Entry</h3>
+            <ol>
+                <li>Create <code>data/journal/YYYY-MM-DD-slug.md</code></li>
+                <li>Add one line to <code>data/journal/manifest.json</code> at the top</li>
+                <li>Done — it appears here automatically</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        async function loadIndex() {
+            try {
+                const res = await fetch('../data/journal/manifest.json');
+                const entries = await res.json();
+
+                document.getElementById('entryCount').textContent =
+                    `${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}`;
+
+                // Group by month
+                const groups = {};
+                for (const entry of entries) {
+                    const d = new Date(entry.date + 'T12:00:00');
+                    const key = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                    if (!groups[key]) groups[key] = [];
+                    groups[key].push(entry);
+                }
+
+                const container = document.getElementById('journalList');
+                container.innerHTML = '';
+
+                for (const [month, items] of Object.entries(groups)) {
+                    const group = document.createElement('div');
+                    group.className = 'month-group';
+                    group.innerHTML = `<div class="month-label">${month}</div><div class="entry-list"></div>`;
+
+                    const list = group.querySelector('.entry-list');
+                    for (const entry of items) {
+                        const d = new Date(entry.date + 'T12:00:00');
+                        const dayLabel = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        const link = document.createElement('a');
+                        link.className = 'entry-row';
+                        link.href = `journal.html?file=${entry.file}`;
+                        link.innerHTML = `
+                            <span class="entry-date-chip">${dayLabel}</span>
+                            <span class="entry-title">${entry.title.replace(/^[A-Za-z]+ \d+ — /, '')}</span>
+                            <span class="entry-arrow">→</span>
+                        `;
+                        list.appendChild(link);
+                    }
+                    container.appendChild(group);
+                }
+            } catch (err) {
+                document.getElementById('journalList').innerHTML =
+                    '<p class="empty-state">Could not load journal entries.</p>';
+            }
+        }
+
+        loadIndex();
+    </script>
+</body>
+</html>
