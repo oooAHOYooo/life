@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Poems - LifeOS</title>
+        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../design-system.css">
+        <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .toggle-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .poem-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .poem-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .poem-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #34495e;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .markdown-view {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .markdown-view pre {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #34495e;
+        }
+
+        .poems-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to Home</a>
+
+            <div class="header-controls">
+                <h1>Poems</h1>
+                <div class="view-toggle">
+                    <button class="toggle-btn active" data-view="formatted">Formatted View</button>
+                    <button class="toggle-btn" data-view="source">Source (Markdown)</button>
+                </div>
+            </div>
+
+            <div id="formatted-view" class="poems-grid">
+                <div class="poem-container">
+                    <h2 class="poem-title">Dandy Dandy Dandy</h2>
+                    <div class="poem-text">Dandy Dandy Dandy
+was the name upon the game
+i got it used in Branford
+and i've never been the same
+it had a box so dented
+I mistook it for some trash
+but after playing dandy dandy i learned
+it's quite the bash
+
+Dandy Dandy Dandy
+was a hit among the fam
+we played it after coffee and the stew and christmas ham
+you start with just the two of spades
+and roll a little die
+you roll and roll and roll and roll - until the snake eyes cry
+
+oh Dandy dandy dandy
+is a game of quiet skill
+you take a turn and kill a queen and
+shout "Happy Daffadills"
+Dandy Dandy Dandy
+got its start in rural Spain
+
+Dandy Dandy Dandy
+
+some snake eyes or some boxcars you could start the bloody bout
+move a knight into the rook
+
+but inside, it was certain,
+
+and in it was a board a square or two
+you could play it solo dolo, but three or more to vandaluew
+
+Dandy Dandy Dandy
+was a hit amoung the fam
+we played it over coffee after</div>
+                </div>
+            </div>
+
+            <div id="source-view" class="markdown-view hidden">
+                <pre id="markdown-content"></pre>
+            </div>
+        </div>
+
+        <script>
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        const formattedView = document.getElementById('formatted-view');
+        const sourceView = document.getElementById('source-view');
+        const markdownContent = document.getElementById('markdown-content');
+
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const view = this.getAttribute('data-view');
+
+                // Update active button
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Toggle views
+                if (view === 'formatted') {
+                    formattedView.classList.remove('hidden');
+                    sourceView.classList.add('hidden');
+                } else {
+                    formattedView.classList.add('hidden');
+                    sourceView.classList.remove('hidden');
+
+                    // Load markdown if not already loaded
+                    if (!markdownContent.textContent) {
+                        fetch('../poems/poems-source.md')
+                            .then(response => response.text())
+                            .then(text => {
+                                markdownContent.textContent = text;
+                            })
+                            .catch(error => {
+                                markdownContent.textContent = 'Error loading source file: ' + error;
+                            });
+                    }
+                }
+            });
+        });
+        </script>
+    </body>
+</html>
