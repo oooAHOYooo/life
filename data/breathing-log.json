@@ -1,0 +1,11 @@
+[
+  {
+    "id": "bl-001",
+    "datetime": "2026-06-25T10:20:00",
+    "severity": "moderate",
+    "notes": "Feeling short of breath",
+    "triggers": [],
+    "duration_minutes": null,
+    "relief": null
+  }
+]

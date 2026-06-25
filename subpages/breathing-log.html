@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyspnea Symptom Log — LifeOS Health</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <style>
+    /* ── Base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+        --navy:      #0d1b2e;
+        --navy-mid:  #122237;
+        --navy-card: #162b40;
+        --border:    rgba(255,255,255,0.09);
+        --border-hi: rgba(99,179,237,0.35);
+        --teal:      #63b3ed;
+        --teal-dim:  rgba(99,179,237,0.12);
+        --green:     #68d391;
+        --green-dim: rgba(104,211,145,0.12);
+        --amber:     #f6ad55;
+        --amber-dim: rgba(246,173,85,0.12);
+        --red:       #fc8181;
+        --red-dim:   rgba(252,129,129,0.12);
+        --text:      #e2e8f0;
+        --text-mid:  #a0aec0;
+        --text-dim:  #4a5568;
+        --radius:    10px;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, sans-serif;
+        background: var(--navy);
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.5;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 20px 80px;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 28px;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--teal); }
+
+    /* ── Clinical Header ── */
+    .clinical-header {
+        background: var(--navy-card);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--teal);
+        border-radius: var(--radius);
+        padding: 22px 28px;
+        margin-bottom: 22px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .clinical-header-left h1 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.02em;
+    }
+    .clinical-header-left p {
+        font-size: 0.8rem;
+        color: var(--text-mid);
+        margin-top: 2px;
+        font-style: italic;
+    }
+    .patient-fields {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .patient-field label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-dim);
+        display: block;
+        margin-bottom: 3px;
+    }
+    .patient-field input {
+        background: var(--navy-mid);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 6px 10px;
+        color: var(--text);
+        font-size: 0.85rem;
+        font-family: inherit;
+        width: 160px;
+        outline: none;
+    }
+    .patient-field input:focus { border-color: var(--teal); }
+    .patient-field input::placeholder { color: var(--text-dim); }
+
+    .btn-print {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 16px;
+        border-radius: 7px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        border: 1px solid var(--border-hi);
+        background: var(--teal-dim);
+        color: var(--teal);
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    .btn-print:hover { background: rgba(99,179,237,0.22); }
+
+    /* ── Stats Grid ── */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 12px;
+        margin-bottom: 22px;
+    }
+    .stat-card {
+        background: var(--navy-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        text-align: center;
+    }
+    .stat-card .s-val {
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 3px;
+    }
+    .stat-card .s-lbl {
+        font-size: 0.72rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-mid);
+    }
+    .stat-card .s-sub {
+        font-size: 0.72rem;
+        color: var(--text-dim);
+        margin-top: 2px;
+    }
+    .c-teal  { color: var(--teal); }
+    .c-green { color: var(--green); }
+    .c-amber { color: var(--amber); }
+    .c-red   { color: var(--red); }
+
+    /* ── Section ── */
+    .section {
+        background: var(--navy-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 18px;
+        overflow: hidden;
+    }
+    .section-head {
+        padding: 13px 20px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .section-head h2 {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-mid);
+    }
+    .section-head .section-badge {
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 20px;
+        background: var(--teal-dim);
+        color: var(--teal);
+        font-weight: 600;
+    }
+    .section-body { padding: 20px; }
+
+    /* ── Form ── */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+    .form-grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+    @media (max-width: 640px) {
+        .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+    }
+
+    .field label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-mid);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 5px;
+    }
+    .field label .req { color: var(--red); font-size: 0.7rem; }
+    .field label .unit {
+        font-size: 0.67rem;
+        color: var(--text-dim);
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+
+    input[type="datetime-local"],
+    input[type="text"],
+    input[type="number"],
+    select, textarea {
+        width: 100%;
+        background: var(--navy-mid);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 9px 12px;
+        color: var(--text);
+        font-size: 0.88rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        -webkit-appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(99,179,237,0.12);
+    }
+    select option { background: #1a2b3c; color: var(--text); }
+    textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+    input::placeholder { color: var(--text-dim); }
+
+    /* ── Borg Scale ── */
+    .borg-wrap { margin-bottom: 14px; }
+    .borg-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-mid);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .borg-ref {
+        font-size: 0.65rem;
+        color: var(--text-dim);
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+    .borg-scale {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+    .borg-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        background: var(--navy-mid);
+        color: var(--text-mid);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .borg-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .borg-btn.selected { border-color: var(--teal); background: var(--teal-dim); color: var(--teal); }
+    .borg-btn[data-v="7"],.borg-btn[data-v="8"],.borg-btn[data-v="9"],.borg-btn[data-v="10"] {
+        border-color: rgba(252,129,129,0.3);
+    }
+    .borg-btn[data-v="7"].selected,.borg-btn[data-v="8"].selected,
+    .borg-btn[data-v="9"].selected,.borg-btn[data-v="10"].selected {
+        border-color: var(--red); background: var(--red-dim); color: var(--red);
+    }
+    .borg-btn[data-v="4"],.borg-btn[data-v="5"],.borg-btn[data-v="6"] {
+        border-color: rgba(246,173,85,0.25);
+    }
+    .borg-btn[data-v="4"].selected,.borg-btn[data-v="5"].selected,.borg-btn[data-v="6"].selected {
+        border-color: var(--amber); background: var(--amber-dim); color: var(--amber);
+    }
+    .borg-desc {
+        font-size: 0.77rem;
+        color: var(--text-mid);
+        margin-top: 6px;
+        min-height: 18px;
+        font-style: italic;
+    }
+
+    /* ── Symptom Checklist ── */
+    .symptom-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+    .symptom-chip {
+        padding: 6px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: var(--navy-mid);
+        color: var(--text-mid);
+        font-size: 0.78rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s;
+        user-select: none;
+    }
+    .symptom-chip:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .symptom-chip.active { border-color: var(--amber); background: var(--amber-dim); color: var(--amber); }
+
+    /* ── Submit Row ── */
+    .submit-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-top: 6px;
+        border-top: 1px solid var(--border);
+        margin-top: 4px;
+    }
+    .btn-log {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        border: 1px solid rgba(104,211,145,0.45);
+        background: var(--green-dim);
+        color: var(--green);
+        transition: all 0.2s;
+    }
+    .btn-log:hover { background: rgba(104,211,145,0.2); }
+    .btn-log-note {
+        font-size: 0.75rem;
+        color: var(--text-dim);
+    }
+
+    /* ── Trend Chart ── */
+    .trend-wrap { padding: 16px 20px 18px; }
+    .trend-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 6px;
+        height: 80px;
+        margin-bottom: 6px;
+    }
+    .trend-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+    }
+    .trend-bar {
+        width: 100%;
+        background: var(--teal-dim);
+        border: 1px solid rgba(99,179,237,0.25);
+        border-radius: 4px 4px 0 0;
+        min-height: 3px;
+        transition: height 0.3s;
+        position: relative;
+    }
+    .trend-bar.has-severe { background: rgba(252,129,129,0.18); border-color: rgba(252,129,129,0.3); }
+    .trend-bar:hover .trend-tooltip { opacity: 1; }
+    .trend-tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1e3a50;
+        border: 1px solid var(--border-hi);
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        color: var(--text);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.15s;
+        margin-bottom: 4px;
+        z-index: 10;
+    }
+    .trend-lbl {
+        font-size: 0.62rem;
+        color: var(--text-dim);
+        text-align: center;
+    }
+
+    /* ── Episode Table ── */
+    .ep-table-wrap { overflow-x: auto; }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+    }
+    thead th {
+        padding: 9px 12px;
+        text-align: left;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-dim);
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+    }
+    tbody tr {
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        transition: background 0.15s;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.025); }
+    tbody tr:last-child { border-bottom: none; }
+    td {
+        padding: 11px 12px;
+        vertical-align: top;
+        color: var(--text);
+    }
+    td.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+
+    .borg-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 0.88rem;
+    }
+    .borg-low  { background: var(--green-dim); color: var(--green); }
+    .borg-mid  { background: var(--amber-dim); color: var(--amber); }
+    .borg-high { background: var(--red-dim); color: var(--red); }
+
+    .spo2-val {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+    }
+    .spo2-ok   { color: var(--green); }
+    .spo2-warn { color: var(--amber); }
+    .spo2-low  { color: var(--red); }
+
+    .chip-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .chip {
+        font-size: 0.68rem;
+        padding: 2px 7px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.06);
+        color: var(--text-mid);
+    }
+
+    .btn-del {
+        background: none;
+        border: 1px solid rgba(252,129,129,0.2);
+        border-radius: 5px;
+        color: var(--red);
+        font-size: 0.72rem;
+        padding: 3px 8px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+    }
+    .btn-del:hover { background: var(--red-dim); border-color: rgba(252,129,129,0.5); }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-dim);
+        font-size: 0.88rem;
+    }
+
+    /* ── Toast ── */
+    .toast {
+        position: fixed;
+        bottom: 28px;
+        right: 24px;
+        background: var(--navy-card);
+        border: 1px solid rgba(104,211,145,0.45);
+        color: var(--green);
+        padding: 10px 18px;
+        border-radius: 9px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: all 0.3s;
+        pointer-events: none;
+        z-index: 200;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ── Print Styles ── */
+    @media print {
+        body { background: #fff; color: #111; font-size: 11pt; }
+        .back-link, .btn-print, .btn-log, .btn-del,
+        .section:nth-child(3), /* hide form section */
+        .submit-row { display: none !important; }
+        .clinical-header { border-top-color: #1a365d; background: #f7fafc; border-color: #e2e8f0; page-break-inside: avoid; }
+        .clinical-header-left h1 { color: #1a365d; }
+        .section { border-color: #e2e8f0; background: #fff; page-break-inside: avoid; }
+        .section-head { background: #f7fafc; border-color: #e2e8f0; }
+        .section-head h2 { color: #4a5568; }
+        td, th { color: #111 !important; border-color: #e2e8f0 !important; }
+        .stat-card { background: #f7fafc; border-color: #e2e8f0; }
+        .print-disclaimer {
+            display: block !important;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 0.8rem;
+            color: #4a5568;
+            background: #fffbeb;
+        }
+        .borg-pill, .spo2-val { color: #111 !important; background: #f0f0f0 !important; }
+        .chip { background: #eee; color: #333; }
+        .patient-field input { border: none; border-bottom: 1px solid #ccc; border-radius: 0; background: transparent; color: #111; }
+    }
+
+    .print-disclaimer { display: none; }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <a href="../index.html" class="back-link">← Back to LifeOS</a>
+
+    <!-- Print disclaimer (only visible when printing) -->
+    <div class="print-disclaimer">
+        <strong>Patient-Generated Health Data — For Clinical Reference Only.</strong>
+        This log was self-reported using a personal symptom tracking application and has not been reviewed or validated by a healthcare provider. Data should be interpreted in clinical context. SpO2 and HR values, if recorded, were captured using consumer-grade devices and are not equivalent to clinical measurements.
+    </div>
+
+    <!-- Clinical Header -->
+    <div class="clinical-header">
+        <div class="clinical-header-left">
+            <h1>Dyspnea Symptom Log</h1>
+            <p>Shortness of breath / breathing difficulty — patient-reported symptom record</p>
+        </div>
+        <div class="patient-fields">
+            <div class="patient-field">
+                <label>Patient Name</label>
+                <input type="text" id="patientName" placeholder="Your name" oninput="saveMeta()">
+            </div>
+            <div class="patient-field">
+                <label>DOB</label>
+                <input type="text" id="patientDob" placeholder="MM/DD/YYYY" style="width:130px" oninput="saveMeta()">
+            </div>
+            <div class="patient-field">
+                <label>Physician</label>
+                <input type="text" id="patientDoc" placeholder="Dr. Name" oninput="saveMeta()">
+            </div>
+            <button class="btn-print" onclick="window.print()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+                Print / Export PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <!-- Trend -->
+    <div class="section">
+        <div class="section-head">
+            <h2>Episode Frequency — Last 8 Weeks</h2>
+        </div>
+        <div class="trend-wrap">
+            <div class="trend-bars" id="trendBars"></div>
+            <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
+                <span style="display:flex; align-items:center; gap:4px; font-size:0.7rem; color:var(--text-dim);">
+                    <span style="display:inline-block; width:10px; height:10px; border-radius:3px; background:var(--teal-dim); border:1px solid rgba(99,179,237,0.25);"></span> Episodes
+                </span>
+                <span style="display:flex; align-items:center; gap:4px; font-size:0.7rem; color:var(--text-dim);">
+                    <span style="display:inline-block; width:10px; height:10px; border-radius:3px; background:rgba(252,129,129,0.18); border:1px solid rgba(252,129,129,0.3);"></span> Includes severe
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Log Form -->
+    <div class="section" id="formSection">
+        <div class="section-head">
+            <h2>Record New Episode</h2>
+            <span class="section-badge">New Entry</span>
+        </div>
+        <div class="section-body">
+
+            <div class="form-grid">
+                <div class="field">
+                    <label>Onset Date &amp; Time <span class="req">*</span></label>
+                    <input type="datetime-local" id="epDatetime">
+                </div>
+                <div class="field">
+                    <label>Duration <span class="unit">(minutes, approximate)</span></label>
+                    <input type="number" id="epDuration" min="1" placeholder="e.g. 15">
+                </div>
+            </div>
+
+            <!-- Borg Scale -->
+            <div class="borg-wrap">
+                <div class="borg-label">
+                    Modified Borg Dyspnea Scale <span class="req">*</span>
+                    <span class="borg-ref">— validated clinical scale for perceived breathlessness</span>
+                </div>
+                <div class="borg-scale" id="borgScale"></div>
+                <div class="borg-desc" id="borgDesc">Select a rating above</div>
+            </div>
+
+            <div class="form-grid-3">
+                <div class="field">
+                    <label>SpO<sub>2</sub> <span class="unit">% — if measured</span></label>
+                    <input type="number" id="epSpo2" min="70" max="100" placeholder="e.g. 97">
+                </div>
+                <div class="field">
+                    <label>Heart Rate <span class="unit">bpm — if measured</span></label>
+                    <input type="number" id="epHr" min="30" max="250" placeholder="e.g. 88">
+                </div>
+                <div class="field">
+                    <label>Respiratory Rate <span class="unit">breaths/min</span></label>
+                    <input type="number" id="epRr" min="5" max="60" placeholder="e.g. 22">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="field">
+                    <label>Activity at Onset</label>
+                    <select id="epActivity">
+                        <option value="">— select —</option>
+                        <option value="rest">At rest / sitting</option>
+                        <option value="lying">Lying down</option>
+                        <option value="light">Light activity (slow walk, standing)</option>
+                        <option value="moderate">Moderate activity (walking pace)</option>
+                        <option value="exertion">Exertion (stairs, brisk walk)</option>
+                        <option value="sleep">Woke from sleep</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Relief / Resolution</label>
+                    <select id="epRelief">
+                        <option value="">— select —</option>
+                        <option value="spontaneous">Resolved spontaneously</option>
+                        <option value="rest">Rest</option>
+                        <option value="position">Position change</option>
+                        <option value="inhaler">Rescue inhaler</option>
+                        <option value="fresh-air">Fresh air</option>
+                        <option value="breathing-ex">Breathing exercises</option>
+                        <option value="medication">Other medication</option>
+                        <option value="unresolved">Did not fully resolve</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Associated Symptoms -->
+            <div class="field" style="margin-bottom:14px;">
+                <label>Associated Symptoms <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-dim);">(select all that apply)</span></label>
+                <div class="symptom-grid" id="symptomChips">
+                    <span class="symptom-chip" data-sym="Chest tightness">Chest tightness</span>
+                    <span class="symptom-chip" data-sym="Chest pain">Chest pain</span>
+                    <span class="symptom-chip" data-sym="Wheezing">Wheezing</span>
+                    <span class="symptom-chip" data-sym="Cough">Cough</span>
+                    <span class="symptom-chip" data-sym="Dizziness">Dizziness</span>
+                    <span class="symptom-chip" data-sym="Fatigue">Fatigue</span>
+                    <span class="symptom-chip" data-sym="Palpitations">Palpitations</span>
+                    <span class="symptom-chip" data-sym="Ankle swelling">Ankle swelling</span>
+                    <span class="symptom-chip" data-sym="Nausea">Nausea</span>
+                    <span class="symptom-chip" data-sym="Cyanosis (bluish lips/fingers)">Cyanosis</span>
+                    <span class="symptom-chip" data-sym="Anxiety">Anxiety</span>
+                    <span class="symptom-chip" data-sym="Difficulty speaking">Difficulty speaking</span>
+                </div>
+            </div>
+
+            <!-- Possible Triggers -->
+            <div class="field" style="margin-bottom:14px;">
+                <label>Possible Triggers <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-dim);">(select all that apply)</span></label>
+                <div class="symptom-grid" id="triggerChips">
+                    <span class="symptom-chip" data-sym="Physical exertion">Exertion</span>
+                    <span class="symptom-chip" data-sym="Emotional stress / anxiety">Stress / anxiety</span>
+                    <span class="symptom-chip" data-sym="Cold air">Cold air</span>
+                    <span class="symptom-chip" data-sym="Hot / humid weather">Heat / humidity</span>
+                    <span class="symptom-chip" data-sym="Allergens">Allergens</span>
+                    <span class="symptom-chip" data-sym="Smoke / fumes">Smoke / fumes</span>
+                    <span class="symptom-chip" data-sym="Lying flat">Lying flat</span>
+                    <span class="symptom-chip" data-sym="After eating">After eating</span>
+                    <span class="symptom-chip" data-sym="Unknown / no apparent trigger">Unknown</span>
+                </div>
+            </div>
+
+            <!-- Medications -->
+            <div class="form-grid" style="margin-bottom:14px;">
+                <div class="field">
+                    <label>Medications Taken During Episode</label>
+                    <input type="text" id="epMeds" placeholder="e.g. albuterol inhaler, none">
+                </div>
+                <div class="field">
+                    <label>Current Relevant Medications</label>
+                    <input type="text" id="epCurrentMeds" placeholder="e.g. lisinopril, metoprolol">
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="field" style="margin-bottom:18px;">
+                <label>Clinical Notes <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-dim);">— narrative description of the episode</span></label>
+                <textarea id="epNotes" placeholder="Describe what you were doing when it started, how it felt, any environmental factors, and how it resolved. More detail helps your doctor identify patterns."></textarea>
+            </div>
+
+            <div class="submit-row">
+                <button class="btn-log" onclick="addEntry()">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    Save Episode
+                </button>
+                <span class="btn-log-note">Saved locally to this device · share via Print → PDF to your doctor</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Episode Log -->
+    <div class="section">
+        <div class="section-head">
+            <h2>Episode History</h2>
+            <span class="section-badge" id="histBadge">0 records</span>
+        </div>
+        <div class="ep-table-wrap">
+            <table id="epTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date / Time</th>
+                        <th>Borg</th>
+                        <th>SpO<sub>2</sub></th>
+                        <th>HR</th>
+                        <th>Activity</th>
+                        <th>Associated Symptoms</th>
+                        <th>Triggers</th>
+                        <th>Relief</th>
+                        <th>Duration</th>
+                        <th>Notes</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="epTbody"></tbody>
+            </table>
+            <div class="empty-state" id="emptyState" style="display:none;">No episodes logged yet. Record your first episode above.</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="toast" id="toast">Episode saved</div>
+
+<script>
+const DATA_KEY  = 'breathingLog_v2';
+const META_KEY  = 'breathingLogMeta_v1';
+
+const BORG_LABELS = {
+    0:  'Nothing at all',
+    1:  'Very light — barely noticeable',
+    2:  'Light — slight awareness',
+    3:  'Moderate — noticeable, manageable',
+    4:  'Somewhat severe',
+    5:  'Severe — markedly limiting activity',
+    6:  'Between severe and very severe',
+    7:  'Very severe',
+    8:  'Very severe — near maximum',
+    9:  'Very, very severe — near maximal',
+    10: 'Maximal — cannot be greater'
+};
+
+const ACTIVITY_LABELS = {
+    rest: 'At rest', lying: 'Lying down', light: 'Light activity',
+    moderate: 'Moderate activity', exertion: 'Exertion', sleep: 'Woke from sleep'
+};
+
+const RELIEF_LABELS = {
+    spontaneous: 'Spontaneous', rest: 'Rest', position: 'Position change',
+    inhaler: 'Rescue inhaler', 'fresh-air': 'Fresh air',
+    'breathing-ex': 'Breathing exercises', medication: 'Other medication',
+    unresolved: 'Unresolved'
+};
+
+let selectedBorg = null;
+
+// ── Borg scale setup
+function buildBorgScale() {
+    const wrap = document.getElementById('borgScale');
+    for (let i = 0; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'borg-btn';
+        btn.dataset.v = i;
+        btn.textContent = i;
+        btn.onclick = () => selectBorg(i);
+        wrap.appendChild(btn);
+    }
+}
+
+function selectBorg(v) {
+    selectedBorg = v;
+    document.querySelectorAll('.borg-btn').forEach(b => b.classList.toggle('selected', +b.dataset.v === v));
+    document.getElementById('borgDesc').textContent = BORG_LABELS[v] || '';
+}
+
+// ── Symptom / trigger chips
+function initChips(containerId) {
+    document.getElementById(containerId).querySelectorAll('.symptom-chip').forEach(chip => {
+        chip.onclick = () => chip.classList.toggle('active');
+    });
+}
+
+function getActiveChips(containerId) {
+    return [...document.getElementById(containerId).querySelectorAll('.symptom-chip.active')]
+        .map(c => c.dataset.sym);
+}
+
+function clearChips(containerId) {
+    document.getElementById(containerId).querySelectorAll('.symptom-chip').forEach(c => c.classList.remove('active'));
+}
+
+// ── Persistence
+function loadEntries() {
+    const raw = localStorage.getItem(DATA_KEY);
+    return raw ? JSON.parse(raw) : null;
+}
+
+function saveEntries(entries) {
+    localStorage.setItem(DATA_KEY, JSON.stringify(entries));
+}
+
+async function getEntries() {
+    let entries = loadEntries();
+    if (entries === null) {
+        try {
+            const res = await fetch('../data/breathing-log.json');
+            const seed = await res.json();
+            // Migrate old format
+            entries = seed.map((e, i) => ({
+                id: e.id || 'bl-' + i,
+                datetime: e.datetime,
+                borg: null,
+                spo2: null,
+                hr: null,
+                rr: null,
+                activity: null,
+                relief: e.relief || null,
+                symptoms: [],
+                triggers: e.triggers || [],
+                meds: null,
+                currentMeds: null,
+                duration_minutes: e.duration_minutes || null,
+                notes: e.notes || null
+            }));
+            saveEntries(entries);
+        } catch { entries = []; }
+    }
+    return entries;
+}
+
+function saveMeta() {
+    localStorage.setItem(META_KEY, JSON.stringify({
+        name: document.getElementById('patientName').value,
+        dob:  document.getElementById('patientDob').value,
+        doc:  document.getElementById('patientDoc').value
+    }));
+}
+
+function loadMeta() {
+    const raw = localStorage.getItem(META_KEY);
+    if (!raw) return;
+    const m = JSON.parse(raw);
+    document.getElementById('patientName').value = m.name || '';
+    document.getElementById('patientDob').value  = m.dob  || '';
+    document.getElementById('patientDoc').value  = m.doc  || '';
+}
+
+// ── Default datetime
+function setDefaultDatetime() {
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    document.getElementById('epDatetime').value = local.toISOString().slice(0, 16);
+}
+
+// ── Formatting helpers
+function fmtDt(iso) {
+    const d = new Date(iso);
+    return d.toLocaleString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric',
+        hour: 'numeric', minute: '2-digit', hour12: true
+    });
+}
+
+function fmtDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function borgPill(v) {
+    if (v === null || v === undefined) return '<span style="color:var(--text-dim)">—</span>';
+    const cls = v <= 3 ? 'borg-low' : v <= 6 ? 'borg-mid' : 'borg-high';
+    return `<span class="borg-pill ${cls}">${v}</span>`;
+}
+
+function spo2Display(v) {
+    if (!v) return '<span style="color:var(--text-dim)">—</span>';
+    const cls = v >= 95 ? 'spo2-ok' : v >= 90 ? 'spo2-warn' : 'spo2-low';
+    return `<span class="spo2-val ${cls}">${v}%</span>`;
+}
+
+function numVal(id) { return parseInt(document.getElementById(id).value) || null; }
+function strVal(id) { return document.getElementById(id).value.trim() || null; }
+
+// ── Stats
+function renderStats(entries) {
+    const now = new Date();
+    const d7  = new Date(now - 7*24*60*60*1000);
+    const d30 = new Date(now - 30*24*60*60*1000);
+    const last7  = entries.filter(e => new Date(e.datetime) >= d7).length;
+    const last30 = entries.filter(e => new Date(e.datetime) >= d30).length;
+
+    const borgs = entries.map(e => e.borg).filter(b => b !== null && b !== undefined);
+    const avgBorg = borgs.length ? (borgs.reduce((a,b)=>a+b,0)/borgs.length).toFixed(1) : '—';
+
+    const spo2s = entries.map(e => e.spo2).filter(Boolean);
+    const minSpo2 = spo2s.length ? Math.min(...spo2s) : null;
+    const spo2Class = !minSpo2 ? '' : minSpo2 >= 95 ? 'c-green' : minSpo2 >= 90 ? 'c-amber' : 'c-red';
+
+    const severe = entries.filter(e => e.borg !== null && e.borg >= 7).length;
+
+    document.getElementById('statsGrid').innerHTML = `
+        <div class="stat-card">
+            <div class="s-val c-teal">${entries.length}</div>
+            <div class="s-lbl">Total Episodes</div>
+        </div>
+        <div class="stat-card">
+            <div class="s-val c-teal">${last7}</div>
+            <div class="s-lbl">Last 7 Days</div>
+        </div>
+        <div class="stat-card">
+            <div class="s-val">${last30}</div>
+            <div class="s-lbl">Last 30 Days</div>
+        </div>
+        <div class="stat-card">
+            <div class="s-val c-amber">${avgBorg}</div>
+            <div class="s-lbl">Avg Borg Score</div>
+            <div class="s-sub">of recorded</div>
+        </div>
+        <div class="stat-card">
+            <div class="s-val ${spo2Class}">${minSpo2 ? minSpo2 + '%' : '—'}</div>
+            <div class="s-lbl">Lowest SpO₂</div>
+            <div class="s-sub">of recorded</div>
+        </div>
+        <div class="stat-card">
+            <div class="s-val c-red">${severe}</div>
+            <div class="s-lbl">Severe (Borg ≥7)</div>
+        </div>
+    `;
+}
+
+// ── Trend chart
+function renderTrend(entries) {
+    const weeks = 8;
+    const now = new Date();
+    const cols = [];
+
+    for (let w = weeks - 1; w >= 0; w--) {
+        const end   = new Date(now - w * 7 * 24 * 60 * 60 * 1000);
+        const start = new Date(end - 7 * 24 * 60 * 60 * 1000);
+        const wk = entries.filter(e => {
+            const d = new Date(e.datetime);
+            return d >= start && d < end;
+        });
+        const hasSevere = wk.some(e => e.borg !== null && e.borg >= 7);
+        const label = end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        cols.push({ count: wk.length, hasSevere, label });
+    }
+
+    const max = Math.max(...cols.map(c => c.count), 1);
+    const wrap = document.getElementById('trendBars');
+    wrap.innerHTML = '';
+
+    cols.forEach(c => {
+        const pct = Math.max((c.count / max) * 72, c.count > 0 ? 6 : 0);
+        const col = document.createElement('div');
+        col.className = 'trend-col';
+        col.innerHTML = `
+            <div class="trend-bar${c.hasSevere ? ' has-severe' : ''}" style="height:${pct}px">
+                <div class="trend-tooltip">${c.count} episode${c.count !== 1 ? 's' : ''}<br>${c.label}</div>
+            </div>
+            <div class="trend-lbl">${c.label}</div>`;
+        wrap.appendChild(col);
+    });
+}
+
+// ── Render table
+function renderTable(entries) {
+    const tbody = document.getElementById('epTbody');
+    const empty = document.getElementById('emptyState');
+    document.getElementById('histBadge').textContent = `${entries.length} record${entries.length !== 1 ? 's' : ''}`;
+
+    if (!entries.length) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        document.querySelector('#epTable thead').style.display = 'none';
+        return;
+    }
+    empty.style.display = 'none';
+    document.querySelector('#epTable thead').style.display = '';
+
+    const sorted = [...entries].sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+    tbody.innerHTML = sorted.map((e, displayIdx) => {
+        const realIdx = entries.indexOf(e);
+        const syms = (e.symptoms || []).map(s => `<span class="chip">${s}</span>`).join('');
+        const trigs = (e.triggers || []).map(t => `<span class="chip">${t}</span>`).join('');
+        const hr = e.hr ? `<span style="font-family:monospace;font-size:0.8rem;">${e.hr}</span>` : '—';
+        const dur = e.duration_minutes ? `${e.duration_minutes} min` : '—';
+        const activity = e.activity ? (ACTIVITY_LABELS[e.activity] || e.activity) : '—';
+        const relief   = e.relief   ? (RELIEF_LABELS[e.relief]     || e.relief)   : '—';
+        return `<tr>
+            <td style="color:var(--text-dim);font-size:0.75rem;">${entries.length - displayIdx}</td>
+            <td class="mono" style="white-space:nowrap;">${fmtDt(e.datetime)}</td>
+            <td>${borgPill(e.borg)}</td>
+            <td>${spo2Display(e.spo2)}</td>
+            <td style="color:var(--text-mid);">${hr}</td>
+            <td style="color:var(--text-mid);font-size:0.8rem;white-space:nowrap;">${activity}</td>
+            <td><div class="chip-list">${syms || '<span style="color:var(--text-dim)">—</span>'}</div></td>
+            <td><div class="chip-list">${trigs || '<span style="color:var(--text-dim)">—</span>'}</div></td>
+            <td style="color:var(--text-mid);font-size:0.8rem;white-space:nowrap;">${relief}</td>
+            <td style="color:var(--text-mid);">${dur}</td>
+            <td style="max-width:200px;font-size:0.8rem;color:var(--text-mid);">${e.notes || '<span style="color:var(--text-dim)">—</span>'}</td>
+            <td><button class="btn-del" onclick="deleteEntry(${realIdx})">Delete</button></td>
+        </tr>`;
+    }).join('');
+}
+
+// ── Add entry
+async function addEntry() {
+    const dt = document.getElementById('epDatetime').value;
+    if (!dt) { alert('Please enter a date and time.'); return; }
+    if (selectedBorg === null) { alert('Please select a Borg dyspnea score.'); return; }
+
+    const entries = await getEntries();
+    const entry = {
+        id: 'bl-' + Date.now(),
+        datetime: dt + ':00',
+        borg: selectedBorg,
+        spo2: numVal('epSpo2'),
+        hr:   numVal('epHr'),
+        rr:   numVal('epRr'),
+        activity: strVal('epActivity'),
+        relief:   strVal('epRelief'),
+        symptoms: getActiveChips('symptomChips'),
+        triggers: getActiveChips('triggerChips'),
+        meds: strVal('epMeds'),
+        currentMeds: strVal('epCurrentMeds'),
+        duration_minutes: numVal('epDuration'),
+        notes: strVal('epNotes')
+    };
+
+    entries.push(entry);
+    saveEntries(entries);
+    render(entries);
+
+    // Reset form
+    setDefaultDatetime();
+    selectedBorg = null;
+    document.querySelectorAll('.borg-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('borgDesc').textContent = 'Select a rating above';
+    ['epSpo2','epHr','epRr','epDuration','epMeds','epCurrentMeds','epNotes'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('epActivity').value = '';
+    document.getElementById('epRelief').value = '';
+    clearChips('symptomChips');
+    clearChips('triggerChips');
+
+    showToast('Episode saved');
+    document.getElementById('epTable').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Delete
+async function deleteEntry(idx) {
+    if (!confirm('Permanently delete this episode record?')) return;
+    const entries = await getEntries();
+    entries.splice(idx, 1);
+    saveEntries(entries);
+    render(entries);
+}
+
+// ── Full render
+function render(entries) {
+    renderStats(entries);
+    renderTrend(entries);
+    renderTable(entries);
+}
+
+// ── Toast
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── Init
+buildBorgScale();
+initChips('symptomChips');
+initChips('triggerChips');
+setDefaultDatetime();
+loadMeta();
+getEntries().then(render);
+</script>
+</body>
+</html>
